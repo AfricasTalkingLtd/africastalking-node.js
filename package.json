@@ -1,8 +1,8 @@
 {
   "name": "africastalking",
   "version": "1.0.0",
-  "description": "Official API binding",
-  "main": "index.js",
+  "description": "Official AfricasTalking node.js API wrapper",
+  "main": "lib/index.js",
   "scripts": {
     "test": "istanbul cover _mocha -- --recursive ./test/"
   },
