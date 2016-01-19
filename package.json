@@ -1,0 +1,35 @@
+{
+  "name": "africastalking",
+  "version": "1.0.0",
+  "description": "Official AfricasTalking node.js API wrapper",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha -- --recursive ./test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/africastalking/africastalking-node.js.git"
+  },
+  "keywords": [
+    "africastalking"
+  ],
+  "author": "Africa's Talking",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/africastalking/africastalking-node.js/issues"
+  },
+  "homepage": "https://github.com/africastalking/africastalking-node.js#readme",
+  "engines": {
+    "node": ">= 0.12"
+  },
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "unirest": "^0.4.2",
+    "validate.js": "^0.9.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4",
+    "should": "^8.1.1"
+  }
+}
