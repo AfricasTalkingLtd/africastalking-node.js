@@ -1,7 +1,11 @@
 # africastalking-node.js
 Official AfricasTalking node.js API wrapper
 
-**Goal**: Simple, easy to use (and to upgrade) API that covers all the features provided by [Africa's Talking](http://docs.africastalking.com/)
+### Install
+
+```shell
+$ npm install --save africastalking
+```
 
 ### Initialization
 
@@ -31,7 +35,7 @@ sms.send(opts)
 
 - `send(options)`: Send a message. `options` contains:
 
-    - `to`: An array of recipients. `REQUIRED`
+    - `to`: A single recipient or an array of recipients. `REQUIRED`
     - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account.
     - `message`: SMS content. `REQUIRED`
 
@@ -73,7 +77,7 @@ sms.send(opts)
     - `lastReceivedId`: "ID of the subscription you believe to be your last." Defaults to `0`
 
 
-### Voice
+### Voice **TODO**
 
 ```javascript
 var voice = AfricasTalking.VOICE;
@@ -84,7 +88,7 @@ var voice = AfricasTalking.VOICE;
 - Fetch call queue
 - Media upload
 
-### USSD
+### USSD **TODO**
 
 ```javascript
 var ussd = AfricasTalking.USSD;
@@ -100,7 +104,7 @@ AfricasTalking.fetchAccount()
 ```
 - `fetchAccount()`: Fetch account info; i.e. balance
 
-### Airtime
+### Airtime **TODO**
 
 ```javascript
 var airtime = AfricasTalking.AIRTIME;
