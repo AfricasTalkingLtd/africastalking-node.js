@@ -104,15 +104,17 @@ AfricasTalking.fetchAccount()
 ```
 - `fetchAccount()`: Fetch account info; i.e. balance
 
-### Airtime **TODO**
+### Airtime
 
 ```javascript
 var airtime = AfricasTalking.AIRTIME;
 ```
-- `send(options)`: Send airtime
+- `airtime.send(options)`: Send airtime
+
+   airtime.send(options)
+       .then(success)
+       .catch(error);
 
     - `recipients`: An array of the following
         - `phoneNumber`: Receipient of airtime
         - `amount`: Amount sent. `>= 10 && <= 10K`
-        
-        
