@@ -35,10 +35,46 @@ describe('AIRTIME', function(){
             let p = airtime.send(options);
         }).should.throw();
         
+        options.recipients = [
+            {phoneNumber: '0712345678', amount:9}
+        ];
+        (function() {
+            let p = airtime.send(options);
+        }).should.throw();
+        
+        options.recipients = [
+            {phoneNumber: '0712345678', amount:10001}
+        ];
+        (function() {
+            let p = airtime.send(options);
+        }).should.throw();
+        
         
     });
     
-    it('sends airtime', function(done){
+    it('sends airtime to one', function (done) {
+        var opts = {
+           recipients: [
+               {
+                   phoneNumber: '254726166685',
+                   amount: 10
+               }
+           ]
+        };
+       
+        airtime.send(opts)
+            .then(function(resp){
+                resp.should.have.property('responses');
+                done();
+            })
+            .catch(function(err){
+                console.error(err);
+                done();
+            });
+            
+    });
+    
+    it('sends airtime to many', function(done){
        
        var opts = {
            recipients: [
@@ -47,7 +83,7 @@ describe('AIRTIME', function(){
                    amount: 10
                },
                {
-                   phoneNumber: '254726166685',
+                   phoneNumber: '0726863825',
                    amount: 10
                }
            ]
