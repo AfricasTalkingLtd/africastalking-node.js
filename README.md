@@ -11,8 +11,8 @@ $ npm install --save africastalking
 
 ```javascript
 var options = {
-    apiKey: 'fb752d3417021812f0961y6c9464832dd1adb1e555c73f1e7c32bcc006488674',
-    username: 'salama'
+    apiKey: 'apiKey',
+    username: 'atUsername'
     format: 'json' // or xml
 };
 var AfricasTalking = require('africastalking')(options);
