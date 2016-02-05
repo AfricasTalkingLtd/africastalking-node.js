@@ -111,10 +111,13 @@ var airtime = AfricasTalking.AIRTIME;
 ```
 - `airtime.send(options)`: Send airtime
 
-   airtime.send(options)
-       .then(success)
-       .catch(error);
-
     - `recipients`: An array of the following
         - `phoneNumber`: Receipient of airtime
         - `amount`: Amount sent. `>= 10 && <= 10K`
+
+
+```javascript
+   airtime.send(options)
+    .then(success)
+    .catch(error);
+```
