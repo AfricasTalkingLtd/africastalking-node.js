@@ -11,8 +11,8 @@ $ npm install --save africastalking
 
 ```javascript
 var options = {
-    apiKey: 'fb752d3417021812f0961y6c9464832dd1adb1e555c73f1e7c32bcc006488674',
-    username: 'salama'
+    apiKey: 'apiKey',
+    username: 'atUsername'
     format: 'json' // or xml
 };
 var AfricasTalking = require('africastalking')(options);
@@ -104,15 +104,20 @@ AfricasTalking.fetchAccount()
 ```
 - `fetchAccount()`: Fetch account info; i.e. balance
 
-### Airtime **TODO**
+### Airtime
 
 ```javascript
 var airtime = AfricasTalking.AIRTIME;
 ```
-- `send(options)`: Send airtime
+- `airtime.send(options)`: Send airtime
 
     - `recipients`: An array of the following
         - `phoneNumber`: Receipient of airtime
         - `amount`: Amount sent. `>= 10 && <= 10K`
-        
-        
+
+
+```javascript
+   airtime.send(options)
+    .then(success)
+    .catch(error);
+```
