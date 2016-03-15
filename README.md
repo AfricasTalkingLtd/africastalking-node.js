@@ -22,7 +22,7 @@ var AfricasTalking = require('africastalking')(options);
 
 
 ### res.send(200)
-If using express or other framework; remember to reply with a Status of 200. The AT API will retry for a duration of 10 minutes; if we don't acknowldge receiving the message.
+If using express or other framework; remember to reply with a Status of 200. The AT API will retry for a duration of 10 minutes; if you don't acknowldge receiving the message.
 
 ```javascript
 res.send(response, 200);
@@ -96,7 +96,16 @@ var voice = AfricasTalking.VOICE;
 - Fetch call queue
 - Media upload
 
+
 ### USSD Sample
+
+- Remember to set content type to text/plain, and respond with a Status of 200
+
+```javascript
+res.contentType("text/plain");
+res.send(200);
+```
+
 
 ```javascript
 app.post('/ussd', function (req, res) {
