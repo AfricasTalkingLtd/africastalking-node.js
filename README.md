@@ -21,6 +21,14 @@ var AfricasTalking = require('africastalking')(options);
 ```
 
 
+### res.send(200)
+If using express or other framework; remember to reply with a Status of 200. The AT API will retry for a duration of 10 minutes; if we don't acknowldge receiving the message.
+
+```javascript
+res.send(response, 200);
+```
+
+
 ### SMS
 
 ```javascript
@@ -88,12 +96,44 @@ var voice = AfricasTalking.VOICE;
 - Fetch call queue
 - Media upload
 
-### USSD **TODO**
+### USSD Sample
 
 ```javascript
-var ussd = AfricasTalking.USSD;
+app.post('/ussd', function (req, res) {
+    var sessionId = req.body.sessionId;
+    var serviceCode = req.body.serviceCode;
+    var phoneNumber = req.body.phoneNumber;
+    var text = req.body.text;
+
+    console.log(sessionId, serviceCode, phoneNumber, text);
+    var response = '';
+
+    if (text == '') {
+        response = "CON Welcome to Nat Oil \n";
+        response += "1: For account info \n";
+        response += "2: For lost gas cylinder";
+    }
+
+    if (text == '1') {
+        response = "END You are Jacky, registered on 4th-2016-March";
+    }
+
+    if (text == '2') {
+        response = "CON Enter 1 for recovery \n";
+        response += "Enter 2 for lost and found";
+    }
+
+    if (text == '2*1') {
+        response += "END I don't care";
+    }
+
+    // must set contentType to text/plain
+    res.contentType("text/plain");
+    res.send(response, 200);
+});
+
 ```
-- Make helpers that will construct proper `text/plain` data to send back to Africa's Taking API when it comes calling. [Read more](http://docs.africastalking.com/ussd)
+[Read more](http://docs.africastalking.com/ussd)
       
 
 ### Account
