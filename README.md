@@ -12,7 +12,7 @@ $ npm install --save africastalking
 ```javascript
 var options = {
     apiKey: 'apiKey',
-    username: 'atUsername'
+    username: 'atUsername',
     format: 'json' // or xml
 };
 var AfricasTalking = require('africastalking')(options);
