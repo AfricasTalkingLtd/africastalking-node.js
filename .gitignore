@@ -28,6 +28,7 @@ node_modules/
 
 Test coverage
 coverage/
+test/fixtures.js
 
 # OSX junk
 .DS_Store

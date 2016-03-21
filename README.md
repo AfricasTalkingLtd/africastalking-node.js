@@ -11,23 +11,14 @@ $ npm install --save africastalking
 
 ```javascript
 var options = {
-    apiKey: 'apiKey',
-    username: 'atUsername',
+    apiKey: 'YOUR_API_KEY',
+    username: 'YOUR_USERNAME',
     format: 'json' // or xml
 };
 var AfricasTalking = require('africastalking')(options);
 // ...
 
 ```
-
-
-### res.send(200)
-If using express or other framework; remember to reply with a Status of 200. The AT API will retry for a duration of 10 minutes; if you don't acknowldge receiving the message.
-
-```javascript
-res.send(response, 200);
-```
-
 
 ### SMS
 
@@ -85,7 +76,62 @@ sms.send(opts)
     - `lastReceivedId`: "ID of the subscription you believe to be your last." Defaults to `0`
 
 
-### Voice **TODO**
+
+### [USSD](http://docs.africastalking.com/ussd)
+
+
+
+```javascript
+var ussd = new AfricasTalking.USSD(handler);
+app.post('/someService', ussd);
+```
+
+- `handler(params, next)`: Process USSD request and call `next()` when done.
+
+    - `params`: contains the following user data sent by Africa's Talking servers: `sessionId`, `serviceCode`, `phoneNumber` and `text`.
+    - `next(args)`: `args` must contain the following:
+        - `response`: Text to display on user's device. `REQUIRED`
+        - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
+        
+```javascript
+
+// example (express)
+
+app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
+    var endSession = false;
+    var message = '';
+    
+    var session = sessions.get(params.sessionId);
+    var user = db.getUserByPhone(params.phoneNumber);
+
+    if (params.text === '') {
+        message = "Welcome to Nat Oil \n";
+        message += "1: For account info \n";
+        message += "2: For lost gas cylinder";
+
+    } else if (params.text === '1') {
+        message = user.getInfo();
+        endSession = true;
+
+    } else if (params.text === '2') {
+        message = "Enter 1 for recovery \n";
+        message += "Enter 2 for lost and found";
+        endSession = true;
+
+    } else {
+        message = "Invalid option";
+        endSession = true;
+    }
+
+    next({
+        response: message, 
+        endSession: endSession
+    });
+}));
+
+```
+
+## Voice **TODO**
 
 ```javascript
 var voice = AfricasTalking.VOICE;
@@ -95,63 +141,7 @@ var voice = AfricasTalking.VOICE;
 - Initiate a call
 - Fetch call queue
 - Media upload
-
-
-### USSD Sample
-
-- Remember to set content type to text/plain, and respond with a Status of 200
-
-```javascript
-res.contentType("text/plain");
-res.send(200);
-```
-
-
-```javascript
-app.post('/ussd', function (req, res) {
-    var sessionId = req.body.sessionId;
-    var serviceCode = req.body.serviceCode;
-    var phoneNumber = req.body.phoneNumber;
-    var text = req.body.text;
-
-    console.log(sessionId, serviceCode, phoneNumber, text);
-    var response = '';
-
-    if (text == '') {
-        response = "CON Welcome to Nat Oil \n";
-        response += "1: For account info \n";
-        response += "2: For lost gas cylinder";
-    }
-
-    if (text == '1') {
-        response = "END You are Jacky, registered on 4th-2016-March";
-    }
-
-    if (text == '2') {
-        response = "CON Enter 1 for recovery \n";
-        response += "Enter 2 for lost and found";
-    }
-
-    if (text == '2*1') {
-        response += "END I don't care";
-    }
-
-    // must set contentType to text/plain
-    res.contentType("text/plain");
-    res.send(response, 200);
-});
-
-```
-[Read more](http://docs.africastalking.com/ussd)
-      
-
-### Account
-```javascript
-AfricasTalking.fetchAccount()
-    .then(success)
-    .catch(error);
-```
-- `fetchAccount()`: Fetch account info; i.e. balance
+- Remember to send back an HTTP 200.
 
 ### Airtime
 
@@ -169,4 +159,14 @@ var airtime = AfricasTalking.AIRTIME;
    airtime.send(options)
     .then(success)
     .catch(error);
+```      
+
+### Account
+```javascript
+AfricasTalking.fetchAccount()
+    .then(success)
+    .catch(error);
 ```
+- `fetchAccount()`: Fetch account info; i.e. balance
+
+
