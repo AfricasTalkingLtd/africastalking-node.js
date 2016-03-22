@@ -20,6 +20,8 @@ var AfricasTalking = require('africastalking')(options);
 
 ```
 
+**`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express**. 
+
 ### SMS
 
 ```javascript
@@ -50,10 +52,10 @@ sms.send(opts)
     
 #### [Retrieving SMS](http://docs.africastalking.com/sms/fetchmessages)
 
-> You can register a callback URL with us and we will forward any messages that are sent to your account the moment they arrive.
+> You can register a callback URL with us and we will forward any messages that are sent to your account the moment they arrive. 
 > [Read more](http://docs.africastalking.com/sms/callback)
 
-- `fetchMessages(options)`:
+- `fetchMessages(options)`: Manually retrieve your messages.
 
     - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`. `REQUIRED`
 
@@ -79,19 +81,21 @@ sms.send(opts)
 
 ### [USSD](http://docs.africastalking.com/ussd)
 
+> Processing USSD requests using our API is very easy once your account is set up. In particular, you will need to:
+> - Register a service code with us.
+> - Register a URL that we can call whenever we get a request from a client coming into our system.
+>
+> Once you register your callback URL, any requests that we receive belonging to you will trigger a callback that sends the request data to that page using HTTP POST.
+> [Read more.](http://docs.africastalking.com/ussd)
 
+If you are using connect-like frameworks (*express*), you could use the middleware `AfricasTalking.USSD(handler)`:
 
-```javascript
-var ussd = new AfricasTalking.USSD(handler);
-app.post('/someService', ussd);
-```
+`handler(params, next)`: Process USSD request and call `next()` when done.
 
-- `handler(params, next)`: Process USSD request and call `next()` when done.
-
-    - `params`: contains the following user data sent by Africa's Talking servers: `sessionId`, `serviceCode`, `phoneNumber` and `text`.
-    - `next(args)`: `args` must contain the following:
-        - `response`: Text to display on user's device. `REQUIRED`
-        - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
+- `params`: contains the following user data sent by Africa's Talking servers: `sessionId`, `serviceCode`, `phoneNumber` and `text`.
+- `next(args)`: `args` must contain the following:
+    - `response`: Text to display on user's device. `REQUIRED`
+    - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
         
 ```javascript
 
