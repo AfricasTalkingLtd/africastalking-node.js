@@ -24,13 +24,16 @@
   },
   "dependencies": {
     "bluebird": "^3.1.1",
+    "body-parser": "^1.15.0",
     "lodash": "^4.0.0",
     "unirest": "^0.4.2",
     "validate.js": "^0.9.0"
   },
   "devDependencies": {
+    "express": "^4.13.4",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
-    "should": "^8.1.1"
+    "should": "^8.1.1",
+    "supertest": "^1.2.0"
   }
 }
