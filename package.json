@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.0.1b",
+  "version": "0.0.2",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "lib/index.js",
   "scripts": {
