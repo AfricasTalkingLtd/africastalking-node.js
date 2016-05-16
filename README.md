@@ -135,17 +135,50 @@ app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
 
 ```
 
-## Voice **TODO**
+## Voice
 
 ```javascript
 var voice = AfricasTalking.VOICE;
 ```
-- Make helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing. [Read more](http://docs.africastalking.com/voice)
+- Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing. [Read more](http://docs.africastalking.com/voice)
     - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 - Initiate a call
 - Fetch call queue
-- Media upload
+- Media upload - any url to ```Play``` will be cached by default.
 - Remember to send back an HTTP 200.
+
+
+### [Initiate a call](http://docs.africastalking.com/voice/call)
+```node
+  voice.call({
+    callFrom: '+2547XXXXXXXX', // AT virtual number
+    callTo: from_ 
+  })
+  .then(function(s) {
+    // persist call Info
+    console.log(s);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+```
+
+### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
+
+```node
+  voice.getNumQueuedCalls({ 
+    phoneNumbers: destinationNumber 
+  })
+  .then(function(s) {
+    // call queue
+    console.log(s);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+```
+
 
 ### Airtime
 
