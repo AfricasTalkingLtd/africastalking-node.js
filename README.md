@@ -181,7 +181,7 @@ var voice = AfricasTalking.VOICE;
 
 #### [Handle call](http://docs.africastalking.com/voice/callhandler) **TODO Build helpers
 
-Check issue #15
+[check issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
 
 ### Airtime
