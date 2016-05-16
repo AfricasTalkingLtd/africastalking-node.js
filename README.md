@@ -211,3 +211,22 @@ AfricasTalking.fetchAccount()
 - `fetchAccount()`: Fetch account info; i.e. balance
 
 
+### Mobile Money - checkOut
+```node
+var payment = AfricasTalking.PAYMENT;
+
+payment.checkOut({
+  phoneNumber  : '+2547XXXXXXXX',
+  productName  : 'your_productName',
+  currencyCode : 'KES',
+  metadata     : { id: 'A_334646364' },
+  amount       : 100
+})
+.then(function(s) {
+    // persist payment status
+    console.log(s);
+})
+.catch(function(error) {
+    console.log(error);
+});
+```
