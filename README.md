@@ -144,11 +144,11 @@ var voice = AfricasTalking.VOICE;
     - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 - Initiate a call
 - Fetch call queue
-- Media upload - any url to ```Play``` will be cached by default.
+- ~~Media upload~~ - any url to ```Play``` will be cached by default.
 - Remember to send back an HTTP 200.
 
 
-### [Initiate a call](http://docs.africastalking.com/voice/call)
+#### [Initiate a call](http://docs.africastalking.com/voice/call)
 ```node
   voice.call({
     callFrom: '+2547XXXXXXXX', // AT virtual number
@@ -164,7 +164,7 @@ var voice = AfricasTalking.VOICE;
 
 ```
 
-### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
+#### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
 
 ```node
   voice.getNumQueuedCalls({ 
@@ -178,6 +178,10 @@ var voice = AfricasTalking.VOICE;
     console.log(error);
   });
 ```
+
+#### [Handle call](http://docs.africastalking.com/voice/callhandler) **TODO Build helpers
+
+Check issue #15
 
 
 ### Airtime
