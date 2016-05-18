@@ -3,7 +3,7 @@ Official AfricasTalking node.js API wrapper
 
 ### Install
 
-```shell
+```bash
 $ npm install --save africastalking
 ```
 
