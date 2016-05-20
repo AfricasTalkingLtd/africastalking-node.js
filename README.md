@@ -192,7 +192,7 @@ var airtime = AfricasTalking.AIRTIME;
 - `airtime.send(options)`: Send airtime
 
     - `recipients`: An array of the following
-        - `phoneNumber`: Receipient of airtime
+        - `phoneNumber`: Recipient of airtime
         - `amount`: Amount sent. `>= 10 && <= 10K`
 
 
