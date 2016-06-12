@@ -211,7 +211,7 @@ AfricasTalking.fetchAccount()
 - `fetchAccount()`: Fetch account info; i.e. balance
 
 
-### Mobile Money - checkOut
+### Mobile Money (mpesa) - check out
 ```node
 var payment = AfricasTalking.PAYMENT;
 
@@ -219,7 +219,7 @@ payment.checkOut({
   phoneNumber  : '+2547XXXXXXXX',
   productName  : 'your_productName',
   currencyCode : 'KES',
-  metadata     : { id: 'A_334646364' },
+  metadata     : { id: uuid.v4() },
   amount       : 100
 })
 .then(function(s) {
@@ -230,3 +230,9 @@ payment.checkOut({
     console.log(error);
 });
 ```
+
+### B2B (mpesa)
+???
+
+### B2C (mpesa)
+???
