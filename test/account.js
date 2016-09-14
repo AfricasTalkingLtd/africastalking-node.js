@@ -19,7 +19,7 @@ describe('Account', function () {
             done();
 
         }).catch(function (error) {
-            should.not.exist(error);
+            console.log(error);
             done();
         });
 
