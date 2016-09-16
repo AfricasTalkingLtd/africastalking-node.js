@@ -103,8 +103,4 @@ describe('USSD', function () {
                 done();
             });
     });
-
-
-
-
 });
