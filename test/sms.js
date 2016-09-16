@@ -1,7 +1,6 @@
 'use strict';
 
 var should = require('should');
-var validate = require('validate.js');
 var fixtures = require('./fixtures');
 
 var AfricasTalking, sms;
@@ -14,43 +13,48 @@ describe('SMS', function () {
         sms = AfricasTalking.SMS;
     });
 
-    it('validates options', function () {
-
+    describe('validation', function () {
         var options = { };
 
-        (function() {
-            let p = sms.send(options);
-        }).should.throw();
+        it('#send() cannot be empty', function () {
+            return sms.send(options)
+                .should.be.rejected();
+        });
 
-        options.to = "+254718769882";
-        options.from = null;
-        options.message = null;
-        (function() {
-            let p = sms.send(options);
-        }).should.throw();
+        it('#send() must have to/from/message params', function () {
+            options.to = "+254718769882";
+            options.from = null;
+            options.message = null;
 
+            return sms.send(options)
+                .should.be.rejected();
+        });
 
-        options.enqueue = "Joe";
-        (function() {
-            let p = sms.sendBulk(options);
-        }).should.throw();
+        it('#sendBulk()', function () {
+            options.enqueue = "Joe";
+            return sms.sendBulk(options)
+                .should.be.rejected();
+        });
 
+        it('#sendPremium()', function () {
+            return sms.sendPremium(options)
+                .should.be.rejected();
+        });
 
-        (function() {
-            let p = sms.sendPremium(options);
-        }).should.throw();
+        it('#fetchMessages()', function () {
+            return sms.fetchMessages(options)
+                .should.be.rejected();
+        });
 
-        let p = sms.fetchMessages(options);
-        validate.isPromise(p).should.be.exactly(true);
+        it('#createSubscription()', function () {
+            return sms.createSubscription(options)
+                .should.be.rejected();
+        });
 
-        (function() {
-            let p = sms.createSubscription(options);
-        }).should.throw();
-
-        (function() {
-            let p = sms.fetchSubscription(options);
-        }).should.throw();
-
+        it('#fetchSubscription()', function () {
+            return sms.fetchSubscription(options)
+                .should.be.rejected();
+        });
     });
 
 
@@ -74,6 +78,7 @@ describe('SMS', function () {
             to: "254718769882",
             message: "This is a test"
         };
+
         sms.send(opts)
             .then(function (resp) {
                 resp.should.have.property('SMSMessageData');
