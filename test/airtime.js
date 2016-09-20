@@ -15,41 +15,47 @@ describe('AIRTIME', function(){
         airtime = AfricasTalking.AIRTIME;
     });
 
-    it('validates options', function(){
-
+    describe('validation', function () {
         var options = {};
 
-        (function() {
-            let p = airtime.send(options);
-        }).should.throw();
+        it('#send() cannot be empty', function () {
+            return airtime.send(options)
+                .should.be.rejected();
+        });
 
         options.recipients = [];
-        (function() {
-            let p = airtime.send(options);
-        }).should.throw();
+
+        it('#send() rejects have empty recipients', function () {
+            return airtime.send(options)
+                .should.be.rejected();
+        });
 
         options.recipients.push(
-            {phoneNumber: 'not phone', amount:'NaN'}
-            );
-        (function() {
-            let p = airtime.send(options);
-        }).should.throw();
+            { phoneNumber: 'not phone', amount: 'NaN' }
+        );
+
+        it('#send() rejects invalid options', function () {
+            return airtime.send(options)
+                .should.be.rejected();
+        });
 
         options.recipients = [
-            {phoneNumber: '0712345678', amount:9}
+            { phoneNumber: '0712345678', amount: 9 }
         ];
-        (function() {
-            let p = airtime.send(options);
-        }).should.throw();
+
+        it('#send() amount must be greater than 10', function () {
+            return airtime.send(options)
+                .should.be.rejected();
+        });
 
         options.recipients = [
             {phoneNumber: '0712345678', amount:10001}
         ];
-        (function() {
-            let p = airtime.send(options);
-        }).should.throw();
 
-
+        it('#send() amount must be less than 10000', function () {
+            return airtime.send(options)
+                .should.be.rejected();
+        });
     });
 
     it('sends airtime to one', function (done) {
@@ -98,7 +104,6 @@ describe('AIRTIME', function(){
                 console.error(err);
                 done();
             });
-
     });
 
 
