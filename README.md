@@ -240,27 +240,27 @@ payments.pay(opts)
 
 - `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
-    - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+    - `productName`: Your Payment Product. `REQUIRED`
 
-    - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+    - `phoneNumber`: The customer phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
 
-    - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
 
-    - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+    - `amount`: This is the amount. `REQUIRED`
 
-    - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
+    - `metadata`: Some optional data to associate with transaction.
 
 - `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
-    - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+    - `productName`: Your Payment Product. `REQUIRED`
 
-    - `recipients`: This contains a list of **up to 10** Recipient elements, each of which corresponds to a B2C Transaction request. Each recipient has:
+    - `recipients`: A list of **up to 10** recipients. Each recipient has:
 
-        - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+        - `phoneNumber`: The payee phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
 
-        - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+        - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
 
-        - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+        - `amount`: Payment amount. `REQUIRED`
 
         - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
         ```
@@ -271,4 +271,4 @@ payments.pay(opts)
             payments.REASON.PROMOTION
         ```
 
-        - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
+        - `metadata`: Some optional data to associate with transaction.
