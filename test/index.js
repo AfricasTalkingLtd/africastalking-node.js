@@ -2,6 +2,7 @@
 
 var should = require('should');
 var validate = require('validate.js');
+var _ = require('lodash');
 var fixtures = require('./fixtures');
 
 describe('Initialization', function () {
@@ -38,6 +39,25 @@ describe('Initialization', function () {
         (function (){
             require('../lib')(options);
         }).should.throw();
+
+    });
+
+    it('switches to and from sandbox', function () {
+        var options = _.cloneDeep(fixtures.TEST_ACCOUNT);
+
+        options.debug = false;
+        var lib = require('../lib')(options);
+        var common = require('../lib/common');
+
+        common.BASE_URL.should.equal("https://api.africastalking.com/version1");
+        common.VOICE_URL.should.equal("https://voice.africastalking.com");
+
+        options.debug = true;
+        lib = require('../lib')(options);
+        common = require('../lib/common');
+
+        common.BASE_URL.should.equal("https://api.sandbox.africastalking.com/version1");
+        common.VOICE_URL.should.equal("https://voice.sandbox.africastalking.com");
 
     });
 

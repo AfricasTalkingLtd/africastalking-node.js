@@ -13,6 +13,7 @@ $ npm install --save africastalking
 var options = {
     apiKey: 'YOUR_API_KEY',
     username: 'YOUR_USERNAME',
+    debug: true, // true/false to use/not sandbox,
     format: 'json' // or xml
 };
 var AfricasTalking = require('africastalking')(options);
@@ -20,7 +21,7 @@ var AfricasTalking = require('africastalking')(options);
 
 ```
 
-**`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express**. 
+`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express.
 
 ### SMS
 
@@ -179,7 +180,7 @@ var voice = AfricasTalking.VOICE;
   });
 ```
 
-#### [Handle call](http://docs.africastalking.com/voice/callhandler) **TODO Build helpers
+#### [Handle call](http://docs.africastalking.com/voice/callhandler)
 
 check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
@@ -211,28 +212,63 @@ AfricasTalking.fetchAccount()
 - `fetchAccount()`: Fetch account info; i.e. balance
 
 
-### Mobile Money (mpesa) - check out
-```node
-var payment = AfricasTalking.PAYMENT;
+### Payments
 
-payment.checkOut({
-  phoneNumber  : '+2547XXXXXXXX',
-  productName  : 'your_productName',
-  currencyCode : 'KES',
-  metadata     : { id: uuid.v4() },
-  amount       : 100
-})
-.then(function(s) {
-    // persist payment status
-    console.log(s);
-})
-.catch(function(error) {
-    console.log(error);
-});
+> Mobile Consumer To Business (C2B) functionality allows your application to receive payments that are initiated by a mobile subscriber.
+> This is typically achieved by disctributing a PayBill or BuyGoods number (and optionally an account number) that clients can use to make payments from their mobile devices.
+> [Read more](http://docs.africastalking.com/payments/mobile-c2b)
+
+```javascript
+var payments = AfricasTalking.PAYMENTS;
+
+// Request payment from customer A.K.A checkout
+payments.checkout(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notifications from customer(s) on your registred callback URL
+
+
+
+// Send payment to customer(s) A.K.A B2C
+payments.pay(opts)
+        .then(success)
+        .catch(error);
+
+
 ```
 
-### B2B (mpesa)
-???
+- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
-### B2C (mpesa)
-???
+    - `productName`: Your Payment Product. `REQUIRED`
+
+    - `phoneNumber`: The customer phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
+
+    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
+    - `amount`: This is the amount. `REQUIRED`
+
+    - `metadata`: Some optional data to associate with transaction.
+
+- `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
+
+    - `productName`: Your Payment Product. `REQUIRED`
+
+    - `recipients`: A list of **up to 10** recipients. Each recipient has:
+
+        - `phoneNumber`: The payee phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
+
+        - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
+        - `amount`: Payment amount. `REQUIRED`
+
+        - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
+        ```
+            payments.REASON.SALARY
+            payments.REASON.SALARY_WITH_CHARGE
+            payments.REASON.BUSINESS
+            payments.REASON.BUSINESS_WITH_CHARGE
+            payments.REASON.PROMOTION
+        ```
+
+        - `metadata`: Some optional data to associate with transaction.
