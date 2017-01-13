@@ -21,7 +21,7 @@ var AfricasTalking = require('africastalking')(options);
 
 ```
 
-**`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express**. 
+`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express.
 
 ### SMS
 
@@ -214,6 +214,10 @@ AfricasTalking.fetchAccount()
 
 ### Payments
 
+> Mobile Consumer To Business (C2B) functionality allows your application to receive payments that are initiated by a mobile subscriber.
+> This is typically achieved by disctributing a PayBill or BuyGoods number (and optionally an account number) that clients can use to make payments from their mobile devices.
+> [Read more](http://docs.africastalking.com/payments/mobile-c2b)
+
 ```javascript
 var payments = AfricasTalking.PAYMENTS;
 
@@ -222,7 +226,7 @@ payments.checkout(opts)
         .then(success)
         .catch(error);
 
-// Wait for payment notifications from customer(s)
+// Wait for payment notifications from customer(s) on your registred callback URL
 
 
 
@@ -234,23 +238,30 @@ payments.pay(opts)
 
 ```
 
-
 - `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
     - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+
     - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+
     - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
     - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+
     - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
 
 - `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
     - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+
     - `recipients`: This contains a list of **up to 10** Recipient elements, each of which corresponds to a B2C Transaction request. Each recipient has:
 
         - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+
         - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
         - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+
         - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
         ```
             payments.REASON.SALARY
@@ -259,4 +270,5 @@ payments.pay(opts)
             payments.REASON.BUSINESS_WITH_CHARGE
             payments.REASON.PROMOTION
         ```
+
         - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
