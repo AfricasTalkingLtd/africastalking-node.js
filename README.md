@@ -11,10 +11,10 @@ $ npm install --save africastalking
 
 ```javascript
 var options = {
-    apiKey: 'YOUR_API_KEY',
-    username: 'YOUR_USERNAME',
-    sandbox: true, // true/false to use/not sandbox,
-    format: 'json' // or xml
+    sandbox: true,                  // true/false to use/not sandbox
+    apiKey: 'YOUR_API_KEY',         // Use sandbox username and API key if you're using the sandbox
+    username: 'YOUR_USERNAME',      //
+    format: 'json'                  // or xml
 };
 var AfricasTalking = require('africastalking')(options);
 // ...
