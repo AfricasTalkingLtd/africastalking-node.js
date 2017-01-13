@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "lib/index.js",
   "scripts": {
@@ -8,17 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/africastalking/africastalking-node.js.git"
+    "url": "git+https://github.com/AfricasTalkingLtd/africastalking-node.js"
   },
   "keywords": [
-    "africastalking"
+    "africastalking",
+    "sms",
+    "ussd",
+    "voice",
+    "m-pesa",
+    "payments"
   ],
   "author": "Africa's Talking",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/africastalking/africastalking-node.js/issues"
+    "url": "https://github.com/AfricasTalkingLtd/africastalking-node.js/issues"
   },
-  "homepage": "https://github.com/africastalking/africastalking-node.js#readme",
+  "homepage": "https://github.com/AfricasTalkingLtd/africastalking-node.js#readme",
   "engines": {
     "node": ">= 0.12"
   },
