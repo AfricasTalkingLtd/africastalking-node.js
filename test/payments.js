@@ -15,6 +15,7 @@ describe('PAYMENTS', function(){
         payments = AfricasTalking.PAYMENTS;
     });
 
+
     describe("Checkout", function () {
 
         describe('validation', function () {
@@ -59,10 +60,58 @@ describe('PAYMENTS', function(){
                     throw (err);
                 });
         });
-
-
     });
 
+    describe("B2C", function () {
+
+        describe('validation', function () {
+            var options = { };
+
+            it('#pay() cannot be empty', function () {
+                return payments.pay(options)
+                    .should.be.rejected();
+            });
+
+            it('#pay() must have productName/recipients', function () {
+                options.productName = "Joe";
+
+                return payments.pay(options)
+                    .should.be.rejected();
+            });
+
+            it('#pay() recipients must be limited to 10', function () {
+                options.productName = "Joe";
+                options.recipients = [1,2,3,4,5,6,7,8,9,0,11];
+                return payments.checkout(options)
+                    .should.be.rejected();
+            });
+        });
+
+
+        it('pay()', function () {
+            let opts = {
+                productName: "TestProduct",
+                recipients: [
+                    {
+                        phoneNumber: "254718769882",
+                        currencyCode: "KES",
+                        reason: payments.REASON.SALARY,
+                        metadata: {"Joe": "Biden", "id":"VP"},
+                        amount: 234.5
+                    }
+                ]
+            };
+
+            return payments.pay(opts)
+                .then(function(resp){
+                    resp.should.have.property('numQueued');
+                    resp.should.have.property('entries');
+                })
+                .catch(function(err){
+                    throw (err);
+                });
+        });
+    });
 
 
 });

@@ -180,7 +180,7 @@ var voice = AfricasTalking.VOICE;
   });
 ```
 
-#### [Handle call](http://docs.africastalking.com/voice/callhandler) **TODO Build helpers
+#### [Handle call](http://docs.africastalking.com/voice/callhandler)
 
 check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
@@ -217,13 +217,25 @@ AfricasTalking.fetchAccount()
 ```javascript
 var payments = AfricasTalking.PAYMENTS;
 
+// Request payment from customer A.K.A checkout
 payments.checkout(opts)
         .then(success)
         .catch(error);
+
+// Wait for payment notifications from customer(s)
+
+
+
+// Send payment to customer(s) A.K.A B2C
+payments.pay(opts)
+        .then(success)
+        .catch(error);
+
+
 ```
 
 
-- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device.
+- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
     - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
     - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
@@ -231,9 +243,20 @@ payments.checkout(opts)
     - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
     - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
 
+- `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
-### B2B (mpesa)
-???
+    - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+    - `recipients`: This contains a list of **up to 10** Recipient elements, each of which corresponds to a B2C Transaction request. Each recipient has:
 
-### B2C (mpesa)
-???
+        - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+        - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+        - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+        - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
+        ```
+            payments.REASON.SALARY
+            payments.REASON.SALARY_WITH_CHARGE
+            payments.REASON.BUSINESS
+            payments.REASON.BUSINESS_WITH_CHARGE
+            payments.REASON.PROMOTION
+        ```
+        - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
