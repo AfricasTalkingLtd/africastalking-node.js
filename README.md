@@ -212,25 +212,25 @@ AfricasTalking.fetchAccount()
 - `fetchAccount()`: Fetch account info; i.e. balance
 
 
-### Mobile Money (mpesa) - check out
-```node
-var payment = AfricasTalking.PAYMENT;
+### Payments
 
-payment.checkOut({
-  phoneNumber  : '+2547XXXXXXXX',
-  productName  : 'your_productName',
-  currencyCode : 'KES',
-  metadata     : { id: uuid.v4() },
-  amount       : 100
-})
-.then(function(s) {
-    // persist payment status
-    console.log(s);
-})
-.catch(function(error) {
-    console.log(error);
-});
+```javascript
+var payments = AfricasTalking.PAYMENTS;
+
+payments.checkout(opts)
+        .then(success)
+        .catch(error);
 ```
+
+
+- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device.
+
+    - `productName`: This value identifies the Africa's Talking Payment Product that should be used to initiate this transaction. `REQUIRED`
+    - `phoneNumber`: This contains the phone number (in international format; e.g. `25471xxxxxxx`) of the mobile subscriber that will complete this transaction. `REQUIRED`
+    - `currencyCode`: This is the 3-digit ISO format currency code for the value of this transaction (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+    - `amount`: This is the amount (in the provided currency) that the mobile subscriber is expected to confirm. `REQUIRED`
+    - `metadata`: This value contains a map of any metadata that you would like to associate with this request.
+
 
 ### B2B (mpesa)
 ???
