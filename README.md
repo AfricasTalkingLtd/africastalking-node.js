@@ -190,9 +190,8 @@ check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/is
 ```javascript
 var airtime = AfricasTalking.AIRTIME;
 ```
-- `airtime.send(options)`: Send airtime
-
-    - `recipients`: An array of the following
+- `airtime.send(options)`: Send airtime `options` is an object which contains the key:
+    - `recipients`: Contains an array of objects containing the following keys
         - `phoneNumber`: Recipient of airtime
         - `amount`: Amount sent. `>= 10 && <= 10K`
 
