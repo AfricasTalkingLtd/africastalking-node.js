@@ -148,7 +148,7 @@ app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
 
 ```
 
-## Voice
+### Voice
 
 ```javascript
 const voice = AfricasTalking.VOICE;
@@ -266,6 +266,8 @@ payments.pay(opts)
         .then(success)
         .catch(error);
 
+// Wait for payment notifications on your registred callback URL
+
 ```
 
 - `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
@@ -295,13 +297,15 @@ payments.pay(opts)
 #### B2B
 
 
-```
+```js
 // Send payment to business(s) like a bank A.K.A B2B
 payments.payb2b(opts)
         .then(success)
         .catch(error);
 
+// Wait for payment notifications on your registred callback URL
 
+```
 
 - `payb2b(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
 
