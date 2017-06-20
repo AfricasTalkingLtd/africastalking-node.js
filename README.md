@@ -4,7 +4,7 @@ The Africa's Talking Node API wrapper provides convenient access to the Africa's
 
 ## Documentation
 
-Take a look at the [API docs](http://docs.africastalking.com).
+Take a look at the [API docs here](http://docs.africastalking.com).
 
 
 ## Install
@@ -17,6 +17,7 @@ $ npm install --save africastalking
 
 ## Usage
 
+##
 The package needs to be configured with your Africa's Talking username and API key (which you can get from the dashboard).
 In addition to the API key, there are a few other options you can set including the response format.
 
@@ -230,22 +231,17 @@ AfricasTalking.fetchAccount()
 
 ```javascript
 const payments = AfricasTalking.PAYMENTS;
+```
 
+#### Checkout
+
+```js
 // Request payment from customer A.K.A checkout
 payments.checkout(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications from customer(s) on your registred callback URL
-
-
-
-// Send payment to customer(s) A.K.A B2C
-payments.pay(opts)
-        .then(success)
-        .catch(error);
-
-
 ```
 
 - `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
@@ -259,6 +255,18 @@ payments.pay(opts)
     - `amount`: This is the amount. `REQUIRED`
 
     - `metadata`: Some optional data to associate with transaction.
+
+
+#### B2C
+
+
+```
+// Send payment to customer(s) A.K.A B2C
+payments.pay(opts)
+        .then(success)
+        .catch(error);
+
+```
 
 - `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
@@ -282,7 +290,18 @@ payments.pay(opts)
         ```
 
         - `metadata`: Some optional data to associate with transaction.
-        
+
+
+#### B2B
+
+
+```
+// Send payment to business(s) like a bank A.K.A B2B
+payments.payb2b(opts)
+        .then(success)
+        .catch(error);
+
+
 
 - `payb2b(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
 
