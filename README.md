@@ -1,22 +1,34 @@
-# africastalking-node.js
-Official AfricasTalking node.js API wrapper
+# Official Africa's Talking Node.js API wrapper
 
-### Install
+The Africa's Talking Node API wrapper provides convenient access to the Africa's Talking API from applications written in server-side JavaScript.
+
+## Documentation
+
+Take a look at the [API docs here](http://docs.africastalking.com).
+
+
+## Install
+
+You can install the package by running: 
 
 ```bash
 $ npm install --save africastalking
 ```
 
-### Initialization
+## Usage
+
+##
+The package needs to be configured with your Africa's Talking username and API key (which you can get from the dashboard).
+In addition to the API key, there are a few other options you can set including the response format.
 
 ```javascript
-var options = {
+const options = {
     sandbox: true,                  // true/false to use/not sandbox
     apiKey: 'YOUR_API_KEY',         // Use sandbox username and API key if you're using the sandbox
     username: 'YOUR_USERNAME',      //
     format: 'json'                  // or xml
 };
-var AfricasTalking = require('africastalking')(options);
+const AfricasTalking = require('africastalking')(options);
 // ...
 
 ```
@@ -26,7 +38,7 @@ var AfricasTalking = require('africastalking')(options);
 ### SMS
 
 ```javascript
-var sms = AfricasTalking.SMS;
+const sms = AfricasTalking.SMS;
 // all methods return a promise
 sms.send(opts)
     .then(success)
@@ -103,11 +115,11 @@ If you are using connect-like frameworks (*express*), you could use the middlewa
 // example (express)
 
 app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
-    var endSession = false;
-    var message = '';
+    const endSession = false;
+    const message = '';
     
-    var session = sessions.get(params.sessionId);
-    var user = db.getUserByPhone(params.phoneNumber);
+    const session = sessions.get(params.sessionId);
+    const user = db.getUserByPhone(params.phoneNumber);
 
     if (params.text === '') {
         message = "Welcome to Nat Oil \n";
@@ -136,10 +148,10 @@ app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
 
 ```
 
-## Voice
+### Voice
 
 ```javascript
-var voice = AfricasTalking.VOICE;
+const voice = AfricasTalking.VOICE;
 ```
 - Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing. [Read more](http://docs.africastalking.com/voice)
     - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
@@ -188,7 +200,7 @@ check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/is
 ### Airtime
 
 ```javascript
-var airtime = AfricasTalking.AIRTIME;
+const airtime = AfricasTalking.AIRTIME;
 ```
 - `airtime.send(options)`: Send airtime `options` is an object which contains the key:
     - `recipients`: Contains an array of objects containing the following keys
@@ -218,23 +230,18 @@ AfricasTalking.fetchAccount()
 > [Read more](http://docs.africastalking.com/payments/mobile-c2b)
 
 ```javascript
-var payments = AfricasTalking.PAYMENTS;
+const payments = AfricasTalking.PAYMENTS;
+```
 
+#### Checkout
+
+```js
 // Request payment from customer A.K.A checkout
 payments.checkout(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications from customer(s) on your registred callback URL
-
-
-
-// Send payment to customer(s) A.K.A B2C
-payments.pay(opts)
-        .then(success)
-        .catch(error);
-
-
 ```
 
 - `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
@@ -248,6 +255,20 @@ payments.pay(opts)
     - `amount`: This is the amount. `REQUIRED`
 
     - `metadata`: Some optional data to associate with transaction.
+
+
+#### B2C
+
+
+```
+// Send payment to customer(s) A.K.A B2C
+payments.pay(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notifications on your registred callback URL
+
+```
 
 - `pay(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
@@ -271,3 +292,67 @@ payments.pay(opts)
         ```
 
         - `metadata`: Some optional data to associate with transaction.
+
+
+#### B2B
+
+
+```js
+// Send payment to business(s) like a bank A.K.A B2B
+payments.payb2b(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notifications on your registred callback URL
+
+```
+
+- `payb2b(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
+
+
+    - `productName`: Your Payment Product as setup on your account. `REQUIRED`
+    
+    - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+    ```
+        payments.PROVIDER.ATHENA
+        payments.PROVIDER.MPESA
+    ```
+
+    - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+    ```
+        payments.TRANSFER_TYPE.BUY_GOODS
+        payments.TRANSFER_TYPE.PAYBILL
+        payments.TRANSFER_TYPE.DISBURSE_FUNDS
+        payments.TRANSFER_TYPE.B2B_TRANSFER
+    ```
+    
+    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+    
+    - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
+    
+    - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
+    
+    - `amount`: Payment amount. `REQUIRED`
+
+    - `metadata`: Some optional data to associate with transaction.        
+    
+
+## Development
+
+Run all tests:
+
+```bash
+$ npm install
+$ npm test
+```
+
+or on Windows...
+
+```bash
+$ npm run test-windows
+```
+
+
+## Issues
+
+If you find a bug, please file an issue on [our issue tracker on GitHub](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues).

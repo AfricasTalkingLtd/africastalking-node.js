@@ -113,5 +113,46 @@ describe('PAYMENTS', function(){
         });
     });
 
+    describe("B2B", function () {
+
+        describe('validation', function () {
+            var options = { };
+
+            it('#payb2b() cannot be empty', function () {
+                return payments.payb2b(options)
+                    .should.be.rejected();
+            });
+
+            it('#payb2b() may have string map metadata', function () {
+                options.metadata = "Joe";
+                return payments.payb2b(options)
+                    .should.be.rejected();
+            });
+
+        });
+
+
+        it('payb2b()', function () {
+            const opts = {
+                productName: "TestProduct",
+                provider: payments.PROVIDER.ATHENA,
+                transferType: payments.TRANSFER_TYPE.B2B_TRANSFER,
+                currencyCode: "KES",
+                amount: 100,
+                destinationChannel: '456789',
+                destinationAccount: 'octopus',
+                metadata: {"notes": "Account top-up for July 2017"},
+            };
+
+            return payments.payb2b(opts)
+                .then(function(resp){
+                    resp.should.have.property('status');
+                })
+                .catch(function(err){
+                    throw (err);
+                });
+        });
+    });
+
 
 });
