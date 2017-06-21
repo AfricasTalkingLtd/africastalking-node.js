@@ -2,7 +2,7 @@
 
 var should = require('should');
 var validate = require('validate.js');
-var fixtures = require('./fixtures');
+var fixtures = require('./fixtures.local');
 var express = require('express');
 
 var AfricasTalking,
