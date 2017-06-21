@@ -67,28 +67,28 @@ describe('PAYMENTS', function(){
         describe('validation', function () {
             var options = { };
 
-            it('#pay() cannot be empty', function () {
-                return payments.pay(options)
+            it('#payConsumer() cannot be empty', function () {
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
 
-            it('#pay() must have productName/recipients', function () {
+            it('#payConsumer() must have productName/recipients', function () {
                 options.productName = "Joe";
 
-                return payments.pay(options)
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
 
-            it('#pay() recipients must be limited to 10', function () {
+            it('#payConsumer() recipients must be limited to 10', function () {
                 options.productName = "Joe";
                 options.recipients = [1,2,3,4,5,6,7,8,9,0,11];
-                return payments.checkout(options)
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
         });
 
 
-        it('pay()', function () {
+        it('payConsumer()', function () {
             let opts = {
                 productName: "TestProduct",
                 recipients: [
@@ -102,7 +102,7 @@ describe('PAYMENTS', function(){
                 ]
             };
 
-            return payments.pay(opts)
+            return payments.payConsumer(opts)
                 .then(function(resp){
                     resp.should.have.property('numQueued');
                     resp.should.have.property('entries');
@@ -118,21 +118,21 @@ describe('PAYMENTS', function(){
         describe('validation', function () {
             var options = { };
 
-            it('#payb2b() cannot be empty', function () {
-                return payments.payb2b(options)
+            it('#payBusiness() cannot be empty', function () {
+                return payments.payBusiness(options)
                     .should.be.rejected();
             });
 
-            it('#payb2b() may have string map metadata', function () {
+            it('#payBusiness() may have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.payb2b(options)
+                return payments.payBusiness(options)
                     .should.be.rejected();
             });
 
         });
 
 
-        it('payb2b()', function () {
+        it('payBusiness()', function () {
             const opts = {
                 productName: "TestProduct",
                 provider: payments.PROVIDER.ATHENA,
@@ -144,7 +144,7 @@ describe('PAYMENTS', function(){
                 metadata: {"notes": "Account top-up for July 2017"},
             };
 
-            return payments.payb2b(opts)
+            return payments.payBusiness(opts)
                 .then(function(resp){
                     resp.should.have.property('status');
                 })
