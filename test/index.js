@@ -3,7 +3,7 @@
 var should = require('should');
 var validate = require('validate.js');
 var _ = require('lodash');
-var fixtures = require('./fixtures');
+var fixtures = require('./fixtures.local');
 
 describe('Initialization', function () {
     this.timeout(5000);
@@ -43,16 +43,19 @@ describe('Initialization', function () {
     });
 
     it('switches to and from sandbox', function () {
+        delete require.cache[require.resolve('../lib')];
+        delete require.cache[require.resolve('../lib/common.js')];
+        
         var options = _.cloneDeep(fixtures.TEST_ACCOUNT);
 
-        options.debug = false;
+        options.sandbox = false;
         var lib = require('../lib')(options);
         var common = require('../lib/common');
 
         common.BASE_URL.should.equal("https://api.africastalking.com/version1");
         common.VOICE_URL.should.equal("https://voice.africastalking.com");
 
-        options.debug = true;
+        options.sandbox = true;
         lib = require('../lib')(options);
         common = require('../lib/common');
 

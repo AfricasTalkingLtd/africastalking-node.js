@@ -67,28 +67,28 @@ describe('PAYMENTS', function(){
         describe('validation', function () {
             var options = { };
 
-            it('#pay() cannot be empty', function () {
-                return payments.pay(options)
+            it('#payConsumer() cannot be empty', function () {
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
 
-            it('#pay() must have productName/recipients', function () {
+            it('#payConsumer() must have productName/recipients', function () {
                 options.productName = "Joe";
 
-                return payments.pay(options)
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
 
-            it('#pay() recipients must be limited to 10', function () {
+            it('#payConsumer() recipients must be limited to 10', function () {
                 options.productName = "Joe";
                 options.recipients = [1,2,3,4,5,6,7,8,9,0,11];
-                return payments.checkout(options)
+                return payments.payConsumer(options)
                     .should.be.rejected();
             });
         });
 
 
-        it('pay()', function () {
+        it('payConsumer()', function () {
             let opts = {
                 productName: "TestProduct",
                 recipients: [
@@ -102,10 +102,51 @@ describe('PAYMENTS', function(){
                 ]
             };
 
-            return payments.pay(opts)
+            return payments.payConsumer(opts)
                 .then(function(resp){
                     resp.should.have.property('numQueued');
                     resp.should.have.property('entries');
+                })
+                .catch(function(err){
+                    throw (err);
+                });
+        });
+    });
+
+    describe("B2B", function () {
+
+        describe('validation', function () {
+            var options = { };
+
+            it('#payBusiness() cannot be empty', function () {
+                return payments.payBusiness(options)
+                    .should.be.rejected();
+            });
+
+            it('#payBusiness() may have string map metadata', function () {
+                options.metadata = "Joe";
+                return payments.payBusiness(options)
+                    .should.be.rejected();
+            });
+
+        });
+
+
+        it('payBusiness()', function () {
+            const opts = {
+                productName: "TestProduct",
+                provider: payments.PROVIDER.ATHENA,
+                transferType: payments.TRANSFER_TYPE.B2B_TRANSFER,
+                currencyCode: "KES",
+                amount: 100,
+                destinationChannel: '456789',
+                destinationAccount: 'octopus',
+                metadata: {"notes": "Account top-up for July 2017"},
+            };
+
+            return payments.payBusiness(opts)
+                .then(function(resp){
+                    resp.should.have.property('status');
                 })
                 .catch(function(err){
                     throw (err);

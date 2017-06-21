@@ -1,7 +1,7 @@
 'use strict';
 
 var should = require('should');
-var fixtures = require('./fixtures');
+var fixtures = require('./fixtures.local');
 
 var AfricasTalking, sms;
 
@@ -38,11 +38,6 @@ describe('SMS', function () {
 
         it('#sendPremium()', function () {
             return sms.sendPremium(options)
-                .should.be.rejected();
-        });
-
-        it('#fetchMessages()', function () {
-            return sms.fetchMessages(options)
                 .should.be.rejected();
         });
 

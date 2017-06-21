@@ -1,10 +1,11 @@
 {
   "name": "africastalking",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "lib/index.js",
   "scripts": {
-    "test": "istanbul cover _mocha -- --recursive ./test/"
+    "test": "istanbul cover _mocha -- --recursive ./test/",
+    "test-windows": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive ./test/"
   },
   "repository": {
     "type": "git",
