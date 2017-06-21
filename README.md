@@ -17,7 +17,6 @@ $ npm install --save africastalking
 
 ## Usage
 
-##
 The package needs to be configured with your Africa's Talking username and API key (which you can get from the dashboard).
 In addition to the API key, there are a few other options you can set including the response format.
 
@@ -241,7 +240,7 @@ payments.checkout(opts)
         .then(success)
         .catch(error);
 
-// Wait for payment notifications from customer(s) on your registred callback URL
+// Wait for payment notifications from customer(s) on your registered callback URL
 ```
 
 - `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
@@ -260,7 +259,7 @@ payments.checkout(opts)
 #### B2C
 
 
-```
+```js
 // Send payment to customer(s) A.K.A B2C
 payments.payConsumer(opts)
         .then(success)
@@ -283,7 +282,7 @@ payments.payConsumer(opts)
         - `amount`: Payment amount. `REQUIRED`
 
         - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
-        ```
+        ```js
             payments.REASON.SALARY
             payments.REASON.SALARY_WITH_CHARGE
             payments.REASON.BUSINESS
@@ -303,7 +302,7 @@ payments.payBusiness(opts)
         .then(success)
         .catch(error);
 
-// Wait for payment notifications on your registred callback URL
+// Wait for payment notifications on your registered callback URL
 
 ```
 
@@ -313,18 +312,20 @@ payments.payBusiness(opts)
     - `productName`: Your Payment Product as setup on your account. `REQUIRED`
     
     - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ```
+    ```js
         payments.PROVIDER.ATHENA
         payments.PROVIDER.MPESA
     ```
+     `REQUIRED`
 
     - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ```
+    ```js
         payments.TRANSFER_TYPE.BUY_GOODS
         payments.TRANSFER_TYPE.PAYBILL
         payments.TRANSFER_TYPE.DISBURSE_FUNDS
         payments.TRANSFER_TYPE.B2B_TRANSFER
     ```
+     `REQUIRED`
     
     - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
     
@@ -349,6 +350,7 @@ $ npm test
 or on Windows...
 
 ```bash
+$ npm install
 $ npm run test-windows
 ```
 
