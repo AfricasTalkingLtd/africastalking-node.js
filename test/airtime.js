@@ -6,7 +6,7 @@ var fixtures = require('./fixtures.local');
 
 var AfricasTalking, airtime;
 
-describe('AIRTIME', function(){
+describe('Airtime', function(){
 
     this.timeout(5000);
 
