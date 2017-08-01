@@ -1,0 +1,43 @@
+syntax = "proto3";
+option java_package = "com.africastalking.proto";
+
+message ClientTokenRequest {
+
+  enum Capability {
+    SMS = 0;
+    VOICE = 1;
+    USSD = 2;
+    AIRTIME = 3;
+
+    C2B = 4;
+    B2C = 5;
+    B2B = 6;
+  }
+
+  Capability capability = 1;
+}
+
+message ClientTokenResponse {
+  string token = 1;
+  int64 expiration = 2;
+}
+
+message SipCredentialsRequest { }
+
+message SipCredentials {
+  string host = 1;
+  int32 port = 2;
+  string username = 3;
+  string password = 4;
+}
+
+message SipCredentialsResponse {
+  repeated SipCredentials credentials = 1;
+}
+
+
+service SdkServerService {
+    rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
+
+    rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
+}
