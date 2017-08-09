@@ -21,7 +21,7 @@ describe('Server', function () {
         // starts server
         const ATServer = require('../lib/server');
         const server = new ATServer(fixtures.TEST_ACCOUNT);
-        server.addSipCredentials("test", "secret", "sip://at.dev");
+        server.addSipCredentials("test", "secret", "sip://at.dev", 5060, "tcp");
         server.setAuthenticator((client, callback) => callback(client === TEST_CLIENT_ID));
 
         server.start({
@@ -53,7 +53,7 @@ describe('Server', function () {
     it('gives auth token', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
 
-        client.getToken({ capability: sdk_proto.ClientTokenRequest.Capability.B2C }, (err, resp) => {
+        client.getToken({ capability: sdk_proto.ClientTokenRequest.Capability.B2C, environment: 'sandbox' }, (err, resp) => {
             if (err) throw err;
             should(resp).have.property('token');
             should(resp).have.property('expiration');

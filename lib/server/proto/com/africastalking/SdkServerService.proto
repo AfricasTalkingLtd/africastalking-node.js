@@ -15,6 +15,7 @@ message ClientTokenRequest {
   }
 
   Capability capability = 1;
+  string environment = 2;
 }
 
 message ClientTokenResponse {
@@ -29,6 +30,7 @@ message SipCredentials {
   int32 port = 2;
   string username = 3;
   string password = 4;
+  string transport = 5;
 }
 
 message SipCredentialsResponse {
@@ -37,7 +39,7 @@ message SipCredentialsResponse {
 
 
 service SdkServerService {
-    rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
+  rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
 
-    rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
+  rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
 }
