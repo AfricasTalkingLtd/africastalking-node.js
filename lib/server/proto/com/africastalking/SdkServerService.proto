@@ -1,6 +1,8 @@
 syntax = "proto3";
 option java_package = "com.africastalking.proto";
 
+package africastalking;
+
 message ClientTokenRequest {
 
   enum Capability {
