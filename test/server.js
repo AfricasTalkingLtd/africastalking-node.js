@@ -19,8 +19,8 @@ describe('Server', function () {
 
     before(function (done) {
         // starts server
-        const ATServer = require('../lib/server');
-        const server = new ATServer(fixtures.TEST_ACCOUNT);
+        const Server = require('../lib/server');
+        const server = new Server(fixtures.TEST_ACCOUNT);
         server.addSipCredentials("test", "secret", "sip://at.dev", 5060, "tcp");
         server.setAuthenticator((client, callback) => callback(client === TEST_CLIENT_ID));
 
