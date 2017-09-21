@@ -217,20 +217,7 @@ const airtime = AfricasTalking.AIRTIME;
 
 ### Checkout Token
 
-A `checkoutToken`  is needed to validate the following requests.
-
-- `Africastalking.SMS.createSubscription`
-
-
-- `Africastalking.PAYMENTS.checkout` 
-
-Use this to create the `checkoutToken` to be used when calling any of the above functions:
-
-```javascript
-AfricasTalking.createCheckoutToken(phoneNumber)
-    .then(success)
-    .catch(error);
-```
+- `AfricasTalking.createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
 
 ### Account
 ```javascript
