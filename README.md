@@ -56,13 +56,13 @@ sms.send(opts)
 - `sendBulk(options)`: Send bulk SMS. In addition to paramaters of `send()`, we would have: 
 
     - `enqueue`: "[...] would like deliver as many messages to the API before waiting for an Ack from the Telcos."
-    
+
 - `sendPremium(options)`: Send premium SMS. In addition to paramaters of `send()`, we would have:
 
     - `keyword`: Value is a premium keyword `REQUIRED`
     - `linkId`: "[...] We forward the `linkId` to your application when the user send a message to your service" `REQUIRED`
     - `retryDurationInHours`: "It specifies the number of hours your subscription message should be retried in case it's not delivered to the subscriber"
-    
+
 #### [Retrieving SMS](http://docs.africastalking.com/sms/fetchmessages)
 
 > You can register a callback URL with us and we will forward any messages that are sent to your account the moment they arrive. 
@@ -83,6 +83,7 @@ sms.send(opts)
     - `shortCode`: "This is a premium short code mapped to your account". `REQUIRED`
     - `keyword`: "Value is a premium keyword under the above short code and mapped to your account". `REQUIRED`
     - `phoneNumber`: "The phoneNumber to be subscribed" `REQUIRED`
+    - `checkoutToken`: "This is a token used to validate the subscription request" `REQUIRED`
 
 - `fetchSubscription(options)`:
 
@@ -109,7 +110,7 @@ If you are using connect-like frameworks (*express*), you could use the middlewa
 - `next(args)`: `args` must contain the following:
     - `response`: Text to display on user's device. `REQUIRED`
     - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
-        
+
 ```javascript
 
 // example (express)
@@ -212,7 +213,24 @@ const airtime = AfricasTalking.AIRTIME;
    airtime.send(options)
     .then(success)
     .catch(error);
-```      
+```
+
+### Checkout Token
+
+A `checkoutToken`  is needed to validate the following requests.
+
+- `Africastalking.SMS.createSubscription`
+
+
+- `Africastalking.PAYMENTS.checkout` 
+
+Use this to create the `checkoutToken` to be used when calling any of the above functions:
+
+```javascript
+AfricasTalking.createCheckoutToken(phoneNumber)
+    .then(success)
+    .catch(error);
+```
 
 ### Account
 ```javascript
@@ -311,20 +329,20 @@ payments.payBusiness(opts)
 
 
     - `productName`: Your Payment Product as setup on your account. `REQUIRED`
-    
+
     - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ```
+    ​```
         payments.PROVIDER.ATHENA
         payments.PROVIDER.MPESA
-    ```
-
+    ​```
+    
     - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ```
+    ​```
         payments.TRANSFER_TYPE.BUY_GOODS
         payments.TRANSFER_TYPE.PAYBILL
         payments.TRANSFER_TYPE.DISBURSE_FUNDS
         payments.TRANSFER_TYPE.B2B_TRANSFER
-    ```
+    ​```
     
     - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
     
@@ -333,9 +351,9 @@ payments.payBusiness(opts)
     - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
     
     - `amount`: Payment amount. `REQUIRED`
-
-    - `metadata`: Some optional data to associate with transaction.        
     
+    - `metadata`: Some optional data to associate with transaction.        
+
 
 ## Development
 
