@@ -23,14 +23,12 @@ In addition to the API key, there are a few other options you can set including 
 
 ```javascript
 const options = {
-    sandbox: true,                  // true/false to use/not sandbox
-    apiKey: 'YOUR_API_KEY',         // Use sandbox username and API key if you're using the sandbox
-    username: 'YOUR_USERNAME',      //
+    apiKey: 'YOUR_API_KEY',         // Use sandbox API key for sandbox development
+    username: 'YOUR_USERNAME',      // Use "sandbox" for sandbox development
     format: 'json'                  // or xml
 };
 const AfricasTalking = require('africastalking')(options);
 // ...
-
 ```
 
 `Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express.

@@ -48,14 +48,14 @@ describe('Initialization', function () {
         
         var options = _.cloneDeep(fixtures.TEST_ACCOUNT);
 
-        options.sandbox = false;
+        options.username = 'salama';
         var lib = require('../lib')(options);
         var common = require('../lib/common');
 
         common.BASE_URL.should.equal("https://api.africastalking.com/version1");
         common.VOICE_URL.should.equal("https://voice.africastalking.com");
 
-        options.sandbox = true;
+        options.username = 'sandbox';
         lib = require('../lib')(options);
         common = require('../lib/common');
 
