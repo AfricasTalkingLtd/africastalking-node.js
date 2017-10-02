@@ -144,7 +144,6 @@ app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
         endSession: endSession
     });
 }));
-
 ```
 
 ### Voice
@@ -156,7 +155,7 @@ const voice = AfricasTalking.VOICE;
     - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 - Initiate a call
 - Fetch call queue
-- ~~Media upload~~ - any url to ```Play``` will be cached by default.
+- Upload Media File
 - Remember to send back an HTTP 200.
 
 
@@ -173,23 +172,40 @@ const voice = AfricasTalking.VOICE;
   .catch(function(error) {
     console.log(error);
   });
-
 ```
 
 #### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
 
-```node
-  voice.getNumQueuedCalls({ 
-    phoneNumbers: destinationNumber 
-  })
-  .then(function(s) {
-    // call queue
-    console.log(s);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
+```javascript
+voice.getNumQueuedCalls({ 
+  phoneNumbers: destinationNumber 
+})
+.then(function(s) {
+  // call queue
+  console.log(s);
+})
+.catch(function(error) {
+  console.log(error);
+});
 ```
+
+#### [Upload Media](http://docs.africastalking.com/voice/uploadmedia)
+
+```js
+voice.uploadMediaFile({ 
+  phoneNumber: destinationNumber, // your Africa's Talking virtual number
+  url: 'http://myOnlineMediaFile.mp3'
+})
+.then(function(s) {
+  // upload result
+  console.log(s);
+})
+.catch(function(error) {
+  console.log(error);
+});
+```
+
+
 
 #### [Handle call](http://docs.africastalking.com/voice/callhandler)
 
