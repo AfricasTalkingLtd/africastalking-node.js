@@ -219,7 +219,7 @@ const airtime = AfricasTalking.AIRTIME;
 - `airtime.send(options)`: Send airtime `options` is an object which contains the key:
     - `recipients`: Contains an array of objects containing the following keys
         - `phoneNumber`: Recipient of airtime
-        - `amount`: Amount sent. `>= 10 && <= 10K`
+        - `amount`: Amount sent `>= 10 && <= 10K` with currency e.g `KES 100`
 
 
 ```javascript
