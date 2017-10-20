@@ -57,7 +57,7 @@ describe('Server', function () {
 
     it('gives auth token', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
-        client.getToken({ type: sdk_proto.ClientTokenRequest.TokenType.API,  }, (err, resp) => {
+        client.getToken({}, (err, resp) => {
             if (err) throw err;
             should(resp).have.property('token');
             should(resp).have.property('expiration');

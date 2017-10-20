@@ -3,14 +3,7 @@ option java_package = "com.africastalking.proto";
 
 package africastalking;
 
-message ClientTokenRequest {
-
-  enum TokenType {
-    API = 0;
-    PAYMENT = 1;
-  }
-  TokenType type = 1;
-}
+message ClientTokenRequest { }
 
 message ClientTokenResponse {
   string username = 1;
@@ -35,7 +28,7 @@ message SipCredentialsResponse {
 
 
 service SdkServerService {
-  rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
+    rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
 
-  rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
+    rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
 }
