@@ -20,7 +20,7 @@
     "payments"
   ],
   "author": "Africa's Talking",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AfricasTalkingLtd/africastalking-node.js/issues"
   },
