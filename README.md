@@ -19,7 +19,7 @@ $ npm install --save africastalking
 
 ## Usage
 
-The package needs to be configured with your Africa's Talking username and API key (which you can get from the dashboard).
+The package needs to be configured with your app username and API key (which you can get from the dashboard).
 In addition to the API key, there are a few other options you can set including the response format.
 
 ```javascript
