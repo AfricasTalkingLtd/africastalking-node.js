@@ -28,10 +28,19 @@ const options = {
     username: 'YOUR_USERNAME',      // Use "sandbox" for sandbox development
 };
 const AfricasTalking = require('africastalking')(options);
+//...
+
+
 // ... or if you're making a backend for to use tokens instead of API keys
 const Server = require('africastalking/server');
 const server = new Server(options);
-server.start();
+server.start({
+    privateKeyFile: fs.readFileSync('path/to/pk'),
+    certChainFile: fs.readFileSync('path/to/cert/chain'),
+    rootCertFile: fs.readFileSync('path/to/root/cert'),
+    port: 35897,
+    insecure: false,
+});
 ```
 
 ### SMS
