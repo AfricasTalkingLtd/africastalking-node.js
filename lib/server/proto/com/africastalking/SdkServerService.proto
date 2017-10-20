@@ -5,24 +5,18 @@ package africastalking;
 
 message ClientTokenRequest {
 
-  enum Capability {
-    SMS = 0;
-    VOICE = 1;
-    USSD = 2;
-    AIRTIME = 3;
-
-    C2B = 4;
-    B2C = 5;
-    B2B = 6;
+  enum TokenType {
+    API = 0;
+    PAYMENT = 1;
   }
-
-  Capability capability = 1;
-  string environment = 2;
+  TokenType type = 1;
 }
 
 message ClientTokenResponse {
-  string token = 1;
-  int64 expiration = 2;
+  string username = 1;
+  string token = 2;
+  int64 expiration = 3;
+  string environment = 4;
 }
 
 message SipCredentialsRequest { }
