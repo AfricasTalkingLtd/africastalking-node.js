@@ -7,7 +7,9 @@ const validate = require('validate.js');
 const fixtures = require('./fixtures.local');
 
 const proto = __dirname + '/../lib/server/proto/com/africastalking/SdkServerService.proto';
-const sdk_proto = grpc.load(proto);
+const sdk_proto = grpc.load(proto).africastalking;
+
+let server;
 
 describe('Server', function () {
     this.timeout(5000);
@@ -19,22 +21,25 @@ describe('Server', function () {
 
     before(function (done) {
         // starts server
-        const Server = require('../lib/server');
-        const server = new Server(fixtures.TEST_ACCOUNT);
+        const Server = require('../server');
+        server = new Server(fixtures.TEST_ACCOUNT);
         server.addSipCredentials("test", "secret", "sip://at.dev", 5060, "tcp");
         server.setAuthenticator((client, callback) => callback(client === TEST_CLIENT_ID));
 
         server.start({
             certChainFile: fs.readFileSync(__dirname + '/cert/cert.pem'),
             privateKeyFile: fs.readFileSync(__dirname + '/cert/key.pem'),
-            caBundleFile: null,
+            rootCertFile: null,
             port: TEST_PORT,
         });
         done();
     });
 
-    it('gives SIP credentials', function (done) {
+    after(function () {
+        return server.stop();
+    });
 
+    it('gives SIP credentials', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
 
         client.getSipCredentials({}, (err, resp) => {
@@ -52,11 +57,12 @@ describe('Server', function () {
 
     it('gives auth token', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
-
-        client.getToken({ capability: sdk_proto.ClientTokenRequest.Capability.B2C, environment: 'sandbox' }, (err, resp) => {
+        client.getToken({ type: sdk_proto.ClientTokenRequest.TokenType.API,  }, (err, resp) => {
             if (err) throw err;
             should(resp).have.property('token');
             should(resp).have.property('expiration');
+            should(resp).have.property('username');
+            should(resp).have.property('environment');
             done();
         });
     });

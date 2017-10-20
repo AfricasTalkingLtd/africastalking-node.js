@@ -59,8 +59,8 @@ describe('USSD', function () {
             .send('hello')
             .expect('content-type', /text\/plain/i)
             .expect(200, function(err, resp) {
-                var match = resp.text.match(/^(CON)|(END) /);
-                should(match).be.ok(null);
+                var match = resp.text.match(/^(CON)|(END)/);
+                should(match).be.ok();
                 done()
             });
     });
