@@ -312,13 +312,15 @@ payments.payConsumer(opts)
         - `amount`: Payment amount. `REQUIRED`
 
         - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
-        ```js
+
+          - ```
             payments.REASON.SALARY
             payments.REASON.SALARY_WITH_CHARGE
             payments.REASON.BUSINESS
             payments.REASON.BUSINESS_WITH_CHARGE
             payments.REASON.PROMOTION
-        ```
+            ```
+
 
         - `metadata`: Some optional data to associate with transaction.
 
@@ -338,33 +340,100 @@ payments.payBusiness(opts)
 
 - `payBusiness(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
 
+  - `productName`: Your Payment Product as setup on your account. `REQUIRED`
 
-    - `productName`: Your Payment Product as setup on your account. `REQUIRED`
+  - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
 
-    - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ​```
-        payments.PROVIDER.ATHENA
-        payments.PROVIDER.MPESA
-    ​```
-    
-    - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ​```
-        payments.TRANSFER_TYPE.BUY_GOODS
-        payments.TRANSFER_TYPE.PAYBILL
-        payments.TRANSFER_TYPE.DISBURSE_FUNDS
-        payments.TRANSFER_TYPE.B2B_TRANSFER
-    ​```
-    
-    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
-    
-    - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
-    
-    - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
-    
-    - `amount`: Payment amount. `REQUIRED`
-    
-    - `metadata`: Some optional data to associate with transaction.        
+    - ```
+      payments.PROVIDER.ATHENA
+      payments.PROVIDER.MPESA
+      ```
 
+  - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+
+    - ```
+      payments.TRANSFER_TYPE.BUY_GOODS
+      payments.TRANSFER_TYPE.PAYBILL
+      payments.TRANSFER_TYPE.DISBURSE_FUNDS
+      payments.TRANSFER_TYPE.B2B_TRANSFER
+      ```
+
+  - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
+  - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
+
+  - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
+
+  - `amount`: Payment amount. `REQUIRED`
+
+  - `metadata`: Some optional data to associate with transaction.   
+
+
+#### Bank Checkout
+
+```javascript
+// initiate a bank checkout charge request
+payments.bankCheckout(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `bankCheckout(opts)` Initiate a banck checkout charge request. [More info](http://docs.africastalking.com/payments/card-checkout)
+  - ...
+
+#### Validate Bank Checkout
+
+```javascript
+// initiate a bank OTP validation request
+payments.validateBankCheckout(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `validateBankCheckout(opts)` initiate a bank OTP validation request. [More info](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters)
+  - ...
+
+#### Bank Transfer
+
+```javascript
+// initiate a bank transfer request
+payments.bankTransfer(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `bankTransfer(opts)` initiate a bank transfer request. [More info](http://docs.africastalking.com/payments/bank-transfer#requestParameters)
+  - ...
+
+#### Card Checkout
+
+```javascript
+// initiate a card checkout charge request
+payments.cardCheckout(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `cardCheckout(opts)` initiate a card checkout charge request. [More info](http://docs.africastalking.com/payments/card-checkout#chargeRequestParameters)
+  - ...
+
+#### Validate Card Checkout
+
+```javascript
+// initiate a card OTP validation request
+payments.validateCardCheckout(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `validateCardCheckout(opts)` initiate a card OTP validation request. [More info](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters )
+  - ...
 
 ## Development
 
