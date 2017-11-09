@@ -198,7 +198,7 @@ describe('Payment', function(){
             });
 
             it('#bankTransfer() must have productName/recipients', function () {
-                options.productName = "Jollof";
+                options.productName = "TestProduct";
 
                 return payments.bankTransfer(options)
                     .should.be.rejected();
@@ -312,14 +312,51 @@ describe('Payment', function(){
             });
         });
 
-        it('cardCheckout()', function () {
-            let opts = {};
+        it('cardCheckoutWithPaymentCard()', function () {
+            let opts = {
+                productName: "TestProduct",
+                paymentCard: {
+                    number: "123456789000",
+                    cvvNumber: 654,
+                    expiryMonth: 7,
+                    expiryYear: 2019,
+                    authToken: "2345",
+                    countryCode: "234",
+                },
+                currencyCode: "NGN",
+                amount: 50,
+                narration: "Test Payment",
+                metadata: {
+                    "Joe": "Biden",
+                    "id": "VP",
+                },
+            };
 
             return payments.cardCheckout(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
-                    resp.should.have.property('description');
-                    resp.should.have.property('transactionId');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('cardCheckoutWithToken()', function () {
+            let opts = {
+                productName: "TestProduct",
+                checkoutToken: "12abvsfdhh63535",
+                currencyCode: "NGN",
+                amount: 50,
+                narration: "Test Payment",
+                metadata: {
+                    "Joe": "Biden",
+                    "id": "VP",
+                },
+            };
+
+            return payments.cardCheckout(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
                 })
                 .catch(function(err) {
                     throw err;
@@ -327,12 +364,14 @@ describe('Payment', function(){
         });
 
         it('validateCardCheckout()', function () {
-            let opts = {};
+            let opts = {
+                transactionId: "ATPid_SampleTxnId1",
+                otp: "1234"
+            };
 
             return payments.validateCardCheckout(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
-                    resp.should.have.property('description');
                 })
                 .catch(function(err) {
                     throw err;
