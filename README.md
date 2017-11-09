@@ -262,18 +262,18 @@ AfricasTalking.fetchAccount()
 const payments = AfricasTalking.PAYMENTS;
 ```
 
-#### Checkout
+#### mobileCheckout
 
 ```js
-// Request payment from customer A.K.A checkout
-payments.checkout(opts)
+// Request payment from customer on mobile money
+payments.mobileCheckout(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications from customer(s) on your registered callback URL
 ```
 
-- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
+- `mobileCheckout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
     - `productName`: Your Payment Product. `REQUIRED`
 
@@ -342,7 +342,7 @@ payments.payBusiness(opts)
 
   - `productName`: Your Payment Product as setup on your account. `REQUIRED`
 
-  - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+    - `provider`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
 
     - ```
       payments.PROVIDER.ATHENA
@@ -381,7 +381,15 @@ payments.bankCheckout(opts)
 ```
 
 - `bankCheckout(opts)` Initiate a banck checkout charge request. [More info](http://docs.africastalking.com/payments/card-checkout)
-  - ...
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `bankAccount`: Bank account to be charged. `REQUIRED`
+    - `accountName`: The name of the bank account.
+    - `accountNumber`: The account number `REQUIRED`
+    - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code (e.g KES, USD, UGX etc.) `REQUIRED`
+  - `amount`: Payment amount. `REQUIRED`
+  - `narration`: A short description of the transaction `REQUIRED`
+  - `metadata`: Some optional data to associate with transaction.
 
 #### Validate Bank Checkout
 
@@ -393,7 +401,8 @@ payments.validateBankCheckout(opts)
 ```
 
 - `validateBankCheckout(opts)` initiate a bank OTP validation request. [More info](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters)
-  - ...
+  - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
+  - `otp`: One Time Password that the bank sent to the client. `REQUIRED`
 
 #### Bank Transfer
 
@@ -407,7 +416,16 @@ payments.bankTransfer(opts)
 ```
 
 - `bankTransfer(opts)` initiate a bank transfer request. [More info](http://docs.africastalking.com/payments/bank-transfer#requestParameters)
-  - ...
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `recipients`: A list of recipients. Each recipient has:
+    - `bankAccount`: Bank account to be charged. `REQUIRED`
+      - `accountName`: The name of the bank account.
+      - `accountNumber`: The account number `REQUIRED`
+      - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
+    - `currencyCode`: 3-digit ISO format currency code (e.g KES, USD, UGX etc.) `REQUIRED`
+    - `amount`: Payment amount. `REQUIRED`
+    - `narration`: A short description of the transaction `REQUIRED`
+    - `metadata`: Some optional data to associate with transaction.
 
 #### Card Checkout
 
