@@ -16,33 +16,33 @@ describe('Payment', function(){
     });
 
 
-    describe("Checkout", function () {
+    describe("mobileCheckout", function () {
 
         describe('validation', function () {
             var options = { };
 
-            it('#checkout() cannot be empty', function () {
-                return payments.checkout(options)
+            it('#mobileCheckout() cannot be empty', function () {
+                return payments.mobileCheckout(options)
                     .should.be.rejected();
             });
 
-            it('#checkout() must have username/productName/phoneNumber/currencyCode/amount params', function () {
+            it('#mobileCheckout() must have username/productName/phoneNumber/currencyCode/amount params', function () {
                 options.username = "+254718769882";
                 options.from = null;
                 options.message = null;
 
-                return payments.checkout(options)
+                return payments.mobileCheckout(options)
                     .should.be.rejected();
             });
 
-            it('#checkout() may have string map metadata', function () {
+            it('#mobileCheckout() may have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.checkout(options)
+                return payments.mobileCheckout(options)
                     .should.be.rejected();
             });
         });
 
-        it('checkout()', function () {
+        it('mobileCheckout()', function () {
             let opts = {
                 productName: "TestProduct",
                 phoneNumber: "0718769882",
@@ -51,7 +51,7 @@ describe('Payment', function(){
                 amount: 234.5
             };
 
-            return payments.checkout(opts)
+            return payments.mobileCheckout(opts)
                 .then(function(resp){
                     resp.should.have.property('status');
                 })
@@ -206,13 +206,25 @@ describe('Payment', function(){
         });
 
         it('bankCheckout()', function () {
-            let opts = {};
+            let opts = {
+                productName: "TestProduct",
+                bankAccount: {
+                    accountName: "Test Bank Account",
+                    accountNumber: "1234567890",
+                    bankCode: 234001
+                },
+                currencyCode: "NGN",
+                amount: 50,
+                narration: "Test Payment",
+                metadata: {
+                    "Joe": "Biden",
+                    "id": "VP",
+                },
+            };
 
             return payments.bankCheckout(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
-                    resp.should.have.property('description');
-                    resp.should.have.property('transactionId');
                 })
                 .catch(function(err) {
                     throw err;
@@ -220,12 +232,14 @@ describe('Payment', function(){
         });
 
         it('validateBankCheckout()', function () {
-            let opts = {};
+            let opts = {
+                transactionId: "ATPid_SampleTxnId1",
+                otp: "1234",
+            };
 
             return payments.validateBankCheckout(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
-                    resp.should.have.property('description');
                 })
                 .catch(function(err) {
                     throw err;
@@ -233,7 +247,23 @@ describe('Payment', function(){
         });
 
         it('bankTransfer()', function () {
-            let opts = {};
+            let opts = {
+                productName: "TestProduct",
+                recipients: [{
+                    bankAccount: {
+                        accountName: "Test Bank Account",
+                        accountNumber: "1234567890",
+                        bankCode: 234001
+                    },
+                    currencyCode: "NGN",
+                    amount: 50,
+                    narration: "Test Payment",
+                    metadata: {
+                        "Joe": "Biden",
+                        "id": "VP"
+                    },
+                }],
+            };
 
             return payments.bankTransfer(opts)
                 .then(function(resp) {
