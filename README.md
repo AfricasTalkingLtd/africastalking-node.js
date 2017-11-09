@@ -451,7 +451,7 @@ payments.cardCheckout(opts)
   - `narration`: A short description of the transaction `REQUIRED`
   - `metadata`: Some optional data to associate with transaction.
 
-####Validate Bank Checkout
+#### Validate Bank Checkout
 
 ```javascript
 // initiate a card OTP validation request
