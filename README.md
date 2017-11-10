@@ -385,7 +385,7 @@ payments.bankCheckout(opts)
     - `accountName`: The name of the bank account.
     - `accountNumber`: The account number `REQUIRED`
     - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code (e.g `NGN` etc.) `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
   - `amount`: Payment amount. `REQUIRED`
   - `narration`: A short description of the transaction `REQUIRED`
   - `metadata`: Some optional data to associate with transaction.
@@ -421,7 +421,7 @@ payments.bankTransfer(opts)
       - `accountName`: The name of the bank account.
       - `accountNumber`: The account number `REQUIRED`
       - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
-    - `currencyCode`: 3-digit ISO format currency code (e.g `NGN` etc.) `REQUIRED`
+    - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
     - `amount`: Payment amount. `REQUIRED`
     - `narration`: A short description of the transaction `REQUIRED`
     - `metadata`: Some optional data to associate with transaction.
@@ -445,8 +445,8 @@ payments.cardCheckout(opts)
     - `cvvNumber`: The 3 or 4 digit Card Verification Value. `REQUIRED`
     - `expiryMonth`: The expiration month on the card (e.g `8`) `REQUIRED`
     - `authToken`: The card's ATM PIN. `REQUIRED`
-    - `countryCode`: The card's local country telephone code (e.g `234`) `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code (e.g `NGN` etc.) `REQUIRED`
+    - `countryCode`: The 2-Digit countryCode where the card was issued (only `NG` is supported). `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
   - `amount`: Payment amount. `REQUIRED`
   - `narration`: A short description of the transaction `REQUIRED`
   - `metadata`: Some optional data to associate with transaction.
