@@ -170,18 +170,18 @@ const voice = AfricasTalking.VOICE;
 
 
 #### [Initiate a call](http://docs.africastalking.com/voice/call)
-```node
-  voice.call({
-    callFrom: '+2547XXXXXXXX', // AT virtual number
-    callTo: from_ 
-  })
-  .then(function(s) {
-    // persist call Info
-    console.log(s);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
+```javascript
+voice.call({
+  callFrom: '+2547XXXXXXXX', // AT virtual number
+  callTo: from_ 
+})
+.then(function(s) {
+  // persist call Info
+  console.log(s);
+})
+.catch(function(error) {
+  console.log(error);
+});
 ```
 
 #### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
@@ -222,7 +222,7 @@ voice.uploadMediaFile({
 check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
 
-### Airtime
+### [Airtime](http://docs.africastalking.com/airtime/sending)
 
 ```javascript
 const airtime = AfricasTalking.AIRTIME;
@@ -234,7 +234,7 @@ const airtime = AfricasTalking.AIRTIME;
 
 
 ```javascript
-   airtime.send(options)
+airtime.send(options)
     .then(success)
     .catch(error);
 ```
@@ -243,7 +243,7 @@ const airtime = AfricasTalking.AIRTIME;
 
 - `AfricasTalking.createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
 
-### Account
+### [Account](http://docs.africastalking.com/userdata/balance)
 ```javascript
 AfricasTalking.fetchAccount()
     .then(success)
@@ -262,7 +262,7 @@ AfricasTalking.fetchAccount()
 const payments = AfricasTalking.PAYMENTS;
 ```
 
-#### mobileCheckout
+#### [mobileCheckout](http://docs.africastalking.com/payments/mobile-checkout)
 
 ```js
 // Request payment from customer on mobile money
@@ -286,7 +286,7 @@ payments.mobileCheckout(opts)
     - `metadata`: Some optional data to associate with transaction.
 
 
-#### B2C
+#### [B2C](http://docs.africastalking.com/payments/mobile-b2c)
 
 
 ```js
@@ -296,7 +296,6 @@ payments.payConsumer(opts)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
-
 ```
 
 - `payConsumer(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
@@ -324,7 +323,7 @@ payments.payConsumer(opts)
         - `metadata`: Some optional data to associate with transaction.
 
 
-#### B2B
+#### [B2B](http://docs.africastalking.com/payments/mobile-b2b)
 
 
 ```js
@@ -334,7 +333,6 @@ payments.payBusiness(opts)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
-
 ```
 
 - `payBusiness(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
@@ -368,7 +366,7 @@ payments.payBusiness(opts)
   - `metadata`: Some optional data to associate with transaction.   
 
 
-#### Bank Checkout
+#### [Bank Checkout](http://docs.africastalking.com/payments/bank-checkout)
 
 ```javascript
 // initiate a bank checkout charge request
@@ -390,7 +388,7 @@ payments.bankCheckout(opts)
   - `narration`: A short description of the transaction `REQUIRED`
   - `metadata`: Some optional data to associate with transaction.
 
-#### Validate Bank Checkout
+#### [Validate Bank Checkout](http://docs.africastalking.com/payments/bank-checkout#validationRequestParameters)
 
 ```javascript
 // initiate a bank OTP validation request
@@ -403,7 +401,7 @@ payments.validateBankCheckout(opts)
   - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
   - `otp`: One Time Password that the bank sent to the client. `REQUIRED`
 
-#### Bank Transfer
+#### [Bank Transfer](http://docs.africastalking.com/payments/bank-transfer)
 
 ```javascript
 // initiate a bank transfer request
@@ -426,7 +424,7 @@ payments.bankTransfer(opts)
     - `narration`: A short description of the transaction `REQUIRED`
     - `metadata`: Some optional data to associate with transaction.
 
-#### Card Checkout
+#### [Card Checkout](http://docs.africastalking.com/payments/card-checkout)
 
 ```javascript
 // initiate a card checkout charge request
@@ -451,7 +449,7 @@ payments.cardCheckout(opts)
   - `narration`: A short description of the transaction `REQUIRED`
   - `metadata`: Some optional data to associate with transaction.
 
-#### Validate Card Checkout
+#### [Validate Card Checkout](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters)
 
 ```javascript
 // initiate a card OTP validation request
