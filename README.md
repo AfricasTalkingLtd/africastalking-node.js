@@ -1,6 +1,8 @@
-# Official Africa's Talking Node.js API wrapper
+# Africa's Talking Node.js API wrapper
 
-The Africa's Talking Node API wrapper provides convenient access to the Africa's Talking API from applications written in server-side JavaScript.
+[![NPM](https://nodei.co/npm/africastalking.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.org/package/africastalking)
+
+> The wrapper provides convenient access to the Africa's Talking API from applications written in server-side JavaScript.
 
 ## Documentation
 
@@ -17,20 +19,29 @@ $ npm install --save africastalking
 
 ## Usage
 
-The package needs to be configured with your Africa's Talking username and API key (which you can get from the dashboard).
+The package needs to be configured with your app username and API key (which you can get from the dashboard).
 In addition to the API key, there are a few other options you can set including the response format.
 
 ```javascript
 const options = {
     apiKey: 'YOUR_API_KEY',         // Use sandbox API key for sandbox development
     username: 'YOUR_USERNAME',      // Use "sandbox" for sandbox development
-    format: 'json'                  // or xml
 };
 const AfricasTalking = require('africastalking')(options);
-// ...
-```
+//...
 
-`Important`: If you register a callback URL with the API, always remember to acknowledge the receipt of any data it sends by responding with an HTTP `200`; e.g. `res.status(200);` for express.
+
+// ... or if you're making a backend for to use tokens instead of API keys
+const Server = require('africastalking/server');
+const server = new Server(options);
+server.start({
+    privateKeyFile: fs.readFileSync('path/to/pk'),
+    certChainFile: fs.readFileSync('path/to/cert/chain'),
+    rootCertFile: fs.readFileSync('path/to/root/cert'),
+    port: 35897,
+    insecure: false,
+});
+```
 
 ### SMS
 

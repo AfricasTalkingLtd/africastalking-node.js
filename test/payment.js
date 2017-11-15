@@ -6,7 +6,7 @@ var fixtures = require('./fixtures.local');
 
 var AfricasTalking, payments;
 
-describe('PAYMENTS', function(){
+describe('Payment', function(){
 
     this.timeout(5000);
 

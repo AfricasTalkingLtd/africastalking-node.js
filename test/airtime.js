@@ -6,7 +6,7 @@ var fixtures = require('./fixtures.local');
 
 var AfricasTalking, airtime;
 
-describe('AIRTIME', function(){
+describe('Airtime', function(){
 
     this.timeout(5000);
 
@@ -16,44 +16,16 @@ describe('AIRTIME', function(){
     });
 
     describe('validation', function () {
-        var options = {};
 
         it('#send() cannot be empty', function () {
-            return airtime.send(options)
+            return airtime.send({})
                 .should.be.rejected();
         });
-
-        options.recipients = [];
-
-        it('#send() rejects have empty recipients', function () {
-            return airtime.send(options)
-                .should.be.rejected();
-        });
-
-        options.recipients.push(
-            { phoneNumber: 'not phone', amount: 'NaN' }
-        );
 
         it('#send() rejects invalid options', function () {
-            return airtime.send(options)
-                .should.be.rejected();
-        });
-
-        options.recipients = [
-            { phoneNumber: '0712345678', amount: 9 }
-        ];
-
-        it('#send() amount must be greater than 10', function () {
-            return airtime.send(options)
-                .should.be.rejected();
-        });
-
-        options.recipients = [
-            {phoneNumber: '0712345678', amount:10001}
-        ];
-
-        it('#send() amount must be less than 10000', function () {
-            return airtime.send(options)
+            return airtime.send(
+                { recipients: [ { phoneNumber: 'not phone', amount: 'NaN' } ] }
+            )
                 .should.be.rejected();
         });
     });
@@ -63,7 +35,7 @@ describe('AIRTIME', function(){
            recipients: [
                {
                    phoneNumber: '254726166685',
-                   amount: 10
+                   amount: 'KES 10'
                }
            ]
         };
@@ -86,11 +58,11 @@ describe('AIRTIME', function(){
            recipients: [
                {
                    phoneNumber: '254726166685',
-                   amount: 10
+                   amount: 'KES 90'
                },
                {
                    phoneNumber: '0726863825',
-                   amount: 10
+                   amount: 'KES 897'
                }
            ]
        };
