@@ -18,8 +18,8 @@ server.on('listening', () => {
 
   // Start SDK Server
   const at = new ATServer({
-    apiKey: 'aaff02056ade915242a27ade4d64382832e7265b5f022c98331d3da3c2fcd942',
-    username: 'sandbox'
+    apiKey: 'API_KEY',
+    username: 'USERNAME'
   });
 
   at.start({
