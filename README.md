@@ -170,18 +170,18 @@ const voice = AfricasTalking.VOICE;
 
 
 #### [Initiate a call](http://docs.africastalking.com/voice/call)
-```node
-  voice.call({
-    callFrom: '+2547XXXXXXXX', // AT virtual number
-    callTo: from_ 
-  })
-  .then(function(s) {
-    // persist call Info
-    console.log(s);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
+```javascript
+voice.call({
+  callFrom: '+2547XXXXXXXX', // AT virtual number
+  callTo: from_ 
+})
+.then(function(s) {
+  // persist call Info
+  console.log(s);
+})
+.catch(function(error) {
+  console.log(error);
+});
 ```
 
 #### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
@@ -222,7 +222,7 @@ voice.uploadMediaFile({
 check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
 
-### Airtime
+### [Airtime](http://docs.africastalking.com/airtime/sending)
 
 ```javascript
 const airtime = AfricasTalking.AIRTIME;
@@ -234,7 +234,7 @@ const airtime = AfricasTalking.AIRTIME;
 
 
 ```javascript
-   airtime.send(options)
+airtime.send(options)
     .then(success)
     .catch(error);
 ```
@@ -243,7 +243,7 @@ const airtime = AfricasTalking.AIRTIME;
 
 - `AfricasTalking.createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
 
-### Account
+### [Account](http://docs.africastalking.com/userdata/balance)
 ```javascript
 AfricasTalking.fetchAccount()
     .then(success)
@@ -262,18 +262,18 @@ AfricasTalking.fetchAccount()
 const payments = AfricasTalking.PAYMENTS;
 ```
 
-#### Checkout
+#### [mobileCheckout](http://docs.africastalking.com/payments/mobile-checkout)
 
 ```js
-// Request payment from customer A.K.A checkout
-payments.checkout(opts)
+// Request payment from customer on mobile money
+payments.mobileCheckout(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications from customer(s) on your registered callback URL
 ```
 
-- `checkout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
+- `mobileCheckout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
 
     - `productName`: Your Payment Product. `REQUIRED`
 
@@ -286,7 +286,7 @@ payments.checkout(opts)
     - `metadata`: Some optional data to associate with transaction.
 
 
-#### B2C
+#### [B2C](http://docs.africastalking.com/payments/mobile-b2c)
 
 
 ```js
@@ -296,7 +296,6 @@ payments.payConsumer(opts)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
-
 ```
 
 - `payConsumer(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
@@ -312,18 +311,19 @@ payments.payConsumer(opts)
         - `amount`: Payment amount. `REQUIRED`
 
         - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
-        ```js
+
+          - ```
             payments.REASON.SALARY
             payments.REASON.SALARY_WITH_CHARGE
             payments.REASON.BUSINESS
             payments.REASON.BUSINESS_WITH_CHARGE
             payments.REASON.PROMOTION
-        ```
+            ```
 
         - `metadata`: Some optional data to associate with transaction.
 
 
-#### B2B
+#### [B2B](http://docs.africastalking.com/payments/mobile-b2b)
 
 
 ```js
@@ -333,38 +333,134 @@ payments.payBusiness(opts)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
-
 ```
 
 - `payBusiness(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
 
+  - `productName`: Your Payment Product as setup on your account. `REQUIRED`
 
-    - `productName`: Your Payment Product as setup on your account. `REQUIRED`
+    - `provider`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
 
-    - `provider`: 	This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ​```
-        payments.PROVIDER.ATHENA
-        payments.PROVIDER.MPESA
-    ​```
-    
-    - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    ​```
-        payments.TRANSFER_TYPE.BUY_GOODS
-        payments.TRANSFER_TYPE.PAYBILL
-        payments.TRANSFER_TYPE.DISBURSE_FUNDS
-        payments.TRANSFER_TYPE.B2B_TRANSFER
-    ​```
-    
-    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
-    
-    - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
-    
-    - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
-    
+    - ```
+      payments.PROVIDER.ATHENA
+      payments.PROVIDER.MPESA
+      ```
+
+  - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+
+    - ```
+      payments.TRANSFER_TYPE.BUY_GOODS
+      payments.TRANSFER_TYPE.PAYBILL
+      payments.TRANSFER_TYPE.DISBURSE_FUNDS
+      payments.TRANSFER_TYPE.B2B_TRANSFER
+      ```
+
+  - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
+
+  - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
+
+  - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
+
+  - `amount`: Payment amount. `REQUIRED`
+
+  - `metadata`: Some optional data to associate with transaction.   
+
+
+#### [Bank Checkout](http://docs.africastalking.com/payments/bank-checkout)
+
+```javascript
+// initiate a bank checkout charge request
+payments.bankCheckout(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `bankCheckout(opts)` Initiate a banck checkout charge request. [More info](http://docs.africastalking.com/payments/card-checkout)
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `bankAccount`: Bank account to be charged. `REQUIRED`
+    - `accountName`: The name of the bank account.
+    - `accountNumber`: The account number `REQUIRED`
+    - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
+  - `amount`: Payment amount. `REQUIRED`
+  - `narration`: A short description of the transaction `REQUIRED`
+  - `metadata`: Some optional data to associate with transaction.
+
+#### [Validate Bank Checkout](http://docs.africastalking.com/payments/bank-checkout#validationRequestParameters)
+
+```javascript
+// initiate a bank OTP validation request
+payments.validateBankCheckout(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `validateBankCheckout(opts)` initiate a bank OTP validation request. [More info](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters)
+  - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
+  - `otp`: One Time Password that the bank sent to the client. `REQUIRED`
+
+#### [Bank Transfer](http://docs.africastalking.com/payments/bank-transfer)
+
+```javascript
+// initiate a bank transfer request
+payments.bankTransfer(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `bankTransfer(opts)` initiate a bank transfer request. [More info](http://docs.africastalking.com/payments/bank-transfer#requestParameters)
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `recipients`: A list of recipients. Each recipient has:
+    - `bankAccount`: Bank account to be charged:
+      - `accountName`: The name of the bank account.
+      - `accountNumber`: The account number `REQUIRED`
+      - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
+    - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
     - `amount`: Payment amount. `REQUIRED`
-    
-    - `metadata`: Some optional data to associate with transaction.        
+    - `narration`: A short description of the transaction `REQUIRED`
+    - `metadata`: Some optional data to associate with transaction.
 
+#### [Card Checkout](http://docs.africastalking.com/payments/card-checkout)
+
+```javascript
+// initiate a card checkout charge request
+payments.cardCheckout(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `cardCheckout(opts)` initiate a card checkout charge request. [More info](http://docs.africastalking.com/payments/card-checkout#chargeRequestParameters)
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `checkoutToken`: Token that has been generated by our APIs as as result of charging a user's Payment Card in a previous transaction. When using a token, the `paymentCard` data should NOT be populated.
+  - `paymentCard`: Payment Card to be charged:
+    - `number`: The payment card number. `REQUIRED`
+    - `cvvNumber`: The 3 or 4 digit Card Verification Value. `REQUIRED`
+    - `expiryMonth`: The expiration month on the card (e.g `8`) `REQUIRED`
+    - `authToken`: The card's ATM PIN. `REQUIRED`
+    - `countryCode`: The 2-Digit countryCode where the card was issued (only `NG` is supported). `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
+  - `amount`: Payment amount. `REQUIRED`
+  - `narration`: A short description of the transaction `REQUIRED`
+  - `metadata`: Some optional data to associate with transaction.
+
+#### [Validate Card Checkout](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters)
+
+```javascript
+// initiate a card OTP validation request
+payments.validateCardCheckout(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `validateCardCheckout(opts)` initiate a card OTP validation request. [More info](http://docs.africastalking.com/payments/card-checkout#validationRequestParameters )
+  - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
+  - `otp`: One Time Password that the card issuer sent to the client. `REQUIRED`
 
 ## Development
 
