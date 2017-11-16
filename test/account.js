@@ -5,7 +5,7 @@ var validate = require('validate.js');
 var fixtures = require('./fixtures.local');
 
 describe('Account', function () {
-    this.timeout(5000);
+    this.timeout(15000);
 
     it('fetched account info', function (done) {
 

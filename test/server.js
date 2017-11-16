@@ -64,6 +64,7 @@ describe('Server', function () {
             should(resp).have.property('expiration');
             should(resp).have.property('username');
             should(resp).have.property('environment');
+            should(resp.environment).equal('sandbox');
             done();
         });
     });
