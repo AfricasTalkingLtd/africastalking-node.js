@@ -35,15 +35,16 @@ describe('Server', function () {
         done();
     });
 
-    after(function () {
-        return server.stop();
+    after(function (done) {
+        server.stop();
+        done();
     });
 
     it('gives SIP credentials', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
 
         client.getSipCredentials({}, (err, resp) => {
-            if (err) throw err;
+            if (err) return done(err);
             should(resp).have.property('credentials');
             should(resp.credentials.length).equal(1);
             should(resp.credentials[0].username).equal('test');
@@ -58,7 +59,7 @@ describe('Server', function () {
     it('gives auth token', function (done) {
         const client = new sdk_proto.SdkServerService(`localhost:${TEST_PORT}`, credentials);
         client.getToken({}, (err, resp) => {
-            if (err) throw err;
+            if (err) return done(err);
             should(resp).have.property('token');
             should(resp).have.property('expiration');
             should(resp).have.property('username');
