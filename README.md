@@ -290,15 +290,15 @@ payments.mobileCheckout(opts)
 
 
 ```js
-// Send payment to customer(s) A.K.A B2C
-payments.payConsumer(opts)
+// Send payment to customer
+payments.mobileB2C(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
 ```
 
-- `payConsumer(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
+- `mobileB2C(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
 
     - `productName`: Your Payment Product. `REQUIRED`
 
@@ -327,15 +327,15 @@ payments.payConsumer(opts)
 
 
 ```js
-// Send payment to business(s) like a bank A.K.A B2B
-payments.payBusiness(opts)
+// Send payment to business(s) like a bank
+payments.mobileB2B(opts)
         .then(success)
         .catch(error);
 
 // Wait for payment notifications on your registered callback URL
 ```
 
-- `payBusiness(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
+- `mobileB2B(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
 
   - `productName`: Your Payment Product as setup on your account. `REQUIRED`
 

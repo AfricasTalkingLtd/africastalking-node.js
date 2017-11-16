@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+const ATServer = require('../../lib/server');
+const app = require('../app');
+const debug = require('debug')('example:server');
+const http = require('http');
+
+const port = 3000;
+app.set('port', port);
+
+const server = http.createServer(app);
+server.listen(port);
+server.on('listening', () => {
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+
+  // Start SDK Server
+  const at = new ATServer({
+    apiKey: 'aaff02056ade915242a27ade4d64382832e7265b5f022c98331d3da3c2fcd942',
+    username: 'sandbox'
+  });
+
+  at.start({
+    /*privateKeyFile: fs.readFileSync('path/to/pk'),
+    certChainFile: fs.readFileSync('path/to/cert/chain'),
+    rootCertFile: fs.readFileSync('path/to/root/cert'),
+    port: 35897,*/
+    insecure: true,
+  });
+});
