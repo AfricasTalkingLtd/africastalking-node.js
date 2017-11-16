@@ -211,7 +211,7 @@ describe('Payment', function(){
                 bankAccount: {
                     accountName: "Test Bank Account",
                     accountNumber: "1234567890",
-                    bankCode: 234001
+                    bankCode: payments.BANK.FCMB_NG,
                 },
                 currencyCode: "NGN",
                 amount: 50,
@@ -253,7 +253,7 @@ describe('Payment', function(){
                     bankAccount: {
                         accountName: "Test Bank Account",
                         accountNumber: "1234567890",
-                        bankCode: 234001
+                        bankCode: payments.BANK.FCMB_NG,
                     },
                     currencyCode: "NGN",
                     amount: 50,
