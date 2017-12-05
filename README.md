@@ -124,8 +124,8 @@ If you are using connect-like frameworks (*express*), you could use the middlewa
 // example (express)
 
 app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
-    const endSession = false;
-    const message = '';
+    let endSession = false;
+    let message = '';
     
     const session = sessions.get(params.sessionId);
     const user = db.getUserByPhone(params.phoneNumber);
