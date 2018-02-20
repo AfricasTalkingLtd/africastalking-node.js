@@ -28,18 +28,6 @@ const options = {
 };
 const AfricasTalking = require('africastalking')(options);
 //...
-
-
-// ... or if you're making a backend to use tokens instead of API keys
-const Server = require('africastalking/server');
-const server = new Server(options);
-server.start({
-    privateKeyFile: fs.readFileSync('path/to/pk'),
-    certChainFile: fs.readFileSync('path/to/cert/chain'),
-    rootCertFile: fs.readFileSync('path/to/root/cert'),
-    port: 35897,
-    insecure: false,
-});
 ```
 
 See [example](example/) for more usage examples.
