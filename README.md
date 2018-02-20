@@ -1,8 +1,8 @@
-# Africa's Talking Node.js API wrapper
+# Africa's Talking Node.js SDK
 
 [![NPM](https://nodei.co/npm/africastalking.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.org/package/africastalking)
 
-> The wrapper provides convenient access to the Africa's Talking API from applications written in server-side JavaScript.
+> The wrapper provides convenient access to the Africa's Talking API from applications written for Node.js.
 
 ## Documentation
 
@@ -11,7 +11,7 @@ Take a look at the [API docs here](http://docs.africastalking.com).
 
 ## Install
 
-You can install the package by running: 
+You can install the package from [npm](npmjs.com/package/africastalking) by running: 
 
 ```bash
 $ npm install --save africastalking
@@ -19,19 +19,18 @@ $ npm install --save africastalking
 
 ## Usage
 
-The package needs to be configured with your app username and API key (which you can get from the dashboard).
-In addition to the API key, there are a few other options you can set including the response format.
+The package needs to be configured with your app username and API key (which you can get from the [dashboard](https://account/africastalking.com)).
 
 ```javascript
 const options = {
-    apiKey: 'YOUR_API_KEY',         // Use sandbox API key for sandbox development
-    username: 'YOUR_USERNAME',      // Use "sandbox" for sandbox development
+    apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
+    username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
 const AfricasTalking = require('africastalking')(options);
 //...
 
 
-// ... or if you're making a backend for to use tokens instead of API keys
+// ... or if you're making a backend to use tokens instead of API keys
 const Server = require('africastalking/server');
 const server = new Server(options);
 server.start({
@@ -42,6 +41,8 @@ server.start({
     insecure: false,
 });
 ```
+
+See [example](example/) for more usage examples.
 
 ### SMS
 
