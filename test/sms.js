@@ -70,8 +70,9 @@ describe('SMS', function () {
     it('sends single simple message', function (done) {
 
         var opts = {
-            to: "254718769882",
-            message: "This is a test"
+            to: "+254718769882",
+            message: "This is a test",
+            enqueue: true,
         };
 
         sms.send(opts)
@@ -88,8 +89,9 @@ describe('SMS', function () {
 
     it('sends multiple simple message', function (done) {
         var opts = {
-            to: ["254718769882", "254718769882"],
-            message: "This is mulitple recipients test"
+            to: ["+254718769882", "+254718769882"],
+            message: "This is mulitple recipients test",
+            enqueue: true,
         };
         sms.send(opts)
             .then(function (resp) {
@@ -100,31 +102,43 @@ describe('SMS', function () {
                 console.error(err);
                 done();
             });
-
     });
 
-    it('sends bulk message', function (done) {
-        var opts = {
-            to: ["254718769882"],
-            message: "This is bulk test",
-            enqueue: true
+    it('sends heavy single message', function (done) {
+        this.timeout(55000);
+        const count = 1000;
+        const numbers = Array(count).fill(0).map((num, idx) => `+254718${count + idx}`);
+        const opts = {
+            to: numbers,
+            message: "This is heavy single test",
+            enqueue: true,
         };
-        sms.sendBulk(opts)
+        sms.send(opts)
             .then(function (resp) {
                 resp.should.have.property('SMSMessageData');
                 done();
             })
             .catch(function (err) {
-                console.error(err);
-                done();
+                done(error);
             });
+    });
 
+    it('sends heavy multiple message', function () {
+        this.timeout(55000);
+        const count = 1000;
+        const numbers = Array(count).fill(0).map((num, idx) => `+254718${count + idx}`);
+        const opts = {
+            message: "This is heavy mulitple test",
+            enqueue: true,
+        };
+        const tasks = numbers.map(number => sms.send({...opts, to: number }));
+        return Promise.all(tasks);
     });
 
     it('sends premium message', function (done) {
 
         var opts = {
-            to: "254718760882",
+            to: "+254718760882",
             from: "testService",
             message: "This is premium test",
             keyword: "test",

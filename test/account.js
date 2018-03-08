@@ -11,7 +11,7 @@ describe('Account', function () {
 
         var AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
 
-        var p = AfricasTalking.fetchAccount();
+        var p = AfricasTalking.ACCOUNT.fetchAccount();
         validate.isPromise(p).should.be.exactly(true);
 
         p.then(function (resp) {

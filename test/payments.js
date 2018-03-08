@@ -8,7 +8,7 @@ var AfricasTalking, payments;
 
 describe('Payment', function(){
 
-    this.timeout(5000);
+    this.timeout(15000);
 
     before(function () {
         AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
@@ -45,7 +45,7 @@ describe('Payment', function(){
         it('mobileCheckout()', function () {
             let opts = {
                 productName: "TestProduct",
-                phoneNumber: "0718769882",
+                phoneNumber: "+254718769882",
                 currencyCode: "KES",
                 metadata: {"Joe": "Biden", "id":"VP"},
                 amount: 234.5

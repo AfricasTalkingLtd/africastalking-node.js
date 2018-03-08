@@ -34,7 +34,7 @@ describe('Airtime', function(){
         var opts = {
            recipients: [
                {
-                   phoneNumber: '254726166685',
+                   phoneNumber: '+254726166685',
                    amount: 'KES 10'
                }
            ]
@@ -57,11 +57,11 @@ describe('Airtime', function(){
        var opts = {
            recipients: [
                {
-                   phoneNumber: '254726166685',
+                   phoneNumber: '+254726166685',
                    amount: 'KES 90'
                },
                {
-                   phoneNumber: '0726863825',
+                   phoneNumber: '+254726863825',
                    amount: 'KES 897'
                }
            ]

@@ -48,13 +48,11 @@ sms.send(opts)
 
 - `send(options)`: Send a message. `options` contains:
 
+    - `message`: SMS content. `REQUIRED`
     - `to`: A single recipient or an array of recipients. `REQUIRED`
     - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account.
-    - `message`: SMS content. `REQUIRED`
 
-- `sendBulk(options)`: Send bulk SMS. In addition to paramaters of `send()`, we would have: 
-
-    - `enqueue`: "[...] would like deliver as many messages to the API before waiting for an Ack from the Telcos."
+    - `enqueue`: Set to `true` if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
 
 - `sendPremium(options)`: Send premium SMS. In addition to paramaters of `send()`, we would have:
 
@@ -230,17 +228,39 @@ airtime.send(options)
     .catch(error);
 ```
 
-### Checkout Token
-
-- `AfricasTalking.createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
-
-### [Account](http://docs.africastalking.com/userdata/balance)
+### Token
 ```javascript
-AfricasTalking.fetchAccount()
+const token = AfricasTalking.TOKEN;
+```
+
+- `createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
+
+```javascript
+token.createCheckoutToken(phoneNumber)
     .then(success)
     .catch(error);
 ```
+
+- `generateAuthToken()`: Generate an auth token to us for authentication instead of the API key.
+
+```javascript
+token.generateAuthToken()
+    .then(success)
+    .catch(error);
+```
+
+### [Account](http://docs.africastalking.com/userdata/balance)
+```javascript
+const account = AfricasTalking.ACCOUNT;
+```
+
 - `fetchAccount()`: Fetch account info; i.e. balance
+
+```javascript
+account.fetchAccount()
+    .then(success)
+    .catch(error);
+```
 
 
 ### Payments
