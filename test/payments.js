@@ -153,6 +153,46 @@ describe('Payment', function(){
         });
     });
 
+    describe('Wallet', function() {
+        describe('validation', function () {
+            let options = {};
+
+            it('#walletTransfer() cannot be empty', function () {
+                return payments.walletTransfer(options)
+                    .should.be.rejected();
+            });
+
+            it('#walletTransfer() must have productName/targetProductCode/currencyCode/amount/metadata', function () {
+                options.productName = "Joe";
+                return payments.walletTransfer(options)
+                    .should.be.rejected();
+            });
+        });
+
+        it('walletTransfer()', function () {
+
+            let opts = {
+                productName: "TestProduct",
+                targetProductCode: 3323,
+                currencyCode: "NGN",
+                amount: 50,
+                metadata: {
+                    "Joe": "Biden",
+                    "id": "VP",
+                },
+            };
+
+            return payments.walletTransfer(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+    });
+
     describe('Bank', function () {
 
         describe('validation', function () {
@@ -166,13 +206,13 @@ describe('Payment', function(){
             it('#bankCheckout() must have productName/bankAccount/currencyCode/amount/narration', function () {
                 options.productName = "Joe";
 
-                return payments.payConsumer(options)
+                return payments.bankCheckout(options)
                     .should.be.rejected();
             });
 
             it('#bankCheckout() may have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.payBusiness(options)
+                return payments.bankCheckout(options)
                     .should.be.rejected();
             });
 

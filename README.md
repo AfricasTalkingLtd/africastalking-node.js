@@ -444,6 +444,25 @@ payments.bankTransfer(opts)
     - `narration`: A short description of the transaction `REQUIRED`
     - `metadata`: Some optional data to associate with transaction.
 
+#### [Wallet Transfer](http://docs.africastalking.com/wallet/transfer)
+
+```javascript
+// initiate a wallet transfer request
+payments.walletTransfer(opts)
+        .then(success)
+        .catch(error);
+
+// Wait for payment notification on your registered callback URL
+```
+
+- `walletTransfer(opts)` initiate a wallet transfer request.
+  - `productName`: Payment Product as setup on your account. `REQUIRED`
+  - `targetProductCode`: Unique product code of the Africa's Talking Payment Product to transfer the funds to.
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Payment amount. `REQUIRED`
+  - `metadata`: Some data to associate with the transaction. `REQUIRED`
+
+
 #### [Card Checkout](http://docs.africastalking.com/card/checkout)
 
 ```javascript

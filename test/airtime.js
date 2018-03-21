@@ -8,7 +8,7 @@ var AfricasTalking, airtime;
 
 describe('Airtime', function(){
 
-    this.timeout(5000);
+    this.timeout(15000);
 
     before(function () {
         AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
