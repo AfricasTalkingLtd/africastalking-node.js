@@ -167,6 +167,17 @@ describe('Payment', function(){
                 return payments.walletTransfer(options)
                     .should.be.rejected();
             });
+
+            it('#topupStash() cannot be empty', function () {
+                return payments.topupStash(options)
+                    .should.be.rejected();
+            });
+
+            it('#topupStash() must have productName/currencyCode/amount/metadata', function () {
+                options.productName = "Joe";
+                return payments.topupStash(options)
+                    .should.be.rejected();
+            });
         });
 
         it('walletTransfer()', function () {
@@ -183,6 +194,27 @@ describe('Payment', function(){
             };
 
             return payments.walletTransfer(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('topupStash()', function () {
+
+            let opts = {
+                productName: "TestProduct",
+                currencyCode: "NGN",
+                amount: 50,
+                metadata: {
+                    "Joe": "Biden",
+                    "id": "VP",
+                },
+            };
+
+            return payments.topupStash(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
