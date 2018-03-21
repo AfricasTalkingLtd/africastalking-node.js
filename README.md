@@ -249,15 +249,15 @@ token.generateAuthToken()
     .catch(error);
 ```
 
-### [Account](http://docs.africastalking.com/userdata/balance)
+### [Application](http://docs.africastalking.com/userdata/balance)
 ```javascript
-const account = AfricasTalking.ACCOUNT;
+const app = AfricasTalking.APPLICATION;
 ```
 
-- `fetchAccount()`: Fetch account info; i.e. balance
+- `fetchApplicationData()`: Fetch account info; i.e. balance
 
 ```javascript
-account.fetchAccount()
+app.fetchApplicationData()
     .then(success)
     .catch(error);
 ```
