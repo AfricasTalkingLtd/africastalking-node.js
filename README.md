@@ -465,7 +465,7 @@ payments.walletTransfer(opts)
 #### Topup Stash
 
 ```javascript
-// initiate a wallet transfer request
+// initiate a topup request
 payments.topupStash(opts)
         .then(success)
         .catch(error);
