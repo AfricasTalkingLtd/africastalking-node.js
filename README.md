@@ -473,7 +473,7 @@ payments.topupStash(opts)
 // Wait for payment notification on your registered callback URL
 ```
 
-- `topupStash(opts)` initiate a wallet transfer request.
+- `topupStash(opts)` Move money from a Payment Product to an app's stash.
   - `productName`: Payment Product as setup on your account. `REQUIRED`
   - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
   - `amount`: Payment amount. `REQUIRED`
