@@ -444,7 +444,7 @@ payments.bankTransfer(opts)
     - `narration`: A short description of the transaction `REQUIRED`
     - `metadata`: Some optional data to associate with transaction.
 
-#### [Wallet Transfer]
+#### Wallet Transfer
 
 ```javascript
 // initiate a wallet transfer request
@@ -462,7 +462,7 @@ payments.walletTransfer(opts)
   - `amount`: Payment amount. `REQUIRED`
   - `metadata`: Some data to associate with the transaction. `REQUIRED`
 
-#### [Topup Stash]
+#### Topup Stash
 
 ```javascript
 // initiate a wallet transfer request
