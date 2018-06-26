@@ -6,10 +6,11 @@
     "start": "DEBUG=example:* node ./bin/www"
   },
   "dependencies": {
+    "africastalking": "^0.3.2",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.16.3",
     "jade": "~1.11.0",
     "letsencrypt-express": "^2.0.6",
     "morgan": "~1.9.0",
