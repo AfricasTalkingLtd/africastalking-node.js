@@ -1,14 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  small SDK Address
+  h4 Welcome to #{title}
   br
-  code #{server}
-  br
-  br
-  button Send SMS
+  a(href='/sms')
+    button Send SMS
   br
   br
   button Send Airtime
@@ -21,4 +17,7 @@ block content
   br
   br
   button Bank Checkout
+  br
+  br
+  button Voice
 
