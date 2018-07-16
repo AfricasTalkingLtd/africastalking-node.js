@@ -16,10 +16,9 @@ router.get('/', function (req, res) {
 });
 
 router.post('/send-bulk', (req, res) => {
-    // TODO: validate form submissions
-    const {recipients, message} = req.body;
+    const {to, message} = req.body;
 
-    sms.send({to: recipients, message: message, enque: true}).then( response => {
+    sms.send({ to, message, enque: true }).then( response => {
         console.log(response);
         res.redirect('..');
     }).catch( error => {
@@ -28,27 +27,14 @@ router.post('/send-bulk', (req, res) => {
 });
 
 router.post('/send-premium', (req, res) => {
-    // TODO: validate form submissions
-    const { from, recipients, keyword, linkId, retryDuration, message } = req.body;
-    const options = {
-        from: from,
-        to: recipients,
-        keyword: keyword,
-        linkId: linkId,
-        retryDurationInHours: retryDuration,
-        message: message,
-        enque: true
-    }
-    console.log(options);
+    const { from, to, keyword, linkId, retryDurationInHours, message } = req.body;
 
-    sms.send(options).then(response => {
+    sms.send({ from, to, keyword, linkId, retryDurationInHours, message, enque: true }).then(response => {
         console.log(response);
-        res.redirect('..');
+        res.redirect('/sms');
     }).catch(error => {
         console.log(error);
     });
 });
-
-// TODO: correct redirects
 
 module.exports = router;

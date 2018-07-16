@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=example:* nodemon ./bin/www",
-    "test": "nodemon --ext js --watch ./ --exec 'mocha ./test' --delay 1"
+    "test": "mocha ./test"
   },
   "dependencies": {
     "africastalking": "^0.3.2",
