@@ -37,4 +37,15 @@ router.post('/send-premium', (req, res) => {
     });
 });
 
+router.post('/delivery', (req, res) => {
+    console.log("SMS delivery : ", req.body);
+});
+
+router.post('/subscription', (req, res) => {
+    const { phoneNumber, shortCode, keyword, updateType } = req.body;
+
+    const alert = `User of phone number ${phoneNumber} has ${updateType} service with shortCode ${shortCode} and keyword ${keyword}`
+    console.log(alert);
+});
+
 module.exports = router;
