@@ -450,4 +450,104 @@ describe('Payment', function(){
                 });
         });
     });
+
+    describe.only('Query', function () {
+        describe('validation', function() {
+            let options = {}
+
+            it('#fetchTransactions() cannot be empty', function () {
+                return payments.fetchTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchTransactions() must have productName/pageNumber/count', function () {
+                options.productName = "Joe";
+
+                return payments.fetchTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#findTransaction() cannot be empty', function () {
+                options = {}
+
+                return payments.findTransaction(options)
+                    .should.be.rejected();
+            });
+
+            it('#findTransaction() must have transactionId', function () {
+                options.transactionId = undefined;
+
+                return payments.findTransaction(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchWalletTransactions() cannot be empty', function () {
+                options = {}
+
+                return payments.fetchWalletTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchWalletTransactions() must have transactionId', function () {
+                options.transactionId = undefined;
+
+                return payments.fetchWalletTransactions(options)
+                    .should.be.rejected();
+            });
+        });
+
+        it('fetchTransactions()', function () {
+            let opts = {
+                productName: "Test product",
+                pageNumber: "1",
+                count: "10",
+            }
+
+            return payments.fetchTransactions(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('findTransaction()', function () {
+            let opts = {
+                transactionId: "ATPid_SampleTxnId1"
+            }
+
+            return payments.findTransaction(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('fetchWalletTransactions()', function () {
+            let opts = {
+                transactionId: "ATPid_SampleTxnId1"
+            }
+
+            return payments.fetchWalletTransactions(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('fetchWalletBalance()', function () {
+            return payments.fetchWalletBalance()
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        })
+    });
 });
