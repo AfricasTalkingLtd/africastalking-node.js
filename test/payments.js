@@ -488,8 +488,8 @@ describe('Payment', function(){
                     .should.be.rejected();
             });
 
-            it('#fetchWalletTransactions() must have transactionId', function () {
-                options.transactionId = undefined;
+            it('#fetchWalletTransactions() must have pageNumber/count', function () {
+                options.pageNumber = '1';
 
                 return payments.fetchWalletTransactions(options)
                     .should.be.rejected();
@@ -528,7 +528,8 @@ describe('Payment', function(){
 
         it('fetchWalletTransactions()', function () {
             let opts = {
-                transactionId: "ATPid_SampleTxnId1"
+                pageNumber: "1",
+                count: '20'
             }
 
             return payments.fetchWalletTransactions(opts)
