@@ -498,9 +498,9 @@ describe('Payment', function(){
 
         it('fetchTransactions()', function () {
             let opts = {
-                productName: "Test product",
-                pageNumber: "1",
-                count: "10",
+                productName: "Joe",
+                pageNumber: '1',
+                count: '10',
             }
 
             return payments.fetchTransactions(opts)
