@@ -518,6 +518,91 @@ payments.validateCardCheckout(opts)
   - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
   - `otp`: One Time Password that the card issuer sent to the client. `REQUIRED`
 
+### Query
+
+#### [Query Fetch Transactions](http://docs.africastalking.com/query/fetchtransactions)
+
+```javascript
+// initiate a query fetch transactions request
+payments.fetchTransactions(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `fetchTransactions(opts)` initiate a query fetch transactions request. [More info](http://docs.africastalking.com/query/fetchtransactions)
+    - `productName`: Payment Product as setup on your account. `REQUIRED`
+    - `pageNumber`: Read results from this page. `REQUIRED`
+    - `count`: Number of transactions to fetch. `REQUIRED`
+    - `startDate`: Fetch transactions starting on this date onwards.
+    - `endDate`: Fetch transactions ending on upto this date.
+    - ```
+        Provide BOTH startDate and endDate if you choose to use them
+      ```
+    - `category`: Fetch this cetegory of transactions. Possible categories include:
+    - ```
+        BankCheckout, CardCheckout, MobileCheckout, MobileC2B, MobileB2C, MobileB2B, BankTransfer, WalletTransfer, UserStashTopup
+      ```
+    - `provider`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
+    - ```
+        Mpesa, Segovia, Flutterwave, Admin, Athena
+      ```
+    - `status`: Fetch only transactions with this status. Can be one of:
+    - ```
+        Success, Error
+      ```
+    - `source`: Transaction source to consider. Possible values are:
+    - ```
+        phoneNumber, BankAccount, Card, Wallet
+      ```
+    - `destination`: Transaction destination to consider. Possible values are same as the `source` above
+    - `providerChannel`: Transaction provider channel to consider for example, Mobile Provider's Paybill or Buy Goods belonging your organization
+
+#### [Query Find Transaction](http://docs.africastalking.com/query/findtransaction)
+
+```javascript
+// initiate a query find transaction request
+payments.findTransaction(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `findTransaction(opts)` initiate a query find transaction request. [More info](http://docs.africastalking.com/query/findtransaction)
+    - `transactionId`: ID of the transaction you would like to find. `REQUIRED`
+
+#### [Query Fetch Wallet](http://docs.africastalking.com/query/fetchwallet)
+
+```javascript
+// initiate a query fetch wallet request
+payments.fetchWalletTransactions(opts)
+        .then(success)
+        .catch(error);
+```
+
+- `fetchWalletTransactions(opts)` initiate a query fetch wallet request. [More info](http://docs.africastalking.com/query/fetchwallet)
+    - `productName`: Payment Product as setup on your account. `REQUIRED`
+    - `pageNumber`: Read results from this page. `REQUIRED`
+    - `count`: Number of transactions to fetch. `REQUIRED`
+    - `startDate`: Fetch transactions starting on this date onwards.
+    - `endDate`: Fetch transactions ending on upto this date.
+    - ```
+        Provide BOTH startDate and endDate if you choose to use them
+      ```
+    - `categories`: Fetch this cetegory of transactions. Possible categories include:
+    - ```
+        Credit,Debit,Topup,Refund
+      ```
+
+#### [Query Wallet Balance](http://docs.africastalking.com/query/walletbalance)
+
+```javascript
+// initiate a query wallet balance request
+payments.fetchWalletBalance()
+        .then(success)
+        .catch(error);
+```
+
+- GETs you your wallet balance
+
 ## Development
 
 Run all tests:
