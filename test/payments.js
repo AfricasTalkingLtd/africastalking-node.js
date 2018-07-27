@@ -451,7 +451,7 @@ describe('Payment', function(){
         });
     });
 
-    describe.only('Query', function () {
+    describe('Query', function () {
         describe('validation', function() {
             let options = {}
 
