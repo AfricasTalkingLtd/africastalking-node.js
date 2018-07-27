@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// TODO: keep secrets secret
-const credentials = {
-    apiKey: 'b0a758243c8eca791dab7ff60158704e6edd955f28a16b330f032ed3c5c8d5eb',
-    username: 'sandbox',
-}
+// Get authentication secrets from a file
+const credentials = require('../../test/fixtures.local');
 
-const AfricasTalking = require('africastalking')(credentials);
+const AfricasTalking = require('africastalking')(credentials.TEST_ACCOUNT);
 const sms = AfricasTalking.SMS;
 
 // SMS routes
