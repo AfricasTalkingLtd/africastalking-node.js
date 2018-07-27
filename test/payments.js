@@ -455,15 +455,15 @@ describe('Payment', function(){
         describe('validation', function() {
             let options = {}
 
-            it('#fetchTransactions() cannot be empty', function () {
-                return payments.fetchTransactions(options)
+            it('#fetchProductTransactions() cannot be empty', function () {
+                return payments.fetchProductTransactions(options)
                     .should.be.rejected();
             });
 
-            it('#fetchTransactions() must have productName/pageNumber/count', function () {
+            it('#fetchProductTransactions() must have productName/pageNumber/count', function () {
                 options.productName = "Joe";
 
-                return payments.fetchTransactions(options)
+                return payments.fetchProductTransactions(options)
                     .should.be.rejected();
             });
 
@@ -496,14 +496,14 @@ describe('Payment', function(){
             });
         });
 
-        it('fetchTransactions()', function () {
+        it('fetchProductTransactions()', function () {
             let opts = {
                 productName: "Joe",
                 pageNumber: '1',
                 count: '10',
             }
 
-            return payments.fetchTransactions(opts)
+            return payments.fetchProductTransactions(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })

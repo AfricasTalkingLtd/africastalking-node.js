@@ -520,16 +520,16 @@ payments.validateCardCheckout(opts)
 
 ### Query
 
-#### [Query Fetch Transactions](http://docs.africastalking.com/query/fetchtransactions)
+#### [Query Fetch Product Transactions](http://docs.africastalking.com/query/fetchtransactions)
 
 ```javascript
 // initiate a query fetch transactions request
-payments.fetchTransactions(opts)
+payments.fetchProductTransactions(opts)
         .then(success)
         .catch(error);
 ```
 
-- `fetchTransactions(opts)` initiate a query fetch transactions request. [More info](http://docs.africastalking.com/query/fetchtransactions)
+- `fetchProductTransactions(opts)` initiate a query fetch transactions request. [More info](http://docs.africastalking.com/query/fetchtransactions)
     - `productName`: Payment Product as setup on your account. `REQUIRED`
     - `pageNumber`: Read results from this page. `REQUIRED`
     - `count`: Number of transactions to fetch. `REQUIRED`
