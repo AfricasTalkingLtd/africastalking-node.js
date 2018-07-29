@@ -6,17 +6,19 @@ block content
     form#bulkSmsForm(action="/airtime", method="post")
         .form-group.row
             label.col-sm-2.col-form-label(for="recipients") Recipients
-            .col-sm-7
+            .col-sm-6
                 input#recipients.form-control(name="to", type='phone', placeholder='Enter numbers' required)
                 small.form-text.text-muted
                     | Enter a comma separated list of numbers, all in the international format i.e. +254712345678, +255787654321
         .form-group.row
             label.col-sm-2.col-form-label(for="amount") Amount
-            .col-sm-7
+            .col-sm-6
                 textarea#amount.form-control(name="amount", type='number', placeholder='Enter amount' required)
                 small.form-text.text-muted
                     | Enter the amount to send here
         br
-        .form-group.row
-            .col-sm-7
+        .form-group.row.justify-content-between
+            .col-sm-5
+                a.btn.btn-outline-secondary(href='/') Back
+            .col-sm-5
                 button.btn.btn-success(type='submit') Send
