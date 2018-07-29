@@ -46,4 +46,43 @@ router.post('/mobile-checkout', (req, res) => {
         });
 });
 
+router.get('/bank-checkout', (req, res) => {
+    res.render('bankCheckout', res.locals.commonData);
+});
+
+router.post('/bank-checkout', (req, res) => {
+    const {
+        productName,
+        currencyCode,
+        amount
+    } = req.body;
+
+    let bankAccount = {
+        accountName: "Test Bank Account",
+        accountNumber: "12345678910",
+        bankCode: payments.BANK.FCMB_NG
+    }
+    let narration = "Test bank checkout"
+    let metadata = { "foo": "bar"}
+
+    let options = {
+        productName,
+        bankAccount,
+        currencyCode,
+        amount: Number(amount),
+        narration,
+        metadata
+    }
+
+    payments.bankCheckout(options)
+        .then( response => {
+            console.log(response);
+            res.redirect(302, '/');
+        })
+        .catch( error => {
+            console.log(error);
+            res.redirect(302, '/');
+        });
+});
+
 module.exports = router;

@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    h4 Bank Checkout
+    br
+    form#bankCheckoutForm(action="/payments/bank-checkout", method="post")
+        .form-group.row
+            label.col-sm-2.col-form-label(for="productName") Product
+            .col-sm-6
+                input#productName.form-control(name="productName", type='text' required)
+                small.form-text.text-muted
+                    | Enter your product name from Africa's Talking
+        .form-group.row
+            label.col-sm-2.col-form-label(for="currencyCode") Currency
+            .col-sm-6
+                select#currencyCode.custom-select(name="currencyCode", type="text")
+                    option(selected='' value='NGN') Nigerian Naira
+                small.form-text.text-muted
+                    | Choose currency
+        .form-group.row
+            label.col-sm-2.col-form-label(for="amount") Amount
+            .col-sm-6
+                input#amount.form-control(name="amount", type='number', min=100, step='any' required)
+                small.form-text.text-muted
+                    | Enter the amount to send
+        br
+        .form-group.row.justify-content-between
+            .col-sm-5
+                a.btn.btn-outline-secondary(href='/') Back
+            .col-sm-5
+                button.btn.btn-success(type='submit') Send
