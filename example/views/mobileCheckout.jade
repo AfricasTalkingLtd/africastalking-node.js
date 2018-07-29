@@ -6,19 +6,19 @@ block content
     form#mobileCheckoutForm(action="/payments/mobile-checkout", method="post")
         .form-group.row
             label.col-sm-2.col-form-label(for="productName") Product
-            .col-sm-7
+            .col-sm-6
                 input#productName.form-control(name="productName", type='text', placeholder='Enter product name' required)
                 small.form-text.text-muted
                     | Enter your product name from Africa's Talking
         .form-group.row
             label.col-sm-2.col-form-label(for="phoneNumber") Phone
-            .col-sm-7
+            .col-sm-6
                 input#phoneNumber.form-control(name="phoneNumber", type='phone', placeholder='Enter phone number' required)
                 small.form-text.text-muted
                     | Enter your phone number
         .form-group.row
             label.col-sm-2.col-form-label(for="currencyCode") Currency
-            .col-sm-7
+            .col-sm-6
                 select#currencyCode.custom-select(name="currencyCode", type="text")
                     option(selected='' value='KES') KES
                     option(value='UGS') UGS
@@ -27,11 +27,13 @@ block content
                     | Choose currency
         .form-group.row
             label.col-sm-2.col-form-label(for="amount") Amount
-            .col-sm-7
+            .col-sm-6
                 input#amount.form-control(name="amount", type='number', min='10', step='any', placeholder='Enter amount' required)
                 small.form-text.text-muted
                     | Enter the amount to send
         br
-        .form-group.row
-            .col-sm-7
+        .form-group.row.justify-content-between
+            .col-sm-5
+                a.btn.btn-outline-secondary(href='/') Back
+            .col-sm-5
                 button.btn.btn-success(type='submit') Send

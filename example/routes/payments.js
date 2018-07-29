@@ -8,28 +8,42 @@ const AfricasTalking = require('africastalking')(credentials.TEST_ACCOUNT);
 const payments = AfricasTalking.PAYMENTS;
 
 // Payment routes
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
     let notification = req.body;
     console.log(`\n${notification.category} : `);
     console.log(notification);
 });
 
-router.get('/mobile-checkout', (req, res, next) => {
+router.get('/mobile-checkout', (req, res) => {
     res.render('mobileCheckout', res.locals.commonData);
 });
 
-router.post('/mobile-checkout', (req, res, next) => {
-    const { productName, phoneNumber, currencyCode, amount } = req.body;
+router.post('/mobile-checkout', (req, res) => {
+    const {
+        productName,
+        phoneNumber,
+        currencyCode,
+        amount
+    } = req.body;
     let metadata = { "Joe": "Biden", "id": "VP" }
 
-    let options = { productName, phoneNumber, currencyCode, amount: Number(amount), metadata }
+    let options = {
+        productName,
+        phoneNumber,
+        currencyCode,
+        amount: Number(amount),
+        metadata
+    }
 
-    payments.mobileCheckout(options).then( response => {
-        console.log(response);
-        res.redirect('..');
-    }).catch( error => {
-        console.log(error);
-    });
+    payments.mobileCheckout(options)
+        .then( response => {
+            console.log(response);
+            res.redirect(302, '/');
+        })
+        .catch( error => {
+            console.log(error);
+            res.redirect(302, '/');
+        });
 });
 
 module.exports = router;
