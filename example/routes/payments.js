@@ -46,6 +46,48 @@ router.post('/mobile-checkout', (req, res) => {
         });
 });
 
+router.get('/card-checkout', (req, res) => {
+    res.render('cardCheckout', res.locals.commonData);
+});
+
+router.post('/card-checkout', (req, res) => {
+    const {
+        productName,
+        currencyCode,
+        amount
+    } = req.body;
+
+    let paymentCard = {
+        number: "123456789012345",
+        cvvNumber: 123,
+        expiryMonth: 9,
+        expiryYear: 2021,
+        authToken: "1234",
+        countryCode: "NG"
+    }
+    let narration = "Test card checkout"
+    let metadata = { "foo": "bar" }
+
+    let options = {
+        productName,
+        paymentCard,
+        currencyCode,
+        amount: Number(amount),
+        narration,
+        metadata
+    }
+
+    payments.cardCheckout(options)
+        .then(response => {
+            console.log(response);
+            res.redirect(302, '/');
+        })
+        .catch(error => {
+            console.log(error);
+            res.redirect(302, '/');
+        });
+});
+
 router.get('/bank-checkout', (req, res) => {
     res.render('bankCheckout', res.locals.commonData);
 });
