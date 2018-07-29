@@ -1,24 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  small SDK Address
-  br
-  code #{server}
-  br
-  br
-  button Send SMS
-  br
-  br
-  button Send Airtime
-  br
-  br
-  button Mobile Checkout
-  br
-  br
-  button Card Checkout
-  br
-  br
-  button Bank Checkout
-
+    h4 Welcome to #{title}
+    br
+    a.btn.btn-outline-secondary(href='/sms') Send SMS
+    br
+    br
+    a.btn.btn-outline-secondary(href="airtime") Send Airtime
+    br
+    br
+    a.btn.btn-outline-secondary(href="payments/mobile-checkout") Mobile Checkout
+    br
+    br
+    a.btn.btn-outline-secondary(href="payments/bank-checkout") Bank Checkout
+    br
+    br
+    a.btn.btn-outline-secondary(href="payments/card-checkout") Card Checkout
