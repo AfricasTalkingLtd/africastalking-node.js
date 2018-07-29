@@ -23,9 +23,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 
 // routes
 const indexRoutes = require('./routes/index');
-const voiceRoutes = require('./routes/voice');
 const smsRoutes = require('./routes/sms');
-const ussdRoutes = require('./routes/ussd');
 const airtimeRoutes = require('./routes/airtime');
 const paymentsRoutes = require('./routes/payments');
 
@@ -44,14 +42,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('*', (req, res, next) => {
-    res.locals.commonData = { title: 'Africa\'s Talking', server: ips.map(ip => `${ip}:35897`).join('\n') }
+    res.locals.commonData = {
+        title: 'Africa\'s Talking',
+        server: ips.map(ip => `${ip}:35897`).join('\n')
+    }
     next();
 });
 
 app.use('/', indexRoutes);
 app.use('/sms', smsRoutes);
-app.use('/voice', voiceRoutes);
-app.use('/ussd', ussdRoutes);
 app.use('/airtime', airtimeRoutes);
 app.use('/payments', paymentsRoutes);
 
