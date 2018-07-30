@@ -23,6 +23,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 
 // routes
 const indexRoutes = require('./routes/index');
+const smsRoutes = require('./routes/sms');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.use('/', indexRoutes);
+app.use('/sms', smsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
