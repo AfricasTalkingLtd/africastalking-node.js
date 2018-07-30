@@ -70,8 +70,8 @@ $(function () {
 
     $("#mobileCheckout").click(function () {
         const phoneNumber = $("#phone").val();
-        const inputAmount = $("#amount").val();
-        const productName = $("#product_name").val();
+        const inputAmount = $("#mobileCheckoutAmount").val();
+        const productName = "TestProduct";
 
         if (!phoneNumber) {
             log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
@@ -80,10 +80,6 @@ $(function () {
 
         if (!inputAmount) {
             log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
-            return;
-        }
-        if (!productName) {
-            log(JSON.stringify({ error: "Enter the name of the product registered with AT, eg. Braids" }, null, 2));
             return;
         }
 

@@ -25,6 +25,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 const indexRoutes = require('./routes/index');
 const smsRoutes = require('./routes/sms');
 const airtimeRoutes = require('./routes/airtime');
+const paymentRoutes = require('./routes/payments');
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.all('*', (req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/sms', smsRoutes);
 app.use('/airtime', airtimeRoutes);
+app.use('/payments', paymentRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
