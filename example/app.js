@@ -5,7 +5,24 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const index = require('./routes/index');
+const os = require('os');
+const ifaces = os.networkInterfaces();
+
+const ips = [];
+
+Object.keys(ifaces).forEach(function (ifname) {
+    var alias = 0;
+    ifaces[ifname].forEach(function (iface) {
+        if ('IPv4' !== iface.family || iface.internal !== false) {
+            // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+            return;
+        }
+        ips.push(iface.address);
+    });
+});
+
+// routes
+const indexRoutes = require('./routes/index');
 
 const app = express();
 
@@ -21,24 +38,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.all('*', (req, res, next) => {
+    res.locals.commonData = {
+        title: 'Africa\'s Talking',
+        server: ips.map(ip => `${ip}:35897`).join('\n')
+    }
+    next();
+});
+
+app.use('/', indexRoutes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error', { title: 'Africa\'s Talking', server: ips.map(ip => `${ip}:35897`).join('\n') });
 });
 
 module.exports = app;
