@@ -109,29 +109,19 @@ $(function () {
 
     $("#mobileB2C").click(function () {
         const phoneNumber = $("#phone").val();
-        const InputAmount = $("#amount").val();
-        const productName = $("#product_name").val();
-        const name = $("#name").val();
+        const inputAmount = $("#mobileB2CAmount").val();
         if (!phoneNumber) {
             log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
             return;
         }
 
-        if (!InputAmount) {
+        if (!inputAmount) {
             log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
-            return;
-        }
-        if (!productName) {
-            log(JSON.stringify({ error: "Enter the name of the product registered with AT, eg. Braids" }, null, 2));
-            return;
-        }
-        if (!name) {
-            log(JSON.stringify({ error: "Enter the name of the recipient" }, null, 2));
             return;
         }
 
         let currencyCode, amount;
-        [currencyCode, amount] = InputAmount.split(" ");
+        [currencyCode, amount] = inputAmount.split(" ");
 
         log("Sending money...");
 
@@ -140,9 +130,8 @@ $(function () {
             url: "/payments/mobile-b2c",
             data: {
                 phoneNumber,
-                amount,
-                productName,
-                name
+                currencyCode,
+                amount
             }
         })
         .done(function (msg) {
