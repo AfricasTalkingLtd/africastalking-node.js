@@ -17,7 +17,9 @@ router.post('/send', (req, res) => {
         }
     });
 
-    airtime.send({ recipients: airtimeRecipientList }).then(response => {
+    let options = { recipients: airtimeRecipientList }
+
+    airtime.send(options).then(response => {
         console.log(response);
         res.json(response);
     }).catch(error => {

@@ -26,7 +26,7 @@ $(function () {
         })
         .done(function (msg) {
             console.log("message : ", msg);
-            log(JSON.stringify(msg));
+            log(JSON.stringify(msg, null, 2));
         })
         .fail(function (jqXHR, textStatus) {
             console.log("jqXHR", jqXHR);
@@ -50,7 +50,6 @@ $(function () {
 
         log("Sending airtime.....");
 
-
         $.ajax({
             method: "POST",
             url: "/airtime/send",
@@ -60,7 +59,7 @@ $(function () {
             }
         })
         .done(function (msg) {
-            log(JSON.stringify(msg));
+            log(JSON.stringify(msg, null, 2));
         })
         .fail(function (jqXHR, textStatus) {
             log(textStatus);
@@ -99,7 +98,7 @@ $(function () {
             }
         })
         .done(function (msg) {
-            log(JSON.stringify(msg));
+            log(JSON.stringify(msg, null, 2));
         })
         .fail(function (jqXHR, textStatus) {
             log(textStatus);
@@ -135,7 +134,7 @@ $(function () {
             }
         })
         .done(function (msg) {
-            log(JSON.stringify(msg));
+            log(JSON.stringify(msg, null, 2));
         })
         .fail(function (jqXHR, textStatus) {
             log(textStatus);
