@@ -29,75 +29,264 @@ const options = {
     username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
 const AfricasTalking = require('africastalking')(options);
-//...
+
+// Initialize a service e.g. SMS
+sms = africastalking.SMS
+
+// Use the service
+const options = {
+    to: ['+254711XXXYYY', '+254733YYYZZZ'],
+    message: "I'm a lumberjack and its ok, I work all night and sleep all day"
+}
+
+// Send message and capture the response or error
+sms.send(options)
+    .then( response => {
+        console.log(response);
+    })
+    .catch( error => {
+        console.log(error);
+    });
 ```
 
 See [example](example/) for more usage examples.
 
-### SMS
+## Initialization
 
-```javascript
-const sms = AfricasTalking.SMS;
-// all methods return a promise
-sms.send(opts)
-    .then(success)
-    .catch(error);
-```
+Initialize the SDK as a requirement by doing `require('africastalking')(options)`. After initialization, you can get instances of offered services as follows:
 
-#### [Sending SMS](http://docs.africastalking.com/sms/sending)
+- [Application Service](#applicationservice) : `AfricasTalking.APPLICATION`
 
-- `send(options)`: Send a message. `options` contains:
+- [Airtime Service](#airtimeservice) : `AfricasTalking.AIRTIME`
 
-    - `message`: SMS content. `REQUIRED`
-    - `to`: A single recipient or an array of recipients. `REQUIRED`
-    - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account.
+- [SMS Service](#smsservice) : `AfricasTalking.SMS`
 
-    - `enqueue`: Set to `true` if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
+- [Payments Service](#paymentservice) : `AfricasTalking.PAYMENTS`
 
-- `sendPremium(options)`: Send premium SMS. In addition to paramaters of `send()`, we would have:
+- [Voice Service](#voiceservice) : `AfricasTalking.VOICE`
 
-    - `keyword`: Value is a premium keyword `REQUIRED`
-    - `linkId`: "[...] We forward the `linkId` to your application when the user send a message to your service" `REQUIRED`
-    - `retryDurationInHours`: "It specifies the number of hours your subscription message should be retried in case it's not delivered to the subscriber"
+- [USSD Service](#ussdservice) : `AfricasTalking.USSD`
 
-#### [Retrieving SMS](http://docs.africastalking.com/sms/fetchmessages)
+- [Token Service](#tokenservice) : `AfricasTalking.TOKEN`
 
-> You can register a callback URL with us and we will forward any messages that are sent to your account the moment they arrive. 
-> [Read more](http://docs.africastalking.com/sms/callback)
+## Services
 
-- `fetchMessages(options)`: Manually retrieve your messages.
+All methoods are asynchronous
 
-    - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`. `REQUIRED`
-
-
-#### [Premium Subscriptions](http://docs.africastalking.com/subscriptions/fetchsubscriptions)
-
-> If you have subscription products on your premium SMS short codes, you will need to configure a callback URL that we will invoke to notify you when users subscribe or unsubscribe from your products.
-> [Read more](http://docs.africastalking.com/subscriptions/callback)
-
-- `createSubscription(options)`:
-
-    - `shortCode`: "This is a premium short code mapped to your account". `REQUIRED`
-    - `keyword`: "Value is a premium keyword under the above short code and mapped to your account". `REQUIRED`
-    - `phoneNumber`: "The phoneNumber to be subscribed" `REQUIRED`
-    - `checkoutToken`: "This is a token used to validate the subscription request" `REQUIRED`
-
-- `fetchSubscription(options)`:
-
-    - `shortCode`: "This is a premium short code mapped to your account". `REQUIRED`
-    - `keyword`: "Value is a premium keyword under the above short code and mapped to your account". `REQUIRED`
-    - `lastReceivedId`: "ID of the subscription you believe to be your last." Defaults to `0`
+All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 
 
 
-### [USSD](http://docs.africastalking.com/ussd)
+### `ApplicationService`
 
-> Processing USSD requests using our API is very easy once your account is set up. In particular, you will need to:
-> - Register a service code with us.
-> - Register a URL that we can call whenever we get a request from a client coming into our system.
->
-> Once you register your callback URL, any requests that we receive belonging to you will trigger a callback that sends the request data to that page using HTTP POST.
-> [Read more.](http://docs.africastalking.com/ussd)
+- `fetchApplicationData()`: Get app information. e.g. balance
+
+For more information, please read [http://docs.africastalking.com/userdata/balance](http://docs.africastalking.com/userdata/balance)
+
+
+
+### `AirtimeService`
+
+- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients` is an array of objects containing the following keys:
+    - `phoneNumber`: Recipient of airtime
+    - `amount`: Amount sent `>= 10 && <= 10K` with currency e.g `KES 100`
+
+For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
+
+
+
+### `SmsService`
+
+- `send({ to, from, message, enqueue })`: Send a message
+
+  - `to`: Recipients phone number.
+  - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account.
+  - `message`: SMS content
+  - `enqueue`: Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
+
+
+- `sendPremium({ to, from, message, enqueue, keyword, linkId, retryDurationInHours })`: Send premium SMS
+
+  - `send()` parameters plus:
+  - `keyword`: You premium product keyword
+  - `linkId`: We forward the `linkId` to your application when the user send a message to your service
+  - `retryDurationInHours`: It specifies the number of hours your subscription message should be retried in case it's not delivered to the subscriber
+
+
+- `fetchMessages({ lastReceivedId })`: Manually retrieve your messages
+
+  - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`
+
+
+- `fetchSubscription({ shortCode, keyword, lastReceivedId })`: Fetch your premium subscription data
+
+  - `shortCode`: This is the premium short code mapped to your account.
+  - `keyword`: A premium keyword under the above short code and mapped to your account.
+  - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`
+
+
+- `createSubscription({ shortCode, keyword, phoneNumber, checkoutToken })`: Create a premium subscription
+
+  - `shortCode`: This is the premium short code mapped to your account.
+  - `keyword`: A premium keyword under the above short code and mapped to your account.
+  - `phoneNumber`:  The phone number to be subscribed
+  - `checkoutToken`: This is a token used to validate the subscription request.
+
+
+For more information on:
+- SMS service: [http://docs.africastalking.com/sms](http://docs.africastalking.com/sms)
+- How to fetch subscriptions: [http://docs.africastalking.com/subscriptions/fetchsubscriptions](http://docs.africastalking.com/subscriptions/fetchsubscriptions)
+- How to listen for subscription notifications: [http://docs.africastalking.com/subscriptions/callback](http://docs.africastalking.com/subscriptions/callback)
+
+
+
+### `PaymentService`
+
+- `cardCheckout({ productName, paymentCard/checkoutToken, currencyCode, amount, narration, metadata })` Initiate a card checkout.
+
+  - `productName`: Your payment product
+  - `paymentCard`: Card to charge.
+  - `checkoutToken`: Token from a previous successful transaction. Replaces `paymentCard`.
+  - `currencyCode`: 3-digit ISO format currency code
+  - `amount`: Amount to charge
+  - `narration`: Checkout description
+  - `metadata`: Additional info to go with the checkout
+
+
+- `validateCardCheckout({ transactionId, otp })` Validate a card checkout.
+
+  - `transactionId`: Transaction ID returned on charge request
+  - `otp`: A user-provided OTP
+
+
+- `bankCheckout({ productName, bankAccount, currencyCode, amount, narration, metadata })` Initiate a bank checkout.
+
+  - `productName`: Your payment product
+  - `bankAccount`: Bank account to charge.
+  - `currencyCode`: 3-digit ISO format currency code
+  - `amount`: Amount to charge
+  - `narration`: Checkout description
+  - `metadata`: Additional info to go with the checkout
+
+
+- `validateBankCheckout({ transactionId, otp })` Validate a bank checkout.
+
+  - `transactionId`: Transaction ID returned on charge request
+  - `otp`: A user-provided OTP
+
+
+- `bankTransfer({ productName, recipients })` Initiate a bank transfer.
+
+  - `productName`: Your payment product
+  - `recipients`: A list of banks to transfer to.
+
+
+- `mobileCheckout({ productName, phoneNumber, currencyCode, amount, metadata })`: Initiate mobile checkout.
+
+  - `productName`: Your payment product
+  - `phoneNumber`: Mobile wallet to charge
+  - `currencyCode`: 3-digit ISO format currency code
+  - `amount`: Amount to charge
+  - `metadata`: Additional info to go with the checkout
+
+
+- `mobileB2C({ productName, recipients })`:  Send mobile money to consumer.
+
+  - `productName`: Your payment product
+  - `recipients`: A list of consumers that will receive the money.
+
+
+- `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, metadata })`:   Send mobile money to busness.
+
+  - `productName`: Your payment product
+  - `provider`: Provider used to process request. Checkout  `payments.PROVIDER.*`
+  - `transferType`: Checkout  `payments.TRANSFER_TYPE.*`
+  - `currencyCode`: 3-digit ISO format currency code
+  - `destinationChannel`: Name or number of channel to receive payment
+  - `destinationAccount`: Account name used to receive money
+  - `amount`: Amount to transfer
+  - `metadata`: Additional info to go with the transfer
+
+
+- `walletTransfer({ productName, targetProductCode, currencyCode, amount, metadata })` Move money form one payment product to another.
+
+  - `productName`: Your payment product
+  - `targetProductCode`: ID of recipient payment product on Africa's Talking
+  - `currencyCode`: 3-digit ISO format currency code
+  - `amount`: Amount to transfer
+  - `metadata`: Additional info to go with the transfer
+
+
+- `topupStash({ productName, currencyCode, amount, metadata })` Move money from a Payment Product to an app's stash.
+
+  - `productName`: Your payment product
+  - `currencyCode`: 3-digit ISO format currency code
+  - `amount`: Amount to transfer
+  - `metadata`: Additional info to go with the transfer
+
+
+- `fetchProductTransactions({ productName, ...filters })`: Fetch payment product transactions.
+
+  - `productName`: Your payment product
+  - `filters`: Query filters. Includes:
+
+    - `pageNumber`: Page number to fetch results from. Starts from `1`. `REQUIRED`
+    - `count`:  Number of results to fetch. `REQUIRED`
+    - `startDate`: Start Date to consider when fetching.
+    - `endDate`: End Date to consider when fetching.
+    - `category`: Category to consider when fetching.
+    - `prodiver`: Provider to consider when fetching.
+    - `status`: Status to consider when fetching.
+    - `source`: Source to consider when fetching.
+    - `destination`: Destination to consider when fetching.
+    - `providerChannel`: Provider channel to consider when fetching.
+
+
+- `findTransaction({ transactionId })`: Find a particular transaction.
+
+- `fetchWalletTransactions({ ...filters })`: Fetch wallet transactions.
+
+  - `filters`: Query filter. Includes:
+    - `pageNumber`: Page number to fetch results from. Starts from `1`. `REQUIRED`
+    - `count`: Number of results to fetch. `REQUIRED`
+    - `startDate`: Start Date to consider when fetching.
+    - `endDate`: End Date to consider when fetching.
+    - `categories`: Comma delimited list of categories to consider when fetching.
+
+
+- `fetchWalletBalance()`: Fetch your wallet's balance
+
+For more information, please read [http://docs.africastalking.com/payments](http://docs.africastalking.com/payments)
+
+
+### `VoiceService`
+
+- `voice.call({ callFrom, callTo })`: Initiate a phone call
+
+    - `callFrom`: Your Africa's Talking issued virtual phone number.
+    - `callTo`: Phone number to dial
+
+
+- `voice.fetchQuedCalls({ phoneNumber })`: Get queued calls
+
+    - `phoneNumber`: Your Africa's Talking issued virtual phone number
+
+
+- `voice.uploadMediaFile({ phoneNumber, url })`: Upload voice media file
+
+    - `phoneNumber`: Your Africa's Talking issued virtual phone number
+    - `url`: URL to your media file.
+
+
+> Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing.
+- `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
+> Remember to send back an HTTP 200.
+
+For more information, please read [http://docs.africastalking.com/voice](http://docs.africastalking.com/voice) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
+
+
+
+### `UssdService`
 
 If you are using connect-like frameworks (*express*), you could use the middleware `AfricasTalking.USSD(handler)`:
 
@@ -108,500 +297,17 @@ If you are using connect-like frameworks (*express*), you could use the middlewa
     - `response`: Text to display on user's device. `REQUIRED`
     - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
 
-```javascript
+For more information, please read [http://docs.africastalking.com/ussd](http://docs.africastalking.com/ussd)
 
-// example (express)
 
-app.post('/natoil-ussd', new AfricasTalking.USSD((params, next) => {
-    let endSession = false;
-    let message = '';
-    
-    const session = sessions.get(params.sessionId);
-    const user = db.getUserByPhone(params.phoneNumber);
 
-    if (params.text === '') {
-        message = "Welcome to Nat Oil \n";
-        message += "1: For account info \n";
-        message += "2: For lost gas cylinder";
+### `TokenService`
 
-    } else if (params.text === '1') {
-        message = user.getInfo();
-        endSession = true;
+- `createCheckoutToken(phoneNumber)`: Create a new checkout token.
 
-    } else if (params.text === '2') {
-        message = "Enter 1 for recovery \n";
-        message += "Enter 2 for lost and found";
-        endSession = true;
+- `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
 
-    } else {
-        message = "Invalid option";
-        endSession = true;
-    }
 
-    next({
-        response: message, 
-        endSession: endSession
-    });
-}));
-```
-
-### Voice
-
-```javascript
-const voice = AfricasTalking.VOICE;
-```
-- Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing. [Read more](http://docs.africastalking.com/voice)
-    - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
-- Initiate a call
-- Fetch call queue
-- Upload Media File
-- Remember to send back an HTTP 200.
-
-
-#### [Initiate a call](http://docs.africastalking.com/voice/call)
-```javascript
-voice.call({
-  callFrom: '+2547XXXXXXXX', // AT virtual number
-  callTo: from_ 
-})
-.then(function(s) {
-  // persist call Info
-  console.log(s);
-})
-.catch(function(error) {
-  console.log(error);
-});
-```
-
-#### [Fetch call queue](http://docs.africastalking.com/voice/callqueue)
-
-```javascript
-voice.getNumQueuedCalls({ 
-  phoneNumbers: destinationNumber 
-})
-.then(function(s) {
-  // call queue
-  console.log(s);
-})
-.catch(function(error) {
-  console.log(error);
-});
-```
-
-#### [Upload Media](http://docs.africastalking.com/voice/uploadmedia)
-
-```js
-voice.uploadMediaFile({ 
-  phoneNumber: destinationNumber, // your Africa's Talking virtual number
-  url: 'http://myOnlineMediaFile.mp3'
-})
-.then(function(s) {
-  // upload result
-  console.log(s);
-})
-.catch(function(error) {
-  console.log(error);
-});
-```
-
-
-
-#### [Handle call](http://docs.africastalking.com/voice/callhandler)
-
-check issue [#15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
-
-
-### [Airtime](http://docs.africastalking.com/airtime/sending)
-
-```javascript
-const airtime = AfricasTalking.AIRTIME;
-```
-- `airtime.send(options)`: Send airtime `options` is an object which contains the key:
-    - `recipients`: Contains an array of objects containing the following keys
-        - `phoneNumber`: Recipient of airtime
-        - `amount`: Amount sent `>= 10 && <= 10K` with currency e.g `KES 100`
-
-
-```javascript
-airtime.send(options)
-    .then(success)
-    .catch(error);
-```
-
-### Token
-```javascript
-const token = AfricasTalking.TOKEN;
-```
-
-- `createCheckoutToken(phoneNumber)`: Create a checkout token. Accepts the `phoneNumber` to create a token for.
-
-```javascript
-token.createCheckoutToken(phoneNumber)
-    .then(success)
-    .catch(error);
-```
-
-- `generateAuthToken()`: Generate an auth token to us for authentication instead of the API key.
-
-```javascript
-token.generateAuthToken()
-    .then(success)
-    .catch(error);
-```
-
-### [Application](http://docs.africastalking.com/userdata/balance)
-```javascript
-const app = AfricasTalking.APPLICATION;
-```
-
-- `fetchApplicationData()`: Fetch account info; i.e. balance
-
-```javascript
-app.fetchApplicationData()
-    .then(success)
-    .catch(error);
-```
-
-
-### Payments
-
-> Mobile Consumer To Business (C2B) functionality allows your application to receive payments that are initiated by a mobile subscriber.
-> This is typically achieved by disctributing a PayBill or BuyGoods number (and optionally an account number) that clients can use to make payments from their mobile devices.
-> [Read more](http://docs.africastalking.com/payments/mobile-c2b)
-
-```javascript
-const payments = AfricasTalking.PAYMENTS;
-```
-
-#### [mobileCheckout](http://docs.africastalking.com/payments/mobile-checkout)
-
-```js
-// Request payment from customer on mobile money
-payments.mobileCheckout(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notifications from customer(s) on your registered callback URL
-```
-
-- `mobileCheckout(options)`: Initiate Customer to Business (C2B) payments on a mobile subscriber's device. [More info](http://docs.africastalking.com/payments/mobile-checkout)
-
-    - `productName`: Your Payment Product. `REQUIRED`
-
-    - `phoneNumber`: The customer phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
-
-    - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
-
-    - `amount`: This is the amount. `REQUIRED`
-
-    - `metadata`: Some optional data to associate with transaction.
-
-
-#### [B2C](http://docs.africastalking.com/payments/mobile-b2c)
-
-
-```js
-// Send payment to customer
-payments.mobileB2C(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notifications on your registered callback URL
-```
-
-- `mobileB2C(options)`:  Initiate payments to mobile subscribers from your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2c)
-
-    - `productName`: Your Payment Product. `REQUIRED`
-
-    - `recipients`: A list of **up to 10** recipients. Each recipient has:
-
-        - `phoneNumber`: The payee phone number (in international format; e.g. `25471xxxxxxx`). `REQUIRED`
-
-        - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
-
-        - `amount`: Payment amount. `REQUIRED`
-
-        - `reason`: This field contains a string showing the purpose for the payment. If set, it should be one of the following
-
-          - ```
-            payments.REASON.SALARY
-            payments.REASON.SALARY_WITH_CHARGE
-            payments.REASON.BUSINESS
-            payments.REASON.BUSINESS_WITH_CHARGE
-            payments.REASON.PROMOTION
-            ```
-
-        - `metadata`: Some optional data to associate with transaction.
-
-
-#### [B2B](http://docs.africastalking.com/payments/mobile-b2b)
-
-
-```js
-// Send payment to business(s) like a bank
-payments.mobileB2B(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notifications on your registered callback URL
-```
-
-- `mobileB2B(options)`:  Mobile Business To Business (B2B) APIs allow you to initiate payments TO businesses eg banks FROM your payment wallet. [More info](http://docs.africastalking.com/payments/mobile-b2b)
-
-  - `productName`: Your Payment Product as setup on your account. `REQUIRED`
-
-    - `provider`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-
-    - ```
-      payments.PROVIDER.ATHENA
-      payments.PROVIDER.MPESA
-      ```
-
-  - `transferType`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-
-    - ```
-      payments.TRANSFER_TYPE.BUY_GOODS
-      payments.TRANSFER_TYPE.PAYBILL
-      payments.TRANSFER_TYPE.DISBURSE_FUNDS
-      payments.TRANSFER_TYPE.B2B_TRANSFER
-      ```
-
-  - `currencyCode`: 3-digit ISO format currency code (e.g `KES`, `USD`, `UGX` etc.) `REQUIRED`
-
-  - `destinationChannel`: This value contains the name or number of the channel that will receive payment by the provider. `REQUIRED`
-
-  - `destinationAccount`: This value contains the account name used by the business to receive money on the provided destinationChannel. `REQUIRED`
-
-  - `amount`: Payment amount. `REQUIRED`
-
-  - `metadata`: Some optional data to associate with transaction.   
-
-
-#### [Bank Checkout](http://docs.africastalking.com/bank/checkout)
-
-```javascript
-// initiate a bank checkout charge request
-payments.bankCheckout(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notification on your registered callback URL
-```
-
-- `bankCheckout(opts)` Initiate a banck checkout charge request. [More info](http://docs.africastalking.com/bank/checkout)
-  - `productName`: Payment Product as setup on your account. `REQUIRED`
-  - `bankAccount`: Bank account to be charged. `REQUIRED`
-    - `accountName`: The name of the bank account.
-    - `accountNumber`: The account number `REQUIRED`
-    - `bankCode`: A 6-Digit Integer Code for the bank that we allocate. `REQUIRED`
-      Bank checkout is supported by the following banks:
-      ```
-      payments.BANK.FCMB_NG
-      payments.BANK.ZENITH_NG
-      payments.BANK.ACCESS_NG
-      payments.BANK.PROVIDUS_NG
-      payments.BANK.STERLING_NG
-      ```
-
-  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
-  - `amount`: Payment amount. `REQUIRED`
-  - `narration`: A short description of the transaction `REQUIRED`
-  - `metadata`: Some optional data to associate with transaction.
-
-#### [Validate Bank Checkout](http://docs.africastalking.com/bank/checkout#validationRequestParameters)
-
-```javascript
-// initiate a bank OTP validation request
-payments.validateBankCheckout(opts)
-        .then(success)
-        .catch(error);
-```
-
-- `validateBankCheckout(opts)` initiate a bank OTP validation request. [More info](http://docs.africastalking.com/bank/checkout#validationRequestParameters)
-  - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
-  - `otp`: One Time Password that the bank sent to the client. `REQUIRED`
-
-#### [Bank Transfer](http://docs.africastalking.com/bank/transfer)
-
-```javascript
-// initiate a bank transfer request
-payments.bankTransfer(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notification on your registered callback URL
-```
-
-- `bankTransfer(opts)` initiate a bank transfer request. [More info](http://docs.africastalking.com/bank/transfer#requestParameters)
-  - `productName`: Payment Product as setup on your account. `REQUIRED`
-  - `recipients`: A list of recipients. Each recipient has:
-    - `bankAccount`: Bank account to be charged:
-      - `accountName`: The name of the bank account.
-      - `accountNumber`: The account number `REQUIRED`
-      - `bankCode`: A 6-Digit Integer Code for the bank that we allocate; See `payments.BANK.*` for supported banks. `REQUIRED`
-    - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
-    - `amount`: Payment amount. `REQUIRED`
-    - `narration`: A short description of the transaction `REQUIRED`
-    - `metadata`: Some optional data to associate with transaction.
-
-#### Wallet Transfer
-
-```javascript
-// initiate a wallet transfer request
-payments.walletTransfer(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notification on your registered callback URL
-```
-
-- `walletTransfer(opts)` initiate a wallet transfer request.
-  - `productName`: Payment Product as setup on your account. `REQUIRED`
-  - `targetProductCode`: Unique product code of the Africa's Talking Payment Product to transfer the funds to. `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
-  - `amount`: Payment amount. `REQUIRED`
-  - `metadata`: Some data to associate with the transaction. `REQUIRED`
-
-#### Topup Stash
-
-```javascript
-// initiate a topup request
-payments.topupStash(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notification on your registered callback URL
-```
-
-- `topupStash(opts)` Move money from a Payment Product to an app's stash.
-  - `productName`: Payment Product as setup on your account. `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
-  - `amount`: Payment amount. `REQUIRED`
-  - `metadata`: Some data to associate with the transaction. `REQUIRED`
-
-
-#### [Card Checkout](http://docs.africastalking.com/card/checkout)
-
-```javascript
-// initiate a card checkout charge request
-payments.cardCheckout(opts)
-        .then(success)
-        .catch(error);
-
-// Wait for payment notification on your registered callback URL
-```
-
-- `cardCheckout(opts)` initiate a card checkout charge request. [More info](http://docs.africastalking.com/card/checkout#chargeRequestParameters)
-  - `productName`: Payment Product as setup on your account. `REQUIRED`
-  - `checkoutToken`: Token that has been generated by our APIs as as result of charging a user's Payment Card in a previous transaction. When using a token, the `paymentCard` data should NOT be populated.
-  - `paymentCard`: Payment Card to be charged:
-    - `number`: The payment card number. `REQUIRED`
-    - `cvvNumber`: The 3 or 4 digit Card Verification Value. `REQUIRED`
-    - `expiryMonth`: The expiration month on the card (e.g `8`) `REQUIRED`
-    - `authToken`: The card's ATM PIN. `REQUIRED`
-    - `countryCode`: The 2-Digit countryCode where the card was issued (only `NG` is supported). `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code (only `NGN` is supported). `REQUIRED`
-  - `amount`: Payment amount. `REQUIRED`
-  - `narration`: A short description of the transaction `REQUIRED`
-  - `metadata`: Some optional data to associate with transaction.
-
-#### [Validate Card Checkout](http://docs.africastalking.com/card/checkout#validationRequestParameters)
-
-```javascript
-// initiate a card OTP validation request
-payments.validateCardCheckout(opts)
-        .then(success)
-        .catch(error);
-```
-
-- `validateCardCheckout(opts)` initiate a card OTP validation request. [More info](http://docs.africastalking.com/card/checkout#validationRequestParameters )
-  - `transactionId`: The transaction that your application wants to validate. `REQUIRED`
-  - `otp`: One Time Password that the card issuer sent to the client. `REQUIRED`
-
-### Query
-
-#### [Query Fetch Product Transactions](http://docs.africastalking.com/query/fetchtransactions)
-
-```javascript
-// initiate a query fetch transactions request
-payments.fetchProductTransactions(opts)
-        .then(success)
-        .catch(error);
-```
-
-- `fetchProductTransactions(opts)` initiate a query fetch transactions request. [More info](http://docs.africastalking.com/query/fetchtransactions)
-    - `productName`: Payment Product as setup on your account. `REQUIRED`
-    - `pageNumber`: Read results from this page. `REQUIRED`
-    - `count`: Number of transactions to fetch. `REQUIRED`
-    - `startDate`: Fetch transactions starting on this date onwards.
-    - `endDate`: Fetch transactions ending on upto this date.
-    - ```
-        Provide BOTH startDate and endDate if you choose to use them
-      ```
-    - `category`: Fetch this cetegory of transactions. Possible categories include:
-    - ```
-        BankCheckout, CardCheckout, MobileCheckout, MobileC2B, MobileB2C, MobileB2B, BankTransfer, WalletTransfer, UserStashTopup
-      ```
-    - `provider`: This contains the payment provider that is facilitating this transaction. Supported providers at the moment are:
-    - ```
-        Mpesa, Segovia, Flutterwave, Admin, Athena
-      ```
-    - `status`: Fetch only transactions with this status. Can be one of:
-    - ```
-        Success, Error
-      ```
-    - `source`: Transaction source to consider. Possible values are:
-    - ```
-        phoneNumber, BankAccount, Card, Wallet
-      ```
-    - `destination`: Transaction destination to consider. Possible values are same as the `source` above
-    - `providerChannel`: Transaction provider channel to consider for example, Mobile Provider's Paybill or Buy Goods belonging your organization
-
-#### [Query Find Transaction](http://docs.africastalking.com/query/findtransaction)
-
-```javascript
-// initiate a query find transaction request
-payments.findTransaction(opts)
-        .then(success)
-        .catch(error);
-```
-
-- `findTransaction(opts)` initiate a query find transaction request. [More info](http://docs.africastalking.com/query/findtransaction)
-    - `transactionId`: ID of the transaction you would like to find. `REQUIRED`
-
-#### [Query Fetch Wallet](http://docs.africastalking.com/query/fetchwallet)
-
-```javascript
-// initiate a query fetch wallet request
-payments.fetchWalletTransactions(opts)
-        .then(success)
-        .catch(error);
-```
-
-- `fetchWalletTransactions(opts)` initiate a query fetch wallet request. [More info](http://docs.africastalking.com/query/fetchwallet)
-    - `productName`: Payment Product as setup on your account. `REQUIRED`
-    - `pageNumber`: Read results from this page. `REQUIRED`
-    - `count`: Number of transactions to fetch. `REQUIRED`
-    - `startDate`: Fetch transactions starting on this date onwards.
-    - `endDate`: Fetch transactions ending on upto this date.
-    - ```
-        Provide BOTH startDate and endDate if you choose to use them
-      ```
-    - `categories`: Fetch this cetegory of transactions. Possible categories include:
-    - ```
-        Credit,Debit,Topup,Refund
-      ```
-
-#### [Query Wallet Balance](http://docs.africastalking.com/query/walletbalance)
-
-```javascript
-// initiate a query wallet balance request
-payments.fetchWalletBalance()
-        .then(success)
-        .catch(error);
-```
-
-- GETs you your wallet balance
 
 ## Development
 
