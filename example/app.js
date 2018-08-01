@@ -26,6 +26,7 @@ const indexRoutes = require('./routes/index');
 const smsRoutes = require('./routes/sms');
 const airtimeRoutes = require('./routes/airtime');
 const paymentRoutes = require('./routes/payments');
+const voiceRoutes = require('./routes/voice');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/', indexRoutes);
 app.use('/sms', smsRoutes);
 app.use('/airtime', airtimeRoutes);
 app.use('/payments', paymentRoutes);
+app.use('/voice', voiceRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
