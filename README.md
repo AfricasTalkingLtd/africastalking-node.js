@@ -65,9 +65,9 @@ Initialize the SDK as a requirement by doing `require('africastalking')(options)
 
 - [Voice Service](#voiceservice) : `AfricasTalking.VOICE`
 
-- [USSD Service](#ussdservice) : `AfricasTalking.USSD`
-
 - [Token Service](#tokenservice) : `AfricasTalking.TOKEN`
+
+- [USSD](#ussd) : USSD API
 
 ## Services
 
@@ -290,26 +290,16 @@ For more information, please read [http://docs.africastalking.com/voice](http://
 
 
 
-### `UssdService`
-
-If you are using connect-like frameworks (*express*), you could use the middleware `AfricasTalking.USSD(handler)`:
-
-`handler(params, next)`: Process USSD request and call `next()` when done.
-
-- `params`: contains the following user data sent by Africa's Talking servers: `sessionId`, `serviceCode`, `phoneNumber` and `text`.
-- `next(args)`: `args` must contain the following:
-    - `response`: Text to display on user's device. `REQUIRED`
-    - `endSession`: Boolean to decide whether to **END** session or to **CON**tinue it. `REQUIRED`
-
-For more information, please read [http://docs.africastalking.com/ussd](http://docs.africastalking.com/ussd)
-
-
-
 ### `TokenService`
 
 - `createCheckoutToken(phoneNumber)`: Create a new checkout token.
 
 - `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
+
+
+### `USSD`
+
+For more information, please read [http://docs.africastalking.com/ussd](http://docs.africastalking.com/ussd)
 
 
 
