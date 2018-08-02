@@ -87,9 +87,9 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
 
 ### `AirtimeService`
 
-- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients` is an array of objects containing the following keys:
+- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients`: `REQUIRED`. An array of objects containing the following keys:
     - `phoneNumber`: Recipient of airtime
-    - `amount`: Amount sent `>= 10 && <= 10K` with currency e.g `KES 100`
+    - `amount`: Amount sent with currency e.g `KES 100`
 
 For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
 
@@ -99,9 +99,9 @@ For more information, please read [http://docs.africastalking.com/airtime/sendin
 
 - `send({ to, from, message, enqueue })`: Send a message
 
-  - `to`: Recipients phone number.
-  - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account.
-  - `message`: SMS content
+  - `to`: Recipients phone number. `REQUIRED`
+  - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account
+  - `message`: SMS content. `REQUIRED`
   - `enqueue`: Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
 
 
@@ -120,17 +120,17 @@ For more information, please read [http://docs.africastalking.com/airtime/sendin
 
 - `fetchSubscription({ shortCode, keyword, lastReceivedId })`: Fetch your premium subscription data
 
-  - `shortCode`: This is the premium short code mapped to your account.
-  - `keyword`: A premium keyword under the above short code and mapped to your account.
+  - `shortCode`: This is the premium short code mapped to your account. `REQUIRED`
+  - `keyword`: A premium keyword under the above short code and mapped to your account. `REQUIRED`
   - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`
 
 
 - `createSubscription({ shortCode, keyword, phoneNumber, checkoutToken })`: Create a premium subscription
 
-  - `shortCode`: This is the premium short code mapped to your account.
-  - `keyword`: A premium keyword under the above short code and mapped to your account.
-  - `phoneNumber`:  The phone number to be subscribed
-  - `checkoutToken`: This is a token used to validate the subscription request.
+  - `shortCode`: This is the premium short code mapped to your account. `REQUIRED`
+  - `keyword`: A premium keyword under the above short code and mapped to your account. `REQUIRED`
+  - `phoneNumber`:  The phone number to be subscribed. `REQUIRED`
+  - `checkoutToken`: This is a token used to validate the subscription request. `REQUIRED`
 
 
 For more information on:
@@ -144,90 +144,91 @@ For more information on:
 
 - `cardCheckout({ productName, paymentCard/checkoutToken, currencyCode, amount, narration, metadata })` Initiate a card checkout.
 
-  - `productName`: Your payment product
+  - `productName`: Your payment product. `REQUIRED`
   - `paymentCard`: Card to charge.
   - `checkoutToken`: Token from a previous successful transaction. Replaces `paymentCard`.
-  - `currencyCode`: 3-digit ISO format currency code
-  - `amount`: Amount to charge
-  - `narration`: Checkout description
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to charge. `REQUIRED`
+  - `narration`: Checkout description. `REQUIRED`
   - `metadata`: Additional info to go with the checkout
 
 
 - `validateCardCheckout({ transactionId, otp })` Validate a card checkout.
 
-  - `transactionId`: Transaction ID returned on charge request
-  - `otp`: A user-provided OTP
+  - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
+  - `otp`: A user-provided OTP. `REQUIRED`
 
 
 - `bankCheckout({ productName, bankAccount, currencyCode, amount, narration, metadata })` Initiate a bank checkout.
 
-  - `productName`: Your payment product
-  - `bankAccount`: Bank account to charge.
-  - `currencyCode`: 3-digit ISO format currency code
-  - `amount`: Amount to charge
-  - `narration`: Checkout description
+  - `productName`: Your payment product. `REQUIRED`
+  - `bankAccount`: Bank account to charge. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to charge. `REQUIRED`
+  - `narration`: Checkout description. `REQUIRED`
   - `metadata`: Additional info to go with the checkout
 
 
 - `validateBankCheckout({ transactionId, otp })` Validate a bank checkout.
 
-  - `transactionId`: Transaction ID returned on charge request
-  - `otp`: A user-provided OTP
+  - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
+  - `otp`: A user-provided OTP. `REQUIRED`
 
 
 - `bankTransfer({ productName, recipients })` Initiate a bank transfer.
 
-  - `productName`: Your payment product
-  - `recipients`: A list of banks to transfer to.
+  - `productName`: Your payment product. `REQUIRED`
+  - `recipients`: A list of banks to transfer to. `REQUIRED`
 
 
-- `mobileCheckout({ productName, phoneNumber, currencyCode, amount, metadata })`: Initiate mobile checkout.
+- `mobileCheckout({ productName, providerChannel, phoneNumber, currencyCode, amount, metadata })`: Initiate mobile checkout.
 
-  - `productName`: Your payment product
-  - `phoneNumber`: Mobile wallet to charge
-  - `currencyCode`: 3-digit ISO format currency code
-  - `amount`: Amount to charge
+  - `productName`: Your payment product. `REQUIRED`
+  - `providerChannel`: Provider channel to consider when fetching.
+  - `phoneNumber`: Mobile wallet to charge. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to charge. `REQUIRED`
   - `metadata`: Additional info to go with the checkout
 
 
 - `mobileB2C({ productName, recipients })`:  Send mobile money to consumer.
 
-  - `productName`: Your payment product
-  - `recipients`: A list of consumers that will receive the money.
+  - `productName`: Your payment product. `REQUIRED`
+  - `recipients`: A list of consumers that will receive the money. `REQUIRED`
 
 
 - `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, metadata })`:   Send mobile money to busness.
 
-  - `productName`: Your payment product
-  - `provider`: Provider used to process request. Checkout  `payments.PROVIDER.*`
-  - `transferType`: Checkout  `payments.TRANSFER_TYPE.*`
-  - `currencyCode`: 3-digit ISO format currency code
-  - `destinationChannel`: Name or number of channel to receive payment
-  - `destinationAccount`: Account name used to receive money
-  - `amount`: Amount to transfer
+  - `productName`: Your payment product. `REQUIRED`
+  - `provider`: Provider used to process request. Checkout  `payments.PROVIDER.*`. `REQUIRED`
+  - `transferType`: Checkout  `payments.TRANSFER_TYPE.*`. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `destinationChannel`: Name or number of channel to receive payment. `REQUIRED`
+  - `destinationAccount`: Account name used to receive money. `REQUIRED`
+  - `amount`: Amount to transfer. `REQUIRED`
   - `metadata`: Additional info to go with the transfer
 
 
 - `walletTransfer({ productName, targetProductCode, currencyCode, amount, metadata })` Move money form one payment product to another.
 
-  - `productName`: Your payment product
-  - `targetProductCode`: ID of recipient payment product on Africa's Talking
-  - `currencyCode`: 3-digit ISO format currency code
-  - `amount`: Amount to transfer
-  - `metadata`: Additional info to go with the transfer
+  - `productName`: Your payment product. `REQUIRED`
+  - `targetProductCode`: ID of recipient payment product on Africa's Talking. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to transfer. `REQUIRED`
+  - `metadata`: Additional info to go with the transfer. `REQUIRED`
 
 
 - `topupStash({ productName, currencyCode, amount, metadata })` Move money from a Payment Product to an app's stash.
 
-  - `productName`: Your payment product
-  - `currencyCode`: 3-digit ISO format currency code
-  - `amount`: Amount to transfer
-  - `metadata`: Additional info to go with the transfer
+  - `productName`: Your payment product. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to transfer. `REQUIRED`
+  - `metadata`: Additional info to go with the transfer. `REQUIRED`
 
 
 - `fetchProductTransactions({ productName, ...filters })`: Fetch payment product transactions.
 
-  - `productName`: Your payment product
+  - `productName`: Your payment product. `REQUIRED`
   - `filters`: Query filters. Includes:
 
     - `pageNumber`: Page number to fetch results from. Starts from `1`. `REQUIRED`
@@ -243,6 +244,9 @@ For more information on:
 
 
 - `findTransaction({ transactionId })`: Find a particular transaction.
+
+  - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
+
 
 - `fetchWalletTransactions({ ...filters })`: Fetch wallet transactions.
 
@@ -263,19 +267,19 @@ For more information, please read [http://docs.africastalking.com/payments](http
 
 - `voice.call({ callFrom, callTo })`: Initiate a phone call
 
-    - `callFrom`: Your Africa's Talking issued virtual phone number.
-    - `callTo`: Phone number to dial
+    - `callFrom`: Your Africa's Talking issued virtual phone number. `REQUIRED`
+    - `callTo`: Phone number to dial. `REQUIRED`
 
 
 - `voice.fetchQuedCalls({ phoneNumber })`: Get queued calls
 
-    - `phoneNumber`: Your Africa's Talking issued virtual phone number
+    - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
 
 
 - `voice.uploadMediaFile({ phoneNumber, url })`: Upload voice media file
 
-    - `phoneNumber`: Your Africa's Talking issued virtual phone number
-    - `url`: URL to your media file.
+    - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
+    - `url`: URL to your media file. `REQUIRED`
 
 
 > Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing.
