@@ -460,7 +460,7 @@ describe('Payment', function(){
                     .should.be.rejected();
             });
 
-            it('#fetchProductTransactions() must have productName/pageNumber/count', function () {
+            it('#fetchProductTransactions() must have productName and pageNumber/count filters', function () {
                 options.productName = "Joe";
 
                 return payments.fetchProductTransactions(options)
@@ -488,8 +488,10 @@ describe('Payment', function(){
                     .should.be.rejected();
             });
 
-            it('#fetchWalletTransactions() must have pageNumber/count', function () {
-                options.pageNumber = '1';
+            it('#fetchWalletTransactions() must have pageNumber/count filters', function () {
+                options.filters = {
+                    pageNumber: '1'
+                }
 
                 return payments.fetchWalletTransactions(options)
                     .should.be.rejected();
@@ -499,8 +501,10 @@ describe('Payment', function(){
         it('fetchProductTransactions()', function () {
             let opts = {
                 productName: "Joe",
-                pageNumber: '1',
-                count: '10',
+                filters: {
+                    pageNumber: '1',
+                    count: '10'
+                }
             }
 
             return payments.fetchProductTransactions(opts)
@@ -528,8 +532,10 @@ describe('Payment', function(){
 
         it('fetchWalletTransactions()', function () {
             let opts = {
-                pageNumber: "1",
-                count: '20'
+                filters: {
+                    pageNumber: "1",
+                    count: '10'
+                }
             }
 
             return payments.fetchWalletTransactions(opts)
