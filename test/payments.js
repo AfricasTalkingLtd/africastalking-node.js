@@ -248,17 +248,17 @@ describe('Payment', function(){
                     .should.be.rejected();
             });
 
-            it('#validateBankCheckout() cannot be empty', function () {
+            it('#bankCheckoutValidate() cannot be empty', function () {
                 options = {};
 
-                return payments.validateBankCheckout(options)
+                return payments.bankCheckoutValidate(options)
                     .should.be.rejected();
             });
 
-            it('#validateBankCheckout() must have transactionId/otp', function () {
+            it('#bankCheckoutValidate() must have transactionId/otp', function () {
                 options.otp = "1234";
 
-                return payments.validateBankCheckout(options)
+                return payments.bankCheckoutValidate(options)
                     .should.be.rejected();
             });
 
@@ -303,13 +303,13 @@ describe('Payment', function(){
                 });
         });
 
-        it('validateBankCheckout()', function () {
+        it('bankCheckoutValidate()', function () {
             let opts = {
                 transactionId: "ATPid_SampleTxnId1",
                 otp: "1234",
             };
 
-            return payments.validateBankCheckout(opts)
+            return payments.bankCheckoutValidate(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
