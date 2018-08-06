@@ -230,21 +230,21 @@ describe('Payment', function(){
         describe('validation', function () {
             let options = {};
 
-            it('#bankCheckout() cannot be empty', function () {
-                return payments.bankCheckout(options)
+            it('#bankCheckoutCharge() cannot be empty', function () {
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#bankCheckout() must have productName/bankAccount/currencyCode/amount/narration', function () {
+            it('#bankCheckoutCharge() must have productName/bankAccount/currencyCode/amount/narration', function () {
                 options.productName = "Joe";
 
-                return payments.bankCheckout(options)
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#bankCheckout() may have string map metadata', function () {
+            it('#bankCheckoutCharge() may have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.bankCheckout(options)
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
@@ -277,7 +277,7 @@ describe('Payment', function(){
             });
         });
 
-        it('bankCheckout()', function () {
+        it('bankCheckoutCharge()', function () {
             let opts = {
                 productName: "TestProduct",
                 bankAccount: {
@@ -294,7 +294,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.bankCheckout(opts)
+            return payments.bankCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
