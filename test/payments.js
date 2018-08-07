@@ -369,17 +369,17 @@ describe('Payment', function(){
                     .should.be.rejected();
             });
 
-            it('#validateCardCheckout() cannot be empty', function () {
+            it('#cardCheckoutValidate() cannot be empty', function () {
                 options = {};
 
-                return payments.validateCardCheckout(options)
+                return payments.cardCheckoutValidate(options)
                     .should.be.rejected();
             });
 
-            it('#validateCardCheckout() must have transactionId/otp', function () {
+            it('#cardCheckoutValidate() must have transactionId/otp', function () {
                 options.otp = "1234";
 
-                return payments.validateCardCheckout(options)
+                return payments.cardCheckoutValidate(options)
                     .should.be.rejected();
             });
         });
@@ -435,13 +435,13 @@ describe('Payment', function(){
                 });
         });
 
-        it('validateCardCheckout()', function () {
+        it('cardCheckoutValidate()', function () {
             let opts = {
                 transactionId: "ATPid_SampleTxnId1",
                 otp: "1234"
             };
 
-            return payments.validateCardCheckout(opts)
+            return payments.cardCheckoutValidate(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
