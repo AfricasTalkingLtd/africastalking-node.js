@@ -50,8 +50,12 @@ describe('SMS', function () {
             return sms.fetchSubscription(options)
                 .should.be.rejected();
         });
-    });
 
+        it('#deleteSubscription()', function () {
+            return sms.deleteSubscription(options)
+                .should.be.rejected();
+        });
+    });
 
     it('fetches messages', function (done) {
 
@@ -65,6 +69,63 @@ describe('SMS', function () {
                 done();
             });
 
+    });
+
+    it('fetches subscription', function (done) {
+
+        const opts = {
+            shortCode: "1234",
+            keyword: "TESTKWD"
+        }
+
+        sms.fetchSubscription(opts)
+            .then(function (subscriptions) {
+                subscriptions.should.have.property('responses');
+                done();
+            })
+            .catch(function (error) {
+                console.error(error);
+                done();
+            });
+    });
+
+    it('creates subscription', function (done) {
+
+        const opts = {
+            shortCode: "1234",
+            keyword: "TESTKWD",
+            phoneNumber: "+254718769882",
+            checkoutToken: "12abvsfdhh63535"
+        }
+
+        sms.createSubscription(opts)
+            .then(function (resp) {
+                resp.should.have.property('status');
+                done();
+            })
+            .catch(function (error) {
+                console.error(error);
+                done();
+            });
+    });
+
+    it('deletes subscription', function (done) {
+
+        const opts = {
+            shortCode: "1234",
+            keyword: "TESTKWD",
+            phoneNumber: "+254718769882"
+        }
+
+        sms.deleteSubscription(opts)
+            .then(function (resp) {
+                resp.should.have.property('status');
+                done();
+            })
+            .catch(function (error) {
+                console.error(error);
+                done();
+            });
     });
 
     it('sends single simple message', function (done) {
