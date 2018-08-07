@@ -347,25 +347,25 @@ describe('Payment', function(){
         });
     });
 
-    describe('Card', function () {
+    describe.only('Card', function () {
         describe('validation', function() {
             let options = {};
             
-            it('#cardCheckout() cannot be empty', function () {
-                return payments.cardCheckout(options)
+            it('#cardCheckoutCharge() cannot be empty', function () {
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#cardCheckout() must have productName/paymentCard/currencyCode/amount/narration', function () {
+            it('#cardCheckoutCharge() must have productName/paymentCard/currencyCode/amount/narration', function () {
                 options.productName = "Joe";
 
-                return payments.cardCheckout(options)
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#cardCheckout() may not have string map metadata', function () {
+            it('#cardCheckoutCharge() may not have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.cardCheckout(options)
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
@@ -384,7 +384,7 @@ describe('Payment', function(){
             });
         });
 
-        it('cardCheckoutWithPaymentCard()', function () {
+        it('cardCheckoutChargeWithPaymentCard()', function () {
             let opts = {
                 productName: "TestProduct",
                 paymentCard: {
@@ -404,7 +404,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.cardCheckout(opts)
+            return payments.cardCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -413,7 +413,7 @@ describe('Payment', function(){
                 });
         });
 
-        it('cardCheckoutWithToken()', function () {
+        it('cardCheckoutChargeWithToken()', function () {
             let opts = {
                 productName: "TestProduct",
                 checkoutToken: "12abvsfdhh63535",
@@ -426,7 +426,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.cardCheckout(opts)
+            return payments.cardCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
