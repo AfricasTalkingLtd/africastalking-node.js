@@ -9,13 +9,20 @@ const airtime = AfricasTalking.AIRTIME;
 
 // Send airtime
 router.post('/send', (req, res) => {
-    const { to, amount } = req.body;
-    const airtimeRecipientList = to.split(',').map(number => {
-        return {
-            phoneNumber: number.trim(),
-            amount: `KES ${amount}`
-        }
-    });
+    const {
+        to,
+        currencyCode,
+        amount
+    } = req.body;
+
+    const airtimeRecipientList = to.split(',')
+        .map(number => {
+            return {
+                phoneNumber: number.trim(),
+                currencyCode,
+                amount: Number(amount)
+            }
+        });
 
     let options = { recipients: airtimeRecipientList }
 

@@ -37,16 +37,19 @@ $(function () {
 
     $("#airtime").click(function () {
         const to = $("#phone").val();
-        const amount = $("#amount").val();
+        const inputAmount = $("#amount").val();
         if (!to) {
             log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
             return;
         }
 
-        if (!amount) {
+        if (!inputAmount) {
             log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
             return;
         }
+
+        let currencyCode, amount;
+        [currencyCode, amount] = inputAmount.split(" ");
 
         log("Sending airtime.....");
 
@@ -55,6 +58,7 @@ $(function () {
             url: "/airtime/send",
             data: {
                 to,
+                currencyCode,
                 amount
             }
         })
