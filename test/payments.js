@@ -347,7 +347,7 @@ describe('Payment', function(){
         });
     });
 
-    describe.only('Card', function () {
+    describe('Card', function () {
         describe('validation', function() {
             let options = {};
             

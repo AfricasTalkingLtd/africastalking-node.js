@@ -87,9 +87,10 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
 
 ### `AirtimeService`
 
-- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients`: `REQUIRED`. An array of objects containing the following keys:
-    - `phoneNumber`: Recipient of airtime
-    - `amount`: Amount sent with currency e.g `KES 100`
+- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients`: An array of objects containing the following keys:
+  - `phoneNumber`: Recipient of airtime. `REQUIRED`
+  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
+  - `amount`: Amount to charge. `REQUIRED`
 
 For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
 
@@ -142,7 +143,7 @@ For more information on:
 
 ### `PaymentService`
 
-- `cardCheckout({ productName, paymentCard/checkoutToken, currencyCode, amount, narration, metadata })` Initiate a card checkout.
+- `cardCheckoutCharge({ productName, paymentCard/checkoutToken, currencyCode, amount, narration, metadata })` Initiate a card checkout.
 
   - `productName`: Your payment product. `REQUIRED`
   - `paymentCard`: Card to charge.
@@ -153,13 +154,13 @@ For more information on:
   - `metadata`: Additional info to go with the checkout
 
 
-- `validateCardCheckout({ transactionId, otp })` Validate a card checkout.
+- `cardCheckoutValidate({ transactionId, otp })` Validate a card checkout.
 
   - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
   - `otp`: A user-provided OTP. `REQUIRED`
 
 
-- `bankCheckout({ productName, bankAccount, currencyCode, amount, narration, metadata })` Initiate a bank checkout.
+- `bankCheckoutCharge({ productName, bankAccount, currencyCode, amount, narration, metadata })` Initiate a bank checkout.
 
   - `productName`: Your payment product. `REQUIRED`
   - `bankAccount`: Bank account to charge. `REQUIRED`
@@ -169,7 +170,7 @@ For more information on:
   - `metadata`: Additional info to go with the checkout
 
 
-- `validateBankCheckout({ transactionId, otp })` Validate a bank checkout.
+- `bankCheckoutValidate({ transactionId, otp })` Validate a bank checkout.
 
   - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
   - `otp`: A user-provided OTP. `REQUIRED`
@@ -226,7 +227,7 @@ For more information on:
   - `metadata`: Additional info to go with the transfer. `REQUIRED`
 
 
-- `fetchProductTransactions({ productName, ...filters })`: Fetch payment product transactions.
+- `fetchProductTransactions({ productName, filters })`: Fetch payment product transactions.
 
   - `productName`: Your payment product. `REQUIRED`
   - `filters`: Query filters. Includes:
@@ -248,9 +249,9 @@ For more information on:
   - `transactionId`: Transaction ID returned on charge request. `REQUIRED`
 
 
-- `fetchWalletTransactions({ ...filters })`: Fetch wallet transactions.
+- `fetchWalletTransactions({ filters })`: Fetch wallet transactions.
 
-  - `filters`: Query filter. Includes:
+  - `filters`: Query filters. Includes:
     - `pageNumber`: Page number to fetch results from. Starts from `1`. `REQUIRED`
     - `count`: Number of results to fetch. `REQUIRED`
     - `startDate`: Start Date to consider when fetching.
