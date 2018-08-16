@@ -22,7 +22,7 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Say> cannot be empty', function () {
-                    voice.Say({})
+                    (function () { voice.Say({}) })
                         .should.throw(Error);
                 });
             });
@@ -53,7 +53,7 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Play> must have url', function () {
-                    voice.Play({})
+                    (function () { voice.Play({}) })
                         .should.throw(Error);
                 });
             });
@@ -73,14 +73,14 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<GetDigits> must have <Say> or <Play> child', function () {
-                    voice.GetDigits({})
+                    (function () { voice.GetDigits({}) })
                         .should.throw(Error);
                 });
 
                 it('cannot have invalid child', function () {
                     options.text = voice.Dial({ phoneNumbers: '+254711XXXYYY' });
 
-                    voice.GetDigits(options)
+                    (function () { voice.GetDigits(options) })
                         .should.throw(Error);
                 });
             });
@@ -122,7 +122,7 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Dial> must have phoneNumbers', function () {
-                    voice.Dial({})
+                    (function () { voice.Dial({}) })
                         .should.throw(Error);
                 });
             });
@@ -157,14 +157,14 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Record> must have <Say> or <Play> child', function () {
-                    voice.Record({})
+                    (function () { voice.Record({}) })
                         .should.throw(Error);
                 });
 
                 it('cannot have invalid child', function () {
                     options.text = voice.Dial({ phoneNumbers: '+254711XXXYYY' });
 
-                    voice.Record(options)
+                    (function () { voice.Record(options) })
                         .should.throw(Error);
                 });
             });
@@ -230,7 +230,7 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Dequeue> must have a phoneNumber', function () {
-                    voice.Dequeue({})
+                    (function () { voice.Dequeue({}) })
                         .should.throw(Error);
                 });
             });
@@ -258,14 +258,14 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Redirect> cannot be empty', function () {
-                    voice.Redirect({})
+                    (function () { voice.Redirect({}) })
                         .should.throw(Error);
                 });
 
                 it('<Redirect> text must be valid url', function () {
                     options.text = 'Hello is not url';
 
-                    voice.Redirect(options)
+                    (function () { voice.Redirect(options) })
                         .should.throw(Error);
                 });
             });
