@@ -139,13 +139,12 @@ describe('Voice', function () {
                 Object.assign(options, {
                     record: true,
                     sequential: true,
-                    callerId: 'AFTKNG',
+                    callerId: '+254711222333',
                     ringBackTone: 'http://mymediafile.com/playme.mp3',
                     maxDuration: 120
                 });
-                expected = '<Dial phoneNumbers="+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com" \
-            record="true" sequential="true" callerId="AFTKNG" ringBackTone="http://mymediafile.com/playme.mp3" \
-            maxDuration="120"/>'
+                expected = '<Dial phoneNumbers="+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com" ' +
+                'record="true" sequential="true" callerId="+254711222333" ringBackTone="http://mymediafile.com/playme.mp3" maxDuration="120"/>'
 
                 voice.Dial(options)
                     .should.equal(expected);
