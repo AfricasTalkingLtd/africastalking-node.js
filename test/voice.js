@@ -258,7 +258,7 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Redirect> cannot be empty', function () {
-                    voice.Redirect(options)
+                    voice.Redirect({})
                         .should.throw(Error);
                 });
 
