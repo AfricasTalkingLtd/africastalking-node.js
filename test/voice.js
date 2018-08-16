@@ -230,14 +230,14 @@ describe('Voice', function () {
 
             describe('validation', function () {
                 it('<Dequeue> must have a phoneNumber', function () {
-                    voice.Dequeue(options)
+                    voice.Dequeue({})
                         .should.throw(Error);
                 });
             });
 
             it('creates <Dequeue> with phoneNumber', function () {
-                options.phoneNumber = '+254711082XXX';
-                expected = '<Dequeue phoneNumber="+254711082XXX"/>';
+                options.phoneNumber = '+254711222333';
+                expected = '<Dequeue phoneNumber="+254711222333"/>';
 
                 voice.Dequeue(options)
                     .should.equal(expected);
@@ -245,7 +245,7 @@ describe('Voice', function () {
 
             it('creates <Dequeue> with phoneNumber and name', function () {
                 options.name = 'support';
-                expected = '<Dequeue phoneNumber="+254711082XXX" name="support"/>';
+                expected = '<Dequeue phoneNumber="+254711222333" name="support"/>';
 
                 voice.Dequeue(options)
                     .should.equal(expected);
