@@ -279,6 +279,14 @@ describe('Voice', function () {
             });
         });
 
+        describe('Conference', function () {
+            let expected = '<Conference/>'
+            it('creates valid <Conference>', function () {
+                voice.Conference()
+                    .should.equal(expected);
+            });
+        });
+
         describe('Reject', function () {
             let expected = '<Reject/>'
             it('creates valid <Reject>', function () {
