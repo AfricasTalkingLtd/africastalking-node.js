@@ -6,7 +6,7 @@ const fixtures = require('./fixtures.local');
 
 var AfricasTalking, voice;
 
-describe.only('Voice', function () {
+describe('Voice', function () {
 
     this.timeout(15000);
 
@@ -22,7 +22,7 @@ describe.only('Voice', function () {
 
             describe('validation', function () {
                 it('<Say> cannot be empty', function () {
-                    voice.Say(options)
+                    voice.Say({})
                         .should.throw(Error);
                 });
             });
@@ -35,7 +35,7 @@ describe.only('Voice', function () {
                     .should.equal(expected);
             });
 
-            it('creates xml string with text, optional parameters', function () {
+            it('creates <Say> with text, optional parameters', function () {
                 Object.assign(options, {
                     voice: 'woman',
                     playBeep: true
@@ -53,7 +53,7 @@ describe.only('Voice', function () {
 
             describe('validation', function () {
                 it('<Play> must have url', function () {
-                    voice.Play(options)
+                    voice.Play({})
                         .should.throw(Error);
                 });
             });
@@ -73,7 +73,7 @@ describe.only('Voice', function () {
 
             describe('validation', function () {
                 it('<GetDigits> must have <Say> or <Play> child', function () {
-                    voice.GetDigits(options)
+                    voice.GetDigits({})
                         .should.throw(Error);
                 });
 
@@ -122,7 +122,7 @@ describe.only('Voice', function () {
 
             describe('validation', function () {
                 it('<Dial> must have phoneNumbers', function () {
-                    voice.Dial(options)
+                    voice.Dial({})
                         .should.throw(Error);
                 });
             });
@@ -158,7 +158,7 @@ describe.only('Voice', function () {
 
             describe('validation', function () {
                 it('<Record> must have <Say> or <Play> child', function () {
-                    voice.Record(options)
+                    voice.Record({})
                         .should.throw(Error);
                 });
 
