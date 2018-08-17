@@ -287,28 +287,22 @@ describe('response', function () {
             });
 
             it('creates <Dequeue> with phoneNumber', function () {
-                options = {
-                    phoneNumber: '+254711222333'
-                }
                 expected = responseTemplate +
                 '<Dequeue phoneNumber="+254711222333"/>' +
                 '</Response>';
 
-                response.dequeue(options)
+                response.dequeue('+254711222333')
                     .build()
                     .should.equal(expected);
             });
 
             it('creates <Dequeue> with phoneNumber and name', function () {
-                options = {
-                    phoneNumber: '+254711222333',
-                    name: 'support'
-                }
+                options = { name: 'support' };
                 expected = responseTemplate +
-                '<Dequeue phoneNumber="+254711222333" name="support"/>' +
+                '<Dequeue name="support" phoneNumber="+254711222333"/>' +
                 '</Response>'
 
-                response.dequeue(options)
+                response.dequeue('+254711222333', options)
                     .build()
                     .should.equal(expected);
             });
