@@ -170,9 +170,9 @@ describe('response', function () {
                     maxDuration: 120
                 }
                 expected = responseTemplate +
-                '<Dial phoneNumbers="+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com" ' +
-                'record="true" sequential="true" callerId="+254711222333" ' +
-                'ringBackTone="http://mymediafile.com/playme.mp3" maxDuration="120"/>' +
+                '<Dial record="true" sequential="true" callerId="+254711222333" ' +
+                'ringBackTone="http://mymediafile.com/playme.mp3" maxDuration="120" ' +
+                'phoneNumbers="+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com"/>' +
                 '</Response>';
 
                 response.dial('+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com', options)
