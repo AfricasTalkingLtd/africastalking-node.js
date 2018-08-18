@@ -196,7 +196,7 @@ describe('response', function () {
                 it('cannot have invalid child', function () {
                     child = {
                         dial: { phoneNumbers: '+254711XXXYYY' }
-                    }
+                    };
 
                     (function () { response.record(child).build() })
                         .should.throw(Error);
@@ -221,7 +221,7 @@ describe('response', function () {
                     say: { text: 'Hello there' }
                 }
                 expected = responseTemplate +
-                '<Record><Say>Hello</Say></Record>' +
+                '<Record><Say>Hello there</Say></Record>' +
                 '</Response>'
 
                 response.record(child)
@@ -241,9 +241,10 @@ describe('response', function () {
                     playBeep: true,
                     callbackUrl: "http://myapp.com/callback"
                 }
-                expected = '<Record finishOnKey="#" maxLengh="120" timeout="3600" \
-            trimSilence="true" playBeep="true" callBackUrl="http://myapp.com/callback">\
-            <Say>Hello</Say></Record>';
+                expected = responseTemplate +
+                '<Record finishOnKey="#" maxLength="120" timeout="3600" ' +
+                'trimSilence="true" playBeep="true" callbackUrl="http://myapp.com/callback">' +
+                '<Say>Hello there</Say></Record></Response>';
 
                 response.record(child, options)
                     .build()
