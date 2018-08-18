@@ -79,7 +79,7 @@ describe('response', function () {
         });
 
         describe('getDigits', function () {
-            let expected, child;
+            let expected, child, options;
 
             describe('validation', function () {
                 it('<GetDigits> must have <Say> or <Play> child', function () {
@@ -88,11 +88,11 @@ describe('response', function () {
                 });
 
                 it('cannot have invalid child', function () {
-                    let options = {
+                    child = {
                         dial: { phoneNumbers: '+254711XXXYYY' }
-                    }
+                    };
 
-                    (function () { response.getDigits(options).build() })
+                    (function () { response.getDigits(child).buld() })
                         .should.throw(Error);
                 });
             });
@@ -115,7 +115,7 @@ describe('response', function () {
                     say: { text: 'Hello there' }
                 }
                 expected = responseTemplate +
-                '<GetDigits numDigits="1" ><Say>Hello there</Say></GetDigits>' +
+                '<GetDigits><Say>Hello there</Say></GetDigits>' +
                 '</Response>';
 
                 response.getDigits(child)
@@ -124,6 +124,9 @@ describe('response', function () {
             });
 
             it('creates <GetDigits> with <Say> child, optional parameters', function () {
+                child = {
+                    say: { text: 'Hello there' }
+                }
                 options = {
                     numDigits: 1,
                     timeout: 30,
@@ -132,10 +135,10 @@ describe('response', function () {
                 }
                 expected = responseTemplate +
                 '<GetDigits numDigits="1" timeout="30" finishOnKey="#" ' +
-                'callbackUrl="http://myapp.com/callback" ><Say>Hello</Say></GetDigits>' +
+                'callbackUrl="http://myapp.com/callback"><Say>Hello there</Say></GetDigits>' +
                 '</Response>';
 
-                response.getDigits(options)
+                response.getDigits(child, options)
                     .build()
                     .should.equal(expected);
             });
