@@ -23,11 +23,10 @@ Object.keys(ifaces).forEach(function (ifname) {
 
 // routes
 const indexRoutes = require('./routes/index');
-const voiceRoutes = require('./routes/voice');
 const smsRoutes = require('./routes/sms');
-const ussdRoutes = require('./routes/ussd');
 const airtimeRoutes = require('./routes/airtime');
-const paymentsRoutes = require('./routes/payments');
+const paymentRoutes = require('./routes/payments');
+const voiceRoutes = require('./routes/voice');
 
 const app = express();
 
@@ -44,32 +43,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('*', (req, res, next) => {
-    res.locals.commonData = { title: 'Africa\'s Talking', server: ips.map(ip => `${ip}:35897`).join('\n') }
+    res.locals.commonData = {
+        title: 'Africa\'s Talking',
+        server: ips.map(ip => `${ip}:35897`).join('\n')
+    }
     next();
 });
 
 app.use('/', indexRoutes);
 app.use('/sms', smsRoutes);
-app.use('/voice', voiceRoutes);
-app.use('/ussd', ussdRoutes);
 app.use('/airtime', airtimeRoutes);
-app.use('/payments', paymentsRoutes);
+app.use('/payments', paymentRoutes);
+app.use('/voice', voiceRoutes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
+    // render the error page
+    res.status(err.status || 500);
     res.render('error', { title: 'Africa\'s Talking', server: ips.map(ip => `${ip}:35897`).join('\n') });
 });
 
