@@ -185,7 +185,7 @@ For more information on:
 - `mobileCheckout({ productName, providerChannel, phoneNumber, currencyCode, amount, metadata })`: Initiate mobile checkout.
 
   - `productName`: Your payment product. `REQUIRED`
-  - `providerChannel`: Provider channel to consider when fetching.
+  - `providerChannel`: Provider channel to consider when charging.
   - `phoneNumber`: Mobile wallet to charge. `REQUIRED`
   - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
   - `amount`: Amount to charge. `REQUIRED`
