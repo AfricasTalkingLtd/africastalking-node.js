@@ -29,18 +29,18 @@
     "node": ">=6"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "grpc": "^1.12.4",
-    "install": "^0.10.1",
-    "lodash": "^4.17.10",
+    "body-parser": "^1.18.3",
+    "grpc": "^1.15.1",
+    "install": "^0.10.4",
+    "lodash": "^4.17.11",
     "unirest": "^0.5.1",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
-    "express": "^4.16.2",
+    "express": "^4.16.4",
     "istanbul": "^0.4.5",
-    "mocha": "^4.0.1",
-    "should": "^13.1.2",
-    "supertest": "^3.0.0"
+    "mocha": "^4.1.0",
+    "should": "^13.2.3",
+    "supertest": "^3.3.0"
   }
 }

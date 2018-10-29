@@ -2,7 +2,7 @@
 
 const should   = require('should');
 const validate = require('validate.js');
-const fixtures = require('./fixtures.local');
+const fixtures = require('./fixtures');
 
 let AfricasTalking, voice, response;
 

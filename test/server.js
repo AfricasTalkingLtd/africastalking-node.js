@@ -4,7 +4,7 @@ const fs = require('fs');
 const grpc = require('grpc');
 const should = require('should');
 const validate = require('validate.js');
-const fixtures = require('./fixtures.local');
+const fixtures = require('./fixtures');
 
 const proto = __dirname + '/../lib/server/proto/com/africastalking/SdkServerService.proto';
 const sdk_proto = grpc.load(proto).africastalking;

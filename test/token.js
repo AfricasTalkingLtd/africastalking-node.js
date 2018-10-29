@@ -2,7 +2,7 @@
 
 var should = require('should');
 var validate = require('validate.js');
-var fixtures = require('./fixtures.local');
+var fixtures = require('./fixtures');
 
 describe('Token', function () {
     this.timeout(15000);

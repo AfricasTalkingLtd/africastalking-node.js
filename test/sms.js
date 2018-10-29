@@ -1,7 +1,7 @@
 'use strict';
 
 var should = require('should');
-var fixtures = require('./fixtures.local');
+var fixtures = require('./fixtures');
 
 var AfricasTalking, sms;
 
@@ -182,18 +182,6 @@ describe('SMS', function () {
             .catch(function (err) {
                 done(error);
             });
-    });
-
-    it('sends heavy multiple message', function () {
-        this.timeout(55000);
-        const count = 1000;
-        const numbers = Array(count).fill(0).map((num, idx) => `+254718${count + idx}`);
-        const opts = {
-            message: "This is heavy mulitple test",
-            enqueue: true,
-        };
-        const tasks = numbers.map(number => sms.send({...opts, to: number }));
-        return Promise.all(tasks);
     });
 
     it('sends premium message', function (done) {

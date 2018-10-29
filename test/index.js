@@ -3,7 +3,7 @@
 var should = require('should');
 var validate = require('validate.js');
 var _ = require('lodash');
-var fixtures = require('./fixtures.local');
+var fixtures = require('./fixtures');
 
 describe('Initialization', function () {
     this.timeout(5000);
