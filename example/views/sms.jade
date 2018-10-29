@@ -1,0 +1,71 @@
+extends layout
+
+block content
+    h4 Send SMS
+    br
+    ul#smsTab.nav.nav-tabs(role="tablist")
+        li.nav-item
+            a#bulkSmsTab.nav-link.active(data-toggle="tab", href="#bulkSms" role="tab", aria-controls="bulk", aria-selected="true") Send Bulk SMS
+        li.nav-item
+            a#premiumSmsTab.nav-link(data-toggle="tab", href="#premiumSms" role="tab", aria-controls="premium", aria-selected="false") Send Premium SMS
+
+    #tabContent.tab-content
+        #bulkSms.tab-pane.fade.show.active.p-4(role="tabpanel", aria-labelledby="bulk-sms")
+            form#bulkSmsForm(action="/sms/send-bulk", method="post")
+                .form-group.row
+                    label.col-sm-2.col-form-label(for="recipients") Recipients
+                    .col-sm-7
+                        input#recipients.form-control(name="to", type='phone', placeholder='Enter numbers' required)
+                        small.form-text.text-muted
+                            | Enter a comma separated list of numbers, all in the international format i.e. +254712345678, +255787654321
+                .form-group.row
+                    label.col-sm-2.col-form-label(for="message") Message
+                    .col-sm-7
+                        textarea#message.form-control(name="message", type='text', placeholder='Enter message' required)
+                        small.form-text.text-muted
+                            | Enter your message here
+                br
+                .form-group.row
+                    .col-sm-7
+                        button.btn.btn-success(type='submit') Send
+        #premiumSms.tab-pane.fade.p-4(role="tabpanel", aria-labelledby="premium-sms")
+            form#premiumSmsForm(action="/sms/send-premium", method="post")
+                //- add optional form entries
+                .form-group.row
+                    .form-group.col-md-6
+                        label(for='shortCodeOrSenderId') From
+                        input#shortCodeOrSenderId.form-control(name="from", type='text', required)
+                        small.form-text.text-muted
+                            | Shortcode or SenderId from Africa's Talking
+                    .form-group.col-md-6
+                        label(for='keyword') Keyword
+                        input#keyword.form-control(name="keyword", type='text', required)
+                        small.form-text.text-muted
+                            | Keyword from Africa's Talking
+                .form-group.row
+                    .form-group.col-md-6
+                        label(for='linkId') Link ID
+                        input#linkId.form-control(name="linkId", type='text', required)
+                        small.form-text.text-muted
+                            | LinkId from Africa's Talking
+                    .form-group.col-md-6
+                        label(for='retryDuration') Retry Duration
+                        input#retryDuration.form-control(name="retryDurationInHours", type='number')
+                        small.form-text.text-muted
+                            | Retry duration in hours
+                .form-group
+                    label.col-sm-2.col-form-label(for="recipients") Recipients
+                    .col-sm-7
+                        input#recipients.form-control(name="to", type='phone', required)
+                        small.form-text.text-muted
+                            | Enter a comma separated list of numbers, all in the international format i.e. +254712345678, +255787654321
+                .form-group
+                    label.col-sm-2.col-form-label(for="message") Message
+                    .col-sm-7
+                        textarea#message.form-control(name="message", type='text', required)
+                        small.form-text.text-muted
+                            | Enter your message here
+                br
+                .form-group.row
+                    .col-sm-7
+                        button.btn.btn-success(type='submit') Send

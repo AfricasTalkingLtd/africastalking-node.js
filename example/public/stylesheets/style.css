@@ -3,11 +3,9 @@ body {
   padding-top: 2em;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
-
 pre {
     height: 96%;
     padding: 1em;

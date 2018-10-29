@@ -22,9 +22,16 @@ describe('Airtime', function(){
                 .should.be.rejected();
         });
 
+        it('#send() must have phoneNumber/currencyCode/amount', function () {
+            return airtime.send(
+                { recipients: [ { phoneNumber: '+254726166685' } ] }
+            )
+                .should.be.rejected();
+        })
+
         it('#send() rejects invalid options', function () {
             return airtime.send(
-                { recipients: [ { phoneNumber: 'not phone', amount: 'NaN' } ] }
+                { recipients: [ { phoneNumber: 'not phone', currencyCode: '', amount: 'NaN' } ] }
             )
                 .should.be.rejected();
         });
@@ -35,7 +42,8 @@ describe('Airtime', function(){
            recipients: [
                {
                    phoneNumber: '+254726166685',
-                   amount: 'KES 10'
+                   currencyCode: 'KES',
+                   amount: 10
                }
            ]
         };
@@ -58,11 +66,13 @@ describe('Airtime', function(){
            recipients: [
                {
                    phoneNumber: '+254726166685',
-                   amount: 'KES 90'
+                   currencyCode: 'KES',
+                   amount: 90
                },
                {
                    phoneNumber: '+254726863825',
-                   amount: 'KES 897'
+                   currencyCode: 'KES',
+                   amount: 897
                }
            ]
        };
