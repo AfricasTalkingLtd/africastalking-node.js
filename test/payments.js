@@ -230,35 +230,35 @@ describe('Payment', function(){
         describe('validation', function () {
             let options = {};
 
-            it('#bankCheckout() cannot be empty', function () {
-                return payments.bankCheckout(options)
+            it('#bankCheckoutCharge() cannot be empty', function () {
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#bankCheckout() must have productName/bankAccount/currencyCode/amount/narration', function () {
+            it('#bankCheckoutCharge() must have productName/bankAccount/currencyCode/amount/narration', function () {
                 options.productName = "Joe";
 
-                return payments.bankCheckout(options)
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#bankCheckout() may have string map metadata', function () {
+            it('#bankCheckoutCharge() may have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.bankCheckout(options)
+                return payments.bankCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#validateBankCheckout() cannot be empty', function () {
+            it('#bankCheckoutValidate() cannot be empty', function () {
                 options = {};
 
-                return payments.validateBankCheckout(options)
+                return payments.bankCheckoutValidate(options)
                     .should.be.rejected();
             });
 
-            it('#validateBankCheckout() must have transactionId/otp', function () {
+            it('#bankCheckoutValidate() must have transactionId/otp', function () {
                 options.otp = "1234";
 
-                return payments.validateBankCheckout(options)
+                return payments.bankCheckoutValidate(options)
                     .should.be.rejected();
             });
 
@@ -277,7 +277,7 @@ describe('Payment', function(){
             });
         });
 
-        it('bankCheckout()', function () {
+        it('bankCheckoutCharge()', function () {
             let opts = {
                 productName: "TestProduct",
                 bankAccount: {
@@ -294,7 +294,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.bankCheckout(opts)
+            return payments.bankCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -303,13 +303,13 @@ describe('Payment', function(){
                 });
         });
 
-        it('validateBankCheckout()', function () {
+        it('bankCheckoutValidate()', function () {
             let opts = {
                 transactionId: "ATPid_SampleTxnId1",
                 otp: "1234",
             };
 
-            return payments.validateBankCheckout(opts)
+            return payments.bankCheckoutValidate(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -351,40 +351,40 @@ describe('Payment', function(){
         describe('validation', function() {
             let options = {};
             
-            it('#cardCheckout() cannot be empty', function () {
-                return payments.cardCheckout(options)
+            it('#cardCheckoutCharge() cannot be empty', function () {
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#cardCheckout() must have productName/paymentCard/currencyCode/amount/narration', function () {
+            it('#cardCheckoutCharge() must have productName/paymentCard/currencyCode/amount/narration', function () {
                 options.productName = "Joe";
 
-                return payments.cardCheckout(options)
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#cardCheckout() may not have string map metadata', function () {
+            it('#cardCheckoutCharge() may not have string map metadata', function () {
                 options.metadata = "Joe";
-                return payments.cardCheckout(options)
+                return payments.cardCheckoutCharge(options)
                     .should.be.rejected();
             });
 
-            it('#validateCardCheckout() cannot be empty', function () {
+            it('#cardCheckoutValidate() cannot be empty', function () {
                 options = {};
 
-                return payments.validateCardCheckout(options)
+                return payments.cardCheckoutValidate(options)
                     .should.be.rejected();
             });
 
-            it('#validateCardCheckout() must have transactionId/otp', function () {
+            it('#cardCheckoutValidate() must have transactionId/otp', function () {
                 options.otp = "1234";
 
-                return payments.validateCardCheckout(options)
+                return payments.cardCheckoutValidate(options)
                     .should.be.rejected();
             });
         });
 
-        it('cardCheckoutWithPaymentCard()', function () {
+        it('cardCheckoutChargeWithPaymentCard()', function () {
             let opts = {
                 productName: "TestProduct",
                 paymentCard: {
@@ -404,7 +404,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.cardCheckout(opts)
+            return payments.cardCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -413,7 +413,7 @@ describe('Payment', function(){
                 });
         });
 
-        it('cardCheckoutWithToken()', function () {
+        it('cardCheckoutChargeWithToken()', function () {
             let opts = {
                 productName: "TestProduct",
                 checkoutToken: "12abvsfdhh63535",
@@ -426,7 +426,7 @@ describe('Payment', function(){
                 },
             };
 
-            return payments.cardCheckout(opts)
+            return payments.cardCheckoutCharge(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -435,13 +435,13 @@ describe('Payment', function(){
                 });
         });
 
-        it('validateCardCheckout()', function () {
+        it('cardCheckoutValidate()', function () {
             let opts = {
                 transactionId: "ATPid_SampleTxnId1",
                 otp: "1234"
             };
 
-            return payments.validateCardCheckout(opts)
+            return payments.cardCheckoutValidate(opts)
                 .then(function(resp) {
                     resp.should.have.property('status');
                 })
@@ -449,5 +449,112 @@ describe('Payment', function(){
                     throw err;
                 });
         });
+    });
+
+    describe('Query', function () {
+        describe('validation', function() {
+            let options = {}
+
+            it('#fetchProductTransactions() cannot be empty', function () {
+                return payments.fetchProductTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchProductTransactions() must have productName and pageNumber/count filters', function () {
+                options.productName = "Joe";
+
+                return payments.fetchProductTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#findTransaction() cannot be empty', function () {
+                options = {}
+
+                return payments.findTransaction(options)
+                    .should.be.rejected();
+            });
+
+            it('#findTransaction() must have transactionId', function () {
+                options.transactionId = undefined;
+
+                return payments.findTransaction(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchWalletTransactions() cannot be empty', function () {
+                options = {}
+
+                return payments.fetchWalletTransactions(options)
+                    .should.be.rejected();
+            });
+
+            it('#fetchWalletTransactions() must have pageNumber/count filters', function () {
+                options.filters = {
+                    pageNumber: '1'
+                }
+
+                return payments.fetchWalletTransactions(options)
+                    .should.be.rejected();
+            });
+        });
+
+        it('fetchProductTransactions()', function () {
+            let opts = {
+                productName: "Joe",
+                filters: {
+                    pageNumber: '1',
+                    count: '10'
+                }
+            }
+
+            return payments.fetchProductTransactions(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('findTransaction()', function () {
+            let opts = {
+                transactionId: "ATPid_SampleTxnId1"
+            }
+
+            return payments.findTransaction(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('fetchWalletTransactions()', function () {
+            let opts = {
+                filters: {
+                    pageNumber: "1",
+                    count: '10'
+                }
+            }
+
+            return payments.fetchWalletTransactions(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+
+        it('fetchWalletBalance()', function () {
+            return payments.fetchWalletBalance()
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        })
     });
 });
