@@ -1,3 +1,4 @@
+//dependecies 
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -50,6 +51,7 @@ app.all('*', (req, res, next) => {
     next();
 });
 
+//routes
 app.use('/', indexRoutes);
 app.use('/sms', smsRoutes);
 app.use('/airtime', airtimeRoutes);

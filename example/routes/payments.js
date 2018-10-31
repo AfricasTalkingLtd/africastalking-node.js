@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Get authentication secrets from a file
-const credentials = require('../../test/fixtures.local');
+const credentials = require('../../test/fixtures');
 
 const AfricasTalking = require('africastalking')(credentials.TEST_ACCOUNT);
 const payments = AfricasTalking.PAYMENTS;
