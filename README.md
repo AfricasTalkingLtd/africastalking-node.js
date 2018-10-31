@@ -261,7 +261,7 @@ For more information on:
 
 - `fetchWalletBalance()`: Fetch your wallet's balance
 
-For more information, please read [http://docs.africastalking.com/payments](http://docs.africastalking.com/payments)
+For more information, please read [Payment](http://docs.africastalking.com/payments)
 
 
 ### `VoiceService`
@@ -287,7 +287,7 @@ For more information, please read [http://docs.africastalking.com/payments](http
 - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 > Remember to send back an HTTP 200.
 
-For more information, please read [http://docs.africastalking.com/voice](http://docs.africastalking.com/voice) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
+For more information, please read [Voice](http://docs.africastalking.com/voice) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
 
 
@@ -300,7 +300,7 @@ For more information, please read [http://docs.africastalking.com/voice](http://
 
 ### `USSD`
 
-For more information, please read [http://docs.africastalking.com/ussd](http://docs.africastalking.com/ussd)
+For more information, please read [USSD](http://docs.africastalking.com/ussd)
 
 
 
