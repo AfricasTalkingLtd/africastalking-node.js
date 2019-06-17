@@ -31,7 +31,7 @@ const options = {
 const AfricasTalking = require('africastalking')(options);
 
 // Initialize a service e.g. SMS
-sms = africastalking.SMS
+let sms = africastalking.SMS
 
 // Use the service
 const options = {
