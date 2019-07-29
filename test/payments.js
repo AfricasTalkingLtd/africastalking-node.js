@@ -153,6 +153,32 @@ describe('Payment', function(){
         });
     });
 
+    describe('Mobile Data', function() {
+        it('mobileData()', function () {
+            let opts = {
+                productName: "TestProduct",
+                recipients: [{
+                    phoneNumber: "+254711223344",
+                    quantity: 10,
+                    unit: "GB",
+                    validity: "Monthly",
+                    metadata: {
+                        "Joe": "Biden",
+                        "id": "VP"
+                    },
+                }],
+            };
+
+            return payments.mobileData(opts)
+                .then(function(resp) {
+                    resp.should.have.property('status');
+                })
+                .catch(function(err) {
+                    throw err;
+                });
+        });
+    });
+
     describe('Wallet', function() {
         describe('validation', function () {
             let options = {};
