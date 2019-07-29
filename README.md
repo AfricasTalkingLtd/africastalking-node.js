@@ -209,6 +209,16 @@ For more information on:
   - `amount`: Amount to transfer. `REQUIRED`
   - `metadata`: Additional info to go with the transfer
 
+- `mobileData(productName, recipients)`: Send mobile data to customers.
+
+    - `productName`: Payment product on Africa's Talking. `REQUIRED`
+    - `recipients`:  A list of recipients. Each recipient has:
+      - `phoneNumber`: Customer phone number (in international format). `REQUIRED`
+      - `quantity`: Mobile data amount. `REQUIRED`
+      - `unit`: Mobile data unit. Can either be `MB` or `GB`. `REQUIRED`
+      - `validity`: How long the mobile data is valid for. Must be one of `Daily`, `Weekly` and `Monthly`. `REQUIRED`
+      - `metadata`: Additional data to associate with the transaction. `REQUIRED`
+
 
 - `walletTransfer({ productName, targetProductCode, currencyCode, amount, metadata })` Move money form one payment product to another.
 
