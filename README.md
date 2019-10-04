@@ -216,7 +216,7 @@ For more information on:
       - `phoneNumber`: Customer phone number (in international format). `REQUIRED`
       - `quantity`: Mobile data amount. `REQUIRED`
       - `unit`: Mobile data unit. Can either be `MB` or `GB`. `REQUIRED`
-      - `validity`: How long the mobile data is valid for. Must be one of `Daily`, `Weekly` and `Monthly`. `REQUIRED`
+      - `validity`: How long the mobile data is valid for. Must be one of `Day`, `Week` and `Month`. `REQUIRED`
       - `metadata`: Additional data to associate with the transaction. `REQUIRED`
 
 
