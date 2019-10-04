@@ -161,7 +161,7 @@ describe('Payment', function(){
                     phoneNumber: "+254711223344",
                     quantity: 10,
                     unit: "GB",
-                    validity: "Monthly",
+                    validity: "Month",
                     metadata: {
                         "Joe": "Biden",
                         "id": "VP"
