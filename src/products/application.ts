@@ -1,15 +1,17 @@
 import axios from 'axios';
-import { FullCredentials } from './index.interface';
+import { FullCredentials, Format } from './index.interface';
 import { config } from '../constants';
 
-const sendRequest = (apiKey: string, username: string, isSandbox: boolean): Promise<any> => {
+const sendRequest = (
+  apiKey: string, username: string, isSandbox: boolean, format: Format,
+): Promise<any> => {
   const { apiUrl: { APPLICATION } } = config;
   const url = isSandbox ? APPLICATION.sandbox : APPLICATION.live;
 
   return axios.get(url, {
     headers: {
       apiKey,
-      accept: this.credentials.format,
+      accept: format,
     },
     params: {
       username,
@@ -24,6 +26,8 @@ const sendRequest = (apiKey: string, username: string, isSandbox: boolean): Prom
 };
 
 export const fetchApplicationData = (credentials: FullCredentials): Promise<any> => {
-  const { apiKey, username, isSandbox } = credentials;
-  return sendRequest(apiKey, username, isSandbox);
+  const {
+    apiKey, username, format, isSandbox,
+  } = credentials;
+  return sendRequest(apiKey, username, isSandbox, format);
 };

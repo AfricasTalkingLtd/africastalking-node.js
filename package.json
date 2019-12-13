@@ -6,11 +6,12 @@
   "scripts": {
     "test": "echo \"No tests specified!\" && exit 0",
     "lint": "eslint --ext .ts ./",
+    "ts-check": "tsc --noEmit -p  .",
     "pre-commit-message": "echo 'Please wait, running pre-commit checks...' && exit 0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pre-commit-message && npm run lint && npm run test"
+      "pre-commit": "npm run pre-commit-message && npm run lint && npm run ts-check && npm run test"
     }
   },
   "dependencies": {
@@ -22,7 +23,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/config": "0.0.36",
-    "@types/hapi__joi": "^16.0.4",
+    "@types/joi": "^14.3.4",
     "@types/node": "^12.12.17",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",

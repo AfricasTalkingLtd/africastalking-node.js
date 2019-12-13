@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import joi from 'joi';
 import axios from 'axios';
 import queryString from 'query-string';
 import { AirtimeOptions, PostData } from './airtime.interface';
@@ -8,12 +8,12 @@ import { FullCredentials, Format } from './index.interface';
 const validate = async (options: AirtimeOptions): Promise<AirtimeOptions> => {
   const { currencyCodes } = config;
 
-  const schema = Joi.object({
-    recipients: Joi.array().items(
-      Joi.object({
-        phoneNumber: Joi.string().required().pattern(/^\+\d{1,3}\d{3,}$/),
-        currencyCode: Joi.string().valid(currencyCodes.join(', ')).required(),
-        amount: Joi.number().required(),
+  const schema = joi.object({
+    recipients: joi.array().items(
+      joi.object({
+        phoneNumber: (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
+        currencyCode: joi.string().valid(currencyCodes.join(', ')).required(),
+        amount: joi.number().required(),
       }),
     ).min(1).required(),
   }).required();
