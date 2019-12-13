@@ -1,0 +1,13 @@
+{
+  "apiUrl": {
+    "AIRTIME": {
+      "live": "https://api.africastalking.com/version1/airtime/send",
+      "sandbox": "https://api.sandbox.africastalking.com/version1/airtime/send"
+    },
+    "APPLICATION": {
+      "live": "https://api.africastalking.com/version1/user",
+      "sandbox": "https://api.sandbox.africastalking.com/version1/user"
+    }
+  },
+  "currencyCodes": ["KES", "UGX", "TZS", "NGN"]
+}
