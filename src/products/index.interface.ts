@@ -7,8 +7,5 @@ export interface Credentials {
 export interface FullCredentials {
   apiKey: string;
   username: string;
-  format: Format;
-  isSandbox: boolean;
+  format: 'application/xml' | 'application/json';
 }
-
-export type Format = 'application/xml' | 'application/json';

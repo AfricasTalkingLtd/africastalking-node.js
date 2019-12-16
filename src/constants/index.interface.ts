@@ -1,13 +1,15 @@
 export interface Config {
-  apiUrl: {
-    [product in Product]: {
-      live: string;
-      sandbox: string;
-    };
+  urls: {
+    [category in UrlCategory]: EndpointMetadata;
   };
   currencyCodes: CurrencyCode[];
 }
 
-export type CurrencyCode = 'KES' | 'UGX' | 'TZS' | 'NGN';
+export type UrlCategory = 'AIRTIME' | 'APPLICATION' | 'SMS' | 'TOKEN' | 'SUBSCRIPTION';
 
-export type Product = 'AIRTIME' | 'APPLICATION';
+export interface EndpointMetadata {
+  live: string;
+  sandbox: string;
+}
+
+export type CurrencyCode = 'KES' | 'UGX' | 'TZS' | 'NGN';

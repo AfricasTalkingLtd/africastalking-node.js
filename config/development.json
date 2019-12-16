@@ -1,5 +1,5 @@
 {
-  "apiUrl": {
+  "urls": {
     "AIRTIME": {
       "live": "https://api.africastalking.com/version1/airtime/send",
       "sandbox": "https://api.sandbox.africastalking.com/version1/airtime/send"
@@ -7,6 +7,18 @@
     "APPLICATION": {
       "live": "https://api.africastalking.com/version1/user",
       "sandbox": "https://api.sandbox.africastalking.com/version1/user"
+    },
+    "SMS": {
+      "live": "https://api.africastalking.com/version1/messaging",
+      "sandbox": "https://api.sandbox.africastalking.com/version1/messaging"
+    },
+    "TOKEN": {
+      "live": "https://api.africastalking.com/checkout/token/create",
+      "sandbox": "https://api.sandbox.africastalking.com/checkout/token/create"
+    },
+    "SUBSCRIPTION": {
+      "live": "https://api.africastalking.com/version1/subscription/create",
+      "sandbox": "https://api.sandbox.africastalking.com/version1/subscription/create"
     }
   },
   "currencyCodes": ["KES", "UGX", "TZS", "NGN"]

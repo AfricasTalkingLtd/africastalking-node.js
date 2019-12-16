@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { Credentials, FullCredentials } from './index.interface';
-import { sendAirtimeRequest } from './airtime';
-import { AirtimeOptions } from './airtime.interface';
-import { fetchApplicationData } from './application';
+import { SMS } from './sms';
+import { APPLICATION } from './application';
+import { AIRTIME } from './airtime';
 
 const validate = (credentials: Credentials): Credentials => {
   const schema = Joi.object({
@@ -23,23 +23,25 @@ const validate = (credentials: Credentials): Credentials => {
 
 export const AfricasTalking = (credentials: Credentials) => {
   const value = validate(credentials);
-  const { format, username } = value;
+  const { format } = value;
 
   const fullCredentials: FullCredentials = {
     ...value,
     format: format === 'json' ? 'application/json' : 'application/xml',
-    isSandbox: username.toLowerCase() === 'sandbox',
   };
 
   return {
-    AIRTIME: {
-      send: (options: AirtimeOptions) => sendAirtimeRequest(fullCredentials, options),
-    },
-    APPLICATION: {
-      fetchApplicationData: () => fetchApplicationData(fullCredentials),
-    },
-    ACCOUNT: {
-      fetchApplicationData: () => fetchApplicationData(fullCredentials),
-    },
+    AIRTIME: AIRTIME(fullCredentials),
+    APPLICATION: APPLICATION(fullCredentials),
+    SMS: SMS(fullCredentials),
+    // VOICE,
+    // PAYMENTS,
+    // TOKEN,
+    // USSD,
+
+    // fallbacks
+    ACCOUNT: APPLICATION(fullCredentials),
+    // PAYMENT,
+    // end fallbacks
   };
 };
