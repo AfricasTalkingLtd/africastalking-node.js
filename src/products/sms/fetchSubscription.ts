@@ -16,7 +16,7 @@ export const fetchSubscription = async (
 
   const { apiKey, username, format } = fullCredentials;
 
-  return sendRequest<FetchSubscriptionResponse, null>('CREATE_SUBSCRIPTION', username, 'POST', null, {
+  return sendRequest<FetchSubscriptionResponse, null>('CREATE_SUBSCRIPTION', username, 'GET', null, {
     headers: {
       apiKey,
       accept: format,
