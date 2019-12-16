@@ -16,9 +16,17 @@
       "live": "https://api.africastalking.com/checkout/token/create",
       "sandbox": "https://api.sandbox.africastalking.com/checkout/token/create"
     },
-    "SUBSCRIPTION": {
+    "CREATE_SUBSCRIPTION": {
       "live": "https://api.africastalking.com/version1/subscription/create",
       "sandbox": "https://api.sandbox.africastalking.com/version1/subscription/create"
+    },
+    "FETCH_SUBSCRIPTION": {
+      "live": "https://api.africastalking.com/version1/subscription",
+      "sandbox": "https://api.sandbox.africastalking.com/subscription"
+    },
+    "DELETE_SUBSCRIPTION": {
+      "live": "https://api.africastalking.com/subscription/delete",
+      "sandbox": "https://api.sandbox.africastalking.com/subscription/delete"
     }
   },
   "currencyCodes": ["KES", "UGX", "TZS", "NGN"]

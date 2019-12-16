@@ -18,7 +18,7 @@ export const createSubscription = async (
   const { apiKey, username, format } = fullCredentials;
   const postData: CreateSubscriptionPostData = { ...result, username };
 
-  return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>('SUBSCRIPTION', username, 'POST', postData, {
+  return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>('CREATE_SUBSCRIPTION', username, 'POST', postData, {
     headers: {
       apiKey,
       accept: format,

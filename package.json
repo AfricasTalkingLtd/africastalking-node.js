@@ -11,7 +11,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pre-commit-message && npm run lint && npm run ts-check && npm run test"
+      "pre-commit": "npm run pre-commit-message && npm run lint -- --fix && npm run ts-check && npm run test"
     }
   },
   "dependencies": {
