@@ -9,8 +9,8 @@ const getSchema = () => joi.object({
   lastReceivedId: joi.number(),
 });
 
-export const fetchSubscription = async (
-  fullCredentials: FullCredentials, options: FetchSubscriptionOptions,
+export const fetchSubscription = (fullCredentials: FullCredentials) => async (
+  options: FetchSubscriptionOptions,
 ): Promise<FetchSubscriptionResponse> => {
   const result = await validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
 

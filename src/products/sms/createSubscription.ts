@@ -10,8 +10,8 @@ const getSchema = () => joi.object({
   checkoutToken: joi.string().required(),
 });
 
-export const createSubscription = async (
-  fullCredentials: FullCredentials, options: CreateSubscriptionOptions,
+export const createSubscription = (fullCredentials: FullCredentials) => async (
+  options: CreateSubscriptionOptions,
 ): Promise<CreateSubscriptionResponse> => {
   const result = await validateJoiSchema<CreateSubscriptionOptions>(getSchema(), options);
 

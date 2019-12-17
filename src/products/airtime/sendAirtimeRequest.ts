@@ -19,8 +19,8 @@ const getSchema = () => {
   }).required();
 };
 
-export const sendAirtimeRequest = async (
-  fullCredentials: FullCredentials, options: AirtimeOptions,
+export const sendAirtimeRequest = (fullCredentials: FullCredentials) => async (
+  options: AirtimeOptions,
 ): Promise<AirtimeResponse> => {
   const result = await validateJoiSchema<AirtimeOptions>(getSchema(), options);
 

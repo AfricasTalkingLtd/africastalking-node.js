@@ -4,7 +4,7 @@ import { ApplicationResponse } from './fetchApplicationData.interface';
 
 export const fetchApplicationData = (
   fullCredentials: FullCredentials,
-): Promise<ApplicationResponse> => {
+) => (): Promise<ApplicationResponse> => {
   const { apiKey, username, format } = fullCredentials;
 
   return sendRequest<ApplicationResponse, null>('APPLICATION', username, 'GET', null, {

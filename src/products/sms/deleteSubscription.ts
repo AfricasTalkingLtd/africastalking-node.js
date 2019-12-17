@@ -10,8 +10,8 @@ const getSchema = () => joi.object({
   phoneNumber: (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
 });
 
-export const deleteSubscription = async (
-  fullCredentials: FullCredentials, options: DeleteSubscriptionOptions,
+export const deleteSubscription = (fullCredentials: FullCredentials) => async (
+  options: DeleteSubscriptionOptions,
 ): Promise<DeleteSubscriptionResponse> => {
   const result = await validateJoiSchema<DeleteSubscriptionOptions>(getSchema(), options);
 
