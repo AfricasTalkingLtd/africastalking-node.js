@@ -59,6 +59,10 @@
     "TOPUP_STASH": {
       "live": "https://payments.africastalking.com/topup/stash",
       "sandbox": "https://payments.sandbox.africastalking.com/topup/stash"
+    },
+    "CARD_CHECKOUT_CHARGE": {
+      "live": "https://payments.africastalking.com/card/checkout/charge",
+      "sandbox": "https://payments.sandbox.africastalking.com/card/checkout/charge"
     }
   }
 }

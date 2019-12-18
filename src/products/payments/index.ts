@@ -6,6 +6,7 @@ import { bankCheckoutCharge } from './bankCheckoutCharge';
 import { bankCheckoutValidate } from './bankCheckoutValidate';
 import { bankTransfer } from './bankTransfer';
 import { walletTransfer } from './walletTransfer';
+import { cardCheckoutCharge } from './cardCheckoutCharge';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -15,6 +16,7 @@ export const PAYMENTS = (credentials: Credentials) => ({
   bankCheckoutValidate: bankCheckoutValidate(credentials),
   bankTransfer: bankTransfer(credentials),
   walletTransfer: walletTransfer(credentials),
+  cardCheckoutCharge: cardCheckoutCharge(credentials),
 
   // fallbacks
   checkout: mobileCheckout(credentials),
