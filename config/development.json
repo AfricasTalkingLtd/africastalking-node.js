@@ -71,6 +71,10 @@
     "FETCH_PRODUCT_TRANSACTIONS": {
       "live": "https://payments.africastalking.com/query/transaction/fetch",
       "sandbox": "https://payments.sandbox.africastalking.com/query/transaction/fetch"
+    },
+    "FIND_TRANSACTION": {
+      "live": "https://payments.africastalking.com/query/transaction/find",
+      "sandbox": "https://payments.sandbox.africastalking.com/query/transaction/find"
     }
   }
 }

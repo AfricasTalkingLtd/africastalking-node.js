@@ -10,6 +10,7 @@ import { topupStash } from './topupStash';
 import { cardCheckoutCharge } from './card/cardCheckoutCharge';
 import { cardCheckoutValidate } from './card/cardCheckoutValidate';
 import { fetchProductTransactions } from './query/fetchProductTransactions';
+import { findTransaction } from './query/findTransaction';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -23,6 +24,7 @@ export const PAYMENTS = (credentials: Credentials) => ({
   cardCheckoutCharge: cardCheckoutCharge(credentials),
   cardCheckoutValidate: cardCheckoutValidate(credentials),
   fetchProductTransactions: fetchProductTransactions(credentials),
+  findTransaction: findTransaction(credentials),
 
   // fallbacks
   checkout: mobileCheckout(credentials),
