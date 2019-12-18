@@ -51,6 +51,10 @@
     "BANK_TRANSFER": {
       "live": "https://payments.africastalking.com/bank/transfer",
       "sandbox": "https://payments.sandbox.fricastalking.com/bank/transfer"
+    },
+    "WALLET_TRANSFER": {
+      "live": "https://payments.africastalking.com/transfer/wallet",
+      "sandbox": "https://payments.sandbox.fricastalking.com/transfer/wallet"
     }
   }
 }
