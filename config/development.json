@@ -55,6 +55,10 @@
     "WALLET_TRANSFER": {
       "live": "https://payments.africastalking.com/transfer/wallet",
       "sandbox": "https://payments.sandbox.fricastalking.com/transfer/wallet"
+    },
+    "TOPUP_STASH": {
+      "live": "https://payments.africastalking.com/topup/stash",
+      "sandbox": "https://payments.sandbox.africastalking.com/topup/stash"
     }
   }
 }
