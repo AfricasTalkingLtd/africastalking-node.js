@@ -63,6 +63,10 @@
     "CARD_CHECKOUT_CHARGE": {
       "live": "https://payments.africastalking.com/card/checkout/charge",
       "sandbox": "https://payments.sandbox.africastalking.com/card/checkout/charge"
+    },
+    "CARD_CHECKOUT_VALIDATE": {
+      "live": "https://payments.africastalking.com/card/checkout/validate",
+      "sandbox": "https://payments.sandbox.africastalking.com/card/checkout/validate"
     }
   }
 }
