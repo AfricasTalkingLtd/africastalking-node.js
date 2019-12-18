@@ -3,4 +3,7 @@ import { Credentials } from '../../utils/getCredentials.interface';
 
 export const APPLICATION = (credentials: Credentials) => ({
   fetchApplicationData: fetchApplicationData(credentials),
+
+  // fallback
+  fetchAccount: fetchApplicationData(credentials),
 });

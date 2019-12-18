@@ -9,7 +9,7 @@ export interface MobileB2COptions {
     reason?: 'SalaryPayment' | 'SalaryPaymentWithWithdrawalChargePaid'
     | 'BusinessPayment' | 'BusinessPaymentWithWithdrawalChargePaid' | 'PromotionPayment';
     metadata: {
-      [key: string]: string;
+      [key: string]: any;
     };
   }[];
 }

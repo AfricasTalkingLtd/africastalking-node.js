@@ -35,6 +35,10 @@
     "MOBILE_B2C": {
       "live": "https://payments.africastalking.com/mobile/b2c/request",
       "sandbox": "https://payments.sandbox.africastalking.com/mobile/b2c/request"
+    },
+    "MOBILE_B2B": {
+      "live": "https://payments.africastalking.com/mobile/b2b/request",
+      "sandbox": "https://payments.sandbox.africastalking.com/mobile/b2b/request"
     }
   }
 }

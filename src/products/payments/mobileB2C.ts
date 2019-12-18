@@ -36,7 +36,7 @@ export const mobileB2C = (credentials: Credentials) => async (
     headers: {
       apiKey,
       accept: format,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
   });
 };
