@@ -1,9 +1,9 @@
 import joi from 'joi';
 import querystring from 'query-string';
 import { DeleteSubscriptionOptions, DeleteSubscriptionResponse, DeleteSubscriptionPostData } from './deleteSubscription.interface';
-import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { Credentials } from '../../../utils/getCredentials.interface';
+import { getFullCredentials } from '../../../utils/getCredentials';
 
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),

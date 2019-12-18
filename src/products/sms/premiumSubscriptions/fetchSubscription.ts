@@ -1,8 +1,8 @@
 import joi from 'joi';
 import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionPostData } from './fetchSubscription.interface';
-import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { Credentials } from '../../../utils/getCredentials.interface';
+import { getFullCredentials } from '../../../utils/getCredentials';
 
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),

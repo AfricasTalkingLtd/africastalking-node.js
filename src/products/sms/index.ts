@@ -1,9 +1,9 @@
 import { fetchMessages } from './fetchMessages';
 import { SmsOptions } from './sendSms.interface';
 import { sendSms } from './sendSms';
-import { fetchSubscription } from './fetchSubscription';
-import { createSubscription } from './createSubscription';
-import { deleteSubscription } from './deleteSubscription';
+import { fetchSubscription } from './premiumSubscriptions/fetchSubscription';
+import { createSubscription } from './premiumSubscriptions/createSubscription';
+import { deleteSubscription } from './premiumSubscriptions/deleteSubscription';
 import { Credentials } from '../../utils/getCredentials.interface';
 
 export const SMS = (credentials: Credentials) => ({

@@ -1,8 +1,8 @@
 import joi from 'joi';
 import { MobileCheckoutResponse, MobileCheckoutOptions, MobileCheckoutPostData } from './mobileCheckout.interface';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
-import { sendRequest, validateJoiSchema } from '../../utils/misc';
+import { Credentials } from '../../../utils/getCredentials.interface';
+import { getFullCredentials } from '../../../utils/getCredentials';
+import { sendRequest, validateJoiSchema } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
   productName: joi.string().regex(/\S/, 'no space').required(),

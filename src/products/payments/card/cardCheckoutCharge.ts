@@ -1,8 +1,8 @@
 import joi from 'joi';
-import { Credentials } from '../../utils/getCredentials.interface';
+import { Credentials } from '../../../utils/getCredentials.interface';
 import { CardCheckoutChargeOptions, CardCheckoutChargeResponse, CardCheckoutChargePostData } from './cardCheckoutCharge.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
-import { validateJoiSchema, sendRequest } from '../../utils/misc';
+import { getFullCredentials } from '../../../utils/getCredentials';
+import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
   productName: joi.string().regex(/\S/, 'no space').required(),

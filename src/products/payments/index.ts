@@ -1,14 +1,14 @@
 import { Credentials } from '../../utils/getCredentials.interface';
-import { mobileCheckout } from './mobileCheckout';
-import { mobileB2C } from './mobileB2C';
-import { mobileB2B } from './mobileB2B';
-import { bankCheckoutCharge } from './bankCheckoutCharge';
-import { bankCheckoutValidate } from './bankCheckoutValidate';
-import { bankTransfer } from './bankTransfer';
+import { mobileCheckout } from './mobile/mobileCheckout';
+import { mobileB2C } from './mobile/mobileB2C';
+import { mobileB2B } from './mobile/mobileB2B';
+import { bankCheckoutCharge } from './bank/bankCheckoutCharge';
+import { bankCheckoutValidate } from './bank/bankCheckoutValidate';
+import { bankTransfer } from './bank/bankTransfer';
 import { walletTransfer } from './walletTransfer';
 import { topupStash } from './topupStash';
-import { cardCheckoutCharge } from './cardCheckoutCharge';
-import { cardCheckoutValidate } from './cardCheckoutValidate';
+import { cardCheckoutCharge } from './card/cardCheckoutCharge';
+import { cardCheckoutValidate } from './card/cardCheckoutValidate';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
