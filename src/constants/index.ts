@@ -3,5 +3,4 @@ import { Config } from './index.interface';
 
 export const config: Config = {
   urls: CONFIG.get('urls'),
-  currencyCodes: CONFIG.get('currencyCodes'),
 };

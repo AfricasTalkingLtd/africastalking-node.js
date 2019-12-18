@@ -1,11 +1,12 @@
-import { FullCredentials } from '../index.interface';
 import { FetchMessagesResponse, FetchMessagesOptions } from './fetchMessages.interface';
 import { sendRequest } from '../../utils/misc';
+import { getFullCredentials } from '../../utils/getCredentials';
+import { Credentials } from '../../utils/getCredentials.interface';
 
-export const fetchMessages = (fullCredentials: FullCredentials) => async (
+export const fetchMessages = (credentials: Credentials) => async (
   options: FetchMessagesOptions,
 ): Promise<FetchMessagesResponse> => {
-  const { apiKey, username, format } = fullCredentials;
+  const { apiKey, username, format } = await getFullCredentials(credentials);
 
   return sendRequest<FetchMessagesResponse, null>('SMS', username, 'GET', null, {
     headers: {

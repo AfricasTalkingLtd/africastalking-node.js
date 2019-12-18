@@ -1,6 +1,6 @@
-import { FullCredentials } from '../index.interface';
 import { sendAirtimeRequest } from './sendAirtimeRequest';
+import { Credentials } from '../../utils/getCredentials.interface';
 
-export const AIRTIME = (fullCredentials: FullCredentials) => ({
-  send: sendAirtimeRequest(fullCredentials),
+export const AIRTIME = (credentials: Credentials) => ({
+  send: sendAirtimeRequest(credentials),
 });

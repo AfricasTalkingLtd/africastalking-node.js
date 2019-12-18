@@ -1,47 +1,35 @@
-import Joi from 'joi';
-import { Credentials, FullCredentials } from './index.interface';
 import { SMS } from './sms';
 import { APPLICATION } from './application';
 import { AIRTIME } from './airtime';
+import { Credentials } from '../utils/getCredentials.interface';
+import { PAYMENTS } from './payments';
 
-const validate = (credentials: Credentials): Credentials => {
-  const schema = Joi.object({
-    apiKey: Joi.string().required(),
-    username: Joi.string().required(),
-    format: Joi.string().valid('json', 'xml').required(),
-  }).required();
+export const AfricasTalking = (credentials: Credentials) => ({
+  AIRTIME: AIRTIME(credentials),
+  APPLICATION: APPLICATION(credentials),
+  SMS: SMS(credentials),
+  PAYMENTS: PAYMENTS(credentials),
+  // VOICE,
+  // TOKEN,
+  // USSD,
 
-  const { error, value } = schema.validate(credentials);
+  // fallbacks
+  ACCOUNT: APPLICATION(credentials),
+  PAYMENT: PAYMENTS(credentials),
+});
 
-  if (error) {
-    const combinedMessages = error.details.map((d) => d.message).join(';');
-    throw new Error(combinedMessages);
-  }
+export const AfricasTalking2 = (credentials: Credentials) => ({
+  ...AIRTIME(credentials),
+  ...APPLICATION(credentials),
+  ...SMS(credentials),
+  ...PAYMENTS(credentials),
+});
 
-  return value;
-};
+// const credentials = { apiKey: 'xx', username: 'sandbox' };
+// const at = AfricasTalking2(credentials);
+// // const client = AfricasTalking(credentials).APPLICATION;
 
-export const AfricasTalking = (credentials: Credentials) => {
-  const value = validate(credentials);
-  const { format } = value;
-
-  const fullCredentials: FullCredentials = {
-    ...value,
-    format: format === 'json' ? 'application/json' : 'application/xml',
-  };
-
-  return {
-    AIRTIME: AIRTIME(fullCredentials),
-    APPLICATION: APPLICATION(fullCredentials),
-    SMS: SMS(fullCredentials),
-    // VOICE,
-    // PAYMENTS,
-    // TOKEN,
-    // USSD,
-
-    // fallbacks
-    ACCOUNT: APPLICATION(fullCredentials),
-    // PAYMENT,
-    // end fallbacks
-  };
-};
+// at.fetchApplicationData()
+//   .then(result => {
+//     console.log(result.UserData.balance);
+//   });

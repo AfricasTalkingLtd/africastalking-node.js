@@ -5,10 +5,8 @@ export interface Config {
       sandbox: string;
     };
   };
-  currencyCodes: CurrencyCode[];
 }
 
 export type UrlCategory = 'AIRTIME' | 'APPLICATION' | 'SMS' | 'TOKEN'
-| 'CREATE_SUBSCRIPTION' | 'FETCH_SUBSCRIPTION' | 'DELETE_SUBSCRIPTION';
-
-export type CurrencyCode = 'KES' | 'UGX' | 'TZS' | 'NGN';
+| 'CREATE_SUBSCRIPTION' | 'FETCH_SUBSCRIPTION' | 'DELETE_SUBSCRIPTION'
+| 'MOBILE_CHECKOUT' | 'MOBILE_B2C';

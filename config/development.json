@@ -27,7 +27,14 @@
     "DELETE_SUBSCRIPTION": {
       "live": "https://api.africastalking.com/subscription/delete",
       "sandbox": "https://api.sandbox.africastalking.com/subscription/delete"
+    },
+    "MOBILE_CHECKOUT": {
+      "live": "https://payments.africastalking.com/mobile/checkout/request",
+      "sandbox": "https://payments.sandbox.africastalking.com/mobile/checkout/request"
+    },
+    "MOBILE_B2C": {
+      "live": "https://payments.africastalking.com/mobile/b2c/request",
+      "sandbox": "https://payments.sandbox.africastalking.com/mobile/b2c/request"
     }
-  },
-  "currencyCodes": ["KES", "UGX", "TZS", "NGN"]
+  }
 }

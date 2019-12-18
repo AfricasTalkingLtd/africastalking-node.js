@@ -1,9 +1,7 @@
-import { CurrencyCode } from '../../constants/index.interface';
-
 export interface AirtimeOptions {
   recipients: {
     phoneNumber: string;
-    currencyCode: CurrencyCode;
+    currencyCode: 'KES' | 'UGX' | 'TZS' | 'NGN';
     amount: number;
   }[];
 }

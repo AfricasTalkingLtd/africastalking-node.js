@@ -1,7 +1,8 @@
 import joi from 'joi';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.interface';
-import { FullCredentials } from '../index.interface';
+import { Credentials } from '../../utils/getCredentials.interface';
+import { getFullCredentials } from '../../utils/getCredentials';
 
 const getSchema = (isBulk: boolean, isPremium: boolean) => {
   const schema = joi.object({
@@ -11,7 +12,7 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
     ),
     message: joi.string().required(),
     from: joi.string(),
-  });
+  }).required();
 
   if (isBulk) {
     return schema.keys({
@@ -31,13 +32,13 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
   return schema;
 };
 
-export const sendSms = (fullCredentials: FullCredentials) => async (
+export const sendSms = (credentials: Credentials) => async (
   options: SmsOptions, isBulk: boolean = false, isPremium: boolean = false,
 ): Promise<SmsResponse> => {
+  const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<SmsOptions>(getSchema(isBulk, isPremium), options);
 
   const { to } = result;
-  const { apiKey, username, format } = fullCredentials;
 
   const postData: SmsPostData = {
     username,

@@ -1,7 +1,7 @@
 export interface Credentials {
   apiKey: string;
   username: string;
-  format: 'xml' | 'json';
+  format?: 'xml' | 'json';
 }
 
 export interface FullCredentials {
