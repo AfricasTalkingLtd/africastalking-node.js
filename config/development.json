@@ -39,6 +39,10 @@
     "MOBILE_B2B": {
       "live": "https://payments.africastalking.com/mobile/b2b/request",
       "sandbox": "https://payments.sandbox.africastalking.com/mobile/b2b/request"
+    },
+    "BANK_CHECKOUT_CHARGE": {
+      "live": "https://payments.africastalking.com/bank/checkout/charge",
+      "sandbox": "https://payments.sandbox.africastalking.com/bank/checkout/charge"
     }
   }
 }

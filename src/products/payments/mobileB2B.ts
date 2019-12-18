@@ -10,7 +10,7 @@ const getSchema = () => joi.object({
   transferType: joi.string().valid('BusinessBuyGoods', 'BusinessPayBill',
     'DisburseFundsToBusiness', 'BusinessToBusinessTransfer').required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
-  amount: joi.string().required(),
+  amount: joi.number().required(),
   destinationChannel: joi.string().required(),
   destinationAccount: joi.string().required(),
   metadata: joi.object(),

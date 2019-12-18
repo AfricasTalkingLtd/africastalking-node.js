@@ -3,7 +3,7 @@ export interface MobileB2BOptions {
   provider: 'Mpesa' | 'TigoTanzania' | 'Athena';
   transferType: 'BusinessBuyGoods' | 'BusinessPayBill' | 'DisburseFundsToBusiness' | 'BusinessToBusinessTransfer';
   currencyCode: 'KES' | 'UGX' | 'USD';
-  amount: string;
+  amount: number;
   destinationChannel: string;
   destinationAccount: string;
   metadata: {
