@@ -17,12 +17,12 @@ export const validateJoiSchema = <T>(
     resolve(value);
   });
 
-export const sendRequest = <T1, T2>(
+export const sendRequest = <T1, T2, T3 = any>(
   urlCategory: UrlCategory,
   username: string,
   method: 'GET' | 'POST',
   data: T2,
-  opts: { headers?: any; params?: any; },
+  opts: { headers?: any; params?: T3; },
 ): Promise<T1> => {
   const getUrl = (): string => {
     const isSandbox = (): boolean => username.toLowerCase() === 'sandbox';

@@ -1,4 +1,4 @@
-import { FetchMessagesResponse, FetchMessagesOptions } from './fetchMessages.interface';
+import { FetchMessagesResponse, FetchMessagesOptions, FetchMessagesQueryParams } from './fetchMessages.interface';
 import { sendRequest } from '../../utils/misc';
 import { getFullCredentials } from '../../utils/getCredentials';
 import { Credentials } from '../../utils/getCredentials.interface';
@@ -8,15 +8,17 @@ export const fetchMessages = (credentials: Credentials) => async (
 ): Promise<FetchMessagesResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
 
-  return sendRequest<FetchMessagesResponse, null>('SMS', username, 'GET', null, {
+  const queryParams: FetchMessagesQueryParams = {
+    username,
+    lastReceivedId: options.lastReceivedId || '0',
+  };
+
+  return sendRequest<FetchMessagesResponse, null, FetchMessagesQueryParams>('SMS', username, 'GET', null, {
     headers: {
       apiKey,
       accept: format,
       'Content-Type': 'application/json',
     },
-    params: {
-      username,
-      lastReceivedId: options.lastReceivedId || 0,
-    },
+    params: queryParams,
   });
 };

@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionPostData } from './fetchSubscription.interface';
+import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.interface';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { Credentials } from '../../../utils/getCredentials.interface';
 import { getFullCredentials } from '../../../utils/getCredentials';
@@ -16,16 +16,18 @@ export const fetchSubscription = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
 
-  return sendRequest<FetchSubscriptionResponse, null>('CREATE_SUBSCRIPTION', username, 'GET', null, {
+  const queryParams: FetchSubscriptionQueryParams = {
+    ...result,
+    username,
+    lastReceivedId: result.lastReceivedId || 0,
+  };
+
+  return sendRequest<FetchSubscriptionResponse, null, FetchSubscriptionQueryParams>('CREATE_SUBSCRIPTION', username, 'GET', null, {
     headers: {
       apiKey,
       accept: format,
       'Content-Type': 'application/json',
     },
-    params: {
-      ...result,
-      username,
-      lastReceivedId: result.lastReceivedId || 0,
-    } as FetchSubscriptionPostData,
+    params: queryParams,
   });
 };

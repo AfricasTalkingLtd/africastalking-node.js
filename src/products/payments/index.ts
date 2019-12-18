@@ -9,6 +9,7 @@ import { walletTransfer } from './walletTransfer';
 import { topupStash } from './topupStash';
 import { cardCheckoutCharge } from './card/cardCheckoutCharge';
 import { cardCheckoutValidate } from './card/cardCheckoutValidate';
+import { fetchProductTransactions } from './query/fetchProductTransactions';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -21,6 +22,7 @@ export const PAYMENTS = (credentials: Credentials) => ({
   topupStash: topupStash(credentials),
   cardCheckoutCharge: cardCheckoutCharge(credentials),
   cardCheckoutValidate: cardCheckoutValidate(credentials),
+  fetchProductTransactions: fetchProductTransactions(credentials),
 
   // fallbacks
   checkout: mobileCheckout(credentials),

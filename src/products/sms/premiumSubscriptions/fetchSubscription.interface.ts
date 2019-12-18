@@ -4,7 +4,7 @@ export interface FetchSubscriptionOptions {
   lastReceivedId?: number;
 }
 
-export type FetchSubscriptionPostData = FetchSubscriptionOptions & {
+export type FetchSubscriptionQueryParams = FetchSubscriptionOptions & {
   username: string;
 };
 
