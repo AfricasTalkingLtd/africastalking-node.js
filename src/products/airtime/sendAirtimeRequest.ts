@@ -8,10 +8,10 @@ import { getFullCredentials } from '../../utils/getCredentials';
 const getSchema = () => joi.object({
   recipients: joi.array().items(
     joi.object({
-      phoneNumber: (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
+      phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
       currencyCode: joi.string().valid(['KES', 'UGX', 'TZS', 'NGN']).required(),
       amount: joi.number().required(),
-    }),
+    }).required(),
   ).min(1).required(),
 }).required();
 

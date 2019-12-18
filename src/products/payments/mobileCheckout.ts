@@ -5,9 +5,9 @@ import { getFullCredentials } from '../../utils/getCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
 
 const getSchema = () => joi.object({
-  productName: (joi.string() as any).pattern(/\S/).required(), // TODO: 'must not contain invalid productName - eg. Space'
+  productName: joi.string().regex(/\S/, 'product name').required(),
   providerChannel: joi.string(),
-  phoneNumber: (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
+  phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
   amount: joi.number().required(),
   metadata: joi.object(),
@@ -24,7 +24,7 @@ export const mobileCheckout = (credentials: Credentials) => async (
     username,
   };
 
-  return sendRequest('MOBILE_CHECKOUT', username, 'POST', postData, {
+  return sendRequest<MobileCheckoutResponse, MobileCheckoutPostData>('MOBILE_CHECKOUT', username, 'POST', postData, {
     headers: {
       apiKey,
       accept: format,

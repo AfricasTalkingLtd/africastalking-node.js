@@ -7,8 +7,8 @@ import { getFullCredentials } from '../../utils/getCredentials';
 const getSchema = (isBulk: boolean, isPremium: boolean) => {
   const schema = joi.object({
     to: joi.alternatives().try(
-      joi.array().items((joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required()).required(),
-      (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
+      joi.array().items(joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()).required(),
+      joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required(),
     ),
     message: joi.string().required(),
     from: joi.string(),

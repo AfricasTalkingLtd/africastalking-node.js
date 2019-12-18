@@ -7,7 +7,7 @@ import { getFullCredentials } from '../../utils/getCredentials';
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),
   keyword: joi.string().required(),
-  phoneNumber: (joi.string() as any).pattern(/^\+\d{1,3}\d{3,}$/).required(),
+  phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
   checkoutToken: joi.string().required(),
 }).schema();
 
