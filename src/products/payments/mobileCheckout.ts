@@ -5,7 +5,7 @@ import { getFullCredentials } from '../../utils/getCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'product name').required(),
+  productName: joi.string().regex(/\S/, 'no space').required(),
   providerChannel: joi.string(),
   phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),

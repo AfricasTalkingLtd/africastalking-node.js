@@ -5,7 +5,7 @@ import { getFullCredentials } from '../../utils/getCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'product name').required(),
+  productName: joi.string().regex(/\S/, 'no space').required(),
   recipients: joi.array().items(
     joi.object({
       name: joi.string(),
