@@ -11,6 +11,7 @@ import { cardCheckoutCharge } from './card/cardCheckoutCharge';
 import { cardCheckoutValidate } from './card/cardCheckoutValidate';
 import { fetchProductTransactions } from './query/fetchProductTransactions';
 import { findTransaction } from './query/findTransaction';
+import { fetchWalletTransactions } from './query/fetchWalletTransactions';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -25,6 +26,7 @@ export const PAYMENTS = (credentials: Credentials) => ({
   cardCheckoutValidate: cardCheckoutValidate(credentials),
   fetchProductTransactions: fetchProductTransactions(credentials),
   findTransaction: findTransaction(credentials),
+  fetchWalletTransactions: fetchWalletTransactions(credentials),
 
   // fallbacks
   checkout: mobileCheckout(credentials),

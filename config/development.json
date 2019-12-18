@@ -75,6 +75,10 @@
     "FIND_TRANSACTION": {
       "live": "https://payments.africastalking.com/query/transaction/find",
       "sandbox": "https://payments.sandbox.africastalking.com/query/transaction/find"
+    },
+    "FETCH_WALLET_TRANSACTIONS": {
+      "live": "https://payments.africastalking.com/query/wallet/fetch",
+      "sandbox": "https://payments.sandbox.africastalking.com/query/wallet/fetch"
     }
   }
 }

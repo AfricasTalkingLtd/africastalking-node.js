@@ -19,7 +19,7 @@ export const findTransaction = (credentials: Credentials) => async (
     username,
   };
 
-  return sendRequest<FindTransactionResponse, null, FindTransactionQueryParams>('FETCH_PRODUCT_TRANSACTIONS',
+  return sendRequest<FindTransactionResponse, null, FindTransactionQueryParams>('FIND_TRANSACTION',
     username, 'GET', null, {
       headers: {
         apiKey,
