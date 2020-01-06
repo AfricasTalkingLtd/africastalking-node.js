@@ -7,13 +7,13 @@ import { UploadMediaFileOptions, UploadMediaFileResponse, UploadMediaFilePostDat
 
 const getSchema = () => joi.object({
   url: joi.string().regex(/^https?:\/\//, 'url').required(),
-}).schema();
+}).required();
 
 export const uploadMediaFile = (credentials: Credentials) => async (
   options: UploadMediaFileOptions,
 ): Promise<UploadMediaFileResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<UploadMediaFileOptions>(getSchema(), options);
+  const result = validateJoiSchema<UploadMediaFileOptions>(getSchema(), options);
 
   const data: UploadMediaFilePostData = { ...result, username };
 

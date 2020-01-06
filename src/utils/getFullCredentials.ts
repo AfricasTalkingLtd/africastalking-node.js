@@ -9,7 +9,7 @@ const getSchema = () => joi.object({
 }).required();
 
 export const getFullCredentials = async (credentials: Credentials): Promise<FullCredentials> => {
-  const value = await validateJoiSchema<Credentials>(getSchema(), credentials);
+  const value = validateJoiSchema<Credentials>(getSchema(), credentials);
 
   return {
     ...value,

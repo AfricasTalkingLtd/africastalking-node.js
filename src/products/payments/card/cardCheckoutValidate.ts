@@ -13,7 +13,7 @@ export const cardCheckoutValidate = (credentials: Credentials) => async (
   options: CardCheckoutValidateOptions,
 ): Promise<CardCheckoutValidateResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<CardCheckoutValidateOptions>(getSchema(), options);
+  const result = validateJoiSchema<CardCheckoutValidateOptions>(getSchema(), options);
 
   const data: CardCheckoutValidatePostData = {
     ...result,

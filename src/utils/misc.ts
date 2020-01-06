@@ -4,19 +4,16 @@ import { config } from '../constants';
 import { UrlCategory } from '../constants/index.types';
 import { SendRequestOptions } from './misc.types';
 
-export const validateJoiSchema = <T>(
-  schema: Schema, data: any,
-): Promise<T> => new Promise((resolve, reject) => {
-    const { error, value } = schema.validate(data);
+export const validateJoiSchema = <T>(schema: Schema, data: any): T => {
+  const { error, value } = schema.validate(data);
 
-    if (error) {
-      const combinedMessages = error.details.map((d) => d.message).join(';');
-      reject(new Error(combinedMessages));
-      return;
-    }
+  if (error) {
+    const combinedMessages = error.details.map((d) => d.message).join(';');
+    throw new Error(combinedMessages);
+  }
 
-    resolve(value);
-  });
+  return value;
+};
 
 const getUrl = (urlCategory: UrlCategory, username: string): string => {
   const isSandbox = (): boolean => username.toLowerCase() === 'sandbox';

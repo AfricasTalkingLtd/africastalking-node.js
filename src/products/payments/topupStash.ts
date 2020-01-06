@@ -15,7 +15,7 @@ export const topupStash = (credentials: Credentials) => async (
   options: TopupStashOptions,
 ): Promise<TopupStashResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<TopupStashOptions>(getSchema(), options);
+  const result = validateJoiSchema<TopupStashOptions>(getSchema(), options);
 
   const data: TopupStashPostData = {
     ...result,

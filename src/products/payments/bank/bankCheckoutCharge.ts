@@ -22,7 +22,7 @@ export const bankCheckoutCharge = (credentials: Credentials) => async (
   options: BankCheckoutChargeOptions,
 ): Promise<BankCheckoutChargeResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<BankCheckoutChargeOptions>(getSchema(), options);
+  const result = validateJoiSchema<BankCheckoutChargeOptions>(getSchema(), options);
 
   const data: BankCheckoutChargePostData = {
     ...result,

@@ -15,7 +15,7 @@ export interface MobileDataPostData extends MobileDataOptions {
   username: string;
 }
 
-// TODO: no documentation available :-(
+// TODO: no documentation available
 export interface MobileDataResponse {
 
 }

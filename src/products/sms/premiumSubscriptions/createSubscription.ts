@@ -9,13 +9,13 @@ const getSchema = () => joi.object({
   keyword: joi.string().required(),
   phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
   checkoutToken: joi.string().required(),
-}).schema();
+}).required();
 
 export const createSubscription = (credentials: Credentials) => async (
   options: CreateSubscriptionOptions,
 ): Promise<CreateSubscriptionResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<CreateSubscriptionOptions>(getSchema(), options);
+  const result = validateJoiSchema<CreateSubscriptionOptions>(getSchema(), options);
 
   const data: CreateSubscriptionPostData = { ...result, username };
 

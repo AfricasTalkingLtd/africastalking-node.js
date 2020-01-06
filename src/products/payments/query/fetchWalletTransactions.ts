@@ -16,7 +16,7 @@ export const fetchWalletTransactions = (credentials: Credentials) => async (
   options: FetchWalletTransactionsOptions,
 ): Promise<FetchWalletTransactionsResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<FetchWalletTransactionsOptions>(getSchema(), options);
+  const result = validateJoiSchema<FetchWalletTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchWalletTransactionsQueryParams = {
     ...result,

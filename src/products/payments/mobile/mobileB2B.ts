@@ -20,7 +20,7 @@ export const mobileB2B = (credentials: Credentials) => async (
   options: MobileB2BOptions,
 ): Promise<MobileB2BResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<MobileB2BOptions>(getSchema(), options);
+  const result = validateJoiSchema<MobileB2BOptions>(getSchema(), options);
 
   const data: MobileB2BPostData = {
     ...result,

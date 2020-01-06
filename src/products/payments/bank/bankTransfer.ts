@@ -26,7 +26,7 @@ export const bankTransfer = (credentials: Credentials) => async (
   options: BankTransferOptions,
 ): Promise<BankTransferResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<BankTransferOptions>(getSchema(), options);
+  const result = validateJoiSchema<BankTransferOptions>(getSchema(), options);
 
   const data: BankTransferPostData = {
     ...result,

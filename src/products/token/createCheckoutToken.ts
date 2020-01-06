@@ -6,13 +6,13 @@ import { CreateCheckoutTokenOptions, CreateCheckoutTokenResponse, CreateCheckout
 
 const getSchema = () => joi.object({
   phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
-}).schema();
+}).required();
 
 export const createCheckoutToken = (credentials: Credentials) => async (
   phoneNumber: string,
 ): Promise<CreateCheckoutTokenResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<CreateCheckoutTokenOptions>(getSchema(), { phoneNumber });
+  const result = validateJoiSchema<CreateCheckoutTokenOptions>(getSchema(), { phoneNumber });
 
   const data: CreateCheckoutTokenPostData = { ...result };
 

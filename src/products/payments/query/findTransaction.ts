@@ -12,7 +12,7 @@ export const findTransaction = (credentials: Credentials) => async (
   options: FindTransactionOptions,
 ): Promise<FindTransactionResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<FindTransactionOptions>(getSchema(), options);
+  const result = validateJoiSchema<FindTransactionOptions>(getSchema(), options);
 
   const queryParams: FindTransactionQueryParams = {
     ...result,

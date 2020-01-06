@@ -14,7 +14,7 @@ export const fetchSubscription = (credentials: Credentials) => async (
   options: FetchSubscriptionOptions,
 ): Promise<FetchSubscriptionResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
+  const result = validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
 
   const queryParams: FetchSubscriptionQueryParams = {
     ...result,

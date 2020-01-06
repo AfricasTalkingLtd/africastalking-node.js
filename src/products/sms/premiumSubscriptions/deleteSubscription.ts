@@ -15,7 +15,7 @@ export const deleteSubscription = (credentials: Credentials) => async (
   options: DeleteSubscriptionOptions,
 ): Promise<DeleteSubscriptionResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<DeleteSubscriptionOptions>(getSchema(), options);
+  const result = validateJoiSchema<DeleteSubscriptionOptions>(getSchema(), options);
 
   const data: DeleteSubscriptionPostData = { ...result, username };
 

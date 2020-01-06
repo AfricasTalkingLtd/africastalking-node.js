@@ -19,7 +19,7 @@ export const sendAirtimeRequest = (credentials: Credentials) => async (
   options: AirtimeOptions,
 ): Promise<AirtimeResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<AirtimeOptions>(getSchema(), options);
+  const result = validateJoiSchema<AirtimeOptions>(getSchema(), options);
 
   const data: AirtimePostData = {
     username,

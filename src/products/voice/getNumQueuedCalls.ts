@@ -7,13 +7,13 @@ import { GetNumQueuedCallsOptions, GetNumQueuedCallsPostData, GetNumQueuedCallsR
 
 const getSchema = () => joi.object({
   phoneNumbers: joi.string().required(),
-}).schema();
+}).required();
 
 export const getNumQueuedCalls = (credentials: Credentials) => async (
   options: GetNumQueuedCallsOptions,
 ): Promise<GetNumQueuedCallsResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<GetNumQueuedCallsOptions>(getSchema(), options);
+  const result = validateJoiSchema<GetNumQueuedCallsOptions>(getSchema(), options);
 
   const data: GetNumQueuedCallsPostData = { ...result, username };
 

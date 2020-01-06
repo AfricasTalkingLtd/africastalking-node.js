@@ -17,7 +17,7 @@ export const mobileCheckout = (credentials: Credentials) => async (
   options: MobileCheckoutOptions,
 ): Promise<MobileCheckoutResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<MobileCheckoutOptions>(getSchema(), options);
+  const result = validateJoiSchema<MobileCheckoutOptions>(getSchema(), options);
 
   const data: MobileCheckoutPostData = {
     ...result,

@@ -24,7 +24,7 @@ export const fetchProductTransactions = (credentials: Credentials) => async (
   options: FetchProductTransactionsOptions,
 ): Promise<FetchProductTransactionsResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<FetchProductTransactionsOptions>(getSchema(), options);
+  const result = validateJoiSchema<FetchProductTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchProductTransactionsQueryParams = {
     ...result,

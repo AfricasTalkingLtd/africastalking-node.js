@@ -22,7 +22,7 @@ export const mobileData = (credentials: Credentials) => async (
   options: MobileDataOptions,
 ): Promise<MobileDataResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<MobileDataOptions>(getSchema(), options);
+  const result = validateJoiSchema<MobileDataOptions>(getSchema(), options);
 
   const data: MobileDataPostData = {
     ...result,

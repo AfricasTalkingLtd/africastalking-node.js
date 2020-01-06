@@ -16,7 +16,7 @@ export const walletTransfer = (credentials: Credentials) => async (
   options: WalletTransferOptions,
 ): Promise<WalletTransferResponse> => {
   const { apiKey, username, format } = await getFullCredentials(credentials);
-  const result = await validateJoiSchema<WalletTransferOptions>(getSchema(), options);
+  const result = validateJoiSchema<WalletTransferOptions>(getSchema(), options);
 
   const data: WalletTransferPostData = {
     ...result,
