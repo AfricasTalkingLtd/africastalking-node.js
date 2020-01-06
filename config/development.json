@@ -95,6 +95,18 @@
     "MOBILE_DATA": {
       "live": "https://payments.africastalking.com/mobile/data/request",
       "sandbox": "https://payments.sandbox.africastalking.com/mobile/data/request"
+    },
+    "MAKE_CALL": {
+      "live": "https://voice.africastalking.com/call",
+      "sandbox": "https://voice.sandbox.africastalking.com/call"
+    },
+    "GET_NUM_QUEUED_CALLS": {
+      "live": "https://voice.africastalking.com/queueStatus",
+      "sandbox": "https://voice.sandbox.africastalking.com/queueStatus"
+    },
+    "UPLOAD_MEDIA_FILE": {
+      "live": "https://voice.africastalking.com/mediaUpload",
+      "sandbox": "https://voice.sandbox.africastalking.com/mediaUpload"
     }
   }
 }
