@@ -13,6 +13,7 @@ import { fetchProductTransactions } from './query/fetchProductTransactions';
 import { findTransaction } from './query/findTransaction';
 import { fetchWalletTransactions } from './query/fetchWalletTransactions';
 import { fetchWalletBalance } from './query/fetchWalletBalance';
+import { mobileData } from './mobile/mobileData';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -29,6 +30,7 @@ export const PAYMENTS = (credentials: Credentials) => ({
   findTransaction: findTransaction(credentials),
   fetchWalletTransactions: fetchWalletTransactions(credentials),
   fetchWalletBalance: fetchWalletBalance(credentials),
+  mobileData: mobileData(credentials),
 
   // fallbacks
   checkout: mobileCheckout(credentials),

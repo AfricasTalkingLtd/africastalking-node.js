@@ -50,11 +50,11 @@
     },
     "BANK_TRANSFER": {
       "live": "https://payments.africastalking.com/bank/transfer",
-      "sandbox": "https://payments.sandbox.fricastalking.com/bank/transfer"
+      "sandbox": "https://payments.sandbox.africastalking.com/bank/transfer"
     },
     "WALLET_TRANSFER": {
       "live": "https://payments.africastalking.com/transfer/wallet",
-      "sandbox": "https://payments.sandbox.fricastalking.com/transfer/wallet"
+      "sandbox": "https://payments.sandbox.africastalking.com/transfer/wallet"
     },
     "TOPUP_STASH": {
       "live": "https://payments.africastalking.com/topup/stash",
@@ -91,6 +91,10 @@
     "CREATE_CHECKOUT_TOKEN": {
       "live": "https://api.africastalking.com/checkout/token/create",
       "sandbox": "https://api.sandbox.africastalking.com/checkout/token/create"
+    },
+    "MOBILE_DATA": {
+      "live": "https://payments.africastalking.com/mobile/data/request",
+      "sandbox": "https://payments.sandbox.africastalking.com/mobile/data/request"
     }
   }
 }
