@@ -1,4 +1,4 @@
-import { Category, TransactionResponse } from './misc.interface';
+import { Category, TransactionResponse } from './misc.d';
 
 export interface FetchWalletTransactionsOptions {
   pageNumber: string;

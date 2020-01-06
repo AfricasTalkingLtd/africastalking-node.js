@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { BankTransferOptions, BankTransferResponse, BankTransferPostData } from './bankTransfer.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { BankTransferOptions, BankTransferResponse, BankTransferPostData } from './bankTransfer.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
@@ -28,12 +28,16 @@ export const bankTransfer = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<BankTransferOptions>(getSchema(), options);
 
-  const postData: BankTransferPostData = {
+  const data: BankTransferPostData = {
     ...result,
     username,
   };
 
-  return sendRequest<BankTransferResponse, BankTransferPostData>('BANK_TRANSFER', username, 'POST', postData, {
+  return sendRequest<BankTransferResponse, BankTransferPostData>({
+    urlCategory: 'BANK_TRANSFER',
+    username,
+    method: 'POST',
+    data,
     headers: {
       apiKey,
       accept: format,

@@ -1,8 +1,8 @@
 import joi from 'joi';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { CreateSubscriptionOptions, CreateSubscriptionResponse, CreateSubscriptionPostData } from './createSubscription.interface';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { CreateSubscriptionOptions, CreateSubscriptionResponse, CreateSubscriptionPostData } from './createSubscription.d';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),
@@ -17,9 +17,13 @@ export const createSubscription = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<CreateSubscriptionOptions>(getSchema(), options);
 
-  const postData: CreateSubscriptionPostData = { ...result, username };
+  const data: CreateSubscriptionPostData = { ...result, username };
 
-  return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>('CREATE_SUBSCRIPTION', username, 'POST', postData, {
+  return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>({
+    urlCategory: 'CREATE_SUBSCRIPTION',
+    username,
+    method: 'POST',
+    data,
     headers: {
       apiKey,
       accept: format,

@@ -1,7 +1,7 @@
 import { sendRequest } from '../../utils/misc';
-import { ApplicationResponse, ApplicationQueryParams } from './fetchApplicationData.interface';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { ApplicationResponse, ApplicationQueryParams } from './fetchApplicationData.d';
+import { Credentials } from '../../utils/getFullCredentials.d';
+import { getFullCredentials } from '../../utils/getFullCredentials';
 
 export const fetchApplicationData = (
   credentials: Credentials,
@@ -10,7 +10,10 @@ export const fetchApplicationData = (
 
   const queryParams: ApplicationQueryParams = { username };
 
-  return sendRequest<ApplicationResponse, null, ApplicationQueryParams>('APPLICATION', username, 'GET', null, {
+  return sendRequest<ApplicationResponse, null, ApplicationQueryParams>({
+    urlCategory: 'APPLICATION',
+    username,
+    method: 'GET',
     headers: {
       apiKey,
       accept: format,

@@ -1,6 +1,6 @@
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams } from './fetchWalletBalance.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams } from './fetchWalletBalance.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest } from '../../../utils/misc';
 
 export const fetchWalletBalance = (
@@ -10,13 +10,15 @@ export const fetchWalletBalance = (
 
   const queryParams: FetchWalletBalanceQueryParams = { username };
 
-  return sendRequest<FetchWalletBalanceResponse, null, FetchWalletBalanceQueryParams>('FETCH_WALLET_BALANCE',
-    username, 'GET', null, {
-      headers: {
-        apiKey,
-        accept: format,
-        'Content-Type': 'application/json',
-      },
-      params: queryParams,
-    });
+  return sendRequest<FetchWalletBalanceResponse, null, FetchWalletBalanceQueryParams>({
+    urlCategory: 'FETCH_WALLET_BALANCE',
+    username,
+    method: 'GET',
+    headers: {
+      apiKey,
+      accept: format,
+      'Content-Type': 'application/json',
+    },
+    params: queryParams,
+  });
 };

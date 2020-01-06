@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { FetchWalletTransactionsOptions, FetchWalletTransactionsResponse, FetchWalletTransactionsQueryParams } from './fetchWalletTransactions.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { FetchWalletTransactionsOptions, FetchWalletTransactionsResponse, FetchWalletTransactionsQueryParams } from './fetchWalletTransactions.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
@@ -23,13 +23,15 @@ export const fetchWalletTransactions = (credentials: Credentials) => async (
     username,
   };
 
-  return sendRequest<FetchWalletTransactionsResponse, null, FetchWalletTransactionsQueryParams>('FETCH_WALLET_TRANSACTIONS',
-    username, 'GET', null, {
-      headers: {
-        apiKey,
-        accept: format,
-        'Content-Type': 'application/json',
-      },
-      params: queryParams,
-    });
+  return sendRequest<FetchWalletTransactionsResponse, null, FetchWalletTransactionsQueryParams>({
+    urlCategory: 'FETCH_WALLET_TRANSACTIONS',
+    username,
+    method: 'GET',
+    headers: {
+      apiKey,
+      accept: format,
+      'Content-Type': 'application/json',
+    },
+    params: queryParams,
+  });
 };

@@ -1,8 +1,8 @@
 import joi from 'joi';
-import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.interface';
+import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.d';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),
@@ -22,7 +22,10 @@ export const fetchSubscription = (credentials: Credentials) => async (
     lastReceivedId: result.lastReceivedId || 0,
   };
 
-  return sendRequest<FetchSubscriptionResponse, null, FetchSubscriptionQueryParams>('CREATE_SUBSCRIPTION', username, 'GET', null, {
+  return sendRequest<FetchSubscriptionResponse, null, FetchSubscriptionQueryParams>({
+    urlCategory: 'FETCH_SUBSCRIPTION',
+    username,
+    method: 'GET',
     headers: {
       apiKey,
       accept: format,

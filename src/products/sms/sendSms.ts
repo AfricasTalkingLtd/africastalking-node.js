@@ -1,8 +1,8 @@
 import joi from 'joi';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.interface';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.d';
+import { Credentials } from '../../utils/getFullCredentials.d';
+import { getFullCredentials } from '../../utils/getFullCredentials';
 
 const getSchema = (isBulk: boolean, isPremium: boolean) => {
   const schema = joi.object({
@@ -40,7 +40,7 @@ export const sendSms = (credentials: Credentials) => async (
 
   const { to } = result;
 
-  const postData: SmsPostData = {
+  const data: SmsPostData = {
     username,
     ...result,
     to: Array.isArray(to) ? to.join(',') : to,
@@ -48,7 +48,11 @@ export const sendSms = (credentials: Credentials) => async (
     ...(isPremium && { bulkSMSMode: 0 }),
   };
 
-  return sendRequest<SmsResponse, SmsPostData>('SMS', username, 'POST', postData, {
+  return sendRequest<SmsResponse, SmsPostData>({
+    urlCategory: 'SMS',
+    username,
+    method: 'POST',
+    data,
     headers: {
       apiKey,
       accept: format,

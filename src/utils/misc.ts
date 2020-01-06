@@ -2,6 +2,7 @@ import { Schema } from 'joi';
 import axios from 'axios';
 import { config } from '../constants';
 import { UrlCategory } from '../constants/index.interface';
+import { SendRequestOptions } from './misc.d';
 
 export const validateJoiSchema = <T>(
   schema: Schema, data: any,
@@ -17,27 +18,26 @@ export const validateJoiSchema = <T>(
     resolve(value);
   });
 
-export const sendRequest = <T1, T2, T3 = any>(
-  urlCategory: UrlCategory,
-  username: string,
-  method: 'GET' | 'POST',
-  data: T2,
-  opts: { headers?: any; params?: T3; },
-): Promise<T1> => {
-  const getUrl = (): string => {
-    const isSandbox = (): boolean => username.toLowerCase() === 'sandbox';
-    const { urls } = config;
+const getUrl = (urlCategory: UrlCategory, username: string): string => {
+  const isSandbox = (): boolean => username.toLowerCase() === 'sandbox';
+  const { urls } = config;
 
-    return isSandbox()
-      ? urls[urlCategory].sandbox
-      : urls[urlCategory].live;
-  };
+  return isSandbox()
+    ? urls[urlCategory].sandbox
+    : urls[urlCategory].live;
+};
+
+export const sendRequest = <T1, T2, T3 = any>(opts: SendRequestOptions<T2, T3>): Promise<T1> => {
+  const {
+    urlCategory, username, method, data = null, headers, params,
+  } = opts;
 
   return axios({
-    url: getUrl(),
+    url: getUrl(urlCategory, username),
     method,
     data,
-    ...opts,
+    headers,
+    params,
   }).then((value) => {
     if (![200, 201].includes(value.status)) {
       return Promise.reject(value.data);

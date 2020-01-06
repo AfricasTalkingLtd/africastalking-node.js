@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { BankCheckoutChargeOptions, BankCheckoutChargeResponse, BankCheckoutChargePostData } from './bankCheckoutCharge.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { BankCheckoutChargeOptions, BankCheckoutChargeResponse, BankCheckoutChargePostData } from './bankCheckoutCharge.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
@@ -24,12 +24,16 @@ export const bankCheckoutCharge = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<BankCheckoutChargeOptions>(getSchema(), options);
 
-  const postData: BankCheckoutChargePostData = {
+  const data: BankCheckoutChargePostData = {
     ...result,
     username,
   };
 
-  return sendRequest<BankCheckoutChargeResponse, BankCheckoutChargePostData>('BANK_CHECKOUT_CHARGE', username, 'POST', postData, {
+  return sendRequest<BankCheckoutChargeResponse, BankCheckoutChargePostData>({
+    urlCategory: 'BANK_CHECKOUT_CHARGE',
+    username,
+    method: 'POST',
+    data,
     headers: {
       apiKey,
       accept: format,

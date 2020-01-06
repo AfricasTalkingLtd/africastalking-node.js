@@ -1,7 +1,7 @@
 import { SMS } from './sms';
 import { APPLICATION } from './application';
 import { AIRTIME } from './airtime';
-import { Credentials } from '../utils/getCredentials.interface';
+import { Credentials } from '../utils/getFullCredentials.d';
 import { PAYMENTS } from './payments';
 
 export const AfricasTalking = (credentials: Credentials) => ({
@@ -17,19 +17,3 @@ export const AfricasTalking = (credentials: Credentials) => ({
   ACCOUNT: APPLICATION(credentials),
   PAYMENT: PAYMENTS(credentials),
 });
-
-export const AfricasTalking2 = (credentials: Credentials) => ({
-  ...AIRTIME(credentials),
-  ...APPLICATION(credentials),
-  ...SMS(credentials),
-  ...PAYMENTS(credentials),
-});
-
-// const credentials = { apiKey: 'xx', username: 'sandbox' };
-// const at = AfricasTalking2(credentials);
-// // const client = AfricasTalking(credentials).APPLICATION;
-
-// at.fetchApplicationData()
-//   .then(result => {
-//     console.log(result.UserData.balance);
-//   });

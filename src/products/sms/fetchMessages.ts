@@ -1,7 +1,7 @@
-import { FetchMessagesResponse, FetchMessagesOptions, FetchMessagesQueryParams } from './fetchMessages.interface';
+import { FetchMessagesResponse, FetchMessagesOptions, FetchMessagesQueryParams } from './fetchMessages.d';
 import { sendRequest } from '../../utils/misc';
-import { getFullCredentials } from '../../utils/getCredentials';
-import { Credentials } from '../../utils/getCredentials.interface';
+import { getFullCredentials } from '../../utils/getFullCredentials';
+import { Credentials } from '../../utils/getFullCredentials.d';
 
 export const fetchMessages = (credentials: Credentials) => async (
   options: FetchMessagesOptions,
@@ -13,7 +13,10 @@ export const fetchMessages = (credentials: Credentials) => async (
     lastReceivedId: options.lastReceivedId || '0',
   };
 
-  return sendRequest<FetchMessagesResponse, null, FetchMessagesQueryParams>('SMS', username, 'GET', null, {
+  return sendRequest<FetchMessagesResponse, null, FetchMessagesQueryParams>({
+    urlCategory: 'SMS',
+    username,
+    method: 'GET',
     headers: {
       apiKey,
       accept: format,

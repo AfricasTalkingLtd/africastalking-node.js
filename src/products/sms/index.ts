@@ -1,10 +1,10 @@
 import { fetchMessages } from './fetchMessages';
-import { SmsOptions } from './sendSms.interface';
+import { SmsOptions } from './sendSms.d';
 import { sendSms } from './sendSms';
 import { fetchSubscription } from './premiumSubscriptions/fetchSubscription';
 import { createSubscription } from './premiumSubscriptions/createSubscription';
 import { deleteSubscription } from './premiumSubscriptions/deleteSubscription';
-import { Credentials } from '../../utils/getCredentials.interface';
+import { Credentials } from '../../utils/getFullCredentials.d';
 
 export const SMS = (credentials: Credentials) => ({
   send: (options: SmsOptions) => sendSms(credentials)(options),

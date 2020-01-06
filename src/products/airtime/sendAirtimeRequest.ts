@@ -1,9 +1,9 @@
 import joi from 'joi';
 import queryString from 'query-string';
-import { AirtimeOptions, AirtimePostData, AirtimeResponse } from './sendAirtimeRequest.interface';
+import { AirtimeOptions, AirtimePostData, AirtimeResponse } from './sendAirtimeRequest.d';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { Credentials } from '../../utils/getFullCredentials.d';
+import { getFullCredentials } from '../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({
   recipients: joi.array().items(
@@ -21,7 +21,7 @@ export const sendAirtimeRequest = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<AirtimeOptions>(getSchema(), options);
 
-  const postData: AirtimePostData = {
+  const data: AirtimePostData = {
     username,
     recipients: result.recipients.map((r) => ({
       phoneNumber: r.phoneNumber,
@@ -29,7 +29,11 @@ export const sendAirtimeRequest = (credentials: Credentials) => async (
     })),
   };
 
-  return sendRequest<AirtimeResponse, string>('AIRTIME', username, 'POST', queryString.stringify(postData), {
+  return sendRequest<AirtimeResponse, string>({
+    urlCategory: 'AIRTIME',
+    username,
+    method: 'POST',
+    data: queryString.stringify(data),
     headers: {
       apiKey,
       accept: format,

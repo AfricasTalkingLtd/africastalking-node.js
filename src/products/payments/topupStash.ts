@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { Credentials } from '../../utils/getCredentials.interface';
-import { TopupStashOptions, TopupStashResponse, TopupStashPostData } from './topupStash.interface';
-import { getFullCredentials } from '../../utils/getCredentials';
+import { Credentials } from '../../utils/getFullCredentials.d';
+import { TopupStashOptions, TopupStashResponse, TopupStashPostData } from './topupStash.d';
+import { getFullCredentials } from '../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 
 const getSchema = () => joi.object({
@@ -17,12 +17,16 @@ export const topupStash = (credentials: Credentials) => async (
   const { apiKey, username, format } = await getFullCredentials(credentials);
   const result = await validateJoiSchema<TopupStashOptions>(getSchema(), options);
 
-  const postData: TopupStashPostData = {
+  const data: TopupStashPostData = {
     ...result,
     username,
   };
 
-  return sendRequest<TopupStashResponse, TopupStashPostData>('TOPUP_STASH', username, 'POST', postData, {
+  return sendRequest<TopupStashResponse, TopupStashPostData>({
+    urlCategory: 'TOPUP_STASH',
+    username,
+    method: 'POST',
+    data,
     headers: {
       apiKey,
       accept: format,

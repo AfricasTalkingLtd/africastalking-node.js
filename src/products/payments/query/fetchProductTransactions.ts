@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getCredentials.interface';
-import { FetchProductTransactionsOptions, FetchProductTransactionsResponse, FetchProductTransactionsQueryParams } from './fetchProductTransactions.interface';
-import { getFullCredentials } from '../../../utils/getCredentials';
+import { Credentials } from '../../../utils/getFullCredentials.d';
+import { FetchProductTransactionsOptions, FetchProductTransactionsResponse, FetchProductTransactionsQueryParams } from './fetchProductTransactions.d';
+import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
@@ -31,13 +31,15 @@ export const fetchProductTransactions = (credentials: Credentials) => async (
     username,
   };
 
-  return sendRequest<FetchProductTransactionsResponse, null, FetchProductTransactionsQueryParams>('FETCH_PRODUCT_TRANSACTIONS',
-    username, 'GET', null, {
-      headers: {
-        apiKey,
-        accept: format,
-        'Content-Type': 'application/json',
-      },
-      params: queryParams,
-    });
+  return sendRequest<FetchProductTransactionsResponse, null, FetchProductTransactionsQueryParams>({
+    urlCategory: 'FETCH_PRODUCT_TRANSACTIONS',
+    username,
+    method: 'GET',
+    headers: {
+      apiKey,
+      accept: format,
+      'Content-Type': 'application/json',
+    },
+    params: queryParams,
+  });
 };
