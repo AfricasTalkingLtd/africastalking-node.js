@@ -1,7 +1,7 @@
 import joi from 'joi';
-import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.d';
+import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.types';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { Credentials } from '../../../utils/getFullCredentials.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({

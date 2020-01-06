@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { FindTransactionOptions, FindTransactionResponse, FindTransactionQueryParams } from './findTransaction.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { FindTransactionOptions, FindTransactionResponse, FindTransactionQueryParams } from './findTransaction.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 

@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { BankTransferOptions, BankTransferResponse, BankTransferPostData } from './bankTransfer.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { BankTransferOptions, BankTransferResponse, BankTransferPostData } from './bankTransfer.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 

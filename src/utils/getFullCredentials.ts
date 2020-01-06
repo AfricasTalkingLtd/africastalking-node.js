@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { Credentials, FullCredentials } from './getFullCredentials.d';
+import { Credentials, FullCredentials } from './getFullCredentials.types';
 import { validateJoiSchema } from './misc';
 
 const getSchema = () => joi.object({

@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { MobileCheckoutResponse, MobileCheckoutOptions, MobileCheckoutPostData } from './mobileCheckout.d';
-import { Credentials } from '../../../utils/getFullCredentials.d';
+import { MobileCheckoutResponse, MobileCheckoutOptions, MobileCheckoutPostData } from './mobileCheckout.types';
+import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../../utils/misc';
 

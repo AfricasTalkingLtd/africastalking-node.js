@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { MobileB2COptions, MobileB2CResponse, MobileB2CPostData } from './mobileB2C.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { MobileB2COptions, MobileB2CResponse, MobileB2CPostData } from './mobileB2C.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 

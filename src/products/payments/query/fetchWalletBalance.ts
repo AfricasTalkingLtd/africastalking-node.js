@@ -1,5 +1,5 @@
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams } from './fetchWalletBalance.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams } from './fetchWalletBalance.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest } from '../../../utils/misc';
 

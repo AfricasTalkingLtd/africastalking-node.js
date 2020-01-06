@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { FetchProductTransactionsOptions, FetchProductTransactionsResponse, FetchProductTransactionsQueryParams } from './fetchProductTransactions.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { FetchProductTransactionsOptions, FetchProductTransactionsResponse, FetchProductTransactionsQueryParams } from './fetchProductTransactions.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 

@@ -1,4 +1,4 @@
-import { TransactionResponse } from './misc.d';
+import { TransactionResponse } from './misc.types';
 
 export interface FindTransactionOptions {
   transactionId: string;

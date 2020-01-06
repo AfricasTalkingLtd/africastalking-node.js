@@ -1,4 +1,4 @@
-import { Credentials } from '../../utils/getFullCredentials.d';
+import { Credentials } from '../../utils/getFullCredentials.types';
 import { mobileCheckout } from './mobile/mobileCheckout';
 import { mobileB2C } from './mobile/mobileB2C';
 import { mobileB2B } from './mobile/mobileB2B';

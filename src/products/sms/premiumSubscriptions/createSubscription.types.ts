@@ -5,9 +5,9 @@ export interface CreateSubscriptionOptions {
   checkoutToken: string;
 }
 
-export type CreateSubscriptionPostData = CreateSubscriptionOptions & {
+export interface CreateSubscriptionPostData extends CreateSubscriptionOptions {
   username: string;
-};
+}
 
 export interface CreateSubscriptionResponse {
   status: 'Success' | 'Failed';

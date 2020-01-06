@@ -1,7 +1,7 @@
-import { FetchMessagesResponse, FetchMessagesOptions, FetchMessagesQueryParams } from './fetchMessages.d';
+import { FetchMessagesResponse, FetchMessagesOptions, FetchMessagesQueryParams } from './fetchMessages.types';
 import { sendRequest } from '../../utils/misc';
 import { getFullCredentials } from '../../utils/getFullCredentials';
-import { Credentials } from '../../utils/getFullCredentials.d';
+import { Credentials } from '../../utils/getFullCredentials.types';
 
 export const fetchMessages = (credentials: Credentials) => async (
   options: FetchMessagesOptions,

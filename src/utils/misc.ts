@@ -1,8 +1,8 @@
 import { Schema } from 'joi';
 import axios from 'axios';
 import { config } from '../constants';
-import { UrlCategory } from '../constants/index.interface';
-import { SendRequestOptions } from './misc.d';
+import { UrlCategory } from '../constants/index.types';
+import { SendRequestOptions } from './misc.types';
 
 export const validateJoiSchema = <T>(
   schema: Schema, data: any,
@@ -27,7 +27,9 @@ const getUrl = (urlCategory: UrlCategory, username: string): string => {
     : urls[urlCategory].live;
 };
 
-export const sendRequest = <T1, T2, T3 = any>(opts: SendRequestOptions<T2, T3>): Promise<T1> => {
+export const sendRequest = <T1, T2 = null, T3 = any>(
+  opts: SendRequestOptions<T2, T3>,
+): Promise<T1> => {
   const {
     urlCategory, username, method, data = null, headers, params,
   } = opts;

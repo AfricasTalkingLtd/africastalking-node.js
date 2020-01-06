@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../utils/getFullCredentials.d';
-import { TopupStashOptions, TopupStashResponse, TopupStashPostData } from './topupStash.d';
+import { Credentials } from '../../utils/getFullCredentials.types';
+import { TopupStashOptions, TopupStashResponse, TopupStashPostData } from './topupStash.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 

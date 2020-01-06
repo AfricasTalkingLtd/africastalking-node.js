@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../utils/getFullCredentials.d';
-import { WalletTransferOptions, WalletTransferResponse, WalletTransferPostData } from './walletTransfer.d';
+import { Credentials } from '../../utils/getFullCredentials.types';
+import { WalletTransferOptions, WalletTransferResponse, WalletTransferPostData } from './walletTransfer.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 

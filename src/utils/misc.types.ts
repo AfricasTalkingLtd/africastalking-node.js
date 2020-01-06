@@ -1,4 +1,4 @@
-import { UrlCategory } from '../constants/index.interface';
+import { UrlCategory } from '../constants/index.types';
 
 export interface SendRequestOptions<T2, T3> {
   urlCategory: UrlCategory,

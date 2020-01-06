@@ -1,8 +1,8 @@
 import joi from 'joi';
 import queryString from 'query-string';
-import { AirtimeOptions, AirtimePostData, AirtimeResponse } from './sendAirtimeRequest.d';
+import { AirtimeOptions, AirtimePostData, AirtimeResponse } from './sendAirtimeRequest.types';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { Credentials } from '../../utils/getFullCredentials.d';
+import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({

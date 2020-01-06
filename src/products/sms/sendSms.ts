@@ -1,7 +1,7 @@
 import joi from 'joi';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.d';
-import { Credentials } from '../../utils/getFullCredentials.d';
+import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.types';
+import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 
 const getSchema = (isBulk: boolean, isPremium: boolean) => {

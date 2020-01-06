@@ -1,6 +1,6 @@
 import {
   TransactionResponse, Category, Provider, PartyType,
-} from './misc.d';
+} from './misc.types';
 
 export interface FetchProductTransactionsOptions {
   productName: string;

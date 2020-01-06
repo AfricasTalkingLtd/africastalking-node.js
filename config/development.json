@@ -83,6 +83,14 @@
     "FETCH_WALLET_BALANCE": {
       "live": "https://payments.africastalking.com/query/wallet/balance",
       "sandbox": "https://payments.sandbox.africastalking.com/query/wallet/balance"
+    },
+    "GENERATE_AUTH_TOKEN": {
+      "live": "https://api.africastalking.com/auth-token/generate",
+      "sandbox": "https://api.sandbox.africastalking.com/auth-token/generate"
+    },
+    "CREATE_CHECKOUT_TOKEN": {
+      "live": "https://api.africastalking.com/checkout/token/create",
+      "sandbox": "https://api.sandbox.africastalking.com/checkout/token/create"
     }
   }
 }

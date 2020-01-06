@@ -1,6 +1,6 @@
 import joi from 'joi';
-import { Credentials } from '../../../utils/getFullCredentials.d';
-import { BankCheckoutValidateOptions, BankCheckoutValidateResponse, BankCheckoutValidatePostData } from './bankCheckoutValidate.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
+import { BankCheckoutValidateOptions, BankCheckoutValidateResponse, BankCheckoutValidatePostData } from './bankCheckoutValidate.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 

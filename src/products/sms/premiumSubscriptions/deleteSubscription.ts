@@ -1,8 +1,8 @@
 import joi from 'joi';
 import querystring from 'query-string';
-import { DeleteSubscriptionOptions, DeleteSubscriptionResponse, DeleteSubscriptionPostData } from './deleteSubscription.d';
+import { DeleteSubscriptionOptions, DeleteSubscriptionResponse, DeleteSubscriptionPostData } from './deleteSubscription.types';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { Credentials } from '../../../utils/getFullCredentials.d';
+import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({

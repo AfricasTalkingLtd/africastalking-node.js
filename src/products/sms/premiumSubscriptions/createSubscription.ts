@@ -1,7 +1,7 @@
 import joi from 'joi';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { CreateSubscriptionOptions, CreateSubscriptionResponse, CreateSubscriptionPostData } from './createSubscription.d';
-import { Credentials } from '../../../utils/getFullCredentials.d';
+import { CreateSubscriptionOptions, CreateSubscriptionResponse, CreateSubscriptionPostData } from './createSubscription.types';
+import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 
 const getSchema = () => joi.object({
