@@ -1,10 +1,10 @@
 import { UrlCategory } from '../constants/index.types';
 
-export interface SendRequestOptions<T2, T3> {
+export interface SendRequestOptions<PostData, Params> {
   urlCategory: UrlCategory,
   username: string,
   method: 'GET' | 'POST',
-  data?: T2,
+  data?: PostData,
   headers?: any;
-  params?: T3;
+  params?: Params;
 }

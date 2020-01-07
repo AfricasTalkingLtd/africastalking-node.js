@@ -1,0 +1,34 @@
+syntax = "proto3";
+option java_package = "com.africastalking.proto";
+
+package africastalking;
+
+message ClientTokenRequest { }
+
+message ClientTokenResponse {
+  string username = 1;
+  string token = 2;
+  int64 expiration = 3;
+  string environment = 4;
+}
+
+message SipCredentialsRequest { }
+
+message SipCredentials {
+  string host = 1;
+  int32 port = 2;
+  string username = 3;
+  string password = 4;
+  string transport = 5;
+}
+
+message SipCredentialsResponse {
+  repeated SipCredentials credentials = 1;
+}
+
+
+service SdkServerService {
+    rpc getToken(ClientTokenRequest) returns (ClientTokenResponse) {}
+
+    rpc getSipCredentials(SipCredentialsRequest) returns (SipCredentialsResponse) {}
+}

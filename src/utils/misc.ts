@@ -24,9 +24,9 @@ const getUrl = (urlCategory: UrlCategory, username: string): string => {
     : urls[urlCategory].live;
 };
 
-export const sendRequest = <T1, T2 = null, T3 = any>(
-  opts: SendRequestOptions<T2, T3>,
-): Promise<T1> => {
+export const sendRequest = <Response, PostData = null, Params = any>(
+  opts: SendRequestOptions<PostData, Params>,
+): Promise<Response> => {
   const {
     urlCategory, username, method, data = null, headers, params,
   } = opts;
