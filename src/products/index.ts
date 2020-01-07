@@ -5,6 +5,7 @@ import { Credentials } from '../utils/getFullCredentials.types';
 import { PAYMENTS } from './payments';
 import { TOKEN } from './token';
 import { VOICE } from './voice';
+import { USSD } from './ussd';
 
 export const AfricasTalking = (credentials: Credentials) => ({
   AIRTIME: AIRTIME(credentials),
@@ -13,7 +14,7 @@ export const AfricasTalking = (credentials: Credentials) => ({
   PAYMENTS: PAYMENTS(credentials),
   TOKEN: TOKEN(credentials),
   VOICE: VOICE(credentials),
-  // USSD,
+  USSD,
 
   // fallbacks
   ACCOUNT: APPLICATION(credentials),

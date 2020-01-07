@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.js",
+    "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.ts",
     "test-windows": "NODE_ENV=test nyc node_modules/mocha/bin/_mocha -r ts-node/register test/**/*.test.js",
     "lint": "eslint --ext .ts ./",
     "ts-check": "tsc --noEmit -p  .",
@@ -18,13 +18,17 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "config": "^3.2.4",
+    "express": "^4.17.1",
     "joi": "^14.3.1",
     "query-string": "^6.9.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.17.1",
     "@types/config": "0.0.36",
+    "@types/express": "^4.17.2",
     "@types/joi": "^14.3.4",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.17",
