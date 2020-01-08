@@ -20,7 +20,7 @@ export const findTransaction = (credentials: Credentials) => async (
   };
 
   return sendRequest<FindTransactionResponse, null, FindTransactionQueryParams>({
-    urlCategory: 'FIND_TRANSACTION',
+    endpointCategory: 'FIND_TRANSACTION',
     username,
     method: 'GET',
     headers: {

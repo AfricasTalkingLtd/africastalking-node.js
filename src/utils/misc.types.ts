@@ -1,7 +1,7 @@
-import { UrlCategory } from '../constants/index.types';
+import { EndpointCategory } from './getUrl.types';
 
 export interface SendRequestOptions<PostData, Params> {
-  urlCategory: UrlCategory,
+  endpointCategory: EndpointCategory,
   username: string,
   method: 'GET' | 'POST',
   data?: PostData,

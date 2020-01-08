@@ -23,7 +23,7 @@ export const fetchSubscription = (credentials: Credentials) => async (
   };
 
   return sendRequest<FetchSubscriptionResponse, null, FetchSubscriptionQueryParams>({
-    urlCategory: 'FETCH_SUBSCRIPTION',
+    endpointCategory: 'FETCH_SUBSCRIPTION',
     username,
     method: 'GET',
     headers: {

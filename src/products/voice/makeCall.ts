@@ -25,7 +25,7 @@ export const makeCall = (credentials: Credentials) => async (
   };
 
   return sendRequest<MakeCallResponse, string>({
-    urlCategory: 'MAKE_CALL',
+    endpointCategory: 'MAKE_CALL',
     username,
     method: 'POST',
     data: queryString.stringify(data),

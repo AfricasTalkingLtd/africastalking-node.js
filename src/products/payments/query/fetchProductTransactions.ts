@@ -32,7 +32,7 @@ export const fetchProductTransactions = (credentials: Credentials) => async (
   };
 
   return sendRequest<FetchProductTransactionsResponse, null, FetchProductTransactionsQueryParams>({
-    urlCategory: 'FETCH_PRODUCT_TRANSACTIONS',
+    endpointCategory: 'FETCH_PRODUCT_TRANSACTIONS',
     username,
     method: 'GET',
     headers: {

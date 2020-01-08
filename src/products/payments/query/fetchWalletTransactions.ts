@@ -24,7 +24,7 @@ export const fetchWalletTransactions = (credentials: Credentials) => async (
   };
 
   return sendRequest<FetchWalletTransactionsResponse, null, FetchWalletTransactionsQueryParams>({
-    urlCategory: 'FETCH_WALLET_TRANSACTIONS',
+    endpointCategory: 'FETCH_WALLET_TRANSACTIONS',
     username,
     method: 'GET',
     headers: {

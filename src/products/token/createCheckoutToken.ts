@@ -17,7 +17,7 @@ export const createCheckoutToken = (credentials: Credentials) => async (
   const data: CreateCheckoutTokenPostData = { ...result };
 
   return sendRequest<CreateCheckoutTokenResponse, CreateCheckoutTokenPostData>({
-    urlCategory: 'CREATE_CHECKOUT_TOKEN',
+    endpointCategory: 'CREATE_CHECKOUT_TOKEN',
     username,
     method: 'POST',
     data,

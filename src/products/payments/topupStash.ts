@@ -23,7 +23,7 @@ export const topupStash = (credentials: Credentials) => async (
   };
 
   return sendRequest<TopupStashResponse, TopupStashPostData>({
-    urlCategory: 'TOPUP_STASH',
+    endpointCategory: 'TOPUP_STASH',
     username,
     method: 'POST',
     data,

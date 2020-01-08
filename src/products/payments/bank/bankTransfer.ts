@@ -34,7 +34,7 @@ export const bankTransfer = (credentials: Credentials) => async (
   };
 
   return sendRequest<BankTransferResponse, BankTransferPostData>({
-    urlCategory: 'BANK_TRANSFER',
+    endpointCategory: 'BANK_TRANSFER',
     username,
     method: 'POST',
     data,

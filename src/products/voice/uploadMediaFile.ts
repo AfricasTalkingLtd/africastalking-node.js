@@ -18,7 +18,7 @@ export const uploadMediaFile = (credentials: Credentials) => async (
   const data: UploadMediaFilePostData = { ...result, username };
 
   return sendRequest<UploadMediaFileResponse, string>({
-    urlCategory: 'UPLOAD_MEDIA_FILE',
+    endpointCategory: 'UPLOAD_MEDIA_FILE',
     username,
     method: 'POST',
     data: queryString.stringify(data),

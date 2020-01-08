@@ -30,7 +30,7 @@ export const bankCheckoutCharge = (credentials: Credentials) => async (
   };
 
   return sendRequest<BankCheckoutChargeResponse, BankCheckoutChargePostData>({
-    urlCategory: 'BANK_CHECKOUT_CHARGE',
+    endpointCategory: 'BANK_CHECKOUT_CHARGE',
     username,
     method: 'POST',
     data,

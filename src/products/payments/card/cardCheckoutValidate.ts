@@ -21,7 +21,7 @@ export const cardCheckoutValidate = (credentials: Credentials) => async (
   };
 
   return sendRequest<CardCheckoutValidateResponse, CardCheckoutValidatePostData>({
-    urlCategory: 'CARD_CHECKOUT_VALIDATE',
+    endpointCategory: 'CARD_CHECKOUT_VALIDATE',
     username,
     method: 'POST',
     data,

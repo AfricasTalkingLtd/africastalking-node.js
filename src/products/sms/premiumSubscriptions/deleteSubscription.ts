@@ -20,7 +20,7 @@ export const deleteSubscription = (credentials: Credentials) => async (
   const data: DeleteSubscriptionPostData = { ...result, username };
 
   return sendRequest<DeleteSubscriptionResponse, string>({
-    urlCategory: 'DELETE_SUBSCRIPTION',
+    endpointCategory: 'DELETE_SUBSCRIPTION',
     username,
     method: 'POST',
     data: querystring.stringify(data),

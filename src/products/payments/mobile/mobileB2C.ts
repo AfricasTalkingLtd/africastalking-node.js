@@ -33,7 +33,7 @@ export const mobileB2C = (credentials: Credentials) => async (
   };
 
   return sendRequest<MobileB2CResponse, MobileB2CPostData>({
-    urlCategory: 'MOBILE_B2C',
+    endpointCategory: 'MOBILE_B2C',
     username,
     method: 'POST',
     data,

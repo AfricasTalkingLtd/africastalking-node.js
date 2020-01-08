@@ -9,7 +9,7 @@ export const generateAuthToken = (
   const { apiKey, username, format } = await getFullCredentials(credentials);
 
   return sendRequest<GenerateAuthTokenResponse>({
-    urlCategory: 'GENERATE_AUTH_TOKEN',
+    endpointCategory: 'GENERATE_AUTH_TOKEN',
     username,
     method: 'GET',
     headers: {

@@ -24,7 +24,7 @@ export const walletTransfer = (credentials: Credentials) => async (
   };
 
   return sendRequest<WalletTransferResponse, WalletTransferPostData>({
-    urlCategory: 'WALLET_TRANSFER',
+    endpointCategory: 'WALLET_TRANSFER',
     username,
     method: 'POST',
     data,

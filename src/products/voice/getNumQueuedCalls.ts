@@ -18,7 +18,7 @@ export const getNumQueuedCalls = (credentials: Credentials) => async (
   const data: GetNumQueuedCallsPostData = { ...result, username };
 
   return sendRequest<GetNumQueuedCallsResponse, string>({
-    urlCategory: 'GET_NUM_QUEUED_CALLS',
+    endpointCategory: 'GET_NUM_QUEUED_CALLS',
     username,
     method: 'POST',
     data: queryString.stringify(data),

@@ -28,7 +28,7 @@ export const mobileB2B = (credentials: Credentials) => async (
   };
 
   return sendRequest<MobileB2BResponse, MobileB2BPostData>({
-    urlCategory: 'MOBILE_B2B',
+    endpointCategory: 'MOBILE_B2B',
     username,
     method: 'POST',
     data,

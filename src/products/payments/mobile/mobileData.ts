@@ -30,7 +30,7 @@ export const mobileData = (credentials: Credentials) => async (
   };
 
   return sendRequest<MobileDataResponse, MobileDataPostData>({
-    urlCategory: 'MOBILE_DATA',
+    endpointCategory: 'MOBILE_DATA',
     username,
     method: 'POST',
     data,

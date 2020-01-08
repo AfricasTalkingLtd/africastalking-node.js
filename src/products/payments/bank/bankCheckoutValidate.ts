@@ -21,7 +21,7 @@ export const bankCheckoutValidate = (credentials: Credentials) => async (
   };
 
   return sendRequest<BankCheckoutValidateResponse, BankCheckoutValidatePostData>({
-    urlCategory: 'BANK_CHECKOUT_VALIDATE',
+    endpointCategory: 'BANK_CHECKOUT_VALIDATE',
     username,
     method: 'POST',
     data,

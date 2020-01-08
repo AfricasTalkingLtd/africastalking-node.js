@@ -49,7 +49,7 @@ export const sendSms = (credentials: Credentials) => async (
   };
 
   return sendRequest<SmsResponse, SmsPostData>({
-    urlCategory: 'SMS',
+    endpointCategory: 'SMS',
     username,
     method: 'POST',
     data,

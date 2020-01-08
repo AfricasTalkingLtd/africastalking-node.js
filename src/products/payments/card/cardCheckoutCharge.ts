@@ -41,7 +41,7 @@ export const cardCheckoutCharge = (credentials: Credentials) => async (
   };
 
   return sendRequest<CardCheckoutChargeResponse, CardCheckoutChargePostData>({
-    urlCategory: 'CARD_CHECKOUT_CHARGE',
+    endpointCategory: 'CARD_CHECKOUT_CHARGE',
     username,
     method: 'POST',
     data,

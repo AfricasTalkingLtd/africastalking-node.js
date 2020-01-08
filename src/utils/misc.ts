@@ -1,8 +1,7 @@
 import { Schema } from 'joi';
 import axios from 'axios';
-import { config } from '../constants';
-import { UrlCategory } from '../constants/index.types';
 import { SendRequestOptions } from './misc.types';
+import { getUrl } from './getUrl';
 
 export const validateJoiSchema = <T>(schema: Schema, data: any): T => {
   const { error, value } = schema.validate(data);
@@ -15,24 +14,15 @@ export const validateJoiSchema = <T>(schema: Schema, data: any): T => {
   return value;
 };
 
-const getUrl = (urlCategory: UrlCategory, username: string): string => {
-  const isSandbox = (): boolean => username.toLowerCase() === 'sandbox';
-  const { urls } = config;
-
-  return isSandbox()
-    ? urls[urlCategory].sandbox
-    : urls[urlCategory].live;
-};
-
 export const sendRequest = <Response, PostData = null, Params = any>(
   opts: SendRequestOptions<PostData, Params>,
 ): Promise<Response> => {
   const {
-    urlCategory, username, method, data = null, headers, params,
+    endpointCategory, username, method, data = null, headers, params,
   } = opts;
 
   return axios({
-    url: getUrl(urlCategory, username),
+    url: getUrl(endpointCategory, username),
     method,
     data,
     headers,

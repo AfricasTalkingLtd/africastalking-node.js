@@ -14,7 +14,7 @@ export const fetchMessages = (credentials: Credentials) => async (
   };
 
   return sendRequest<FetchMessagesResponse, null, FetchMessagesQueryParams>({
-    urlCategory: 'SMS',
+    endpointCategory: 'SMS',
     username,
     method: 'GET',
     headers: {

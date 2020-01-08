@@ -11,7 +11,7 @@ export const fetchWalletBalance = (
   const queryParams: FetchWalletBalanceQueryParams = { username };
 
   return sendRequest<FetchWalletBalanceResponse, null, FetchWalletBalanceQueryParams>({
-    urlCategory: 'FETCH_WALLET_BALANCE',
+    endpointCategory: 'FETCH_WALLET_BALANCE',
     username,
     method: 'GET',
     headers: {

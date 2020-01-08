@@ -25,7 +25,7 @@ export const mobileCheckout = (credentials: Credentials) => async (
   };
 
   return sendRequest<MobileCheckoutResponse, MobileCheckoutPostData>({
-    urlCategory: 'MOBILE_CHECKOUT',
+    endpointCategory: 'MOBILE_CHECKOUT',
     username,
     method: 'POST',
     data,

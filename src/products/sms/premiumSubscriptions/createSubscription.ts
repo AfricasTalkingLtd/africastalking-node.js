@@ -20,7 +20,7 @@ export const createSubscription = (credentials: Credentials) => async (
   const data: CreateSubscriptionPostData = { ...result, username };
 
   return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>({
-    urlCategory: 'CREATE_SUBSCRIPTION',
+    endpointCategory: 'CREATE_SUBSCRIPTION',
     username,
     method: 'POST',
     data,

@@ -30,7 +30,7 @@ export const sendAirtimeRequest = (credentials: Credentials) => async (
   };
 
   return sendRequest<AirtimeResponse, string>({
-    urlCategory: 'AIRTIME',
+    endpointCategory: 'AIRTIME',
     username,
     method: 'POST',
     data: queryString.stringify(data),

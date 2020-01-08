@@ -11,7 +11,7 @@ export const fetchApplicationData = (
   const queryParams: ApplicationQueryParams = { username };
 
   return sendRequest<ApplicationResponse, null, ApplicationQueryParams>({
-    urlCategory: 'APPLICATION',
+    endpointCategory: 'APPLICATION',
     username,
     method: 'GET',
     headers: {
