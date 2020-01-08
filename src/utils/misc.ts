@@ -1,4 +1,5 @@
 import { Schema } from 'joi';
+import chalk from 'chalk';
 import axios from 'axios';
 import { SendRequestOptions } from './misc.types';
 import { getUrl } from './getUrl';
@@ -34,4 +35,20 @@ export const sendRequest = <Response, PostData = null, Params = any>(
 
     return Promise.resolve(value.data);
   });
+};
+
+export const showDeprecationWarning = (
+  oldFunctionName: string,
+  newFunctionName: string,
+  releaseType: 'minor' | 'major' = 'minor',
+  link: string = 'https://github.com/AfricasTalkingLtd/africastalking-node.js',
+): void => {
+  const header = chalk.bold.bgHex('#ff8c00')('Deprecation warning:');
+  const msg = chalk.keyword('orange')(` 
+  ${chalk.bold(oldFunctionName)} is being deprecated and will be removed in upcoming ${chalk.bold(releaseType)} release. 
+  Please use ${chalk.bold(newFunctionName)} instead.
+  For more information, please refer to ${chalk.underline(link)}.`);
+
+  // eslint-disable-next-line no-console
+  console.warn(`${header}${msg}`);
 };
