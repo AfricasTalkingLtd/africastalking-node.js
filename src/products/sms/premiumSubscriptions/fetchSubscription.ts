@@ -13,7 +13,7 @@ const getSchema = () => joi.object({
 export const fetchSubscription = (credentials: Credentials) => async (
   options: FetchSubscriptionOptions,
 ): Promise<FetchSubscriptionResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
 
   const queryParams: FetchSubscriptionQueryParams = {

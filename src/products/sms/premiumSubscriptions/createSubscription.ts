@@ -14,7 +14,7 @@ const getSchema = () => joi.object({
 export const createSubscription = (credentials: Credentials) => async (
   options: CreateSubscriptionOptions,
 ): Promise<CreateSubscriptionResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<CreateSubscriptionOptions>(getSchema(), options);
 
   const data: CreateSubscriptionPostData = { ...result, username };

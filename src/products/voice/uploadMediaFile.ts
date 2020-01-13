@@ -12,7 +12,7 @@ const getSchema = () => joi.object({
 export const uploadMediaFile = (credentials: Credentials) => async (
   options: UploadMediaFileOptions,
 ): Promise<UploadMediaFileResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<UploadMediaFileOptions>(getSchema(), options);
 
   const data: UploadMediaFilePostData = { ...result, username };

@@ -19,7 +19,7 @@ const getSchema = () => joi.object({
 export const mobileB2B = (credentials: Credentials) => async (
   options: MobileB2BOptions,
 ): Promise<MobileB2BResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileB2BOptions>(getSchema(), options);
 
   const data: MobileB2BPostData = {

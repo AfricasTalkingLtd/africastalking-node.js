@@ -6,7 +6,7 @@ import { Credentials } from '../../utils/getFullCredentials.types';
 export const fetchMessages = (credentials: Credentials) => async (
   options: FetchMessagesOptions,
 ): Promise<FetchMessagesResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: FetchMessagesQueryParams = {
     username,

@@ -23,7 +23,7 @@ const getSchema = () => joi.object({
 export const fetchProductTransactions = (credentials: Credentials) => async (
   options: FetchProductTransactionsOptions,
 ): Promise<FetchProductTransactionsResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchProductTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchProductTransactionsQueryParams = {

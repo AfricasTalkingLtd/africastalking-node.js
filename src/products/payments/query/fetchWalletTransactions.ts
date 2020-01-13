@@ -15,7 +15,7 @@ const getSchema = () => joi.object({
 export const fetchWalletTransactions = (credentials: Credentials) => async (
   options: FetchWalletTransactionsOptions,
 ): Promise<FetchWalletTransactionsResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchWalletTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchWalletTransactionsQueryParams = {

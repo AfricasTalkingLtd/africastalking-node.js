@@ -35,7 +35,7 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
 export const sendSms = (credentials: Credentials) => async (
   options: SmsOptions, isBulk: boolean = false, isPremium: boolean = false,
 ): Promise<SmsResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<SmsOptions>(getSchema(isBulk, isPremium), options);
 
   const { to } = result;

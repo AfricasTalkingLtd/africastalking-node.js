@@ -16,7 +16,7 @@ const getSchema = () => joi.object({
 export const mobileCheckout = (credentials: Credentials) => async (
   options: MobileCheckoutOptions,
 ): Promise<MobileCheckoutResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileCheckoutOptions>(getSchema(), options);
 
   const data: MobileCheckoutPostData = {

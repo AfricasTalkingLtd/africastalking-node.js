@@ -6,7 +6,7 @@ import { sendRequest } from '../../../utils/misc';
 export const fetchWalletBalance = (
   credentials: Credentials,
 ) => async (): Promise<FetchWalletBalanceResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: FetchWalletBalanceQueryParams = { username };
 

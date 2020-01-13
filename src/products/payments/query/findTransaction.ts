@@ -11,7 +11,7 @@ const getSchema = () => joi.object({
 export const findTransaction = (credentials: Credentials) => async (
   options: FindTransactionOptions,
 ): Promise<FindTransactionResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FindTransactionOptions>(getSchema(), options);
 
   const queryParams: FindTransactionQueryParams = {

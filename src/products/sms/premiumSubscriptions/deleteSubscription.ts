@@ -14,7 +14,7 @@ const getSchema = () => joi.object({
 export const deleteSubscription = (credentials: Credentials) => async (
   options: DeleteSubscriptionOptions,
 ): Promise<DeleteSubscriptionResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<DeleteSubscriptionOptions>(getSchema(), options);
 
   const data: DeleteSubscriptionPostData = { ...result, username };

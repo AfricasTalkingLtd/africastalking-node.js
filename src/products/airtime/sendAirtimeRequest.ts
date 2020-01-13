@@ -18,15 +18,15 @@ const getSchema = () => joi.object({
 export const sendAirtimeRequest = (credentials: Credentials) => async (
   options: AirtimeOptions,
 ): Promise<AirtimeResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<AirtimeOptions>(getSchema(), options);
 
   const data: AirtimePostData = {
     username,
-    recipients: result.recipients.map((r) => ({
+    recipients: JSON.stringify(result.recipients.map((r) => ({
       phoneNumber: r.phoneNumber,
       amount: `${r.currencyCode} ${r.amount}`,
-    })),
+    }))) as any,
   };
 
   return sendRequest<AirtimeResponse, string>({

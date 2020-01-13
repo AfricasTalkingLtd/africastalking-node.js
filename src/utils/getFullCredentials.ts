@@ -8,7 +8,7 @@ const getSchema = () => joi.object({
   format: joi.string().valid('json', 'xml').required(),
 }).required();
 
-export const getFullCredentials = async (credentials: Credentials): Promise<FullCredentials> => {
+export const getFullCredentials = (credentials: Credentials): FullCredentials => {
   const value = validateJoiSchema<Credentials>(getSchema(), credentials);
 
   return {

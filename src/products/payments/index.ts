@@ -14,7 +14,6 @@ import { findTransaction } from './query/findTransaction';
 import { fetchWalletTransactions } from './query/fetchWalletTransactions';
 import { fetchWalletBalance } from './query/fetchWalletBalance';
 import { mobileData } from './mobile/mobileData';
-import { showDeprecationWarning } from '../../utils/misc';
 
 export const PAYMENTS = (credentials: Credentials) => ({
   mobileCheckout: mobileCheckout(credentials),
@@ -34,20 +33,8 @@ export const PAYMENTS = (credentials: Credentials) => ({
   mobileData: mobileData(credentials),
 
   // fallbacks
-  checkout: (() => {
-    showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()');
-    return mobileCheckout(credentials);
-  })(),
-  checkOut: (() => {
-    showDeprecationWarning('PAYMENTS.checkOut()', 'PAYMENTS.mobileCheckout()');
-    return mobileCheckout(credentials);
-  })(),
-  payConsumer: (() => {
-    showDeprecationWarning('PAYMENTS.payConsumer()', 'PAYMENTS.mobileB2C()');
-    return mobileB2C(credentials);
-  })(),
-  payBusiness: (() => {
-    showDeprecationWarning('PAYMENTS.payBusiness()', 'PAYMENTS.mobileB2B()');
-    return mobileB2B(credentials);
-  })(),
+  checkout: mobileCheckout(credentials),
+  checkOut: mobileCheckout(credentials),
+  payConsumer: mobileB2C(credentials),
+  payBusiness: mobileB2B(credentials),
 });

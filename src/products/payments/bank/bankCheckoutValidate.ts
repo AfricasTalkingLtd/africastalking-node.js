@@ -12,7 +12,7 @@ const getSchema = () => joi.object({
 export const bankCheckoutValidate = (credentials: Credentials) => async (
   options: BankCheckoutValidateOptions,
 ): Promise<BankCheckoutValidateResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<BankCheckoutValidateOptions>(getSchema(), options);
 
   const data: BankCheckoutValidatePostData = {

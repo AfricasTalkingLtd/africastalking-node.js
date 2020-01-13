@@ -6,7 +6,7 @@ import { getFullCredentials } from '../../utils/getFullCredentials';
 export const fetchApplicationData = (
   credentials: Credentials,
 ) => async (): Promise<ApplicationResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: ApplicationQueryParams = { username };
 

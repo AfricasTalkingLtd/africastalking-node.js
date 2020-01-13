@@ -15,7 +15,7 @@ const getSchema = () => joi.object({
 export const walletTransfer = (credentials: Credentials) => async (
   options: WalletTransferOptions,
 ): Promise<WalletTransferResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<WalletTransferOptions>(getSchema(), options);
 
   const data: WalletTransferPostData = {

@@ -21,7 +21,7 @@ const getSchema = () => joi.object({
 export const mobileData = (credentials: Credentials) => async (
   options: MobileDataOptions,
 ): Promise<MobileDataResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileDataOptions>(getSchema(), options);
 
   const data: MobileDataPostData = {

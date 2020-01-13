@@ -11,7 +11,7 @@ const getSchema = () => joi.object({
 export const createCheckoutToken = (credentials: Credentials) => async (
   phoneNumber: string,
 ): Promise<CreateCheckoutTokenResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<CreateCheckoutTokenOptions>(getSchema(), { phoneNumber });
 
   const data: CreateCheckoutTokenPostData = { ...result };

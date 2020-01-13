@@ -6,7 +6,7 @@ import { sendRequest } from '../../utils/misc';
 export const generateAuthToken = (
   credentials: Credentials,
 ) => async (): Promise<GenerateAuthTokenResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
 
   return sendRequest<GenerateAuthTokenResponse>({
     endpointCategory: 'GENERATE_AUTH_TOKEN',

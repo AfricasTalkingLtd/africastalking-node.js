@@ -14,7 +14,7 @@ const getSchema = () => joi.object({
 export const makeCall = (credentials: Credentials) => async (
   options: MakeCallOptions,
 ): Promise<MakeCallResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MakeCallOptions>(getSchema(), options);
 
   const data: MakeCallPostData = {

@@ -14,7 +14,7 @@ const getSchema = () => joi.object({
 export const topupStash = (credentials: Credentials) => async (
   options: TopupStashOptions,
 ): Promise<TopupStashResponse> => {
-  const { apiKey, username, format } = await getFullCredentials(credentials);
+  const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<TopupStashOptions>(getSchema(), options);
 
   const data: TopupStashPostData = {
