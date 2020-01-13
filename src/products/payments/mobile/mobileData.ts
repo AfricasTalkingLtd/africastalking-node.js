@@ -9,7 +9,7 @@ const getSchema = () => joi.object({
   recipients: joi.array().items(
     joi.object({
       phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
-      qty: joi.number().required(),
+      quantity: joi.number().required(),
       unit: joi.string().valid('MB', 'GB').required(),
       validity: joi.string().valid('Day', 'Month', 'Week').required(),
       metadata: joi.object(),

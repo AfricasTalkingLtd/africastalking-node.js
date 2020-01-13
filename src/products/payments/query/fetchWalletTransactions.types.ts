@@ -1,16 +1,24 @@
 import { Category, TransactionResponse } from './misc.types';
 
 export interface FetchWalletTransactionsOptions {
+  filters: {
+    pageNumber: string;
+    count: string;
+    startDate?: string;
+    endDate?: string;
+    categories?: string;
+  };
+
+}
+
+export interface FetchWalletTransactionsQueryParams {
+  username: string;
   pageNumber: string;
   count: string;
   startDate?: string;
   endDate?: string;
   categories?: string;
 }
-
-export type FetchWalletTransactionsQueryParams = FetchWalletTransactionsOptions & {
-  username: string;
-};
 
 export interface FetchWalletTransactionsResponse {
   status: 'Success' | 'Failed';

@@ -5,11 +5,13 @@ import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
-  pageNumber: joi.string().required(),
-  count: joi.string().required(),
-  startDate: joi.string(),
-  endDate: joi.string(),
-  categories: joi.string(),
+  filters: joi.object({
+    pageNumber: joi.string().required(),
+    count: joi.string().required(),
+    startDate: joi.string(),
+    endDate: joi.string(),
+    categories: joi.string(),
+  }).required(),
 }).required();
 
 export const fetchWalletTransactions = (credentials: Credentials) => async (
@@ -19,7 +21,7 @@ export const fetchWalletTransactions = (credentials: Credentials) => async (
   const result = validateJoiSchema<FetchWalletTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchWalletTransactionsQueryParams = {
-    ...result,
+    ...result.filters,
     username,
   };
 

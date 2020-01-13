@@ -4,6 +4,23 @@ import {
 
 export interface FetchProductTransactionsOptions {
   productName: string;
+  filters: {
+    pageNumber: string;
+    count: string;
+    startDate?: string;
+    endDate?: string;
+    category?: Category;
+    provider?: Provider;
+    status?: 'Sucess' | 'Failed';
+    source?: PartyType;
+    destination?: PartyType;
+    providerChannel?: string;
+  };
+}
+
+export interface FetchProductTransactionsQueryParams {
+  username: string;
+  productName: string;
   pageNumber: string;
   count: string;
   startDate?: string;
@@ -15,10 +32,6 @@ export interface FetchProductTransactionsOptions {
   destination?: PartyType;
   providerChannel?: string;
 }
-
-export type FetchProductTransactionsQueryParams = FetchProductTransactionsOptions & {
-  username: string;
-};
 
 export interface FetchProductTransactionsResponse {
   status: 'Success' | 'Failed';

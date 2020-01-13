@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import AfricasTalking from '../src';
-import { validCredentials } from './fixtures';
+import AfricasTalking from '../../src';
+import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 

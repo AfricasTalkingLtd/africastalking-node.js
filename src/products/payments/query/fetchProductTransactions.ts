@@ -6,18 +6,20 @@ import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
 const getSchema = () => joi.object({
   productName: joi.string().regex(/\S/, 'no space').required(),
-  pageNumber: joi.string().required(),
-  count: joi.string().required(),
-  startDate: joi.string(),
-  endDate: joi.string(),
-  category: joi.string().valid('BankCheckout', 'CardCheckout', 'MobileCheckout',
-    'MobileC2B', 'MobileB2C', 'MobileB2B', 'BankTransfer', 'WalletTransfer',
-    'UserStashTopup'),
-  provider: joi.string().valid('Mpesa', 'Segovia', 'Flutterwave', 'Admin', 'Athena'),
-  status: joi.string().valid('Success', 'Failed'),
-  source: joi.string().valid('phoneNumber', 'BankAccount', 'Card', 'Wallet'),
-  destination: joi.string().valid('phoneNumber', 'BankAccount', 'Card', 'Wallet'),
-  providerChannel: joi.string(),
+  filters: joi.object({
+    pageNumber: joi.string().required(),
+    count: joi.string().required(),
+    startDate: joi.string(),
+    endDate: joi.string(),
+    category: joi.string().valid('BankCheckout', 'CardCheckout', 'MobileCheckout',
+      'MobileC2B', 'MobileB2C', 'MobileB2B', 'BankTransfer', 'WalletTransfer',
+      'UserStashTopup'),
+    provider: joi.string().valid('Mpesa', 'Segovia', 'Flutterwave', 'Admin', 'Athena'),
+    status: joi.string().valid('Success', 'Failed'),
+    source: joi.string().valid('phoneNumber', 'BankAccount', 'Card', 'Wallet'),
+    destination: joi.string().valid('phoneNumber', 'BankAccount', 'Card', 'Wallet'),
+    providerChannel: joi.string(),
+  }).required(),
 }).required();
 
 export const fetchProductTransactions = (credentials: Credentials) => async (
@@ -27,7 +29,8 @@ export const fetchProductTransactions = (credentials: Credentials) => async (
   const result = validateJoiSchema<FetchProductTransactionsOptions>(getSchema(), options);
 
   const queryParams: FetchProductTransactionsQueryParams = {
-    ...result,
+    productName: result.productName,
+    ...result.filters,
     username,
   };
 

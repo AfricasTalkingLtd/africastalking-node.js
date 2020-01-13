@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.ts",
-    "test-windows": "NODE_ENV=test nyc node_modules/mocha/bin/_mocha -r ts-node/register test/**/*.test.js",
+    "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
+    "test-windows": "NODE_ENV=test nyc node_modules/mocha/bin/_mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
     "lint": "eslint --ext .ts ./",
     "ts-check": "tsc --noEmit -p  .",
     "pre-commit-message": "echo 'Please wait, running pre-commit checks...' && exit 0"

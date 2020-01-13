@@ -36,7 +36,7 @@ const endpoints: Endpoints = {
   CARD_CHECKOUT_VALIDATE: { baseUrlCategory: 'PAYMENTS', endpoint: '/card/checkout/validate' },
   FETCH_PRODUCT_TRANSACTIONS: { baseUrlCategory: 'PAYMENTS', endpoint: '/query/transaction/fetch' },
   FIND_TRANSACTION: { baseUrlCategory: 'PAYMENTS', endpoint: '/query/transaction/find' },
-  FETCH_WALLET_TRANSACTIONS: { baseUrlCategory: 'PAYMENTS', endpoint: 'query/wallet/fetch' },
+  FETCH_WALLET_TRANSACTIONS: { baseUrlCategory: 'PAYMENTS', endpoint: '/query/wallet/fetch' },
   FETCH_WALLET_BALANCE: { baseUrlCategory: 'PAYMENTS', endpoint: '/query/wallet/balance' },
   MAKE_CALL: { baseUrlCategory: 'VOICE', endpoint: '/call' },
   GET_NUM_QUEUED_CALLS: { baseUrlCategory: 'VOICE', endpoint: '/queueStatus' },

@@ -2,8 +2,8 @@
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import AfricasTalking from '../src';
-import { validCredentials } from './fixtures';
+import AfricasTalking from '../../src';
+import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
@@ -42,9 +42,9 @@ describe('Airtime', () => {
         });
 
         expect(result).to.have.property('responses');
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e);
+      } catch (err) {
+      // eslint-disable-next-line no-console
+        console.log(err);
       }
     });
 
@@ -66,9 +66,9 @@ describe('Airtime', () => {
         });
 
         expect(result).to.have.property('responses');
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e);
+      } catch (err) {
+      // eslint-disable-next-line no-console
+        console.log(err);
       }
     });
   });
