@@ -1,6 +1,6 @@
 export type Authenticator = (client: any, cb: Function) => void;
 
-// TODO:
+// TODO: no documentation available
 export interface StartOptions {
   certChainFile: any;
   privateKeyFile: any;

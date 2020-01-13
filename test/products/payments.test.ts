@@ -376,6 +376,7 @@ describe('Payments', () => {
     });
 
     context('valid options', () => {
+      // TODO: fix API error: The request content was malformed: Expected String as JsString
       it('cardCheckoutCharge()', async () => {
         try {
           const result = await payments.cardCheckoutCharge({

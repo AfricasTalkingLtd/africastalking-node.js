@@ -13,21 +13,13 @@ const getSchema = () => joi.object({
     expiryYear: joi.number().required(),
     countryCode: joi.string().valid('NG').required(),
     authToken: joi.string().required(),
-  }).when('checkoutToken', {
-    is: joi.exist(),
-    then: joi.forbidden(),
-    otherwise: joi.required(),
   }),
-  checkoutToken: joi.string().regex(/\S/, 'no space').when('paymentCard', {
-    is: joi.exist(),
-    then: joi.forbidden(),
-    otherwise: joi.required(),
-  }),
+  checkoutToken: joi.string().regex(/\S/, 'no space'),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
   amount: joi.number().required(),
   narration: joi.string().regex(/\S/, 'no space').required(),
   metadata: joi.object(),
-}).required();
+}).xor('paymentCard', 'checkoutToken').required();
 
 export const cardCheckoutCharge = (credentials: Credentials) => async (
   options: CardCheckoutChargeOptions,
