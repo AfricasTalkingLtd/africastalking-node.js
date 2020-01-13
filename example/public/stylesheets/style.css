@@ -1,0 +1,18 @@
+body {
+  padding: 1em;
+  padding-top: 2em;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+    color: #00B7FF;
+}
+pre {
+    height: 96%;
+    padding: 1em;
+    color: #333333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f0ffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}

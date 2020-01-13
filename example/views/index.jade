@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    .row
+        .col-sm-6
+            pre
+                span#response
+        .col-sm-6.pt-1
+            p.lead Try clicking some buttons
+            br
+            .col-sm-8
+                input#phone.form-control(type='text', placeholder='Phone number e.g. +254718769882')
+                a#sendSms.btn.btn-success.btn-sm(role='button') Send SMS
+            br
+            .col-sm-8
+                input#amount.form-control(type='text', placeholder='Amount e.g. USD 35')
+                a#airtime.btn.btn-success.btn-sm(role='button') Airtime
+            br
+            .col-sm-8
+                input#mobileCheckoutAmount.form-control(type='text', placeholder='Amount e.g. KES 4456')
+                a#mobileCheckout.btn.btn-success.btn-sm(role='button') Mobile Checkout
+            br
+            .col-sm-8
+                input#mobileB2CAmount.form-control(type='text', placeholder='Amount e.g. KES 4456')
+                a#mobileB2C.btn.btn-success.btn-sm(role='button') Mobile B2C
+            br
+            p
+                | Read
+                a(href='https://github.com/AfricasTalkingLtd/africastalking-node.js', target='_blank')  this
+                |  for more info on all available features

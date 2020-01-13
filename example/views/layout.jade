@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        //- title= title
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css', integrity='sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B', crossorigin='anonymous')
+
+    body
+        .container
+            .row
+                h1.col-sm-10= title
+                nav.col-sm-2.float-right
+                    ul.nav.nav-pills
+                        li(role='presentation')
+                            a.nav-link(href='/') Home
+                        li(role='presentation')
+                            a.nav-link(href='http://docs.africastalking.com', target='_blank') Docs
+            small SDK Address : 
+            code #{server}
+            hr
+            block content
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js')
+        script(src='js/main.js')
