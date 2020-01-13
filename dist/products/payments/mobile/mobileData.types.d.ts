@@ -2,7 +2,7 @@ export interface MobileDataOptions {
     productName: string;
     recipients: {
         phoneNumber: string;
-        qty: number;
+        quantity: number;
         unit: 'MB' | 'GB';
         validity: 'Day' | 'Month' | 'Week';
         metadata: {

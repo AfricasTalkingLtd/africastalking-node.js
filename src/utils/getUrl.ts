@@ -18,7 +18,7 @@ const endpoints: Endpoints = {
   AIRTIME: { baseUrlCategory: 'API', endpoint: '/version1/airtime/send' },
   APPLICATION: { baseUrlCategory: 'API', endpoint: '/version1/user' },
   SMS: { baseUrlCategory: 'API', endpoint: '/version1/messaging' },
-  GENERATE_AUTH_TOKEN: { baseUrlCategory: 'API', endpoint: '/checkout/token/create' },
+  GENERATE_AUTH_TOKEN: { baseUrlCategory: 'API', endpoint: '/auth-token/generate' },
   CREATE_CHECKOUT_TOKEN: { baseUrlCategory: 'API', endpoint: '/checkout/token/create' },
   CREATE_SUBSCRIPTION: { baseUrlCategory: 'API', endpoint: '/version1/subscription/create' },
   FETCH_SUBSCRIPTION: { baseUrlCategory: 'API', endpoint: '/version1/subscription' },

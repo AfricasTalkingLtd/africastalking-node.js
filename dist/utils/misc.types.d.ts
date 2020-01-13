@@ -1,9 +1,9 @@
-import { UrlCategory } from '../constants/index.types';
-export interface SendRequestOptions<T2, T3> {
-    urlCategory: UrlCategory;
+import { EndpointCategory } from './getUrl.types';
+export interface SendRequestOptions<PostData, Params> {
+    endpointCategory: EndpointCategory;
     username: string;
     method: 'GET' | 'POST';
-    data?: T2;
+    data?: PostData;
     headers?: any;
-    params?: T3;
+    params?: Params;
 }

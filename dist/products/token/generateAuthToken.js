@@ -41,27 +41,23 @@ var misc_1 = require("../../utils/misc");
 exports.generateAuthToken = function (credentials) { return function () { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format;
     return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4, getFullCredentials_1.getFullCredentials(credentials)];
-            case 1:
-                _a = _b.sent(), apiKey = _a.apiKey, username = _a.username, format = _a.format;
-                return [2, misc_1.sendRequest({
-                        urlCategory: 'GENERATE_AUTH_TOKEN',
-                        username: username,
-                        method: 'GET',
-                        headers: {
-                            apiKey: apiKey,
-                            accept: format,
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                        .then(function (result) {
-                        if (result.token == null || result.token === 'None') {
-                            return Promise.reject(result.description);
-                        }
-                        return Promise.resolve(result);
-                    })];
-        }
+        _a = getFullCredentials_1.getFullCredentials(credentials), apiKey = _a.apiKey, username = _a.username, format = _a.format;
+        return [2, misc_1.sendRequest({
+                endpointCategory: 'GENERATE_AUTH_TOKEN',
+                username: username,
+                method: 'GET',
+                headers: {
+                    apiKey: apiKey,
+                    accept: format,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(function (result) {
+                if (result.token == null || result.token === 'None') {
+                    return Promise.reject(result.description);
+                }
+                return Promise.resolve(result);
+            })];
     });
 }); }; };
 //# sourceMappingURL=generateAuthToken.js.map

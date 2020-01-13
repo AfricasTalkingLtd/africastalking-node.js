@@ -43,7 +43,7 @@ describe('Airtime', () => {
 
         expect(result).to.have.property('responses');
       } catch (err) {
-      // eslint-disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     });
@@ -67,7 +67,7 @@ describe('Airtime', () => {
 
         expect(result).to.have.property('responses');
       } catch (err) {
-      // eslint-disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     });

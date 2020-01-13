@@ -1,4 +1,5 @@
 import joi from 'joi';
+import queryString from 'query-string';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
@@ -16,11 +17,11 @@ export const createCheckoutToken = (credentials: Credentials) => async (
 
   const data: CreateCheckoutTokenPostData = { ...result };
 
-  return sendRequest<CreateCheckoutTokenResponse, CreateCheckoutTokenPostData>({
+  return sendRequest<CreateCheckoutTokenResponse, string>({
     endpointCategory: 'CREATE_CHECKOUT_TOKEN',
     username,
     method: 'POST',
-    data,
+    data: queryString.stringify(data),
     headers: {
       apiKey,
       accept: format,

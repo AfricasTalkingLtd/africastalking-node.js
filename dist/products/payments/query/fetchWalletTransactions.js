@@ -54,33 +54,31 @@ var joi_1 = __importDefault(require("joi"));
 var getFullCredentials_1 = require("../../../utils/getFullCredentials");
 var misc_1 = require("../../../utils/misc");
 var getSchema = function () { return joi_1.default.object({
-    pageNumber: joi_1.default.string().required(),
-    count: joi_1.default.string().required(),
-    startDate: joi_1.default.string(),
-    endDate: joi_1.default.string(),
-    categories: joi_1.default.string(),
+    filters: joi_1.default.object({
+        pageNumber: joi_1.default.string().required(),
+        count: joi_1.default.string().required(),
+        startDate: joi_1.default.string(),
+        endDate: joi_1.default.string(),
+        categories: joi_1.default.string(),
+    }).required(),
 }).required(); };
 exports.fetchWalletTransactions = function (credentials) { return function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, result, queryParams;
     return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4, getFullCredentials_1.getFullCredentials(credentials)];
-            case 1:
-                _a = _b.sent(), apiKey = _a.apiKey, username = _a.username, format = _a.format;
-                result = misc_1.validateJoiSchema(getSchema(), options);
-                queryParams = __assign(__assign({}, result), { username: username });
-                return [2, misc_1.sendRequest({
-                        urlCategory: 'FETCH_WALLET_TRANSACTIONS',
-                        username: username,
-                        method: 'GET',
-                        headers: {
-                            apiKey: apiKey,
-                            accept: format,
-                            'Content-Type': 'application/json',
-                        },
-                        params: queryParams,
-                    })];
-        }
+        _a = getFullCredentials_1.getFullCredentials(credentials), apiKey = _a.apiKey, username = _a.username, format = _a.format;
+        result = misc_1.validateJoiSchema(getSchema(), options);
+        queryParams = __assign(__assign({}, result.filters), { username: username });
+        return [2, misc_1.sendRequest({
+                endpointCategory: 'FETCH_WALLET_TRANSACTIONS',
+                username: username,
+                method: 'GET',
+                headers: {
+                    apiKey: apiKey,
+                    accept: format,
+                    'Content-Type': 'application/json',
+                },
+                params: queryParams,
+            })];
     });
 }); }; };
 //# sourceMappingURL=fetchWalletTransactions.js.map

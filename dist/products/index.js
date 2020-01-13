@@ -6,6 +6,7 @@ var airtime_1 = require("./airtime");
 var payments_1 = require("./payments");
 var token_1 = require("./token");
 var voice_1 = require("./voice");
+var ussd_1 = require("./ussd");
 exports.AfricasTalking = function (credentials) { return ({
     AIRTIME: airtime_1.AIRTIME(credentials),
     APPLICATION: application_1.APPLICATION(credentials),
@@ -13,6 +14,7 @@ exports.AfricasTalking = function (credentials) { return ({
     PAYMENTS: payments_1.PAYMENTS(credentials),
     TOKEN: token_1.TOKEN(credentials),
     VOICE: voice_1.VOICE(credentials),
+    USSD: ussd_1.USSD,
     ACCOUNT: application_1.APPLICATION(credentials),
     PAYMENT: payments_1.PAYMENTS(credentials),
 }); };

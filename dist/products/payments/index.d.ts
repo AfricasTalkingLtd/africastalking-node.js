@@ -19,4 +19,45 @@ export declare const PAYMENTS: (credentials: Credentials) => {
     checkOut: (options: import("./mobile/mobileCheckout.types").MobileCheckoutOptions) => Promise<import("./mobile/mobileCheckout.types").MobileCheckoutResponse>;
     payConsumer: (options: import("./mobile/mobileB2C.types").MobileB2COptions) => Promise<import("./mobile/mobileB2C.types").MobileB2CResponse>;
     payBusiness: (options: import("./mobile/mobileB2B.types").MobileB2BOptions) => Promise<import("./mobile/mobileB2B.types").MobileB2BResponse>;
+    REASON: {
+        SALARY: string;
+        SALARY_WITH_CHARGE: string;
+        BUSINESS: string;
+        BUSINESS_WITH_CHARGE: string;
+        PROMOTION: string;
+    };
+    PROVIDER: {
+        ATHENA: string;
+        MPESA: string;
+    };
+    TRANSFER_TYPE: {
+        BUY_GOODS: string;
+        PAYBILL: string;
+        DISBURSE_FUNDS: string;
+        B2B_TRANSFER: string;
+    };
+    BANK: {
+        FCMB_NG: number;
+        ZENITH_NG: number;
+        ACCESS_NG: number;
+        GTBANK_NG: number;
+        ECOBANK_NG: number;
+        DIAMOND_NG: number;
+        PROVIDUS_NG: number;
+        UNITY_NG: number;
+        STANBIC_NG: number;
+        STERLING_NG: number;
+        PARKWAY_NG: number;
+        AFRIBANK_NG: number;
+        ENTREPRISE_NG: number;
+        FIDELITY_NG: number;
+        HERITAGE_NG: number;
+        KEYSTONE_NG: number;
+        SKYE_NG: number;
+        STANCHART_NG: number;
+        UNION_NG: number;
+        UBA_NG: number;
+        WEMA_NG: number;
+        FIRST_NG: number;
+    };
 };

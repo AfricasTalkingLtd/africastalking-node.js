@@ -1,3 +1,4 @@
+/// <reference types="express" />
 import { Credentials } from '../utils/getFullCredentials.types';
 export declare const AfricasTalking: (credentials: Credentials) => {
     AIRTIME: {
@@ -36,6 +37,47 @@ export declare const AfricasTalking: (credentials: Credentials) => {
         checkOut: (options: import("./payments/mobile/mobileCheckout.types").MobileCheckoutOptions) => Promise<import("./payments/mobile/mobileCheckout.types").MobileCheckoutResponse>;
         payConsumer: (options: import("./payments/mobile/mobileB2C.types").MobileB2COptions) => Promise<import("./payments/mobile/mobileB2C.types").MobileB2CResponse>;
         payBusiness: (options: import("./payments/mobile/mobileB2B.types").MobileB2BOptions) => Promise<import("./payments/mobile/mobileB2B.types").MobileB2BResponse>;
+        REASON: {
+            SALARY: string;
+            SALARY_WITH_CHARGE: string;
+            BUSINESS: string;
+            BUSINESS_WITH_CHARGE: string;
+            PROMOTION: string;
+        };
+        PROVIDER: {
+            ATHENA: string;
+            MPESA: string;
+        };
+        TRANSFER_TYPE: {
+            BUY_GOODS: string;
+            PAYBILL: string;
+            DISBURSE_FUNDS: string;
+            B2B_TRANSFER: string;
+        };
+        BANK: {
+            FCMB_NG: number;
+            ZENITH_NG: number;
+            ACCESS_NG: number;
+            GTBANK_NG: number;
+            ECOBANK_NG: number;
+            DIAMOND_NG: number;
+            PROVIDUS_NG: number;
+            UNITY_NG: number;
+            STANBIC_NG: number;
+            STERLING_NG: number;
+            PARKWAY_NG: number;
+            AFRIBANK_NG: number;
+            ENTREPRISE_NG: number;
+            FIDELITY_NG: number;
+            HERITAGE_NG: number;
+            KEYSTONE_NG: number;
+            SKYE_NG: number;
+            STANCHART_NG: number;
+            UNION_NG: number;
+            UBA_NG: number;
+            WEMA_NG: number;
+            FIRST_NG: number;
+        };
     };
     TOKEN: {
         generateAuthToken: () => Promise<import("./token/generateAuthToken.types").GenerateAuthTokenResponse>;
@@ -47,6 +89,7 @@ export declare const AfricasTalking: (credentials: Credentials) => {
         getNumQueuedCalls: (options: import("./voice/getNumQueuedCalls.types").GetNumQueuedCallsOptions) => Promise<import("./voice/getNumQueuedCalls.types").GetNumQueuedCallsResponse>;
         uploadMediaFile: (options: import("./voice/uploadMediaFile.types").UploadMediaFileOptions) => Promise<import("./voice/uploadMediaFile.types").UploadMediaFileResponse>;
     };
+    USSD: (handler: import("./ussd/ExpressHandler.types").UssdHandler) => ((req: import("express").Request<import("express-serve-static-core").ParamsDictionary>, res: import("express").Response, next: import("express").NextFunction) => void)[];
     ACCOUNT: {
         fetchApplicationData: () => Promise<import("./application/fetchApplicationData.types").ApplicationResponse>;
         fetchAccount: () => Promise<import("./application/fetchApplicationData.types").ApplicationResponse>;
@@ -71,5 +114,46 @@ export declare const AfricasTalking: (credentials: Credentials) => {
         checkOut: (options: import("./payments/mobile/mobileCheckout.types").MobileCheckoutOptions) => Promise<import("./payments/mobile/mobileCheckout.types").MobileCheckoutResponse>;
         payConsumer: (options: import("./payments/mobile/mobileB2C.types").MobileB2COptions) => Promise<import("./payments/mobile/mobileB2C.types").MobileB2CResponse>;
         payBusiness: (options: import("./payments/mobile/mobileB2B.types").MobileB2BOptions) => Promise<import("./payments/mobile/mobileB2B.types").MobileB2BResponse>;
+        REASON: {
+            SALARY: string;
+            SALARY_WITH_CHARGE: string;
+            BUSINESS: string;
+            BUSINESS_WITH_CHARGE: string;
+            PROMOTION: string;
+        };
+        PROVIDER: {
+            ATHENA: string;
+            MPESA: string;
+        };
+        TRANSFER_TYPE: {
+            BUY_GOODS: string;
+            PAYBILL: string;
+            DISBURSE_FUNDS: string;
+            B2B_TRANSFER: string;
+        };
+        BANK: {
+            FCMB_NG: number;
+            ZENITH_NG: number;
+            ACCESS_NG: number;
+            GTBANK_NG: number;
+            ECOBANK_NG: number;
+            DIAMOND_NG: number;
+            PROVIDUS_NG: number;
+            UNITY_NG: number;
+            STANBIC_NG: number;
+            STERLING_NG: number;
+            PARKWAY_NG: number;
+            AFRIBANK_NG: number;
+            ENTREPRISE_NG: number;
+            FIDELITY_NG: number;
+            HERITAGE_NG: number;
+            KEYSTONE_NG: number;
+            SKYE_NG: number;
+            STANCHART_NG: number;
+            UNION_NG: number;
+            UBA_NG: number;
+            WEMA_NG: number;
+            FIRST_NG: number;
+        };
     };
 };

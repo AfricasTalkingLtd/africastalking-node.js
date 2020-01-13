@@ -41,23 +41,19 @@ var misc_1 = require("../../../utils/misc");
 exports.fetchWalletBalance = function (credentials) { return function () { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, queryParams;
     return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4, getFullCredentials_1.getFullCredentials(credentials)];
-            case 1:
-                _a = _b.sent(), apiKey = _a.apiKey, username = _a.username, format = _a.format;
-                queryParams = { username: username };
-                return [2, misc_1.sendRequest({
-                        urlCategory: 'FETCH_WALLET_BALANCE',
-                        username: username,
-                        method: 'GET',
-                        headers: {
-                            apiKey: apiKey,
-                            accept: format,
-                            'Content-Type': 'application/json',
-                        },
-                        params: queryParams,
-                    })];
-        }
+        _a = getFullCredentials_1.getFullCredentials(credentials), apiKey = _a.apiKey, username = _a.username, format = _a.format;
+        queryParams = { username: username };
+        return [2, misc_1.sendRequest({
+                endpointCategory: 'FETCH_WALLET_BALANCE',
+                username: username,
+                method: 'GET',
+                headers: {
+                    apiKey: apiKey,
+                    accept: format,
+                    'Content-Type': 'application/json',
+                },
+                params: queryParams,
+            })];
     });
 }); }; };
 //# sourceMappingURL=fetchWalletBalance.js.map
