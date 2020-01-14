@@ -8,6 +8,7 @@
   - payments: accepted currencies
   - missing types (due to no documentation)
 - [cardCheckOutCharge] fix API error: The request content was malformed: Expected String as JsString
+- Improve test converage
 
 ## Rewrites
 

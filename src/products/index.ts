@@ -19,12 +19,12 @@ export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => ({
   USSD: ussd,
 
   // fallbacks
-  ACCOUNT: (() => {
+  get ACCOUNT() {
     showDeprecationWarning('AfricasTalking().ACCOUNT', 'AfricasTalking().APPLICATION', 'minor');
     return application(credentials);
-  })(),
-  PAYMENT: (() => {
+  },
+  get PAYMENT() {
     showDeprecationWarning('AfricasTalking().PAYMENT', 'AfricasTalking().PAYMENTS', 'minor');
     return payments(credentials);
-  })(),
+  },
 });

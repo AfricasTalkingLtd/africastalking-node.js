@@ -39,21 +39,21 @@ export const payments = (credentials: Credentials): Payments => ({
   walletTransfer: walletTransfer(credentials),
 
   // fallbacks
-  checkout: (opts) => {
+  get checkout() {
     showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()', 'minor');
-    return mobileCheckout(credentials)(opts);
+    return mobileCheckout(credentials);
   },
-  checkOut: (opts) => {
+  get checkOut() {
     showDeprecationWarning('PAYMENTS.checkOut()', 'PAYMENTS.mobileCheckout()', 'minor');
-    return mobileCheckout(credentials)(opts);
+    return mobileCheckout(credentials);
   },
-  payConsumer: (opts) => {
+  get payConsumer() {
     showDeprecationWarning('PAYMENTS.payConsumer()', 'PAYMENTS.mobileB2C()', 'minor');
-    return mobileB2C(credentials)(opts);
+    return mobileB2C(credentials);
   },
-  payBusiness: (opts) => {
+  get payBusiness() {
     showDeprecationWarning('PAYMENTS.payBusiness()', 'PAYMENTS.mobileB2B()', 'minor');
-    return mobileB2B(credentials)(opts);
+    return mobileB2B(credentials);
   },
 
   // constants

@@ -7,8 +7,8 @@ export const application = (credentials: Credentials): Application => ({
   fetchApplicationData: fetchApplicationData(credentials),
 
   // fallbacks
-  fetchAccount: () => {
+  get fetchAccount() {
     showDeprecationWarning('APPLICATION.fetchAccount()', 'APPLICATION.fetchApplicationData()', 'minor');
-    return fetchApplicationData(credentials)();
+    return fetchApplicationData(credentials);
   },
 });
