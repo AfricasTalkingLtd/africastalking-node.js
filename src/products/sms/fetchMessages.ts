@@ -4,13 +4,13 @@ import { getFullCredentials } from '../../utils/getFullCredentials';
 import { Credentials } from '../../utils/getFullCredentials.types';
 
 export const fetchMessages = (credentials: Credentials) => async (
-  options: FetchMessagesOptions,
+  options?: FetchMessagesOptions,
 ): Promise<FetchMessagesResponse> => {
   const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: FetchMessagesQueryParams = {
     username,
-    lastReceivedId: options.lastReceivedId || '0',
+    lastReceivedId: options?.lastReceivedId || '0',
   };
 
   return sendRequest<FetchMessagesResponse, null, FetchMessagesQueryParams>({

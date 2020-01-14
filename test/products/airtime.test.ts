@@ -16,15 +16,21 @@ describe('Airtime', () => {
     });
 
     it('#send() must have phoneNumber/currencyCode/amount', () => {
-      expect(
-        airtime.send({ recipients: [{ phoneNumber: '+254726166685' }] } as any),
-      ).to.be.rejected;
+      expect(airtime.send({
+        recipients: [{
+          phoneNumber: '+254726166685',
+        }],
+      } as any)).to.be.rejected;
     });
 
     it('#send() rejects invalid options', () => {
-      expect(
-        airtime.send({ recipients: [{ phoneNumber: 'not phone', currencyCode: '', amount: 'NaN' }] } as any),
-      ).to.be.rejected;
+      expect(airtime.send({
+        recipients: [{
+          phoneNumber: 'not phone',
+          currencyCode: '',
+          amount: 'NaN',
+        }],
+      } as any)).to.be.rejected;
     });
   });
 

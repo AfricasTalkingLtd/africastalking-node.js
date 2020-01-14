@@ -1,4 +1,5 @@
 import joi from 'joi';
+import queryString from 'query-string';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
@@ -12,12 +13,12 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
     ),
     message: joi.string().required(),
     from: joi.string(),
+    enqueue: joi.boolean(),
   }).required();
 
   if (isBulk) {
     return schema.keys({
-      bulkSMSMode: joi.number().valid(0, 1).required(),
-      enqueue: joi.number().valid(0, 1).required(),
+      bulkSMSMode: joi.boolean().required(),
     });
   }
 
@@ -40,23 +41,28 @@ export const sendSms = (credentials: Credentials) => async (
 
   const { to } = result;
 
+  const bulkSMSMode = {
+    ...(isBulk && { bulkSMSMode: true }),
+    ...(isPremium && { bulkSMSMode: false }),
+  };
+
   const data: SmsPostData = {
     username,
     ...result,
     to: Array.isArray(to) ? to.join(',') : to,
-    ...(isBulk && { bulkSMSMode: 1 }),
-    ...(isPremium && { bulkSMSMode: 0 }),
+    enqueue: result.enqueue ? 1 : 0,
+    bulkSMSMode: bulkSMSMode ? 1 : 0,
   };
 
-  return sendRequest<SmsResponse, SmsPostData>({
+  return sendRequest<SmsResponse, string>({
     endpointCategory: 'SMS',
     username,
     method: 'POST',
-    data,
+    data: queryString.stringify(data),
     headers: {
       apiKey,
       accept: format,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 };

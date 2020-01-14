@@ -1,4 +1,5 @@
 import joi from 'joi';
+import queryString from 'query-string';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { CreateSubscriptionOptions, CreateSubscriptionResponse, CreateSubscriptionPostData } from './createSubscription.types';
 import { Credentials } from '../../../utils/getFullCredentials.types';
@@ -19,15 +20,15 @@ export const createSubscription = (credentials: Credentials) => async (
 
   const data: CreateSubscriptionPostData = { ...result, username };
 
-  return sendRequest<CreateSubscriptionResponse, CreateSubscriptionPostData>({
+  return sendRequest<CreateSubscriptionResponse, string>({
     endpointCategory: 'CREATE_SUBSCRIPTION',
     username,
     method: 'POST',
-    data,
+    data: queryString.stringify(data),
     headers: {
       apiKey,
       accept: format,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 };

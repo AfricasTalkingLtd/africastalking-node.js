@@ -1,5 +1,5 @@
 import joi from 'joi';
-import querystring from 'query-string';
+import queryString from 'query-string';
 import { DeleteSubscriptionOptions, DeleteSubscriptionResponse, DeleteSubscriptionPostData } from './deleteSubscription.types';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { Credentials } from '../../../utils/getFullCredentials.types';
@@ -23,7 +23,7 @@ export const deleteSubscription = (credentials: Credentials) => async (
     endpointCategory: 'DELETE_SUBSCRIPTION',
     username,
     method: 'POST',
-    data: querystring.stringify(data),
+    data: queryString.stringify(data),
     headers: {
       apiKey,
       accept: format,

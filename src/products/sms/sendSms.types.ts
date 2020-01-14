@@ -1,19 +1,21 @@
 export interface SmsOptions {
   to: string | string[];
   message: string;
-  from: string;
+  from?: string;
+  enqueue?: boolean;
 
-  bulkSMSMode?: 0 | 1;
-  enqueue?: 0 | 1;
+  bulkSMSMode?: boolean;
 
   keyword?: string;
   linkId?: string;
   retryDurationInHours?: number;
 }
 
-export type SmsPostData = SmsOptions & {
+export interface SmsPostData extends Omit<SmsOptions, 'enqueue' | 'bulkSMSMode'> {
   username: string;
-};
+  enqueue?: 0 | 1;
+  bulkSMSMode?: 0 | 1;
+}
 
 export interface SmsResponse {
   SMSMessageData: {
