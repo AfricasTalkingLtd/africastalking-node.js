@@ -1,6 +1,6 @@
 import joi from 'joi';
 import {
-  Action, Child, SayAttributes, GetDigitsChildren, GetDigitsAttributes,
+  Action, Child, SayAttributes, SayOrPlayChildren, GetDigitsAttributes,
   GetDigitsCombined, DialAttributes, RecordAttributes, EnqueueAttributes,
   DequeueAttributes, RedirectAttributes,
 } from './actionBuilder.types';
@@ -69,19 +69,21 @@ export class ActionBuilder {
     }
   }
 
-  public say(text: string, attributes: SayAttributes): void {
+  public say(text: string, attributes?: SayAttributes): void {
     const getSchema = () => joi.object({
       text: joi.string().required(),
       voice: joi.string().valid('man', 'woman'),
       playBeep: joi.boolean(),
     }).required();
 
-    const result = validateJoiSchema<SayAttributes & { text: string; }>(getSchema(), {
+    const {
+      text: formattedText, ...attr
+    } = validateJoiSchema<SayAttributes & { text: string; }>(getSchema(), {
       ...attributes,
       text,
     });
 
-    this.buildAction({ tag: 'Say', text: result.text, attributes: result });
+    this.buildAction({ tag: 'Say', text: formattedText, attributes: attr });
   }
 
   public play(url: string): void {
@@ -94,17 +96,18 @@ export class ActionBuilder {
     this.buildAction({ tag: 'Play', attributes: result });
   }
 
-  public getDigits(children: GetDigitsChildren, attributes: GetDigitsAttributes): void {
+  public getDigits(children: SayOrPlayChildren, attributes?: GetDigitsAttributes): void {
     const getSchema = () => joi.object({
       children: joi.object({
         say: joi.any(),
         play: joi.any(),
-      }).required(),
+      }).xor('say', 'play').required(),
       attributes: joi.object({
+        callbackUrl: joi.string(),
         numDigits: joi.number().integer(),
         timeout: joi.number(),
-        callbackUrl: joi.string(),
-      }).required(),
+        finishOnKey: joi.string(),
+      }),
     }).required();
 
     const result = validateJoiSchema<GetDigitsCombined>(getSchema(), {
@@ -115,7 +118,7 @@ export class ActionBuilder {
     this.buildAction({ tag: 'GetDigits', ...result as any });
   }
 
-  public dial(phoneNumbers: string, attributes: DialAttributes): void {
+  public dial(phoneNumbers: string, attributes?: DialAttributes): void {
     const getSchema = () => joi.object({
       phoneNumbers: joi.string().required(),
       record: joi.boolean(),
@@ -132,19 +135,20 @@ export class ActionBuilder {
     this.buildAction({ tag: 'Dial', attributes: result });
   }
 
-  public record(children: GetDigitsChildren, attributes: RecordAttributes): void {
+  public record(children: SayOrPlayChildren, attributes?: RecordAttributes): void {
     const getSchema = () => joi.object({
       children: joi.object({
         say: joi.any(),
         play: joi.any(),
-      }).required(),
+      }).xor('say', 'play').required(),
       attributes: joi.object({
+        finishOnKey: joi.string(),
         maxLength: joi.number(),
         timeout: joi.number(),
         trimSilence: joi.boolean(),
         playBeep: joi.boolean(),
         callbackUrl: joi.string().uri(),
-      }).required(),
+      }),
     }).required();
 
     const result = validateJoiSchema<GetDigitsCombined>(getSchema(), {
@@ -155,22 +159,24 @@ export class ActionBuilder {
     this.buildAction({ tag: 'Record', ...result as any });
   }
 
-  public enqueue(attributes: EnqueueAttributes): void {
+  public enqueue(attributes?: EnqueueAttributes): void {
     const getSchema = () => joi.object({
       holdMusic: joi.string().uri(),
-    }).required();
+      name: joi.string(),
+    });
 
-    const result = validateJoiSchema<SayAttributes>(getSchema(), attributes);
+    const result = validateJoiSchema<EnqueueAttributes>(getSchema(), attributes);
 
     this.buildAction({ tag: 'Enqueue', attributes: result });
   }
 
-  public dequeue(phoneNumber: string, attributes = {}): void {
+  public dequeue(phoneNumber: string, attributes?: DequeueAttributes): void {
     const getSchema = () => joi.object({
       phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+      name: joi.string(),
     }).required();
 
-    const result = validateJoiSchema<DequeueAttributes>(getSchema(), {
+    const result = validateJoiSchema<DequeueAttributes & { phoneNumber: string; }>(getSchema(), {
       ...attributes,
       phoneNumber,
     });
@@ -178,14 +184,14 @@ export class ActionBuilder {
     this.buildAction({ tag: 'Dequeue', attributes: result });
   }
 
-  public redirect(text: string): void {
+  public redirect(url: string): void {
     const getSchema = () => joi.object({
-      text: joi.string().required(),
+      url: joi.string().uri().required(),
     }).required();
 
-    const result = validateJoiSchema<RedirectAttributes>(getSchema(), { text });
+    const result = validateJoiSchema<RedirectAttributes>(getSchema(), { url });
 
-    this.buildAction({ tag: 'Redirect', text: result.text });
+    this.buildAction({ tag: 'Redirect', text: result.url });
   }
 
   public conference(): void {

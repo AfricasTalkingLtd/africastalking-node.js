@@ -12,7 +12,10 @@
 
 ## BUGS
 
-- website: sidebar scroll issue
+- website
+  - sidebar scroll issue
+  - list item: convert to hyperlink
+  - on click list item, show loading icon
 - documentation:
   - accepted currencies: b2b, etc.
   - full pages for token: generateAuthToken() and createCheckoutToken()

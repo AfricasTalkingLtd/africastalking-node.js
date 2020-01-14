@@ -5,7 +5,7 @@ import { uploadMediaFile } from './uploadMediaFile';
 import { ActionBuilder } from './utils/actionBuilder';
 
 export const VOICE = (credentials: Credentials) => ({
-  ActionBuilder: new ActionBuilder(),
+  ActionBuilder,
   call: makeCall(credentials),
   getNumQueuedCalls: getNumQueuedCalls(credentials),
   uploadMediaFile: uploadMediaFile(credentials),
