@@ -6,3 +6,4 @@ export interface ApplicationResponse {
         balance: string;
     };
 }
+export declare type FetchApplicationData = () => Promise<ApplicationResponse>;

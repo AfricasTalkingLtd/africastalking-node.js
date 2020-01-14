@@ -10,6 +10,17 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -96,8 +107,8 @@ var ActionBuilder = (function () {
             voice: joi_1.default.string().valid('man', 'woman'),
             playBeep: joi_1.default.boolean(),
         }).required(); };
-        var result = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { text: text }));
-        this.buildAction({ tag: 'Say', text: result.text, attributes: result });
+        var _a = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { text: text })), formattedText = _a.text, attr = __rest(_a, ["text"]);
+        this.buildAction({ tag: 'Say', text: formattedText, attributes: attr });
     };
     ActionBuilder.prototype.play = function (url) {
         var getSchema = function () { return joi_1.default.object({
@@ -111,12 +122,13 @@ var ActionBuilder = (function () {
             children: joi_1.default.object({
                 say: joi_1.default.any(),
                 play: joi_1.default.any(),
-            }).required(),
+            }).xor('say', 'play').required(),
             attributes: joi_1.default.object({
+                callbackUrl: joi_1.default.string(),
                 numDigits: joi_1.default.number().integer(),
                 timeout: joi_1.default.number(),
-                callbackUrl: joi_1.default.string(),
-            }).required(),
+                finishOnKey: joi_1.default.string(),
+            }),
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), {
             children: children,
@@ -141,14 +153,15 @@ var ActionBuilder = (function () {
             children: joi_1.default.object({
                 say: joi_1.default.any(),
                 play: joi_1.default.any(),
-            }).required(),
+            }).xor('say', 'play').required(),
             attributes: joi_1.default.object({
+                finishOnKey: joi_1.default.string(),
                 maxLength: joi_1.default.number(),
                 timeout: joi_1.default.number(),
                 trimSilence: joi_1.default.boolean(),
                 playBeep: joi_1.default.boolean(),
                 callbackUrl: joi_1.default.string().uri(),
-            }).required(),
+            }),
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), {
             children: children,
@@ -159,24 +172,25 @@ var ActionBuilder = (function () {
     ActionBuilder.prototype.enqueue = function (attributes) {
         var getSchema = function () { return joi_1.default.object({
             holdMusic: joi_1.default.string().uri(),
-        }).required(); };
+            name: joi_1.default.string(),
+        }); };
         var result = misc_1.validateJoiSchema(getSchema(), attributes);
         this.buildAction({ tag: 'Enqueue', attributes: result });
     };
     ActionBuilder.prototype.dequeue = function (phoneNumber, attributes) {
-        if (attributes === void 0) { attributes = {}; }
         var getSchema = function () { return joi_1.default.object({
             phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+            name: joi_1.default.string(),
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { phoneNumber: phoneNumber }));
         this.buildAction({ tag: 'Dequeue', attributes: result });
     };
-    ActionBuilder.prototype.redirect = function (text) {
+    ActionBuilder.prototype.redirect = function (url) {
         var getSchema = function () { return joi_1.default.object({
-            text: joi_1.default.string().required(),
+            url: joi_1.default.string().uri().required(),
         }).required(); };
-        var result = misc_1.validateJoiSchema(getSchema(), { text: text });
-        this.buildAction({ tag: 'Redirect', text: result.text });
+        var result = misc_1.validateJoiSchema(getSchema(), { url: url });
+        this.buildAction({ tag: 'Redirect', text: result.url });
     };
     ActionBuilder.prototype.conference = function () {
         this.buildAction({ tag: 'Conference' });

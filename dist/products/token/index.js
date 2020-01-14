@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var generateAuthToken_1 = require("./generateAuthToken");
 var createCheckoutToken_1 = require("./createCheckoutToken");
-exports.TOKEN = function (credentials) { return ({
-    generateAuthToken: generateAuthToken_1.generateAuthToken(credentials),
+var generateAuthToken_1 = require("./generateAuthToken");
+exports.token = function (credentials) { return ({
     createCheckoutToken: createCheckoutToken_1.createCheckoutToken(credentials),
+    generateAuthToken: generateAuthToken_1.generateAuthToken(credentials),
 }); };
 //# sourceMappingURL=index.js.map

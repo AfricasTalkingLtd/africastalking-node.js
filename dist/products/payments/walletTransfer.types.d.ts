@@ -7,11 +7,12 @@ export interface WalletTransferOptions {
         [key: string]: any;
     };
 }
-export declare type WalletTransferPostData = WalletTransferOptions & {
+export interface WalletTransferPostData extends WalletTransferOptions {
     username: string;
-};
+}
 export interface WalletTransferResponse {
     status: 'Success' | 'Failed';
     description: string;
     transactionId?: string;
 }
+export declare type WalletTransfer = (options: WalletTransferOptions) => Promise<WalletTransferResponse>;

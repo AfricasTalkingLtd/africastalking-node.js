@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ExpressHandler_1 = require("./ExpressHandler");
-exports.USSD = ExpressHandler_1.ExpressHandler;
+var expressHandler_1 = require("./expressHandler");
+exports.ussd = expressHandler_1.expressHandler;
 //# sourceMappingURL=index.js.map

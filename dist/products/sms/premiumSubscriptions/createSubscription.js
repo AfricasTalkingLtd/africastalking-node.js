@@ -51,6 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
+var query_string_1 = __importDefault(require("query-string"));
 var misc_1 = require("../../../utils/misc");
 var getFullCredentials_1 = require("../../../utils/getFullCredentials");
 var getSchema = function () { return joi_1.default.object({
@@ -69,11 +70,11 @@ exports.createSubscription = function (credentials) { return function (options) 
                 endpointCategory: 'CREATE_SUBSCRIPTION',
                 username: username,
                 method: 'POST',
-                data: data,
+                data: query_string_1.default.stringify(data),
                 headers: {
                     apiKey: apiKey,
                     accept: format,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })];
     });

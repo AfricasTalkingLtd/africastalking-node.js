@@ -62,21 +62,13 @@ var getSchema = function () { return joi_1.default.object({
         expiryYear: joi_1.default.number().required(),
         countryCode: joi_1.default.string().valid('NG').required(),
         authToken: joi_1.default.string().required(),
-    }).when('checkoutToken', {
-        is: joi_1.default.exist(),
-        then: joi_1.default.forbidden(),
-        otherwise: joi_1.default.required(),
     }),
-    checkoutToken: joi_1.default.string().regex(/\S/, 'no space').when('paymentCard', {
-        is: joi_1.default.exist(),
-        then: joi_1.default.forbidden(),
-        otherwise: joi_1.default.required(),
-    }),
+    checkoutToken: joi_1.default.string().regex(/\S/, 'no space'),
     currencyCode: joi_1.default.string().valid('KES', 'UGX', 'USD').required(),
     amount: joi_1.default.number().required(),
     narration: joi_1.default.string().regex(/\S/, 'no space').required(),
     metadata: joi_1.default.object(),
-}).required(); };
+}).xor('paymentCard', 'checkoutToken').required(); };
 exports.cardCheckoutCharge = function (credentials) { return function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, result, data;
     return __generator(this, function (_b) {

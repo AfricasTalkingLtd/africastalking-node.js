@@ -17,3 +17,4 @@ export interface MakeCallResponse {
     }[];
     errorMessage?: string;
 }
+export declare type MakeCall = (options: MakeCallOptions) => Promise<MakeCallResponse>;

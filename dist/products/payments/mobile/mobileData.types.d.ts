@@ -15,3 +15,4 @@ export interface MobileDataPostData extends MobileDataOptions {
 }
 export interface MobileDataResponse {
 }
+export declare type MobileData = (options: MobileDataOptions) => Promise<MobileDataResponse>;

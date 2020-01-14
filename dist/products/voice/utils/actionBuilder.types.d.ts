@@ -10,42 +10,49 @@ export interface Action {
 }
 export declare type Child = 'say' | 'play' | 'getDigits' | 'dial' | 'record' | 'enqueue' | 'dequeue' | 'redirect' | 'conference' | 'reject';
 export interface SayAttributes {
-    voice: 'man' | 'woman';
-    playBeep: boolean;
+    voice?: 'man' | 'woman';
+    playBeep?: boolean;
 }
-export interface GetDigitsChildren {
-    say: any;
-    play: any;
+export interface SayOrPlayChildren {
+    say?: {
+        text: string;
+    } & SayAttributes;
+    play?: {
+        url: string;
+    };
 }
 export interface GetDigitsAttributes {
-    numDigits: number;
-    timeout: number;
-    callbackUrl: string;
+    callbackUrl?: string;
+    numDigits?: number;
+    timeout?: number;
+    finishOnKey?: string;
 }
 export interface GetDigitsCombined {
-    children: GetDigitsChildren;
+    children: SayOrPlayChildren;
     attributes: GetDigitsAttributes;
 }
 export interface DialAttributes {
-    record: boolean;
-    sequential: boolean;
-    callerId: string;
-    ringBackTone: string;
-    maxDuration: number;
+    record?: boolean;
+    sequential?: boolean;
+    callerId?: string;
+    ringBackTone?: string;
+    maxDuration?: number;
 }
 export interface RecordAttributes {
-    maxLength: number;
-    timeout: number;
-    trimSilence: boolean;
-    playBeep: boolean;
-    callbackUrl: string;
+    finishOnKey?: string;
+    maxLength?: number;
+    timeout?: number;
+    trimSilence?: boolean;
+    playBeep?: boolean;
+    callbackUrl?: string;
 }
 export interface EnqueueAttributes {
-    holdMusic: string;
+    holdMusic?: string;
+    name?: 'None' | string;
 }
 export interface DequeueAttributes {
-    phoneNumber: string;
+    name: string;
 }
 export interface RedirectAttributes {
-    text: string;
+    url: string;
 }

@@ -8,12 +8,13 @@ export interface MobileCheckoutOptions {
         [key: string]: any;
     };
 }
-export declare type MobileCheckoutPostData = MobileCheckoutOptions & {
+export interface MobileCheckoutPostData extends MobileCheckoutOptions {
     username: string;
-};
+}
 export interface MobileCheckoutResponse {
     status: 'PendingConfirmation' | 'InvalidRequest' | 'NotSupported' | 'Failed';
     description: string;
     transactionId?: string;
     providerChannel?: string;
 }
+export declare type MobileCheckout = (options: MobileCheckoutOptions) => Promise<MobileCheckoutResponse>;

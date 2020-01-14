@@ -1,3 +1,3 @@
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { FindTransactionOptions, FindTransactionResponse } from './findTransaction.types';
-export declare const findTransaction: (credentials: Credentials) => (options: FindTransactionOptions) => Promise<FindTransactionResponse>;
+import { FindTransaction } from './findTransaction.types';
+export declare const findTransaction: (credentials: Credentials) => FindTransaction;

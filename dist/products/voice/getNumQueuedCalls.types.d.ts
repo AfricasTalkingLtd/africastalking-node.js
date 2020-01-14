@@ -13,3 +13,4 @@ export interface GetNumQueuedCallsResponse {
     }[];
     errorMessage: 'None' | string;
 }
+export declare type GetNumQueuedCalls = (options: GetNumQueuedCallsOptions) => Promise<GetNumQueuedCallsResponse>;

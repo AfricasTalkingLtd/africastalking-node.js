@@ -12,9 +12,9 @@ export interface MobileB2COptions {
         };
     }[];
 }
-export declare type MobileB2CPostData = MobileB2COptions & {
+export interface MobileB2CPostData extends MobileB2COptions {
     username: string;
-};
+}
 export interface MobileB2CResponse {
     numQueued: number;
     totalValue?: string;
@@ -31,3 +31,4 @@ export interface MobileB2CResponse {
     }[];
     errorMessage?: string;
 }
+export declare type MobileB2C = (options: MobileB2COptions) => Promise<MobileB2CResponse>;

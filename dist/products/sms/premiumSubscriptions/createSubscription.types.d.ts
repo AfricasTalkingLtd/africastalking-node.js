@@ -11,3 +11,4 @@ export interface CreateSubscriptionResponse {
     status: 'Success' | 'Failed';
     description: string;
 }
+export declare type CreateSubscription = (options: CreateSubscriptionOptions) => Promise<CreateSubscriptionResponse>;

@@ -39,13 +39,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var misc_1 = require("../../utils/misc");
 exports.generateAuthToken = function (credentials) { return function () { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, apiKey, username, format;
+    var _a, apiKey, username, format, data;
     return __generator(this, function (_b) {
         _a = getFullCredentials_1.getFullCredentials(credentials), apiKey = _a.apiKey, username = _a.username, format = _a.format;
+        data = { username: username };
         return [2, misc_1.sendRequest({
                 endpointCategory: 'GENERATE_AUTH_TOKEN',
                 username: username,
-                method: 'GET',
+                method: 'POST',
+                data: data,
                 headers: {
                     apiKey: apiKey,
                     accept: format,

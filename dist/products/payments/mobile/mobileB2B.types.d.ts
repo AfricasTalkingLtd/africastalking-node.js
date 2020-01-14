@@ -10,9 +10,9 @@ export interface MobileB2BOptions {
         [key: string]: any;
     };
 }
-export declare type MobileB2BPostData = MobileB2BOptions & {
+export interface MobileB2BPostData extends MobileB2BOptions {
     username: string;
-};
+}
 export interface MobileB2BResponse {
     status: 'Queued' | 'InvalidRequest' | 'NotSupported' | 'Failed';
     transaction?: string;
@@ -20,3 +20,4 @@ export interface MobileB2BResponse {
     providerChannel: string;
     errorMessage: string;
 }
+export declare type MobileB2B = (options: MobileB2BOptions) => Promise<MobileB2BResponse>;

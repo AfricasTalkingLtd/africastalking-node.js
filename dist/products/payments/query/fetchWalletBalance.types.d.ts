@@ -6,3 +6,4 @@ export interface FetchWalletBalanceResponse {
     balance: string;
     errorMessage?: string;
 }
+export declare type FetchWalletBalance = () => Promise<FetchWalletBalanceResponse>;

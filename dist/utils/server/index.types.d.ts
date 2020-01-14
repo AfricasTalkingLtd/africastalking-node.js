@@ -4,5 +4,5 @@ export interface StartOptions {
     privateKeyFile: any;
     rootCertFile: any;
     port: any;
-    insecure: any;
+    insecure?: any;
 }

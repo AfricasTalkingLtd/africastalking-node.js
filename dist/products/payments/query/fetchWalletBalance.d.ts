@@ -1,3 +1,3 @@
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { FetchWalletBalanceResponse } from './fetchWalletBalance.types';
-export declare const fetchWalletBalance: (credentials: Credentials) => () => Promise<FetchWalletBalanceResponse>;
+import { FetchWalletBalance } from './fetchWalletBalance.types';
+export declare const fetchWalletBalance: (credentials: Credentials) => FetchWalletBalance;

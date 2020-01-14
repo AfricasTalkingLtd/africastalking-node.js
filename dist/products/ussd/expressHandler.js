@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var misc_1 = require("../../utils/misc");
-exports.ExpressHandler = function (handler) { return [
+exports.expressHandler = function (handler) { return [
     body_parser_1.default.urlencoded({ extended: true }),
     body_parser_1.default.json(),
     function (req, res, next) {
@@ -29,4 +29,4 @@ exports.ExpressHandler = function (handler) { return [
         });
     },
 ]; };
-//# sourceMappingURL=ExpressHandler.js.map
+//# sourceMappingURL=expressHandler.js.map

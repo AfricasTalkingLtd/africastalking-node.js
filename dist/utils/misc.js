@@ -30,7 +30,7 @@ exports.sendRequest = function (opts) {
     });
 };
 exports.showDeprecationWarning = function (oldFunctionName, newFunctionName, releaseType, link) {
-    if (releaseType === void 0) { releaseType = 'minor'; }
+    if (releaseType === void 0) { releaseType = 'major'; }
     if (link === void 0) { link = 'https://github.com/AfricasTalkingLtd/africastalking-node.js'; }
     var header = chalk_1.default.bold.bgHex('#D15E00')("\n  Deprecation warning:");
     var msg = chalk_1.default.keyword('orange')("\n  " + chalk_1.default.bold(oldFunctionName) + " is being deprecated and will be removed in upcoming " + chalk_1.default.bold(releaseType) + " release.\n  Please use " + chalk_1.default.bold(newFunctionName) + " instead.\n  For more information, please refer to " + chalk_1.default.underline(link) + ".");

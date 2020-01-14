@@ -51,6 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
+var query_string_1 = __importDefault(require("query-string"));
 var misc_1 = require("../../utils/misc");
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var getSchema = function (isBulk, isPremium) {
@@ -58,11 +59,11 @@ var getSchema = function (isBulk, isPremium) {
         to: joi_1.default.alternatives().try(joi_1.default.array().items(joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()).required(), joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()),
         message: joi_1.default.string().required(),
         from: joi_1.default.string(),
+        enqueue: joi_1.default.boolean(),
     }).required();
     if (isBulk) {
         return schema.keys({
-            bulkSMSMode: joi_1.default.number().valid(0, 1).required(),
-            enqueue: joi_1.default.number().valid(0, 1).required(),
+            bulkSMSMode: joi_1.default.boolean().required(),
         });
     }
     if (isPremium) {
@@ -78,21 +79,22 @@ exports.sendSms = function (credentials) { return function (options, isBulk, isP
     if (isBulk === void 0) { isBulk = false; }
     if (isPremium === void 0) { isPremium = false; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var _a, apiKey, username, format, result, to, data;
+        var _a, apiKey, username, format, result, to, bulkSMSMode, data;
         return __generator(this, function (_b) {
             _a = getFullCredentials_1.getFullCredentials(credentials), apiKey = _a.apiKey, username = _a.username, format = _a.format;
             result = misc_1.validateJoiSchema(getSchema(isBulk, isPremium), options);
             to = result.to;
-            data = __assign(__assign(__assign(__assign({ username: username }, result), { to: Array.isArray(to) ? to.join(',') : to }), (isBulk && { bulkSMSMode: 1 })), (isPremium && { bulkSMSMode: 0 }));
+            bulkSMSMode = __assign(__assign({}, (isBulk && { bulkSMSMode: true })), (isPremium && { bulkSMSMode: false }));
+            data = __assign(__assign({ username: username }, result), { to: Array.isArray(to) ? to.join(',') : to, enqueue: result.enqueue ? 1 : 0, bulkSMSMode: bulkSMSMode ? 1 : 0 });
             return [2, misc_1.sendRequest({
                     endpointCategory: 'SMS',
                     username: username,
                     method: 'POST',
-                    data: data,
+                    data: query_string_1.default.stringify(data),
                     headers: {
                         apiKey: apiKey,
                         accept: format,
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                     },
                 })];
         });

@@ -1,40 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mobileCheckout_1 = require("./mobile/mobileCheckout");
-var mobileB2C_1 = require("./mobile/mobileB2C");
-var mobileB2B_1 = require("./mobile/mobileB2B");
 var bankCheckoutCharge_1 = require("./bank/bankCheckoutCharge");
 var bankCheckoutValidate_1 = require("./bank/bankCheckoutValidate");
 var bankTransfer_1 = require("./bank/bankTransfer");
-var walletTransfer_1 = require("./walletTransfer");
-var topupStash_1 = require("./topupStash");
 var cardCheckoutCharge_1 = require("./card/cardCheckoutCharge");
 var cardCheckoutValidate_1 = require("./card/cardCheckoutValidate");
-var fetchProductTransactions_1 = require("./query/fetchProductTransactions");
-var findTransaction_1 = require("./query/findTransaction");
-var fetchWalletTransactions_1 = require("./query/fetchWalletTransactions");
-var fetchWalletBalance_1 = require("./query/fetchWalletBalance");
+var mobileB2B_1 = require("./mobile/mobileB2B");
+var mobileB2C_1 = require("./mobile/mobileB2C");
+var mobileCheckout_1 = require("./mobile/mobileCheckout");
 var mobileData_1 = require("./mobile/mobileData");
-exports.PAYMENTS = function (credentials) { return ({
-    mobileCheckout: mobileCheckout_1.mobileCheckout(credentials),
-    mobileB2C: mobileB2C_1.mobileB2C(credentials),
-    mobileB2B: mobileB2B_1.mobileB2B(credentials),
+var fetchProductTransactions_1 = require("./query/fetchProductTransactions");
+var fetchWalletBalance_1 = require("./query/fetchWalletBalance");
+var fetchWalletTransactions_1 = require("./query/fetchWalletTransactions");
+var findTransaction_1 = require("./query/findTransaction");
+var topupStash_1 = require("./topupStash");
+var walletTransfer_1 = require("./walletTransfer");
+var misc_1 = require("../../utils/misc");
+exports.payments = function (credentials) { return ({
     bankCheckoutCharge: bankCheckoutCharge_1.bankCheckoutCharge(credentials),
     bankCheckoutValidate: bankCheckoutValidate_1.bankCheckoutValidate(credentials),
     bankTransfer: bankTransfer_1.bankTransfer(credentials),
-    walletTransfer: walletTransfer_1.walletTransfer(credentials),
-    topupStash: topupStash_1.topupStash(credentials),
     cardCheckoutCharge: cardCheckoutCharge_1.cardCheckoutCharge(credentials),
     cardCheckoutValidate: cardCheckoutValidate_1.cardCheckoutValidate(credentials),
-    fetchProductTransactions: fetchProductTransactions_1.fetchProductTransactions(credentials),
-    findTransaction: findTransaction_1.findTransaction(credentials),
-    fetchWalletTransactions: fetchWalletTransactions_1.fetchWalletTransactions(credentials),
-    fetchWalletBalance: fetchWalletBalance_1.fetchWalletBalance(credentials),
+    mobileB2B: mobileB2B_1.mobileB2B(credentials),
+    mobileB2C: mobileB2C_1.mobileB2C(credentials),
+    mobileCheckout: mobileCheckout_1.mobileCheckout(credentials),
     mobileData: mobileData_1.mobileData(credentials),
-    checkout: mobileCheckout_1.mobileCheckout(credentials),
-    checkOut: mobileCheckout_1.mobileCheckout(credentials),
-    payConsumer: mobileB2C_1.mobileB2C(credentials),
-    payBusiness: mobileB2B_1.mobileB2B(credentials),
+    fetchProductTransactions: fetchProductTransactions_1.fetchProductTransactions(credentials),
+    fetchWalletBalance: fetchWalletBalance_1.fetchWalletBalance(credentials),
+    fetchWalletTransactions: fetchWalletTransactions_1.fetchWalletTransactions(credentials),
+    findTransaction: findTransaction_1.findTransaction(credentials),
+    topupStash: topupStash_1.topupStash(credentials),
+    walletTransfer: walletTransfer_1.walletTransfer(credentials),
+    get checkout() {
+        misc_1.showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()', 'minor');
+        return mobileCheckout_1.mobileCheckout(credentials);
+    },
+    get checkOut() {
+        misc_1.showDeprecationWarning('PAYMENTS.checkOut()', 'PAYMENTS.mobileCheckout()', 'minor');
+        return mobileCheckout_1.mobileCheckout(credentials);
+    },
+    get payConsumer() {
+        misc_1.showDeprecationWarning('PAYMENTS.payConsumer()', 'PAYMENTS.mobileB2C()', 'minor');
+        return mobileB2C_1.mobileB2C(credentials);
+    },
+    get payBusiness() {
+        misc_1.showDeprecationWarning('PAYMENTS.payBusiness()', 'PAYMENTS.mobileB2B()', 'minor');
+        return mobileB2B_1.mobileB2B(credentials);
+    },
     REASON: {
         SALARY: 'SalaryPayment',
         SALARY_WITH_CHARGE: 'SalaryPaymentWithWithdrawalChargePaid',
