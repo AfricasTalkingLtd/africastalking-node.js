@@ -7,3 +7,5 @@ export interface FetchWalletBalanceResponse {
   balance: string;
   errorMessage?: string;
 }
+
+export type FetchWalletBalance = () => Promise<FetchWalletBalanceResponse>;

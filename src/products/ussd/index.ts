@@ -1,3 +1,4 @@
-import { ExpressHandler } from './ExpressHandler';
+import { expressHandler } from './expressHandler';
+import { Ussd } from './index.types';
 
-export const USSD = ExpressHandler;
+export const ussd: Ussd = expressHandler;

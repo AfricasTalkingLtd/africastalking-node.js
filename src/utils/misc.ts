@@ -40,7 +40,7 @@ export const sendRequest = <Response, PostData = null, Params = any>(
 export const showDeprecationWarning = (
   oldFunctionName: string,
   newFunctionName: string,
-  releaseType: 'minor' | 'major' = 'minor',
+  releaseType: 'minor' | 'major' = 'major',
   link: string = 'https://github.com/AfricasTalkingLtd/africastalking-node.js',
 ): void => {
   const header = chalk.bold.bgHex('#D15E00')(`

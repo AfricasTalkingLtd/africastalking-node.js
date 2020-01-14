@@ -7,3 +7,5 @@ export interface ApplicationResponse {
     balance: string;
   };
 }
+
+export type FetchApplicationData = () => Promise<ApplicationResponse>;

@@ -7,3 +7,5 @@ export interface GenerateAuthTokenResponse {
   lifetimeInSeconds: number;
   description?: string;
 }
+
+export type GenerateAuthToken = () => Promise<GenerateAuthTokenResponse>;

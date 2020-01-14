@@ -1,6 +1,9 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { FetchWalletTransactionsOptions, FetchWalletTransactionsResponse, FetchWalletTransactionsQueryParams } from './fetchWalletTransactions.types';
+import {
+  FetchWalletTransactionsOptions, FetchWalletTransactionsResponse,
+  FetchWalletTransactionsQueryParams, FetchWalletTransactions,
+} from './fetchWalletTransactions.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -14,9 +17,9 @@ const getSchema = () => joi.object({
   }).required(),
 }).required();
 
-export const fetchWalletTransactions = (credentials: Credentials) => async (
-  options: FetchWalletTransactionsOptions,
-): Promise<FetchWalletTransactionsResponse> => {
+export const fetchWalletTransactions = (
+  credentials: Credentials,
+): FetchWalletTransactions => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchWalletTransactionsOptions>(getSchema(), options);
 

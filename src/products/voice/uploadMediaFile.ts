@@ -3,15 +3,17 @@ import queryString from 'query-string';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
-import { UploadMediaFileOptions, UploadMediaFileResponse, UploadMediaFilePostData } from './uploadMediaFile.types';
+import {
+  UploadMediaFileOptions, UploadMediaFileResponse, UploadMediaFilePostData, UploadMediaFile,
+} from './uploadMediaFile.types';
 
 const getSchema = () => joi.object({
   url: joi.string().regex(/^https?:\/\//, 'url').required(),
 }).required();
 
-export const uploadMediaFile = (credentials: Credentials) => async (
-  options: UploadMediaFileOptions,
-): Promise<UploadMediaFileResponse> => {
+export const uploadMediaFile = (
+  credentials: Credentials,
+): UploadMediaFile => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<UploadMediaFileOptions>(getSchema(), options);
 

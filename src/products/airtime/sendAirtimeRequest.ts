@@ -1,6 +1,8 @@
 import joi from 'joi';
 import queryString from 'query-string';
-import { AirtimeOptions, AirtimePostData, AirtimeResponse } from './sendAirtimeRequest.types';
+import {
+  AirtimeOptions, AirtimePostData, AirtimeResponse, SendAirtimeRequest,
+} from './sendAirtimeRequest.types';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
@@ -15,9 +17,9 @@ const getSchema = () => joi.object({
   ).min(1).required(),
 }).required();
 
-export const sendAirtimeRequest = (credentials: Credentials) => async (
-  options: AirtimeOptions,
-): Promise<AirtimeResponse> => {
+export const sendAirtimeRequest = (
+  credentials: Credentials,
+): SendAirtimeRequest => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<AirtimeOptions>(getSchema(), options);
 

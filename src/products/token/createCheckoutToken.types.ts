@@ -8,3 +8,5 @@ export interface CreateCheckoutTokenResponse {
   description: string;
   token: string;
 }
+
+export type CreateCheckoutToken = (phoneNumber: string) => Promise<CreateCheckoutTokenResponse>;

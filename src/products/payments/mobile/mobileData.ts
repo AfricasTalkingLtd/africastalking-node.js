@@ -2,7 +2,9 @@ import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
-import { MobileDataOptions, MobileDataPostData, MobileDataResponse } from './mobileData.types';
+import {
+  MobileDataOptions, MobileDataPostData, MobileDataResponse, MobileData,
+} from './mobileData.types';
 
 const getSchema = () => joi.object({
   productName: joi.string().regex(/\S/, 'no space').required(),
@@ -18,9 +20,9 @@ const getSchema = () => joi.object({
     .required(),
 }).required();
 
-export const mobileData = (credentials: Credentials) => async (
-  options: MobileDataOptions,
-): Promise<MobileDataResponse> => {
+export const mobileData = (
+  credentials: Credentials,
+): MobileData => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileDataOptions>(getSchema(), options);
 

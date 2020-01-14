@@ -1,22 +1,30 @@
-import { SMS } from './sms';
-import { APPLICATION } from './application';
-import { AIRTIME } from './airtime';
 import { Credentials } from '../utils/getFullCredentials.types';
-import { PAYMENTS } from './payments';
-import { TOKEN } from './token';
-import { VOICE } from './voice';
-import { USSD } from './ussd';
+import { AFRICASTALKING } from './index.types';
+import { showDeprecationWarning } from '../utils/misc';
+import { airtime } from './airtime';
+import { application } from './application';
+import { payments } from './payments';
+import { sms } from './sms';
+import { token } from './token';
+import { voice } from './voice';
+import { ussd } from './ussd';
 
-export const AfricasTalking = (credentials: Credentials) => ({
-  AIRTIME: AIRTIME(credentials),
-  APPLICATION: APPLICATION(credentials),
-  SMS: SMS(credentials),
-  PAYMENTS: PAYMENTS(credentials),
-  TOKEN: TOKEN(credentials),
-  VOICE: VOICE(credentials),
-  USSD,
+export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => ({
+  AIRTIME: airtime(credentials),
+  APPLICATION: application(credentials),
+  PAYMENTS: payments(credentials),
+  SMS: sms(credentials),
+  TOKEN: token(credentials),
+  VOICE: voice(credentials),
+  USSD: ussd,
 
   // fallbacks
-  ACCOUNT: APPLICATION(credentials),
-  PAYMENT: PAYMENTS(credentials),
+  ACCOUNT: (() => {
+    showDeprecationWarning('AfricasTalking().ACCOUNT', 'AfricasTalking().APPLICATION', 'minor');
+    return application(credentials);
+  })(),
+  PAYMENT: (() => {
+    showDeprecationWarning('AfricasTalking().PAYMENT', 'AfricasTalking().PAYMENTS', 'minor');
+    return payments(credentials);
+  })(),
 });

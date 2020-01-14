@@ -1,6 +1,8 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { MobileB2BOptions, MobileB2BResponse, MobileB2BPostData } from './mobileB2B.types';
+import {
+  MobileB2BOptions, MobileB2BResponse, MobileB2BPostData, MobileB2B,
+} from './mobileB2B.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -16,9 +18,9 @@ const getSchema = () => joi.object({
   metadata: joi.object(),
 }).required();
 
-export const mobileB2B = (credentials: Credentials) => async (
-  options: MobileB2BOptions,
-): Promise<MobileB2BResponse> => {
+export const mobileB2B = (
+  credentials: Credentials,
+): MobileB2B => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileB2BOptions>(getSchema(), options);
 

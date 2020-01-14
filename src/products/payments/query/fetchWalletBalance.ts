@@ -1,11 +1,11 @@
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams } from './fetchWalletBalance.types';
+import { FetchWalletBalanceResponse, FetchWalletBalanceQueryParams, FetchWalletBalance } from './fetchWalletBalance.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest } from '../../../utils/misc';
 
 export const fetchWalletBalance = (
   credentials: Credentials,
-) => async (): Promise<FetchWalletBalanceResponse> => {
+): FetchWalletBalance => async () => {
   const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: FetchWalletBalanceQueryParams = { username };

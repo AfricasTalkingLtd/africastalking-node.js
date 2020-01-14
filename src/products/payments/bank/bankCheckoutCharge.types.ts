@@ -14,12 +14,16 @@ export interface BankCheckoutChargeOptions {
   };
 }
 
-export type BankCheckoutChargePostData = BankCheckoutChargeOptions & {
+export interface BankCheckoutChargePostData extends BankCheckoutChargeOptions {
   username: string;
-};
+}
 
 export interface BankCheckoutChargeResponse {
   status: 'PendingConfirmation' | 'InvalidRequest' | 'NotSupported' | 'Failed';
   description: string;
   transactionId?: string;
 }
+
+export type BankCheckoutCharge = (
+  options: BankCheckoutChargeOptions
+) => Promise<BankCheckoutChargeResponse>;

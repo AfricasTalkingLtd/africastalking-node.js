@@ -11,9 +11,9 @@ export interface MobileB2BOptions {
   };
 }
 
-export type MobileB2BPostData = MobileB2BOptions & {
+export interface MobileB2BPostData extends MobileB2BOptions {
   username: string;
-};
+}
 
 export interface MobileB2BResponse {
   status: 'Queued' | 'InvalidRequest' | 'NotSupported' | 'Failed';
@@ -22,3 +22,5 @@ export interface MobileB2BResponse {
   providerChannel: string;
   errorMessage: string;
 }
+
+export type MobileB2B = (options: MobileB2BOptions) => Promise<MobileB2BResponse>;

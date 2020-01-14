@@ -1,6 +1,9 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { BankCheckoutValidateOptions, BankCheckoutValidateResponse, BankCheckoutValidatePostData } from './bankCheckoutValidate.types';
+import {
+  BankCheckoutValidateOptions, BankCheckoutValidateResponse,
+  BankCheckoutValidatePostData, BankCheckoutValidate,
+} from './bankCheckoutValidate.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -9,9 +12,9 @@ const getSchema = () => joi.object({
   otp: joi.string().regex(/\S/, 'no space').required(),
 }).required();
 
-export const bankCheckoutValidate = (credentials: Credentials) => async (
-  options: BankCheckoutValidateOptions,
-): Promise<BankCheckoutValidateResponse> => {
+export const bankCheckoutValidate = (
+  credentials: Credentials,
+): BankCheckoutValidate => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<BankCheckoutValidateOptions>(getSchema(), options);
 

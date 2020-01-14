@@ -4,11 +4,15 @@ export interface DeleteSubscriptionOptions {
   phoneNumber: string;
 }
 
-export type DeleteSubscriptionPostData = DeleteSubscriptionOptions & {
+export interface DeleteSubscriptionPostData extends DeleteSubscriptionOptions {
   username: string;
-};
+}
 
 export interface DeleteSubscriptionResponse {
   status: 'Success' | 'Failed';
   description: string;
 }
+
+export type DeleteSubscription = (
+  options: DeleteSubscriptionOptions
+) => Promise<DeleteSubscriptionResponse>;

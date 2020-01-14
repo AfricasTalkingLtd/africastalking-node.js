@@ -1,7 +1,9 @@
 import joi from 'joi';
 import queryString from 'query-string';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
-import { SmsOptions, SmsPostData, SmsResponse } from './sendSms.types';
+import {
+  SmsOptions, SmsPostData, SmsResponse, SendSms,
+} from './sendSms.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 
@@ -33,9 +35,9 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
   return schema;
 };
 
-export const sendSms = (credentials: Credentials) => async (
-  options: SmsOptions, isBulk: boolean = false, isPremium: boolean = false,
-): Promise<SmsResponse> => {
+export const sendSms = (
+  credentials: Credentials,
+): SendSms => async (options, isBulk = false, isPremium = false) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<SmsOptions>(getSchema(isBulk, isPremium), options);
 

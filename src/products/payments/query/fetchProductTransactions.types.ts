@@ -37,3 +37,7 @@ export interface FetchProductTransactionsResponse {
   status: 'Success' | 'Failed';
   responses: TransactionResponse[];
 }
+
+export type FetchProductTransactions = (
+  options: FetchProductTransactionsOptions
+) => Promise<FetchProductTransactionsResponse>;

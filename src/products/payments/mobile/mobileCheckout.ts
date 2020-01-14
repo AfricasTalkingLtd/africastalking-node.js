@@ -1,5 +1,7 @@
 import joi from 'joi';
-import { MobileCheckoutResponse, MobileCheckoutOptions, MobileCheckoutPostData } from './mobileCheckout.types';
+import {
+  MobileCheckoutResponse, MobileCheckoutOptions, MobileCheckoutPostData, MobileCheckout,
+} from './mobileCheckout.types';
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../../utils/misc';
@@ -13,9 +15,9 @@ const getSchema = () => joi.object({
   metadata: joi.object(),
 }).required();
 
-export const mobileCheckout = (credentials: Credentials) => async (
-  options: MobileCheckoutOptions,
-): Promise<MobileCheckoutResponse> => {
+export const mobileCheckout = (
+  credentials: Credentials,
+): MobileCheckout => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MobileCheckoutOptions>(getSchema(), options);
 

@@ -9,9 +9,9 @@ export interface MobileCheckoutOptions {
   };
 }
 
-export type MobileCheckoutPostData = MobileCheckoutOptions & {
+export interface MobileCheckoutPostData extends MobileCheckoutOptions {
   username: string;
-};
+}
 
 export interface MobileCheckoutResponse {
   status: 'PendingConfirmation' | 'InvalidRequest' | 'NotSupported' | 'Failed';
@@ -19,3 +19,5 @@ export interface MobileCheckoutResponse {
   transactionId?: string;
   providerChannel?: string;
 }
+
+export type MobileCheckout = (options: MobileCheckoutOptions) => Promise<MobileCheckoutResponse>;

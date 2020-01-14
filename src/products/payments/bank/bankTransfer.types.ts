@@ -16,9 +16,9 @@ export interface BankTransferOptions {
   }[];
 }
 
-export type BankTransferPostData = BankTransferOptions & {
+export interface BankTransferPostData extends BankTransferOptions {
   username: string;
-};
+}
 
 export interface BankTransferResponse {
   entries: {
@@ -30,3 +30,5 @@ export interface BankTransferResponse {
   }[];
   errorMessage?: string;
 }
+
+export type BankTransfer = (options: BankTransferOptions) => Promise<BankTransferResponse>;

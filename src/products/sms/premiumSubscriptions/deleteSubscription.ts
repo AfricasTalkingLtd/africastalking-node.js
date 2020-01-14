@@ -1,6 +1,9 @@
 import joi from 'joi';
 import queryString from 'query-string';
-import { DeleteSubscriptionOptions, DeleteSubscriptionResponse, DeleteSubscriptionPostData } from './deleteSubscription.types';
+import {
+  DeleteSubscriptionOptions, DeleteSubscriptionResponse,
+  DeleteSubscriptionPostData, DeleteSubscription,
+} from './deleteSubscription.types';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
@@ -11,9 +14,9 @@ const getSchema = () => joi.object({
   phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
 }).required();
 
-export const deleteSubscription = (credentials: Credentials) => async (
-  options: DeleteSubscriptionOptions,
-): Promise<DeleteSubscriptionResponse> => {
+export const deleteSubscription = (
+  credentials: Credentials,
+): DeleteSubscription => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<DeleteSubscriptionOptions>(getSchema(), options);
 

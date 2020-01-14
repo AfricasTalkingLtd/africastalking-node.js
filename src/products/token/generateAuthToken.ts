@@ -1,11 +1,11 @@
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
-import { GenerateAuthTokenResponse, GenerateAuthTokenPostData } from './generateAuthToken.types';
+import { GenerateAuthTokenResponse, GenerateAuthTokenPostData, GenerateAuthToken } from './generateAuthToken.types';
 import { sendRequest } from '../../utils/misc';
 
 export const generateAuthToken = (
   credentials: Credentials,
-) => async (): Promise<GenerateAuthTokenResponse> => {
+): GenerateAuthToken => async () => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const data: GenerateAuthTokenPostData = { username };
 

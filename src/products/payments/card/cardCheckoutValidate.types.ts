@@ -3,12 +3,16 @@ export interface CardCheckoutValidateOptions {
   otp: string;
 }
 
-export type CardCheckoutValidatePostData = CardCheckoutValidateOptions & {
+export interface CardCheckoutValidatePostData extends CardCheckoutValidateOptions {
   username: string;
-};
+}
 
 export interface CardCheckoutValidateResponse {
   status: 'Success' | 'Failed';
   description: string;
   checkoutToken?: string;
 }
+
+export type CardCheckoutValidate = (
+  options: CardCheckoutValidateOptions
+) => Promise<CardCheckoutValidateResponse>;

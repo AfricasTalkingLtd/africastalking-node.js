@@ -8,12 +8,14 @@ export interface WalletTransferOptions {
   };
 }
 
-export type WalletTransferPostData = WalletTransferOptions & {
+export interface WalletTransferPostData extends WalletTransferOptions {
   username: string;
-};
+}
 
 export interface WalletTransferResponse {
   status: 'Success' | 'Failed';
   description: string;
   transactionId?: string;
 }
+
+export type WalletTransfer = (options: WalletTransferOptions) => Promise<WalletTransferResponse>;

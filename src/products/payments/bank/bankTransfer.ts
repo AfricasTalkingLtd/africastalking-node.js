@@ -1,6 +1,8 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { BankTransferOptions, BankTransferResponse, BankTransferPostData } from './bankTransfer.types';
+import {
+  BankTransferOptions, BankTransferResponse, BankTransferPostData, BankTransfer,
+} from './bankTransfer.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -22,9 +24,9 @@ const getSchema = () => joi.object({
   ).min(1).required(),
 }).required();
 
-export const bankTransfer = (credentials: Credentials) => async (
-  options: BankTransferOptions,
-): Promise<BankTransferResponse> => {
+export const bankTransfer = (
+  credentials: Credentials,
+) : BankTransfer => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<BankTransferOptions>(getSchema(), options);
 

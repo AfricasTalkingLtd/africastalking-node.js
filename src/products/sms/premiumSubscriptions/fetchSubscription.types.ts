@@ -4,9 +4,9 @@ export interface FetchSubscriptionOptions {
   lastReceivedId?: number;
 }
 
-export type FetchSubscriptionQueryParams = FetchSubscriptionOptions & {
+export interface FetchSubscriptionQueryParams extends FetchSubscriptionOptions {
   username: string;
-};
+}
 
 export interface FetchSubscriptionResponse {
   Subscriptions: {
@@ -15,3 +15,7 @@ export interface FetchSubscriptionResponse {
     date: string;
   }[];
 }
+
+export type FetchSubscription = (
+  options: FetchSubscriptionOptions
+) => Promise<FetchSubscriptionResponse>;

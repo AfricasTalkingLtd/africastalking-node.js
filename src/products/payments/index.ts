@@ -1,42 +1,60 @@
 import { Credentials } from '../../utils/getFullCredentials.types';
-import { mobileCheckout } from './mobile/mobileCheckout';
-import { mobileB2C } from './mobile/mobileB2C';
-import { mobileB2B } from './mobile/mobileB2B';
+import { Payments } from './index.types';
 import { bankCheckoutCharge } from './bank/bankCheckoutCharge';
 import { bankCheckoutValidate } from './bank/bankCheckoutValidate';
 import { bankTransfer } from './bank/bankTransfer';
-import { walletTransfer } from './walletTransfer';
-import { topupStash } from './topupStash';
 import { cardCheckoutCharge } from './card/cardCheckoutCharge';
 import { cardCheckoutValidate } from './card/cardCheckoutValidate';
-import { fetchProductTransactions } from './query/fetchProductTransactions';
-import { findTransaction } from './query/findTransaction';
-import { fetchWalletTransactions } from './query/fetchWalletTransactions';
-import { fetchWalletBalance } from './query/fetchWalletBalance';
+import { mobileB2B } from './mobile/mobileB2B';
+import { mobileB2C } from './mobile/mobileB2C';
+import { mobileCheckout } from './mobile/mobileCheckout';
 import { mobileData } from './mobile/mobileData';
+import { fetchProductTransactions } from './query/fetchProductTransactions';
+import { fetchWalletBalance } from './query/fetchWalletBalance';
+import { fetchWalletTransactions } from './query/fetchWalletTransactions';
+import { findTransaction } from './query/findTransaction';
+import { topupStash } from './topupStash';
+import { walletTransfer } from './walletTransfer';
+import { showDeprecationWarning } from '../../utils/misc';
 
-export const PAYMENTS = (credentials: Credentials) => ({
-  mobileCheckout: mobileCheckout(credentials),
-  mobileB2C: mobileB2C(credentials),
-  mobileB2B: mobileB2B(credentials),
+export const payments = (credentials: Credentials): Payments => ({
   bankCheckoutCharge: bankCheckoutCharge(credentials),
   bankCheckoutValidate: bankCheckoutValidate(credentials),
   bankTransfer: bankTransfer(credentials),
-  walletTransfer: walletTransfer(credentials),
-  topupStash: topupStash(credentials),
+
   cardCheckoutCharge: cardCheckoutCharge(credentials),
   cardCheckoutValidate: cardCheckoutValidate(credentials),
-  fetchProductTransactions: fetchProductTransactions(credentials),
-  findTransaction: findTransaction(credentials),
-  fetchWalletTransactions: fetchWalletTransactions(credentials),
-  fetchWalletBalance: fetchWalletBalance(credentials),
+
+  mobileB2B: mobileB2B(credentials),
+  mobileB2C: mobileB2C(credentials),
+  mobileCheckout: mobileCheckout(credentials),
   mobileData: mobileData(credentials),
 
+  fetchProductTransactions: fetchProductTransactions(credentials),
+  fetchWalletBalance: fetchWalletBalance(credentials),
+  fetchWalletTransactions: fetchWalletTransactions(credentials),
+  findTransaction: findTransaction(credentials),
+
+  topupStash: topupStash(credentials),
+  walletTransfer: walletTransfer(credentials),
+
   // fallbacks
-  checkout: mobileCheckout(credentials),
-  checkOut: mobileCheckout(credentials),
-  payConsumer: mobileB2C(credentials),
-  payBusiness: mobileB2B(credentials),
+  checkout: (opts) => {
+    showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()', 'minor');
+    return mobileCheckout(credentials)(opts);
+  },
+  checkOut: (opts) => {
+    showDeprecationWarning('PAYMENTS.checkOut()', 'PAYMENTS.mobileCheckout()', 'minor');
+    return mobileCheckout(credentials)(opts);
+  },
+  payConsumer: (opts) => {
+    showDeprecationWarning('PAYMENTS.payConsumer()', 'PAYMENTS.mobileB2C()', 'minor');
+    return mobileB2C(credentials)(opts);
+  },
+  payBusiness: (opts) => {
+    showDeprecationWarning('PAYMENTS.payBusiness()', 'PAYMENTS.mobileB2B()', 'minor');
+    return mobileB2B(credentials)(opts);
+  },
 
   // constants
   REASON: {

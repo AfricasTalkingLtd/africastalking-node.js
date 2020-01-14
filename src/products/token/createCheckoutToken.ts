@@ -3,15 +3,18 @@ import queryString from 'query-string';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
-import { CreateCheckoutTokenOptions, CreateCheckoutTokenResponse, CreateCheckoutTokenPostData } from './createCheckoutToken.types';
+import {
+  CreateCheckoutTokenOptions, CreateCheckoutTokenResponse,
+  CreateCheckoutTokenPostData, CreateCheckoutToken,
+} from './createCheckoutToken.types';
 
 const getSchema = () => joi.object({
   phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
 }).required();
 
-export const createCheckoutToken = (credentials: Credentials) => async (
-  phoneNumber: string,
-): Promise<CreateCheckoutTokenResponse> => {
+export const createCheckoutToken = (
+  credentials: Credentials,
+): CreateCheckoutToken => async (phoneNumber) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<CreateCheckoutTokenOptions>(getSchema(), { phoneNumber });
 

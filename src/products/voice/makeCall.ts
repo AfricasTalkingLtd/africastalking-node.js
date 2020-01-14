@@ -3,7 +3,9 @@ import queryString from 'query-string';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
-import { MakeCallResponse, MakeCallOptions, MakeCallPostData } from './makeCall.types';
+import {
+  MakeCallResponse, MakeCallOptions, MakeCallPostData, MakeCall,
+} from './makeCall.types';
 
 const getSchema = () => joi.object({
   callTo: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
@@ -11,9 +13,9 @@ const getSchema = () => joi.object({
   clientRequestId: joi.string(),
 }).required();
 
-export const makeCall = (credentials: Credentials) => async (
-  options: MakeCallOptions,
-): Promise<MakeCallResponse> => {
+export const makeCall = (
+  credentials: Credentials,
+): MakeCall => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<MakeCallOptions>(getSchema(), options);
 

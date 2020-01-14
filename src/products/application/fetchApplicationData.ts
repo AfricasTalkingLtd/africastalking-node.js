@@ -1,11 +1,11 @@
 import { sendRequest } from '../../utils/misc';
-import { ApplicationResponse, ApplicationQueryParams } from './fetchApplicationData.types';
+import { ApplicationResponse, ApplicationQueryParams, FetchApplicationData } from './fetchApplicationData.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 
 export const fetchApplicationData = (
   credentials: Credentials,
-) => async (): Promise<ApplicationResponse> => {
+): FetchApplicationData => async () => {
   const { apiKey, username, format } = getFullCredentials(credentials);
 
   const queryParams: ApplicationQueryParams = { username };

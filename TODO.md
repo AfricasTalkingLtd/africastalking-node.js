@@ -7,13 +7,14 @@
 - types:
   - payments: accepted currencies
   - missing types (due to no documentation)
+- [cardCheckOutCharge] fix API error: The request content was malformed: Expected String as JsString
 
 ## Rewrites
 
 - example/
 - README.md
 
-## BUGS / FIXES
+## Yoda
 
 - website
   - sidebar scroll issue

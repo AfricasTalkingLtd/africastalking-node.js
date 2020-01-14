@@ -1,6 +1,8 @@
 import joi from 'joi';
 import { Credentials } from '../../utils/getFullCredentials.types';
-import { WalletTransferOptions, WalletTransferResponse, WalletTransferPostData } from './walletTransfer.types';
+import {
+  WalletTransferOptions, WalletTransferResponse, WalletTransferPostData, WalletTransfer,
+} from './walletTransfer.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 
@@ -12,9 +14,9 @@ const getSchema = () => joi.object({
   metadata: joi.object(),
 }).required();
 
-export const walletTransfer = (credentials: Credentials) => async (
-  options: WalletTransferOptions,
-): Promise<WalletTransferResponse> => {
+export const walletTransfer = (
+  credentials: Credentials,
+): WalletTransfer => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<WalletTransferOptions>(getSchema(), options);
 

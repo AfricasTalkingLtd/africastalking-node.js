@@ -2,9 +2,9 @@ import joi from 'joi';
 import bodyParser from 'body-parser';
 import { Request, NextFunction, Response } from 'express';
 import { validateJoiSchema } from '../../utils/misc';
-import { UssdOptions, UssdHandler } from './ExpressHandler.types';
+import { UssdOptions, UssdHandler, ExpressHandler } from './expressHandler.types';
 
-export const ExpressHandler = (handler: UssdHandler) => [
+export const expressHandler = (handler: UssdHandler): ExpressHandler[] => [
   bodyParser.urlencoded({ extended: true }),
   bodyParser.json(),
   (req: Request, res: Response, next: NextFunction) => {

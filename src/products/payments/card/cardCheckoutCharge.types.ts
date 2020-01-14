@@ -17,12 +17,16 @@ export interface CardCheckoutChargeOptions {
   };
 }
 
-export type CardCheckoutChargePostData = CardCheckoutChargeOptions & {
+export interface CardCheckoutChargePostData extends CardCheckoutChargeOptions {
   username: string;
-};
+}
 
 export interface CardCheckoutChargeResponse {
   status: 'PendingConfirmation' | 'Success' | 'InvalidRequest' | 'NotSupported' | 'Failed';
   description: string;
   transactionId?: string;
 }
+
+export type CardCheckoutCharge = (
+  options: CardCheckoutChargeOptions
+) => Promise<CardCheckoutChargeResponse>;

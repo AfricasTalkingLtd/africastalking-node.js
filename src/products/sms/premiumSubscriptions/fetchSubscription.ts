@@ -1,5 +1,8 @@
 import joi from 'joi';
-import { FetchSubscriptionOptions, FetchSubscriptionResponse, FetchSubscriptionQueryParams } from './fetchSubscription.types';
+import {
+  FetchSubscriptionOptions, FetchSubscriptionResponse,
+  FetchSubscriptionQueryParams, FetchSubscription,
+} from './fetchSubscription.types';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
@@ -10,9 +13,9 @@ const getSchema = () => joi.object({
   lastReceivedId: joi.number(),
 });
 
-export const fetchSubscription = (credentials: Credentials) => async (
-  options: FetchSubscriptionOptions,
-): Promise<FetchSubscriptionResponse> => {
+export const fetchSubscription = (
+  credentials: Credentials,
+): FetchSubscription => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchSubscriptionOptions>(getSchema(), options);
 

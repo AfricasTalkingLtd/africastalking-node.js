@@ -206,15 +206,15 @@ describe('ActionBuilder', () => {
         actionBuilder.enqueue();
 
         expect(actionBuilder.build()).to.equal(generateResponseTemplate(
-          `<Enqueue/>`,
+          '<Enqueue/>',
         ));
       });
 
       it('creates valid <Enqueue> with optional parameters', () => {
         actionBuilder.enqueue({
           holdMusic: audioUrl,
-          name: 'support'
-      });
+          name: 'support',
+        });
 
         expect(actionBuilder.build()).to.equal(generateResponseTemplate(
           `<Enqueue holdMusic="${audioUrl}" name="support"/>`,
@@ -243,7 +243,7 @@ describe('ActionBuilder', () => {
 
       it('creates <Dequeue> with phoneNumber and name', () => {
         actionBuilder.dequeue(phoneNumber, {
-          name: 'support'
+          name: 'support',
         });
 
         expect(actionBuilder.build()).to.equal(generateResponseTemplate(
@@ -283,7 +283,7 @@ describe('ActionBuilder', () => {
         actionBuilder.conference();
 
         expect(actionBuilder.build()).to.equal(generateResponseTemplate(
-          `<Conference/>`,
+          '<Conference/>',
         ));
       });
     });
@@ -295,7 +295,7 @@ describe('ActionBuilder', () => {
         actionBuilder.reject();
 
         expect(actionBuilder.build()).to.equal(generateResponseTemplate(
-          `<Reject/>`,
+          '<Reject/>',
         ));
       });
     });

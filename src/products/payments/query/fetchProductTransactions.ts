@@ -1,6 +1,9 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { FetchProductTransactionsOptions, FetchProductTransactionsResponse, FetchProductTransactionsQueryParams } from './fetchProductTransactions.types';
+import {
+  FetchProductTransactionsOptions, FetchProductTransactionsResponse,
+  FetchProductTransactionsQueryParams, FetchProductTransactions,
+} from './fetchProductTransactions.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -22,9 +25,9 @@ const getSchema = () => joi.object({
   }).required(),
 }).required();
 
-export const fetchProductTransactions = (credentials: Credentials) => async (
-  options: FetchProductTransactionsOptions,
-): Promise<FetchProductTransactionsResponse> => {
+export const fetchProductTransactions = (
+  credentials: Credentials,
+): FetchProductTransactions => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<FetchProductTransactionsOptions>(getSchema(), options);
 

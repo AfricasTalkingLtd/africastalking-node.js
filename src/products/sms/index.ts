@@ -1,17 +1,17 @@
-import { fetchMessages } from './fetchMessages';
-import { SmsOptions } from './sendSms.types';
-import { sendSms } from './sendSms';
-import { fetchSubscription } from './premiumSubscriptions/fetchSubscription';
+import { Sms } from './index.types';
+import { Credentials } from '../../utils/getFullCredentials.types';
 import { createSubscription } from './premiumSubscriptions/createSubscription';
 import { deleteSubscription } from './premiumSubscriptions/deleteSubscription';
-import { Credentials } from '../../utils/getFullCredentials.types';
+import { fetchSubscription } from './premiumSubscriptions/fetchSubscription';
+import { fetchMessages } from './fetchMessages';
+import { sendSms } from './sendSms';
 
-export const SMS = (credentials: Credentials) => ({
-  send: (options: SmsOptions) => sendSms(credentials)(options),
-  sendBulk: (options: SmsOptions) => sendSms(credentials)(options, true),
-  sendPremium: (options: SmsOptions) => sendSms(credentials)(options, false, true),
-  fetchMessages: fetchMessages(credentials),
-  fetchSubscription: fetchSubscription(credentials),
+export const sms = (credentials: Credentials): Sms => ({
   createSubscription: createSubscription(credentials),
   deleteSubscription: deleteSubscription(credentials),
+  fetchSubscription: fetchSubscription(credentials),
+  fetchMessages: fetchMessages(credentials),
+  send: (opts) => sendSms(credentials)(opts),
+  sendBulk: (opts) => sendSms(credentials)(opts, true),
+  sendPremium: (opts) => sendSms(credentials)(opts, false, true),
 });

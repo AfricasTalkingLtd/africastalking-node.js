@@ -2,9 +2,9 @@ export interface FetchMessagesOptions {
   lastReceivedId?: string;
 }
 
-export type FetchMessagesQueryParams = FetchMessagesOptions & {
+export interface FetchMessagesQueryParams extends FetchMessagesOptions {
   username: string;
-};
+}
 
 export interface FetchMessagesResponse {
   SMSMessageData: {
@@ -18,3 +18,5 @@ export interface FetchMessagesResponse {
     }[];
   };
 }
+
+export type FetchMessages = (options?: FetchMessagesOptions) => Promise<FetchMessagesResponse>;

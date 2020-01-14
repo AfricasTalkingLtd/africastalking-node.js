@@ -29,3 +29,7 @@ export interface SmsResponse {
     }[];
   };
 }
+
+export type SendSms = (
+  options: SmsOptions, isBulk?: boolean, isPremium?: boolean,
+) => Promise<SmsResponse>;

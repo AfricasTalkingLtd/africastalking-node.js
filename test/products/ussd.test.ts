@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 import { expect } from 'chai';
+import axios, { AxiosResponse } from 'axios';
 import AfricasTalking from '../../src';
 import { validCredentials } from '../fixtures';
-import axios, { AxiosResponse } from 'axios';
 
 describe('USSD', () => {
   const screens = {

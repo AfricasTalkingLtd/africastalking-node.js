@@ -1,6 +1,9 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { CardCheckoutChargeOptions, CardCheckoutChargeResponse, CardCheckoutChargePostData } from './cardCheckoutCharge.types';
+import {
+  CardCheckoutChargeOptions, CardCheckoutChargeResponse,
+  CardCheckoutChargePostData, CardCheckoutCharge,
+} from './cardCheckoutCharge.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -21,9 +24,9 @@ const getSchema = () => joi.object({
   metadata: joi.object(),
 }).xor('paymentCard', 'checkoutToken').required();
 
-export const cardCheckoutCharge = (credentials: Credentials) => async (
-  options: CardCheckoutChargeOptions,
-): Promise<CardCheckoutChargeResponse> => {
+export const cardCheckoutCharge = (
+  credentials: Credentials,
+): CardCheckoutCharge => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<CardCheckoutChargeOptions>(getSchema(), options);
 

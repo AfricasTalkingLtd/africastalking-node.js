@@ -3,15 +3,17 @@ import queryString from 'query-string';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../utils/misc';
-import { GetNumQueuedCallsOptions, GetNumQueuedCallsPostData, GetNumQueuedCallsResponse } from './getNumQueuedCalls.types';
+import {
+  GetNumQueuedCallsOptions, GetNumQueuedCallsPostData, GetNumQueuedCallsResponse, GetNumQueuedCalls,
+} from './getNumQueuedCalls.types';
 
 const getSchema = () => joi.object({
   phoneNumbers: joi.string().required(),
 }).required();
 
-export const getNumQueuedCalls = (credentials: Credentials) => async (
-  options: GetNumQueuedCallsOptions,
-): Promise<GetNumQueuedCallsResponse> => {
+export const getNumQueuedCalls = (
+  credentials: Credentials,
+): GetNumQueuedCalls => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<GetNumQueuedCallsOptions>(getSchema(), options);
 

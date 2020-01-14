@@ -28,3 +28,5 @@ export interface AirtimeResponse {
   }[];
   errorMessage?: 'None' | string;
 }
+
+export type SendAirtimeRequest = (options: AirtimeOptions) => Promise<AirtimeResponse>;

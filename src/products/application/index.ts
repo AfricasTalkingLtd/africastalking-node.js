@@ -1,9 +1,14 @@
-import { fetchApplicationData } from './fetchApplicationData';
+import { Application } from './index.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
+import { fetchApplicationData } from './fetchApplicationData';
+import { showDeprecationWarning } from '../../utils/misc';
 
-export const APPLICATION = (credentials: Credentials) => ({
+export const application = (credentials: Credentials): Application => ({
   fetchApplicationData: fetchApplicationData(credentials),
 
   // fallbacks
-  fetchAccount: fetchApplicationData(credentials),
+  fetchAccount: () => {
+    showDeprecationWarning('APPLICATION.fetchAccount()', 'APPLICATION.fetchApplicationData()', 'minor');
+    return fetchApplicationData(credentials)();
+  },
 });

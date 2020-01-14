@@ -10,3 +10,5 @@ export interface UploadMediaFilePostData extends UploadMediaFileOptions {
 export interface UploadMediaFileResponse {
 
 }
+
+export type UploadMediaFile = (options: UploadMediaFileOptions) => Promise<UploadMediaFileResponse>;

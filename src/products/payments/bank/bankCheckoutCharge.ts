@@ -1,6 +1,9 @@
 import joi from 'joi';
 import { Credentials } from '../../../utils/getFullCredentials.types';
-import { BankCheckoutChargeOptions, BankCheckoutChargeResponse, BankCheckoutChargePostData } from './bankCheckoutCharge.types';
+import {
+  BankCheckoutChargeOptions, BankCheckoutChargeResponse,
+  BankCheckoutChargePostData, BankCheckoutCharge,
+} from './bankCheckoutCharge.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 
@@ -18,9 +21,9 @@ const getSchema = () => joi.object({
   metadata: joi.object(),
 }).required();
 
-export const bankCheckoutCharge = (credentials: Credentials) => async (
-  options: BankCheckoutChargeOptions,
-): Promise<BankCheckoutChargeResponse> => {
+export const bankCheckoutCharge = (
+  credentials: Credentials,
+): BankCheckoutCharge => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<BankCheckoutChargeOptions>(getSchema(), options);
 

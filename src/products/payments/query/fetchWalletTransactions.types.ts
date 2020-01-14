@@ -32,3 +32,7 @@ export interface FetchWalletTransactionsResponse {
   }[];
   errorMessage?: string;
 }
+
+export type FetchWalletTransactions = (
+  options: FetchWalletTransactionsOptions
+) => Promise<FetchWalletTransactionsResponse>;
