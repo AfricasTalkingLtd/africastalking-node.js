@@ -4,13 +4,16 @@
 
 - github actions (tests, run build, push to npm)
 - Idempotency-Key
+- types:
+  - payments: accepted currencies
+  - missing types (due to no documentation)
 
 ## Rewrites
 
 - example/
 - README.md
 
-## BUGS
+## BUGS / FIXES
 
 - website
   - sidebar scroll issue
