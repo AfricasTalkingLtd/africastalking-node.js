@@ -2,6 +2,10 @@
 
 ## Add
 
+- Tests error: Server
+- build before push
+- bump version: minor
+
 - github actions (tests, run build, push to npm)
 - Idempotency-Key
 - types:

@@ -8,10 +8,11 @@ describe('Server', () => {
   const TEST_PORT = 9736;
   const TEST_CLIENT_ID = 'TEST-ID-XXXX';
   const credentials = grpc.credentials.createSsl(fs.readFileSync(`${__dirname}/cert/cert.pem`));
-  let server: Server;
   const sdkProto = grpc.load(
     `${__dirname}/../../src/utils/server/proto/com/africastalking/SdkServerService.proto`,
   ).africastalking;
+
+  let server: Server;
 
   before('start server', (done) => {
     server = new Server(validCredentials);
