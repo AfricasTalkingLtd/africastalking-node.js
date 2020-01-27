@@ -53,8 +53,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var misc_1 = require("../../utils/misc");
+var constants_1 = require("../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
-    productName: joi_1.default.string().regex(/\S/, 'no space').required(),
+    productName: joi_1.default.string().regex(constants_1.customRegex.noSpace, 'no space').required(),
     currencyCode: joi_1.default.string().valid('KES', 'UGX', 'USD').required(),
     amount: joi_1.default.number().required(),
     metadata: joi_1.default.object(),

@@ -5,9 +5,10 @@ import {
 } from './mobileB2C.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { customRegex, CONSTANTS } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   recipients: joi.array().items(
     joi.object({
       name: joi.string(),
@@ -15,8 +16,7 @@ const getSchema = () => joi.object({
       currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
       amount: joi.number().required(),
       providerChannel: joi.string(),
-      reason: joi.string().valid('SalaryPayment', 'SalaryPaymentWithWithdrawalChargePaid',
-        'BusinessPayment', 'BusinessPaymentWithWithdrawalChargePaid', 'PromotionPayment').required(),
+      reason: joi.string().valid(Object.values(CONSTANTS.REASON)).required(),
       metadata: joi.object(),
     }).required(),
   ).min(1).max(10)

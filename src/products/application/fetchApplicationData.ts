@@ -1,5 +1,5 @@
 import { sendRequest } from '../../utils/misc';
-import { ApplicationResponse, ApplicationQueryParams, FetchApplicationData } from './fetchApplicationData.types';
+import { FetchApplicationDataQueryParams, FetchApplicationDataResponse, FetchApplicationData } from './fetchApplicationData.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 
@@ -8,9 +8,9 @@ export const fetchApplicationData = (
 ): FetchApplicationData => async () => {
   const { apiKey, username, format } = getFullCredentials(credentials);
 
-  const queryParams: ApplicationQueryParams = { username };
+  const queryParams: FetchApplicationDataQueryParams = { username };
 
-  return sendRequest<ApplicationResponse, null, ApplicationQueryParams>({
+  return sendRequest<FetchApplicationDataResponse, null, FetchApplicationDataQueryParams>({
     endpointCategory: 'APPLICATION',
     username,
     method: 'GET',

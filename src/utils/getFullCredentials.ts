@@ -5,7 +5,7 @@ import { validateJoiSchema } from './misc';
 const getSchema = () => joi.object({
   apiKey: joi.string().required(),
   username: joi.string().required(),
-  format: joi.string().valid('json', 'xml').required(),
+  format: joi.string().valid('json', 'xml'),
 }).required();
 
 export const getFullCredentials = (credentials: Credentials): FullCredentials => {
@@ -13,6 +13,6 @@ export const getFullCredentials = (credentials: Credentials): FullCredentials =>
 
   return {
     ...value,
-    format: value.format === 'xml' ? 'application/xml' : 'application/json',
+    format: value?.format === 'xml' ? 'application/xml' : 'application/json',
   };
 };

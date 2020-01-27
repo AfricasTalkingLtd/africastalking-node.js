@@ -2,8 +2,6 @@ import { Credentials } from '../getFullCredentials.types';
 import { Authenticator, StartOptions } from './index.types';
 export declare class Server {
     private defaultPort;
-    private tokens;
-    private AfricasTalking;
     private server;
     private tokenService;
     private authenticator;

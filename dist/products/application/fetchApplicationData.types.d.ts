@@ -1,9 +1,9 @@
-export interface ApplicationQueryParams {
+export interface FetchApplicationDataQueryParams {
     username: string;
 }
-export interface ApplicationResponse {
+export interface FetchApplicationDataResponse {
     UserData: {
         balance: string;
     };
 }
-export declare type FetchApplicationData = () => Promise<ApplicationResponse>;
+export declare type FetchApplicationData = () => Promise<FetchApplicationDataResponse>;

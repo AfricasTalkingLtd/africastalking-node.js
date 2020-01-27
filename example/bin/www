@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const ATServer = require('../../dist/server');
+const { Server: ATServer } = require('../../dist');
 const app = require('../app');
 const debug = require('debug')('example:server');
 const http = require('http');

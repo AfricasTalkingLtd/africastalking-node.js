@@ -53,8 +53,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
 var getFullCredentials_1 = require("../../../utils/getFullCredentials");
 var misc_1 = require("../../../utils/misc");
+var constants_1 = require("../../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
-    productName: joi_1.default.string().regex(/\S/, 'no space').required(),
+    productName: joi_1.default.string().regex(constants_1.customRegex.noSpace, 'no space').required(),
     paymentCard: joi_1.default.object({
         number: joi_1.default.number().required(),
         cvvNumber: joi_1.default.number().required(),
@@ -63,10 +64,10 @@ var getSchema = function () { return joi_1.default.object({
         countryCode: joi_1.default.string().valid('NG').required(),
         authToken: joi_1.default.string().required(),
     }),
-    checkoutToken: joi_1.default.string().regex(/\S/, 'no space'),
+    checkoutToken: joi_1.default.string().regex(constants_1.customRegex.noSpace, 'no space'),
     currencyCode: joi_1.default.string().valid('KES', 'UGX', 'USD').required(),
     amount: joi_1.default.number().required(),
-    narration: joi_1.default.string().regex(/\S/, 'no space').required(),
+    narration: joi_1.default.string().regex(constants_1.customRegex.noSpace, 'no space').required(),
     metadata: joi_1.default.object(),
 }).xor('paymentCard', 'checkoutToken').required(); };
 exports.cardCheckoutCharge = function (credentials) { return function (options) { return __awaiter(void 0, void 0, void 0, function () {

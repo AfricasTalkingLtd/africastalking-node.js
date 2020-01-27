@@ -8,7 +8,7 @@ import {
 } from './uploadMediaFile.types';
 
 const getSchema = () => joi.object({
-  url: joi.string().regex(/^https?:\/\//, 'url').required(),
+  url: joi.string().uri().required(),
 }).required();
 
 export const uploadMediaFile = (

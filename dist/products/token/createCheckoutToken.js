@@ -54,8 +54,9 @@ var joi_1 = __importDefault(require("joi"));
 var query_string_1 = __importDefault(require("query-string"));
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var misc_1 = require("../../utils/misc");
+var constants_1 = require("../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
-    phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+    phoneNumber: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
 }).required(); };
 exports.createCheckoutToken = function (credentials) { return function (phoneNumber) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, result, data;
@@ -74,11 +75,11 @@ exports.createCheckoutToken = function (credentials) { return function (phoneNum
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
-                .then(function (result2) {
-                if (result2.token == null || result2.token === 'None') {
-                    return Promise.reject(result2.description);
+                .then(function (checkoutTokenResult) {
+                if (checkoutTokenResult.token == null || checkoutTokenResult.token === 'None') {
+                    return Promise.reject(checkoutTokenResult.description);
                 }
-                return Promise.resolve(result2);
+                return Promise.resolve(checkoutTokenResult);
             })];
     });
 }); }; };

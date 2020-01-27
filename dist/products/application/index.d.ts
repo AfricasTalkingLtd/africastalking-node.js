@@ -1,3 +1,5 @@
 import { Application } from './index.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
-export declare const application: (credentials: Credentials) => Application;
+export { FetchApplicationDataResponse } from './fetchApplicationData.types';
+export { fetchApplicationData } from './fetchApplicationData';
+export declare const APPLICATION: (credentials: Credentials) => Application;

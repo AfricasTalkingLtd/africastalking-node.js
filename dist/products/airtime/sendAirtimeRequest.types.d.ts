@@ -1,18 +1,18 @@
-export interface AirtimeOptions {
+export interface SendAirtimeOptions {
     recipients: {
         phoneNumber: string;
         currencyCode: 'KES' | 'UGX' | 'TZS' | 'NGN';
         amount: number;
     }[];
 }
-export interface AirtimePostData {
+export interface SendAirtimePostData {
     username: string;
     recipients: {
         phoneNumber: string;
         amount: String;
     }[];
 }
-export interface AirtimeResponse {
+export interface SendAirtimeResponse {
     numSent: number;
     totalAmount: string;
     totalDiscount: string;
@@ -26,4 +26,4 @@ export interface AirtimeResponse {
     }[];
     errorMessage?: 'None' | string;
 }
-export declare type SendAirtimeRequest = (options: AirtimeOptions) => Promise<AirtimeResponse>;
+export declare type SendAirtimeRequest = (options: SendAirtimeOptions) => Promise<SendAirtimeResponse>;

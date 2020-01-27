@@ -1,17 +1,25 @@
 # TODO
 
-## Add
+## Important before every push
 
-- Tests error: Server
-- build before push
-- bump version: minor
+- remove test credentials
+- bump version
+- build
+
+## Fix
+
+- Tests error
+  - grpc server
+  - [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
+- catch err: expect??
+
+## Add
 
 - github actions (tests, run build, push to npm)
 - Idempotency-Key
 - types:
   - payments: accepted currencies
   - missing types (due to no documentation)
-- [cardCheckOutCharge] fix API error: The request content was malformed: Expected String as JsString
 - Improve test converage
 
 ## Rewrites
@@ -32,19 +40,8 @@
 ## IDEAS
 
 - one base url for api
-- unified approach (not product-based):
-
-```js
-const at = AfricasTalking({});
-
-// instead of:
-at.SMS.send();
-
-// update to:
-AT.sendSms();
-```
-
-- breaking
+- valid('')
+- breaking:
 
 ```js
 const at = AfricasTalking({});

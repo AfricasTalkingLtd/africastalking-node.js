@@ -1,8 +1,7 @@
 import express, { Application } from 'express';
 import { expect } from 'chai';
 import axios, { AxiosResponse } from 'axios';
-import AfricasTalking from '../../src';
-import { validCredentials } from '../fixtures';
+import { USSD } from '../../src';
 
 describe('USSD', () => {
   const screens = {
@@ -39,7 +38,7 @@ describe('USSD', () => {
     baseURL: `http://localhost:${port}`,
   });
 
-  const ussd = AfricasTalking(validCredentials).USSD;
+  const ussd = USSD;
 
   before(() => {
     app = express();

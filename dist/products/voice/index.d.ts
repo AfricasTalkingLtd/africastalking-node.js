@@ -1,3 +1,10 @@
 import { Voice } from './index.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
-export declare const voice: (credentials: Credentials) => Voice;
+export { GetNumQueuedCallsOptions, GetNumQueuedCallsResponse } from './getNumQueuedCalls.types';
+export { MakeCallOptions, MakeCallResponse } from './makeCall.types';
+export { UploadMediaFileOptions, UploadMediaFileResponse } from './uploadMediaFile.types';
+export { ActionBuilder } from './utils/actionBuilder';
+export { getNumQueuedCalls } from './getNumQueuedCalls';
+export { makeCall } from './makeCall';
+export { uploadMediaFile } from './uploadMediaFile';
+export declare const VOICE: (credentials: Credentials) => Voice;

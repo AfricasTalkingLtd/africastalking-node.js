@@ -2,21 +2,21 @@
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import AfricasTalking from '../../src';
+import { SMS } from '../../src';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('SMS', () => {
-  const sms = AfricasTalking(validCredentials).SMS;
+  const sms = SMS(validCredentials);
 
   context('invalid options', () => {
     it('#send() cannot be empty', () => {
-      expect(sms.send({} as any)).to.be.rejected;
+      expect(sms.sendSms({} as any)).to.be.rejected;
     });
 
     it('#send() must have to/from/message params', () => {
-      expect(sms.send({
+      expect(sms.sendSms({
         to: '+254718769882',
         from: null,
         message: null,
@@ -70,125 +70,84 @@ describe('SMS', () => {
 
   context('valid options', () => {
     it('fetches messages', async () => {
-      try {
-        const result = await sms.fetchMessages();
-
-        expect(result).to.have.property('SMSMessageData');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      const result = await sms.fetchMessages();
+      expect(result).to.have.property('SMSMessageData');
     });
 
     it('fetches subscription', async () => {
-      try {
-        const result = await sms.fetchSubscription({
-          shortCode: '1234',
-          keyword: 'TESTKWD',
-        });
+      const result = await sms.fetchSubscription({
+        shortCode: '1234',
+        keyword: 'TESTKWD',
+      });
 
-        expect(result).to.have.property('responses');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('responses');
     });
 
     it('creates subscription', async () => {
-      try {
-        const result = await sms.createSubscription({
-          shortCode: '1234',
-          keyword: 'TESTKWD',
-          phoneNumber: '+254718769882',
-          checkoutToken: '12abvsfdhh63535',
-        });
+      const result = await sms.createSubscription({
+        shortCode: '1234',
+        keyword: 'TESTKWD',
+        phoneNumber: '+254718769882',
+        checkoutToken: '12abvsfdhh63535',
+      });
 
-        expect(result).to.have.property('status');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('status');
     });
 
     it('deletes subscription', async () => {
-      try {
-        const result = await sms.deleteSubscription({
-          shortCode: '1234',
-          keyword: 'TESTKWD',
-          phoneNumber: '+254718769882',
-        });
+      const result = await sms.deleteSubscription({
+        shortCode: '1234',
+        keyword: 'TESTKWD',
+        phoneNumber: '+254718769882',
+      });
 
-        expect(result).to.have.property('status');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('status');
     });
 
     it('sends single simple message', async () => {
-      try {
-        const result = await sms.send({
-          to: '+254718769882',
-          message: 'This is a test',
-          enqueue: true,
-        });
+      const result = await sms.sendSms({
+        to: '+254718769882',
+        message: 'This is a test',
+        enqueue: true,
+      });
 
-        expect(result).to.have.property('SMSMessageData');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('SMSMessageData');
     });
 
     it('sends multiple simple message', async () => {
-      try {
-        const result = await sms.send({
-          to: ['+254718769882', '+254718769882'],
-          message: 'This is mulitple recipients test',
-          enqueue: true,
-        });
+      const result = await sms.sendSms({
+        to: ['+254718769882', '+254718769882'],
+        message: 'This is mulitple recipients test',
+        enqueue: true,
+      });
 
-        expect(result).to.have.property('SMSMessageData');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('SMSMessageData');
     });
 
     it('sends heavy single message', async () => {
-      try {
-        const count = 1000;
-        const numbers = Array(count).fill(0).map((_num, idx) => `+254718${count + idx}`);
+      const count = 1000;
+      const numbers = Array(count).fill(0).map((_num, idx) => `+254718${count + idx}`);
 
-        const result = await sms.send({
-          to: numbers,
-          message: 'This is heavy single test',
-          enqueue: true,
-        });
+      const result = await sms.sendSms({
+        to: numbers,
+        message: 'This is heavy single test',
+        enqueue: true,
+      });
 
-        expect(result).to.have.property('SMSMessageData');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('SMSMessageData');
     }).timeout(55000);
 
     it('sends premium message', async () => {
-      try {
-        const result = await sms.sendPremium({
-          to: '+254718760882',
-          from: 'testService',
-          message: 'This is premium test',
-          keyword: 'test',
-          linkId: '76test',
-          retryDurationInHours: 1,
-        });
+      const result = await sms.sendPremium({
+        to: '+254718760882',
+        from: 'testService',
+        message: 'This is premium test',
+        keyword: 'test',
+        linkId: '76test',
+        retryDurationInHours: 1,
+      });
 
-        expect(result).to.have.property('SMSMessageData');
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      expect(result).to.have.property('SMSMessageData');
     });
   });
 });

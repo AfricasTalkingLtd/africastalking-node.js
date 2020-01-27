@@ -4,13 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var grpc_1 = __importDefault(require("grpc"));
-var __1 = __importDefault(require("../.."));
 var tokenService_1 = require("./tokenService");
 var Server = (function () {
     function Server(credentials) {
         this.defaultPort = 35897;
-        this.tokens = [];
-        this.AfricasTalking = __1.default(credentials);
         this.server = new grpc_1.default.Server();
         this.tokenService = tokenService_1.tokenService(credentials);
         this.server.addService(this.tokenService.definition, this.tokenService.implementation);

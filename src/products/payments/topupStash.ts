@@ -5,9 +5,10 @@ import {
 } from './topupStash.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
+import { customRegex } from '../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
   amount: joi.number().required(),
   metadata: joi.object(),

@@ -2,34 +2,23 @@
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import AfricasTalking from '../../src';
+import { TOKEN } from '../../src';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('Token', () => {
-  const token = AfricasTalking(validCredentials).TOKEN;
+  const token = TOKEN(validCredentials);
 
   it('creates checkout token', async () => {
-    try {
-      const result = await token.createCheckoutToken('+254718769882');
-
-      expect(result).to.have.property('token');
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+    const result = await token.createCheckoutToken('+254718769882');
+    expect(result).to.have.property('token');
   });
 
   it('generates auth token', async () => {
-    try {
-      const result = await token.generateAuthToken();
+    const result = await token.generateAuthToken();
 
-      expect(result).to.have.property('token');
-      expect(result).to.have.property('lifetimeInSeconds');
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+    expect(result).to.have.property('token');
+    expect(result).to.have.property('lifetimeInSeconds');
   });
 });

@@ -54,10 +54,11 @@ var joi_1 = __importDefault(require("joi"));
 var query_string_1 = __importDefault(require("query-string"));
 var misc_1 = require("../../../utils/misc");
 var getFullCredentials_1 = require("../../../utils/getFullCredentials");
+var constants_1 = require("../../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
     shortCode: joi_1.default.string().required(),
     keyword: joi_1.default.string().required(),
-    phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+    phoneNumber: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
 }).required(); };
 exports.deleteSubscription = function (credentials) { return function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, result, data;

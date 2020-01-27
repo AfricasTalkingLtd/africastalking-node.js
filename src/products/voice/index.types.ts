@@ -5,7 +5,9 @@ import { UploadMediaFile } from './uploadMediaFile.types';
 
 export interface Voice {
   ActionBuilder: typeof ActionBuilder;
-  call: MakeCall;
+  makeCall: MakeCall;
   getNumQueuedCalls: GetNumQueuedCalls;
   uploadMediaFile: UploadMediaFile;
+
+  call: MakeCall;
 }

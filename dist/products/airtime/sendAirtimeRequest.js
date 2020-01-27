@@ -43,10 +43,11 @@ var joi_1 = __importDefault(require("joi"));
 var query_string_1 = __importDefault(require("query-string"));
 var misc_1 = require("../../utils/misc");
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
+var constants_1 = require("../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
     recipients: joi_1.default.array().items(joi_1.default.object({
-        phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
-        currencyCode: joi_1.default.string().valid(['KES', 'UGX', 'TZS', 'NGN']).required(),
+        phoneNumber: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
+        currencyCode: joi_1.default.string().valid('KES', 'UGX', 'TZS', 'NGN').required(),
         amount: joi_1.default.number().required(),
     }).required()).min(1).required(),
 }).required(); };

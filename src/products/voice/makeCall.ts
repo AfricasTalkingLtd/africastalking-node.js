@@ -6,9 +6,10 @@ import { sendRequest, validateJoiSchema } from '../../utils/misc';
 import {
   MakeCallResponse, MakeCallOptions, MakeCallPostData, MakeCall,
 } from './makeCall.types';
+import { customRegex } from '../../utils/constants';
 
 const getSchema = () => joi.object({
-  callTo: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+  callTo: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
   callFrom: joi.string().required(),
   clientRequestId: joi.string(),
 }).required();

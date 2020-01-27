@@ -53,10 +53,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
 var getFullCredentials_1 = require("../../../utils/getFullCredentials");
 var misc_1 = require("../../../utils/misc");
+var constants_1 = require("../../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
-    productName: joi_1.default.string().regex(/\S/, 'no space').required(),
+    productName: joi_1.default.string().regex(constants_1.customRegex.noSpace, 'no space').required(),
     recipients: joi_1.default.array().items(joi_1.default.object({
-        phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+        phoneNumber: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
         quantity: joi_1.default.number().required(),
         unit: joi_1.default.string().valid('MB', 'GB').required(),
         validity: joi_1.default.string().valid('Day', 'Month', 'Week').required(),

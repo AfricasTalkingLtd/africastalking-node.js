@@ -5,9 +5,10 @@ import {
 } from './bankTransfer.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { customRegex } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   recipients: joi.array().items(
     joi.object({
       bankAccount: joi.object({
@@ -18,7 +19,7 @@ const getSchema = () => joi.object({
       }).required(),
       currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
       amount: joi.number().required(),
-      narration: joi.string().regex(/\S/, 'no space').required(),
+      narration: joi.string().regex(customRegex.noSpace, 'no space').required(),
       metadata: joi.object(),
     }).required(),
   ).min(1).required(),

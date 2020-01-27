@@ -16,8 +16,44 @@ import { findTransaction } from './query/findTransaction';
 import { topupStash } from './topupStash';
 import { walletTransfer } from './walletTransfer';
 import { showDeprecationWarning } from '../../utils/misc';
+import { CONSTANTS } from '../../utils/constants';
 
-export const payments = (credentials: Credentials): Payments => ({
+// exports 1: types
+export { BankCheckoutChargeOptions, BankCheckoutChargeResponse } from './bank/bankCheckoutCharge.types';
+export { BankCheckoutValidateOptions, BankCheckoutValidateResponse } from './bank/bankCheckoutValidate.types';
+export { BankTransferOptions, BankTransferResponse } from './bank/bankTransfer.types';
+export { CardCheckoutChargeOptions, CardCheckoutChargeResponse } from './card/cardCheckoutCharge.types';
+export { CardCheckoutValidateOptions, CardCheckoutValidateResponse } from './card/cardCheckoutValidate.types';
+export { MobileB2BOptions, MobileB2BResponse } from './mobile/mobileB2B.types';
+export { MobileB2COptions, MobileB2CResponse } from './mobile/mobileB2C.types';
+export { MobileCheckoutOptions, MobileCheckoutResponse } from './mobile/mobileCheckout.types';
+export { MobileDataOptions, MobileDataResponse } from './mobile/mobileData.types';
+export { FetchProductTransactionsOptions, FetchProductTransactionsResponse } from './query/fetchProductTransactions.types';
+export { FetchWalletBalanceResponse } from './query/fetchWalletBalance.types';
+export { FetchWalletTransactionsOptions, FetchWalletTransactionsResponse } from './query/fetchWalletTransactions.types';
+export { FindTransactionOptions, FindTransactionResponse } from './query/findTransaction.types';
+export { TopupStashOptions, TopupStashResponse } from './topupStash.types';
+export { WalletTransferOptions, WalletTransferResponse } from './walletTransfer.types';
+
+// exports 2: pure functions
+export { bankCheckoutCharge } from './bank/bankCheckoutCharge';
+export { bankCheckoutValidate } from './bank/bankCheckoutValidate';
+export { bankTransfer } from './bank/bankTransfer';
+export { cardCheckoutCharge } from './card/cardCheckoutCharge';
+export { cardCheckoutValidate } from './card/cardCheckoutValidate';
+export { mobileB2B } from './mobile/mobileB2B';
+export { mobileB2C } from './mobile/mobileB2C';
+export { mobileCheckout } from './mobile/mobileCheckout';
+export { mobileData } from './mobile/mobileData';
+export { fetchProductTransactions } from './query/fetchProductTransactions';
+export { fetchWalletBalance } from './query/fetchWalletBalance';
+export { fetchWalletTransactions } from './query/fetchWalletTransactions';
+export { findTransaction } from './query/findTransaction';
+export { topupStash } from './topupStash';
+export { walletTransfer } from './walletTransfer';
+
+// exports 3: instance-based functions
+export const PAYMENTS = (credentials: Credentials): Payments => ({
   bankCheckoutCharge: bankCheckoutCharge(credentials),
   bankCheckoutValidate: bankCheckoutValidate(credentials),
   bankTransfer: bankTransfer(credentials),
@@ -38,7 +74,6 @@ export const payments = (credentials: Credentials): Payments => ({
   topupStash: topupStash(credentials),
   walletTransfer: walletTransfer(credentials),
 
-  // fallbacks
   get checkout() {
     showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()', 'minor');
     return mobileCheckout(credentials);
@@ -56,46 +91,5 @@ export const payments = (credentials: Credentials): Payments => ({
     return mobileB2B(credentials);
   },
 
-  // constants
-  REASON: {
-    SALARY: 'SalaryPayment',
-    SALARY_WITH_CHARGE: 'SalaryPaymentWithWithdrawalChargePaid',
-    BUSINESS: 'BusinessPayment',
-    BUSINESS_WITH_CHARGE: 'BusinessPaymentWithWithdrawalChargePaid',
-    PROMOTION: 'PromotionPayment',
-  },
-  PROVIDER: {
-    ATHENA: 'Athena',
-    MPESA: 'Mpesa',
-  },
-  TRANSFER_TYPE: {
-    BUY_GOODS: 'BusinessBuyGoods',
-    PAYBILL: 'BusinessPayBill',
-    DISBURSE_FUNDS: 'DisburseFundsToBusiness',
-    B2B_TRANSFER: 'BusinessToBusinessTransfer',
-  },
-  BANK: {
-    FCMB_NG: 234001,
-    ZENITH_NG: 234002,
-    ACCESS_NG: 234003,
-    GTBANK_NG: 234004,
-    ECOBANK_NG: 234005,
-    DIAMOND_NG: 234006,
-    PROVIDUS_NG: 234007,
-    UNITY_NG: 234008,
-    STANBIC_NG: 234009,
-    STERLING_NG: 234010,
-    PARKWAY_NG: 234011,
-    AFRIBANK_NG: 234012,
-    ENTREPRISE_NG: 234013,
-    FIDELITY_NG: 234014,
-    HERITAGE_NG: 234015,
-    KEYSTONE_NG: 234016,
-    SKYE_NG: 234017,
-    STANCHART_NG: 234018,
-    UNION_NG: 234019,
-    UBA_NG: 234020,
-    WEMA_NG: 234021,
-    FIRST_NG: 234022,
-  },
+  ...CONSTANTS,
 });

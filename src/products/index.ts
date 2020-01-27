@@ -1,30 +1,65 @@
 import { Credentials } from '../utils/getFullCredentials.types';
 import { AFRICASTALKING } from './index.types';
 import { showDeprecationWarning } from '../utils/misc';
-import { airtime } from './airtime';
-import { application } from './application';
-import { payments } from './payments';
-import { sms } from './sms';
-import { token } from './token';
-import { voice } from './voice';
-import { ussd } from './ussd';
+import { AIRTIME } from './airtime';
+import { APPLICATION } from './application';
+import { PAYMENTS } from './payments';
+import { SMS } from './sms';
+import { TOKEN } from './token';
+import { USSD } from './ussd';
+import { VOICE } from './voice';
 
+// exports 1: types & pure functions
+export * from './airtime';
+export * from './application';
+export * from './payments';
+export * from './sms';
+export * from './token';
+export * from './ussd';
+export * from './voice';
+
+// exports 2: instance-based functions
 export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => ({
-  AIRTIME: airtime(credentials),
-  APPLICATION: application(credentials),
-  PAYMENTS: payments(credentials),
-  SMS: sms(credentials),
-  TOKEN: token(credentials),
-  VOICE: voice(credentials),
-  USSD: ussd,
+  AIRTIME: AIRTIME(credentials),
+  APPLICATION: APPLICATION(credentials),
+  PAYMENTS: PAYMENTS(credentials),
+  SMS: SMS(credentials),
+  TOKEN: TOKEN(credentials),
+  USSD,
+  VOICE: VOICE(credentials),
 
-  // fallbacks
   get ACCOUNT() {
     showDeprecationWarning('AfricasTalking().ACCOUNT', 'AfricasTalking().APPLICATION', 'minor');
-    return application(credentials);
+    return APPLICATION(credentials);
   },
   get PAYMENT() {
     showDeprecationWarning('AfricasTalking().PAYMENT', 'AfricasTalking().PAYMENTS', 'minor');
-    return payments(credentials);
+    return PAYMENTS(credentials);
   },
 });
+
+// export const AfricasTalkingFuture = (credentials: Credentials) => ({
+//   ...AIRTIME(credentials),
+//   ...APPLICATION(credentials),
+//   ...PAYMENTS(credentials),
+//   ...SMS(credentials),
+//   ...TOKEN(credentials),
+//   ...USSD,
+//   ...VOICE(credentials),
+// });
+
+
+// import { makeCall, ...a } from './voice';
+
+// TODO: the future!!!!
+// import * as as from './sms';
+
+// export const AfricasTalkingFuture = (credentials: Credentials) => {
+//   let final = {};
+
+//   Object.entries(as).forEach(([key, value]) => {
+//     final[key] = value(credentials);
+//   })
+
+//   return final;
+// };

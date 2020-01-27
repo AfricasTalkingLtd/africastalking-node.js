@@ -1,5 +1,4 @@
 import grpc, { Server as GrpcServer } from 'grpc';
-import AfricasTalking from '../..';
 import { Credentials } from '../getFullCredentials.types';
 import { tokenService } from './tokenService';
 import { TokenService } from './tokenService.types';
@@ -7,10 +6,6 @@ import { Authenticator, StartOptions } from './index.types';
 
 export class Server {
   private defaultPort = 35897;
-
-  private tokens: any[];
-
-  private AfricasTalking: any;
 
   private server: GrpcServer;
 
@@ -20,8 +15,6 @@ export class Server {
 
 
   constructor(credentials: Credentials) {
-    this.tokens = [];
-    this.AfricasTalking = AfricasTalking(credentials);
     this.server = new grpc.Server();
     this.tokenService = tokenService(credentials);
     // TODO: Implement the interceptor

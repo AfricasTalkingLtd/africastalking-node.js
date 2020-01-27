@@ -1,7 +1,7 @@
 import fs from 'fs';
 import grpc from 'grpc';
 import { expect } from 'chai';
-import Server from '../../src/server';
+import { Server } from '../../src';
 import { validCredentials } from '../fixtures';
 
 describe('Server', () => {

@@ -7,11 +7,12 @@ import {
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
+import { customRegex } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
   shortCode: joi.string().required(),
   keyword: joi.string().required(),
-  phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+  phoneNumber: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
 }).required();
 
 export const deleteSubscription = (

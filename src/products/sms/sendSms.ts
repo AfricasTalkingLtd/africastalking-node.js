@@ -6,12 +6,13 @@ import {
 } from './sendSms.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
+import { customRegex } from '../../utils/constants';
 
 const getSchema = (isBulk: boolean, isPremium: boolean) => {
   const schema = joi.object({
     to: joi.alternatives().try(
-      joi.array().items(joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()).required(),
-      joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required(),
+      joi.array().items(joi.string().regex(customRegex.phoneNumber, 'to').required()).required(),
+      joi.string().regex(customRegex.phoneNumber, 'to').required(),
     ),
     message: joi.string().required(),
     from: joi.string(),
@@ -35,7 +36,7 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
   return schema;
 };
 
-export const sendSms = (
+const sendMessage = (
   credentials: Credentials,
 ): SendSms => async (options, isBulk = false, isPremium = false) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
@@ -68,3 +69,15 @@ export const sendSms = (
     },
   });
 };
+
+export const sendSms = (credentials: Credentials) => (
+  opts: SmsOptions,
+) => sendMessage(credentials)(opts);
+
+export const sendBulk = (credentials: Credentials) => (
+  opts: SmsOptions,
+) => sendMessage(credentials)(opts, true);
+
+export const sendPremium = (credentials: Credentials) => (
+  opts: SmsOptions,
+) => sendMessage(credentials)(opts, false, true);

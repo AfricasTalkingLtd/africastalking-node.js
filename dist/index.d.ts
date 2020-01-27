@@ -1,2 +1,2 @@
-import { AfricasTalking } from './products';
-export default AfricasTalking;
+export * from './products';
+export * from './utils';

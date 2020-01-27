@@ -54,9 +54,10 @@ var joi_1 = __importDefault(require("joi"));
 var query_string_1 = __importDefault(require("query-string"));
 var misc_1 = require("../../utils/misc");
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
+var constants_1 = require("../../utils/constants");
 var getSchema = function (isBulk, isPremium) {
     var schema = joi_1.default.object({
-        to: joi_1.default.alternatives().try(joi_1.default.array().items(joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()).required(), joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'to').required()),
+        to: joi_1.default.alternatives().try(joi_1.default.array().items(joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'to').required()).required(), joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'to').required()),
         message: joi_1.default.string().required(),
         from: joi_1.default.string(),
         enqueue: joi_1.default.boolean(),
@@ -75,7 +76,7 @@ var getSchema = function (isBulk, isPremium) {
     }
     return schema;
 };
-exports.sendSms = function (credentials) { return function (options, isBulk, isPremium) {
+var sendMessage = function (credentials) { return function (options, isBulk, isPremium) {
     if (isBulk === void 0) { isBulk = false; }
     if (isPremium === void 0) { isPremium = false; }
     return __awaiter(void 0, void 0, void 0, function () {
@@ -100,4 +101,7 @@ exports.sendSms = function (credentials) { return function (options, isBulk, isP
         });
     });
 }; };
+exports.sendSms = function (credentials) { return function (opts) { return sendMessage(credentials)(opts); }; };
+exports.sendBulk = function (credentials) { return function (opts) { return sendMessage(credentials)(opts, true); }; };
+exports.sendPremium = function (credentials) { return function (opts) { return sendMessage(credentials)(opts, false, true); }; };
 //# sourceMappingURL=sendSms.js.map

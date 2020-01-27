@@ -1,14 +1,13 @@
 import { expect } from 'chai';
-import AfricasTalking from '../../src';
+import { VOICE, ActionBuilder } from '../../src';
 import { validCredentials } from '../fixtures';
-import { ActionBuilder } from '../../src/products/voice/utils/actionBuilder';
 
 describe('ActionBuilder', () => {
   const generateResponseTemplate = (str: string) => `<?xml version="1.0" encoding="UTF-8"?><Response>${str}</Response>`;
   const audioUrl = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3';
   const callbackUrl = 'http://myapp.com/callback';
 
-  const voice = AfricasTalking(validCredentials).VOICE;
+  const voice = VOICE(validCredentials);
   let actionBuilder: ActionBuilder;
 
   beforeEach(() => {

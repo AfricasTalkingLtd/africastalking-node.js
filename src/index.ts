@@ -1,6 +1,2 @@
-import { AfricasTalking } from './products';
-
-export default AfricasTalking;
-
-// fallback
-module.exports = AfricasTalking;
+export * from './products';
+export * from './utils';

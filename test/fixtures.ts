@@ -1,4 +1,4 @@
-import { Credentials } from '../src/utils/getFullCredentials.types';
+import { Credentials } from '../src';
 
 // test for: required
 export const invalidCredentials1 = {};

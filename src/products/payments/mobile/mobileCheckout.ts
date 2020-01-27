@@ -5,11 +5,12 @@ import {
 import { Credentials } from '../../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { sendRequest, validateJoiSchema } from '../../../utils/misc';
+import { customRegex } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   providerChannel: joi.string(),
-  phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+  phoneNumber: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
   amount: joi.number().required(),
   metadata: joi.object(),

@@ -6,10 +6,11 @@ import {
 } from './cardCheckoutValidate.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { customRegex } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  transactionId: joi.string().regex(/\S/, 'no space').required(),
-  otp: joi.string().regex(/\S/, 'no space').required(),
+  transactionId: joi.string().regex(customRegex.noSpace, 'no space').required(),
+  otp: joi.string().regex(customRegex.noSpace, 'no space').required(),
 }).required();
 
 export const cardCheckoutValidate = (

@@ -5,12 +5,13 @@ import { validateJoiSchema, sendRequest } from '../../../utils/misc';
 import {
   MobileDataOptions, MobileDataPostData, MobileDataResponse, MobileData,
 } from './mobileData.types';
+import { customRegex } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   recipients: joi.array().items(
     joi.object({
-      phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+      phoneNumber: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
       quantity: joi.number().required(),
       unit: joi.string().valid('MB', 'GB').required(),
       validity: joi.string().valid('Day', 'Month', 'Week').required(),

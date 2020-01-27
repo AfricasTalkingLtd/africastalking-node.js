@@ -5,12 +5,12 @@ import {
 } from './mobileB2B.types';
 import { getFullCredentials } from '../../../utils/getFullCredentials';
 import { validateJoiSchema, sendRequest } from '../../../utils/misc';
+import { customRegex, CONSTANTS } from '../../../utils/constants';
 
 const getSchema = () => joi.object({
-  productName: joi.string().regex(/\S/, 'no space').required(),
-  provider: joi.string().valid('Mpesa', 'TigoTanzania', 'Athena').required(),
-  transferType: joi.string().valid('BusinessBuyGoods', 'BusinessPayBill',
-    'DisburseFundsToBusiness', 'BusinessToBusinessTransfer').required(),
+  productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
+  provider: joi.string().valid([...Object.values(CONSTANTS.PROVIDER), 'TigoTanzania']).required(),
+  transferType: joi.string().valid(Object.values(CONSTANTS.TRANSFER_TYPE)).required(),
   currencyCode: joi.string().valid('KES', 'UGX', 'USD').required(),
   amount: joi.number().required(),
   destinationChannel: joi.string().required(),

@@ -7,9 +7,10 @@ import {
   CreateCheckoutTokenOptions, CreateCheckoutTokenResponse,
   CreateCheckoutTokenPostData, CreateCheckoutToken,
 } from './createCheckoutToken.types';
+import { customRegex } from '../../utils/constants';
 
 const getSchema = () => joi.object({
-  phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+  phoneNumber: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
 }).required();
 
 export const createCheckoutToken = (
@@ -31,11 +32,11 @@ export const createCheckoutToken = (
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   })
-    .then((result2) => {
-      if (result2.token == null || result2.token === 'None') {
-        return Promise.reject(result2.description);
+    .then((checkoutTokenResult) => {
+      if (checkoutTokenResult.token == null || checkoutTokenResult.token === 'None') {
+        return Promise.reject(checkoutTokenResult.description);
       }
 
-      return Promise.resolve(result2);
+      return Promise.resolve(checkoutTokenResult);
     });
 };

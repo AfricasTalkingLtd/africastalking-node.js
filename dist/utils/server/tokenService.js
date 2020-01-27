@@ -49,43 +49,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var grpc_1 = __importDefault(require("grpc"));
 var path_1 = __importDefault(require("path"));
 var generateAuthToken_1 = require("../../products/token/generateAuthToken");
+var getToken = function (credentials) { return function (_cxt, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, token, lifetimeInSeconds, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                return [4, generateAuthToken_1.generateAuthToken(credentials)()];
+            case 1:
+                _a = _b.sent(), token = _a.token, lifetimeInSeconds = _a.lifetimeInSeconds;
+                cb(null, {
+                    token: token,
+                    expiration: Date.now() + (lifetimeInSeconds * 1000),
+                    username: credentials.username,
+                    environment: credentials.username === 'sandbox'
+                        ? 'sandbox'
+                        : 'production',
+                });
+                return [3, 3];
+            case 2:
+                err_1 = _b.sent();
+                cb(err_1, null);
+                return [3, 3];
+            case 3: return [2];
+        }
+    });
+}); }; };
+var getSipCredentials = function (sipCredentials) { return function (_cxt, cb) {
+    cb(null, { credentials: sipCredentials });
+}; };
 exports.tokenService = function (credentials) {
     var fd = grpc_1.default.load(path_1.default.join(__dirname, './proto/com/africastalking/SdkServerService.proto')).africastalking;
     var sipCredentials = [];
-    var getToken = function (_cxt, cb) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, token, lifetimeInSeconds, err_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _b.trys.push([0, 2, , 3]);
-                    return [4, generateAuthToken_1.generateAuthToken(credentials)()];
-                case 1:
-                    _a = _b.sent(), token = _a.token, lifetimeInSeconds = _a.lifetimeInSeconds;
-                    cb(null, {
-                        token: token,
-                        expiration: Date.now() + (lifetimeInSeconds * 1000),
-                        username: credentials.username,
-                        environment: credentials.username === 'sandbox'
-                            ? 'sandbox'
-                            : 'production',
-                    });
-                    return [3, 3];
-                case 2:
-                    err_1 = _b.sent();
-                    cb(err_1, null);
-                    return [3, 3];
-                case 3: return [2];
-            }
-        });
-    }); };
-    var getSipCredentials = function (_cxt, cb) {
-        cb(null, { credentials: sipCredentials });
-    };
     return {
         definition: fd.SdkServerService.service,
         implementation: {
-            getToken: getToken,
-            getSipCredentials: getSipCredentials,
+            getToken: getToken(credentials),
+            getSipCredentials: getSipCredentials(sipCredentials),
         },
         addSipCredentials: function (username, password, host, port, transport) {
             if (port === void 0) { port = 5060; }

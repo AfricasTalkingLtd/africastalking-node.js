@@ -1,17 +1,18 @@
 import joi from 'joi';
 import queryString from 'query-string';
 import {
-  AirtimeOptions, AirtimePostData, AirtimeResponse, SendAirtimeRequest,
+  SendAirtimeOptions, SendAirtimePostData, SendAirtimeResponse, SendAirtimeRequest,
 } from './sendAirtimeRequest.types';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
+import { customRegex } from '../../utils/constants';
 
 const getSchema = () => joi.object({
   recipients: joi.array().items(
     joi.object({
-      phoneNumber: joi.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
-      currencyCode: joi.string().valid(['KES', 'UGX', 'TZS', 'NGN']).required(),
+      phoneNumber: joi.string().regex(customRegex.phoneNumber, 'phone number').required(),
+      currencyCode: joi.string().valid('KES', 'UGX', 'TZS', 'NGN').required(),
       amount: joi.number().required(),
     }).required(),
   ).min(1).required(),
@@ -21,9 +22,9 @@ export const sendAirtimeRequest = (
   credentials: Credentials,
 ): SendAirtimeRequest => async (options) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
-  const result = validateJoiSchema<AirtimeOptions>(getSchema(), options);
+  const result = validateJoiSchema<SendAirtimeOptions>(getSchema(), options);
 
-  const data: AirtimePostData = {
+  const data: SendAirtimePostData = {
     username,
     recipients: JSON.stringify(result.recipients.map((r) => ({
       phoneNumber: r.phoneNumber,
@@ -31,7 +32,7 @@ export const sendAirtimeRequest = (
     }))) as any,
   };
 
-  return sendRequest<AirtimeResponse, string>({
+  return sendRequest<SendAirtimeResponse, string>({
     endpointCategory: 'AIRTIME',
     username,
     method: 'POST',

@@ -19,10 +19,11 @@ var misc_1 = require("./misc");
 var getSchema = function () { return joi_1.default.object({
     apiKey: joi_1.default.string().required(),
     username: joi_1.default.string().required(),
-    format: joi_1.default.string().valid('json', 'xml').required(),
+    format: joi_1.default.string().valid('json', 'xml'),
 }).required(); };
 exports.getFullCredentials = function (credentials) {
+    var _a;
     var value = misc_1.validateJoiSchema(getSchema(), credentials);
-    return __assign(__assign({}, value), { format: value.format === 'xml' ? 'application/xml' : 'application/json' });
+    return __assign(__assign({}, value), { format: ((_a = value) === null || _a === void 0 ? void 0 : _a.format) === 'xml' ? 'application/xml' : 'application/json' });
 };
 //# sourceMappingURL=getFullCredentials.js.map

@@ -1,3 +1,5 @@
 import { Airtime } from './index.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
-export declare const airtime: (credentials: Credentials) => Airtime;
+export { SendAirtimeOptions, SendAirtimeResponse } from './sendAirtimeRequest.types';
+export { sendAirtimeRequest } from './sendAirtimeRequest';
+export declare const AIRTIME: (credentials: Credentials) => Airtime;

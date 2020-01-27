@@ -55,7 +55,7 @@ var query_string_1 = __importDefault(require("query-string"));
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var misc_1 = require("../../utils/misc");
 var getSchema = function () { return joi_1.default.object({
-    url: joi_1.default.string().regex(/^https?:\/\//, 'url').required(),
+    url: joi_1.default.string().uri().required(),
 }).required(); };
 exports.uploadMediaFile = function (credentials) { return function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, apiKey, username, format, result, data;

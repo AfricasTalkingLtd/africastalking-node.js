@@ -43,8 +43,9 @@ var joi_1 = __importDefault(require("joi"));
 var query_string_1 = __importDefault(require("query-string"));
 var getFullCredentials_1 = require("../../utils/getFullCredentials");
 var misc_1 = require("../../utils/misc");
+var constants_1 = require("../../utils/constants");
 var getSchema = function () { return joi_1.default.object({
-    callTo: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+    callTo: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
     callFrom: joi_1.default.string().required(),
     clientRequestId: joi_1.default.string(),
 }).required(); };

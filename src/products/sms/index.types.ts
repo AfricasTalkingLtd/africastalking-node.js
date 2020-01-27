@@ -9,7 +9,9 @@ export interface Sms {
   deleteSubscription: DeleteSubscription;
   fetchSubscription: FetchSubscription;
   fetchMessages: FetchMessages;
-  send: (options: SmsOptions) => Promise<SmsResponse>;
+  sendSms: (options: SmsOptions) => Promise<SmsResponse>;
   sendBulk: (options: SmsOptions) => Promise<SmsResponse>;
   sendPremium: (options: SmsOptions) => Promise<SmsResponse>;
+
+  send: (options: SmsOptions) => Promise<SmsResponse>;
 }

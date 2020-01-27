@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var joi_1 = __importDefault(require("joi"));
 var misc_1 = require("../../../utils/misc");
+var constants_1 = require("../../../utils/constants");
 var ActionBuilder = (function () {
     function ActionBuilder() {
         this.finalized = false;
@@ -46,54 +47,51 @@ var ActionBuilder = (function () {
         var tag = action.tag, text = action.text, children = action.children, attributes = action.attributes;
         this.xml += "<" + tag;
         if (attributes) {
-            Object.keys(attributes).map(function (key) {
-                _this.xml += " " + key + "=\"" + attributes[key] + "\"";
-                return key;
+            Object.entries(attributes).forEach(function (_a) {
+                var key = _a[0], value = _a[1];
+                _this.xml += " " + key + "=\"" + value + "\"";
             });
         }
-        if (children) {
-            var childrenKeys = Object.keys(children);
-            if (((_a = childrenKeys) === null || _a === void 0 ? void 0 : _a.length) > 0) {
-                this.xml += '>';
-                childrenKeys.map(function (child) {
-                    var opts = children[child];
-                    switch (child) {
-                        case 'say':
-                            _this.say(opts.text, opts.attributes);
-                            break;
-                        case 'play':
-                            _this.play(opts.url);
-                            break;
-                        case 'getDigits':
-                            _this.getDigits(opts.children, opts.attributes);
-                            break;
-                        case 'dial':
-                            _this.dial(opts.phoneNumbers, opts.attributes);
-                            break;
-                        case 'record':
-                            _this.record(opts.children, opts.attributes);
-                            break;
-                        case 'enqueue':
-                            _this.enqueue(opts.attributes);
-                            break;
-                        case 'dequeue':
-                            _this.dequeue(opts.phoneNumber, opts.attributes);
-                            break;
-                        case 'redirect':
-                            _this.redirect(opts.text);
-                            break;
-                        case 'conference':
-                            _this.conference();
-                            break;
-                        case 'reject':
-                            _this.reject();
-                            break;
-                        default: throw new Error('Invalid child');
-                    }
-                    return child;
-                });
-                this.xml += "</" + tag + ">";
-            }
+        if (children && ((_a = Object.keys(children)) === null || _a === void 0 ? void 0 : _a.length) > 0) {
+            this.xml += '>';
+            Object.entries(children).forEach(function (_a) {
+                var child = _a[0], opts = _a[1];
+                switch (child) {
+                    case 'say':
+                        _this.say(opts.text, opts.attributes);
+                        break;
+                    case 'play':
+                        _this.play(opts.url);
+                        break;
+                    case 'getDigits':
+                        _this.getDigits(opts.children, opts.attributes);
+                        break;
+                    case 'dial':
+                        _this.dial(opts.phoneNumbers, opts.attributes);
+                        break;
+                    case 'record':
+                        _this.record(opts.children, opts.attributes);
+                        break;
+                    case 'enqueue':
+                        _this.enqueue(opts.attributes);
+                        break;
+                    case 'dequeue':
+                        _this.dequeue(opts.phoneNumber, opts.attributes);
+                        break;
+                    case 'redirect':
+                        _this.redirect(opts.text);
+                        break;
+                    case 'conference':
+                        _this.conference();
+                        break;
+                    case 'reject':
+                        _this.reject();
+                        break;
+                    default: throw new Error('Invalid child');
+                }
+                return child;
+            });
+            this.xml += "</" + tag + ">";
         }
         else {
             this.xml += text
@@ -109,6 +107,7 @@ var ActionBuilder = (function () {
         }).required(); };
         var _a = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { text: text })), formattedText = _a.text, attr = __rest(_a, ["text"]);
         this.buildAction({ tag: 'Say', text: formattedText, attributes: attr });
+        return this;
     };
     ActionBuilder.prototype.play = function (url) {
         var getSchema = function () { return joi_1.default.object({
@@ -116,6 +115,7 @@ var ActionBuilder = (function () {
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), { url: url });
         this.buildAction({ tag: 'Play', attributes: result });
+        return this;
     };
     ActionBuilder.prototype.getDigits = function (children, attributes) {
         var getSchema = function () { return joi_1.default.object({
@@ -135,18 +135,20 @@ var ActionBuilder = (function () {
             attributes: attributes,
         });
         this.buildAction(__assign({ tag: 'GetDigits' }, result));
+        return this;
     };
     ActionBuilder.prototype.dial = function (phoneNumbers, attributes) {
         var getSchema = function () { return joi_1.default.object({
             phoneNumbers: joi_1.default.string().required(),
             record: joi_1.default.boolean(),
             sequential: joi_1.default.boolean(),
-            callerId: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number'),
+            callerId: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number'),
             ringBackTone: joi_1.default.string().uri(),
             maxDuration: joi_1.default.number(),
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { phoneNumbers: phoneNumbers }));
         this.buildAction({ tag: 'Dial', attributes: result });
+        return this;
     };
     ActionBuilder.prototype.record = function (children, attributes) {
         var getSchema = function () { return joi_1.default.object({
@@ -168,6 +170,7 @@ var ActionBuilder = (function () {
             attributes: attributes,
         });
         this.buildAction(__assign({ tag: 'Record' }, result));
+        return this;
     };
     ActionBuilder.prototype.enqueue = function (attributes) {
         var getSchema = function () { return joi_1.default.object({
@@ -176,14 +179,16 @@ var ActionBuilder = (function () {
         }); };
         var result = misc_1.validateJoiSchema(getSchema(), attributes);
         this.buildAction({ tag: 'Enqueue', attributes: result });
+        return this;
     };
     ActionBuilder.prototype.dequeue = function (phoneNumber, attributes) {
         var getSchema = function () { return joi_1.default.object({
-            phoneNumber: joi_1.default.string().regex(/^\+\d{1,3}\d{3,}$/, 'phone number').required(),
+            phoneNumber: joi_1.default.string().regex(constants_1.customRegex.phoneNumber, 'phone number').required(),
             name: joi_1.default.string(),
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), __assign(__assign({}, attributes), { phoneNumber: phoneNumber }));
         this.buildAction({ tag: 'Dequeue', attributes: result });
+        return this;
     };
     ActionBuilder.prototype.redirect = function (url) {
         var getSchema = function () { return joi_1.default.object({
@@ -191,12 +196,15 @@ var ActionBuilder = (function () {
         }).required(); };
         var result = misc_1.validateJoiSchema(getSchema(), { url: url });
         this.buildAction({ tag: 'Redirect', text: result.url });
+        return this;
     };
     ActionBuilder.prototype.conference = function () {
         this.buildAction({ tag: 'Conference' });
+        return this;
     };
     ActionBuilder.prototype.reject = function () {
         this.buildAction({ tag: 'Reject' });
+        return this;
     };
     return ActionBuilder;
 }());
