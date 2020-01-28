@@ -32,3 +32,9 @@ test/fixtures.local.js
 
 # OSX junk
 .DS_Store
+
+# nyc
+.nyc_output/
+
+# dist
+dist/

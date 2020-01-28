@@ -1,0 +1,1 @@
+export { fetchApplicationData } from './fetchApplicationData';

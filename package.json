@@ -2,10 +2,51 @@
   "name": "africastalking",
   "version": "0.4.4",
   "description": "Official AfricasTalking node.js API wrapper",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "nyc mocha ./test",
-    "test-windows": "nyc node_modules/mocha/bin/_mocha ./test"
+    "build": "rm -rf dist && tsc",
+    "pretest": "npm run build",
+    "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
+    "test-windows": "NODE_ENV=test nyc node_modules/mocha/bin/_mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
+    "lint": "eslint --ext .ts ./",
+    "ts-check": "tsc --noEmit -p  .",
+    "pre-commit-message": "echo 'Please wait, running pre-commit checks...' && exit 0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit-message && npm run lint && npm run ts-check && npm run test"
+    }
+  },
+  "dependencies": {
+    "axios": "^0.19.1",
+    "body-parser": "^1.19.0",
+    "chalk": "^3.0.0",
+    "express": "^4.17.1",
+    "grpc": "^1.24.2",
+    "joi": "^14.3.1",
+    "query-string": "^6.9.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.17.1",
+    "@types/chai": "^4.2.7",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/express": "^4.17.2",
+    "@types/joi": "^14.3.4",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^13.1.6",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-plugin-import": "^2.20.0",
+    "husky": "^4.0.6",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4"
   },
   "repository": {
     "type": "git",
@@ -27,22 +68,5 @@
   "homepage": "https://github.com/AfricasTalkingLtd/africastalking-node.js#readme",
   "engines": {
     "node": ">=6"
-  },
-  "dependencies": {
-    "@hapi/joi": "^16.1.7",
-    "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
-    "grpc": "^1.24.2",
-    "lodash": "^4.17.15",
-    "querystring": "^0.2.0",
-    "unirest": "^0.6.0",
-    "validate.js": "^0.13.1"
-  },
-  "devDependencies": {
-    "express": "^4.17.1",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1",
-    "should": "^13.2.3",
-    "supertest": "^4.0.2"
   }
 }
