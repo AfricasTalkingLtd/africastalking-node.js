@@ -11,7 +11,6 @@
 - Tests error
   - grpc server
   - [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
-- catch err: expect??
 
 ## Add
 
@@ -21,11 +20,9 @@
   - payments: accepted currencies
   - missing types (due to no documentation)
 - Improve test converage
-
-## Rewrites
-
-- example/
-- README.md
+- Rewrite:
+  - example/
+  - README.md
 
 ## Yoda
 

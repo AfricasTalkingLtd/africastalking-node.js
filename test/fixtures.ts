@@ -11,7 +11,7 @@ export const invalidCredentials2 = {
 };
 
 export const validCredentials: Credentials = {
-  apiKey: 'c8c30e0e05dd38aed9a156bf53b8f0f091a79d5eac4740a48e561f3b663683c8',
-  username: 'sandbox',
+  apiKey: 'YOUR_API_KEY',
+  username: 'YOUR_USERNAME',
   format: 'json',
 };
