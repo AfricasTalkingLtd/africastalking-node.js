@@ -1,22 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
+import 'mocha';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { TOKEN } from '../../src';
+import { AfricasTalking } from '../../dist';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('Token', () => {
-  const token = TOKEN(validCredentials);
+  const at = AfricasTalking(validCredentials);
 
   it('creates checkout token', async () => {
-    const result = await token.createCheckoutToken('+254718769882');
+    const result = await at.createCheckoutToken('+254718769882');
     expect(result).to.have.property('token');
   });
 
   it('generates auth token', async () => {
-    const result = await token.generateAuthToken();
+    const result = await at.generateAuthToken();
 
     expect(result).to.have.property('token');
     expect(result).to.have.property('lifetimeInSeconds');

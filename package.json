@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
+    "pretest": "npm run build",
     "test": "NODE_ENV=test nyc mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
     "test-windows": "NODE_ENV=test nyc node_modules/mocha/bin/_mocha -r ts-node/register test/**/*.test.ts --timeout 15000",
     "lint": "eslint --ext .ts ./",

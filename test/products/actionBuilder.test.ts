@@ -1,5 +1,6 @@
+import 'mocha';
 import { expect } from 'chai';
-import { ActionBuilder } from '../../src';
+import { ActionBuilder } from '../../dist';
 
 describe('ActionBuilder', () => {
   const generateResponseTemplate = (str: string) => `<?xml version="1.0" encoding="UTF-8"?><Response>${str}</Response>`;

@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
+import 'mocha';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { AT } from '../../src';
+import { AfricasTalking } from '../../dist';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('Airtime', () => {
-  const at = AT(validCredentials);
+  const at = AfricasTalking(validCredentials);
 
   context('invalid options', () => {
     it('#send() cannot be empty', () => {
@@ -16,7 +17,7 @@ describe('Airtime', () => {
     });
 
     it('#send() must have phoneNumber/currencyCode/amount', () => {
-      expect(airtime.sendAirtimeRequest({
+      expect(at.sendAirtimeRequest({
         recipients: [{
           phoneNumber: '+254726166685',
         }],
@@ -24,7 +25,7 @@ describe('Airtime', () => {
     });
 
     it('#send() rejects invalid options', () => {
-      expect(airtime.sendAirtimeRequest({
+      expect(at.sendAirtimeRequest({
         recipients: [{
           phoneNumber: 'not phone',
           currencyCode: '',
@@ -36,7 +37,7 @@ describe('Airtime', () => {
 
   context('valid options', () => {
     it('sends airtime to one', async () => {
-      const result = await airtime.sendAirtimeRequest({
+      const result = await at.sendAirtimeRequest({
         recipients: [
           {
             phoneNumber: '+254726166685',
@@ -50,7 +51,7 @@ describe('Airtime', () => {
     });
 
     it('sends airtime to many', async () => {
-      const result = await airtime.sendAirtimeRequest({
+      const result = await at.sendAirtimeRequest({
         recipients: [
           {
             phoneNumber: '+254726166685',

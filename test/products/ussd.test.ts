@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import { expect } from 'chai';
 import axios, { AxiosResponse } from 'axios';
-import { USSD } from '../../src';
+import { expressHandler } from '../../dist';
 
 describe('USSD', () => {
   const screens = {
@@ -38,12 +38,10 @@ describe('USSD', () => {
     baseURL: `http://localhost:${port}`,
   });
 
-  const ussd = USSD;
-
   before(() => {
     app = express();
 
-    app.post('/webhook/ussd', ussd(handler));
+    app.post('/webhook/ussd', expressHandler(handler));
     server = app.listen(port, (err) => {
       if (err) {
         throw err;

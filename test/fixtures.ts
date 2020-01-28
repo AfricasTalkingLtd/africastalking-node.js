@@ -1,4 +1,4 @@
-import { Credentials } from '../src';
+import { Credentials } from '../dist';
 
 // test for: required
 export const invalidCredentials1 = {};
