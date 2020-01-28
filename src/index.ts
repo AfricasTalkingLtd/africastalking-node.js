@@ -7,5 +7,3 @@ export * from './utils/index.types';
 
 // backwards compatibility
 export default AfricasTalking;
-
-// module.exports = AfricasTalking;
