@@ -2,7 +2,7 @@ import joi from 'joi';
 import queryString from 'query-string';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import {
-  SmsOptions, SmsPostData, SmsResponse, SendSms,
+  SmsOptions, SmsPostData, SmsResponse, SendMessageComplex, SendMessage,
 } from './sendSms.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
@@ -38,7 +38,7 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
 
 const sendMessage = (
   credentials: Credentials,
-): SendSms => async (options, isBulk = false, isPremium = false) => {
+): SendMessageComplex => async (options, isBulk = false, isPremium = false) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
   const result = validateJoiSchema<SmsOptions>(getSchema(isBulk, isPremium), options);
 
@@ -70,14 +70,14 @@ const sendMessage = (
   });
 };
 
-export const sendSms = (credentials: Credentials) => (
+export const sendSms = (credentials: Credentials): SendMessage => (
   opts: SmsOptions,
 ) => sendMessage(credentials)(opts);
 
-export const sendBulk = (credentials: Credentials) => (
+export const sendBulk = (credentials: Credentials): SendMessage => (
   opts: SmsOptions,
 ) => sendMessage(credentials)(opts, true);
 
-export const sendPremium = (credentials: Credentials) => (
+export const sendPremium = (credentials: Credentials): SendMessage => (
   opts: SmsOptions,
 ) => sendMessage(credentials)(opts, false, true);

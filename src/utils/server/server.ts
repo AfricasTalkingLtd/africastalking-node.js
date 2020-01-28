@@ -2,7 +2,7 @@ import grpc, { Server as GrpcServer } from 'grpc';
 import { Credentials } from '../getFullCredentials.types';
 import { tokenService } from './tokenService';
 import { TokenService } from './tokenService.types';
-import { Authenticator, StartOptions } from './index.types';
+import { Authenticator, StartOptions } from './server.types';
 
 export class Server {
   private defaultPort = 35897;

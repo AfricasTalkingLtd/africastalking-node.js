@@ -4,8 +4,8 @@ import {
   GetDigitsCombined, DialAttributes, RecordAttributes, EnqueueAttributes,
   DequeueAttributes, RedirectAttributes,
 } from './actionBuilder.types';
-import { validateJoiSchema } from '../../../utils/misc';
-import { customRegex } from '../../../utils/constants';
+import { validateJoiSchema } from '../misc';
+import { customRegex } from '../constants';
 
 export class ActionBuilder {
   private finalized = false;

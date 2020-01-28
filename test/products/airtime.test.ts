@@ -2,17 +2,17 @@
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { AIRTIME } from '../../src';
+import { AT } from '../../src';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('Airtime', () => {
-  const airtime = AIRTIME(validCredentials);
+  const at = AT(validCredentials);
 
   context('invalid options', () => {
     it('#send() cannot be empty', () => {
-      expect(airtime.sendAirtimeRequest({} as any)).to.be.rejected;
+      expect(at.sendAirtimeRequest({} as any)).to.be.rejected;
     });
 
     it('#send() must have phoneNumber/currencyCode/amount', () => {

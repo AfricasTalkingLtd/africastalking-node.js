@@ -1,6 +1,1 @@
-import { FetchApplicationData } from './fetchApplicationData.types';
-
-export interface Application {
-  fetchApplicationData: FetchApplicationData;
-  fetchAccount: FetchApplicationData;
-}
+export { FetchApplicationDataResponse } from './fetchApplicationData.types';

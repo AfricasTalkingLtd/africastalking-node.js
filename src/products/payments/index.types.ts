@@ -1,43 +1,15 @@
-import { BankCheckoutCharge } from './bank/bankCheckoutCharge.types';
-import { BankCheckoutValidate } from './bank/bankCheckoutValidate.types';
-import { BankTransfer } from './bank/bankTransfer.types';
-import { CardCheckoutCharge } from './card/cardCheckoutCharge.types';
-import { CardCheckoutValidate } from './card/cardCheckoutValidate.types';
-import { MobileB2B } from './mobile/mobileB2B.types';
-import { MobileB2C } from './mobile/mobileB2C.types';
-import { MobileCheckout } from './mobile/mobileCheckout.types';
-import { MobileData } from './mobile/mobileData.types';
-import { FetchProductTransactions } from './query/fetchProductTransactions.types';
-import { FetchWalletBalance } from './query/fetchWalletBalance.types';
-import { FetchWalletTransactions } from './query/fetchWalletTransactions.types';
-import { FindTransaction } from './query/findTransaction.types';
-import { TopupStash } from './topupStash.types';
-import { WalletTransfer } from './walletTransfer.types';
-import { Constants } from '../../utils/constants.types';
-
-export interface Payments extends Constants {
-  bankCheckoutCharge: BankCheckoutCharge;
-  bankCheckoutValidate: BankCheckoutValidate;
-  bankTransfer: BankTransfer;
-
-  cardCheckoutCharge: CardCheckoutCharge;
-  cardCheckoutValidate: CardCheckoutValidate;
-
-  mobileB2B: MobileB2B;
-  mobileB2C: MobileB2C;
-  mobileCheckout: MobileCheckout;
-  mobileData: MobileData;
-
-  fetchProductTransactions: FetchProductTransactions;
-  fetchWalletBalance: FetchWalletBalance;
-  fetchWalletTransactions: FetchWalletTransactions;
-  findTransaction: FindTransaction;
-
-  topupStash: TopupStash;
-  walletTransfer: WalletTransfer;
-
-  checkout: MobileCheckout;
-  checkOut: MobileCheckout;
-  payConsumer: MobileB2C;
-  payBusiness: MobileB2B;
-}
+export { BankCheckoutChargeOptions, BankCheckoutChargeResponse } from './bank/bankCheckoutCharge.types';
+export { BankCheckoutValidateOptions, BankCheckoutValidateResponse } from './bank/bankCheckoutValidate.types';
+export { BankTransferOptions, BankTransferResponse } from './bank/bankTransfer.types';
+export { CardCheckoutChargeOptions, CardCheckoutChargeResponse } from './card/cardCheckoutCharge.types';
+export { CardCheckoutValidateOptions, CardCheckoutValidateResponse } from './card/cardCheckoutValidate.types';
+export { MobileB2BOptions, MobileB2BResponse } from './mobile/mobileB2B.types';
+export { MobileB2COptions, MobileB2CResponse } from './mobile/mobileB2C.types';
+export { MobileCheckoutOptions, MobileCheckoutResponse } from './mobile/mobileCheckout.types';
+export { MobileDataOptions, MobileDataResponse } from './mobile/mobileData.types';
+export { FetchProductTransactionsOptions, FetchProductTransactionsResponse } from './query/fetchProductTransactions.types';
+export { FetchWalletBalanceResponse } from './query/fetchWalletBalance.types';
+export { FetchWalletTransactionsOptions, FetchWalletTransactionsResponse } from './query/fetchWalletTransactions.types';
+export { FindTransactionOptions, FindTransactionResponse } from './query/findTransaction.types';
+export { TopupStashOptions, TopupStashResponse } from './topupStash.types';
+export { WalletTransferOptions, WalletTransferResponse } from './walletTransfer.types';

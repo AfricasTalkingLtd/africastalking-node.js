@@ -1,15 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 
+
+export interface UssdOptions {
+  response: string;
+  endSession: boolean;
+}
+
 interface UssdRequestBody {
   sessionId: string;
   serviceCode: string;
   phoneNumber: string;
   text: string;
-}
-
-export interface UssdOptions {
-  response: string;
-  endSession: boolean;
 }
 
 export type UssdHandler = (

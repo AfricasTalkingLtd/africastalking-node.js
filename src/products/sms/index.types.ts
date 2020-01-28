@@ -1,17 +1,5 @@
-import { CreateSubscription } from './premiumSubscriptions/createSubscription.types';
-import { DeleteSubscription } from './premiumSubscriptions/deleteSubscription.types';
-import { FetchSubscription } from './premiumSubscriptions/fetchSubscription.types';
-import { FetchMessages } from './fetchMessages.types';
-import { SmsOptions, SmsResponse } from './sendSms.types';
-
-export interface Sms {
-  createSubscription: CreateSubscription;
-  deleteSubscription: DeleteSubscription;
-  fetchSubscription: FetchSubscription;
-  fetchMessages: FetchMessages;
-  sendSms: (options: SmsOptions) => Promise<SmsResponse>;
-  sendBulk: (options: SmsOptions) => Promise<SmsResponse>;
-  sendPremium: (options: SmsOptions) => Promise<SmsResponse>;
-
-  send: (options: SmsOptions) => Promise<SmsResponse>;
-}
+export { CreateSubscriptionOptions, CreateSubscriptionResponse } from './premiumSubscriptions/createSubscription.types';
+export { DeleteSubscriptionOptions, DeleteSubscriptionResponse } from './premiumSubscriptions/deleteSubscription.types';
+export { FetchSubscriptionOptions, FetchSubscriptionResponse } from './premiumSubscriptions/fetchSubscription.types';
+export { FetchMessagesOptions, FetchMessagesResponse } from './fetchMessages.types';
+export { SmsOptions, SmsResponse } from './sendSms.types';

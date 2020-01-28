@@ -1,7 +1,7 @@
 import joi from 'joi';
 import bodyParser from 'body-parser';
 import { Request, NextFunction, Response } from 'express';
-import { validateJoiSchema } from '../../utils/misc';
+import { validateJoiSchema } from '../misc';
 import { UssdOptions, UssdHandler, ExpressHandler } from './expressHandler.types';
 
 export const expressHandler = (handler: UssdHandler): ExpressHandler[] => [

@@ -1,7 +1,2 @@
-import { CreateCheckoutToken } from './createCheckoutToken.types';
-import { GenerateAuthToken } from './generateAuthToken.types';
-
-export interface Token {
-  createCheckoutToken: CreateCheckoutToken;
-  generateAuthToken: GenerateAuthToken;
-}
+export { CreateCheckoutTokenOptions, CreateCheckoutTokenResponse } from './createCheckoutToken.types';
+export { GenerateAuthTokenResponse } from './generateAuthToken.types';

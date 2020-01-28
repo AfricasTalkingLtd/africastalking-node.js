@@ -30,6 +30,8 @@ export interface SmsResponse {
   };
 }
 
-export type SendSms = (
+export type SendMessageComplex = (
   options: SmsOptions, isBulk?: boolean, isPremium?: boolean,
 ) => Promise<SmsResponse>;
+
+export type SendMessage = (options: SmsOptions) => Promise<SmsResponse>;
