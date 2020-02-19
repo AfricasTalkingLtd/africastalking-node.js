@@ -95,6 +95,7 @@ describe('Payment', function(){
                         phoneNumber: "254718769882",
                         currencyCode: "KES",
                         reason: payments.REASON.SALARY,
+                        providerChannel: '1212',
                         metadata: {"Joe": "Biden", "id":"VP"},
                         amount: 234.5
                     }
