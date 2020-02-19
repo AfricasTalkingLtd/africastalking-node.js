@@ -20,19 +20,25 @@ import { createCheckoutToken, generateAuthToken } from './token';
 import { makeCall, getNumQueuedCalls, uploadMediaFile } from './voice';
 
 const AIRTIME = (credentials: Credentials): Airtime => ({
-  sendAirtimeRequest: sendAirtimeRequest(credentials),
+  get sendAirtimeRequest() {
+    showDeprecationWarning('AfricasTalking().AIRTIME.send()', 'new Client().sendAirtimeRequest()', 'minor');
+    return sendAirtimeRequest(credentials);
+  },
 
   get send() {
-    showDeprecationWarning('AIRTIME.send()', 'AIRTIME.sendAirtimeRequest()', 'minor');
+    showDeprecationWarning('AfricasTalking().AIRTIME.send()', 'new Client().sendAirtimeRequest()', 'minor');
     return sendAirtimeRequest(credentials);
   },
 });
 
 const APPLICATION = (credentials: Credentials): Application => ({
-  fetchApplicationData: fetchApplicationData(credentials),
+  get fetchApplicationData() {
+    showDeprecationWarning('AfricasTalking().APPLICATION.fetchAccount()', 'new Client().fetchApplicationData()', 'minor');
+    return fetchApplicationData(credentials);
+  },
 
   get fetchAccount() {
-    showDeprecationWarning('APPLICATION.fetchAccount()', 'APPLICATION.fetchApplicationData()', 'minor');
+    showDeprecationWarning('AfricasTalking().APPLICATION.fetchAccount()', 'new Client().fetchApplicationData()', 'minor');
     return fetchApplicationData(credentials);
   },
 });
@@ -79,54 +85,120 @@ const PAYMENTS = (credentials: Credentials): Payments => ({
 });
 
 const SMS = (credentials: Credentials): Sms => ({
-  createSubscription: createSubscription(credentials),
-  deleteSubscription: deleteSubscription(credentials),
-  fetchSubscription: fetchSubscription(credentials),
-  fetchMessages: fetchMessages(credentials),
-  sendSms: sendSms(credentials),
-  sendBulk: sendBulk(credentials),
-  sendPremium: sendPremium(credentials),
+  get createSubscription() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return createSubscription(credentials);
+  },
+  get deleteSubscription() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return deleteSubscription(credentials);
+  },
+  get fetchSubscription() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return fetchSubscription(credentials);
+  },
+  get fetchMessages() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return fetchMessages(credentials);
+  },
+  get sendSms() {
+    showDeprecationWarning('AfricasTalking().SMS.sendSms()', 'new Client().sendSms()', 'minor');
+    return sendSms(credentials);
+  },
+  get sendBulk() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return sendBulk(credentials);
+  },
+  get sendPremium() {
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    return sendPremium(credentials);
+  },
 
+  // older
   get send() {
-    showDeprecationWarning('SMS.send()', 'SMS.sendSms()', 'minor');
+    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
     return sendSms(credentials);
   },
 });
 
 const TOKEN = (credentials: Credentials): Token => ({
-  createCheckoutToken: createCheckoutToken(credentials),
-  generateAuthToken: generateAuthToken(credentials),
+  get createCheckoutToken() {
+    showDeprecationWarning('AfricasTalking().TOKEN.createCheckoutToken()', 'new Client().createCheckoutToken()', 'minor');
+    return createCheckoutToken(credentials);
+  },
+  get generateAuthToken() {
+    showDeprecationWarning('AfricasTalking().TOKEN.generateAuthToken()', 'new Client().generateAuthToken()', 'minor');
+    return generateAuthToken(credentials);
+  },
 });
 
 const USSD: Ussd = expressHandler;
 
 const VOICE = (credentials: Credentials): Voice => ({
-  ActionBuilder,
-  makeCall: makeCall(credentials),
-  getNumQueuedCalls: getNumQueuedCalls(credentials),
-  uploadMediaFile: uploadMediaFile(credentials),
+  get ActionBuilder() {
+    showDeprecationWarning('new AfricasTalking().VOICE.ActionBuilder()', 'new ActionBuilder()', 'minor');
+    return ActionBuilder;
+  },
+  get makeCall() {
+    showDeprecationWarning('AfricasTalking().VOICE.call()', 'new Client().makeCall()', 'minor');
+    return makeCall(credentials);
+  },
+  get getNumQueuedCalls() {
+    showDeprecationWarning('AfricasTalking().VOICE.getNumQueuedCalls()', 'new Client().getNumQueuedCalls()', 'minor');
+    return getNumQueuedCalls(credentials);
+  },
+  get uploadMediaFile() {
+    showDeprecationWarning('AfricasTalking().VOICE.uploadMediaFile()', 'new Client().uploadMediaFile()', 'minor');
+    return uploadMediaFile(credentials);
+  },
 
+  // older
   get call() {
-    showDeprecationWarning('VOICE.call()', 'VOICE.makeCall()', 'minor');
+    showDeprecationWarning('AfricasTalking().VOICE.call()', 'new Client().makeCall()', 'minor');
     return makeCall(credentials);
   },
 });
 
-export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => ({
-  AIRTIME: AIRTIME(credentials),
-  APPLICATION: APPLICATION(credentials),
-  PAYMENTS: PAYMENTS(credentials),
-  SMS: SMS(credentials),
-  TOKEN: TOKEN(credentials),
-  USSD,
-  VOICE: VOICE(credentials),
+export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => {
+  showDeprecationWarning('AfricasTalking()', 'new Client()', 'minor');
 
-  get ACCOUNT() {
-    showDeprecationWarning('AfricasTalking().ACCOUNT', 'AfricasTalking().APPLICATION', 'minor');
-    return APPLICATION(credentials);
-  },
-  get PAYMENT() {
-    showDeprecationWarning('AfricasTalking().PAYMENT', 'AfricasTalking().PAYMENTS', 'minor');
-    return PAYMENTS(credentials);
-  },
-});
+  return {
+    get AIRTIME() {
+      showDeprecationWarning('AfricasTalking().AIRTIME', 'new Client()', 'minor');
+      return AIRTIME(credentials);
+    },
+    get APPLICATION() {
+      showDeprecationWarning('AfricasTalking().APPLICATION', 'new Client()', 'minor');
+      return APPLICATION(credentials);
+    },
+    get PAYMENTS() {
+      showDeprecationWarning('AfricasTalking().PAYMENTS', 'new Client()', 'minor');
+      return PAYMENTS(credentials);
+    },
+    get SMS() {
+      showDeprecationWarning('AfricasTalking().SMS', 'new Client()', 'minor');
+      return SMS(credentials);
+    },
+    get TOKEN() {
+      showDeprecationWarning('AfricasTalking().TOKEN', 'new Client()', 'minor');
+      return TOKEN(credentials);
+    },
+    get USSD() {
+      showDeprecationWarning('AfricasTalking().USSD', 'expressHandler()', 'minor');
+      return USSD;
+    },
+    get VOICE() {
+      showDeprecationWarning('AfricasTalking().VOICE', 'new Client()', 'minor');
+      return VOICE(credentials);
+    },
+
+    get ACCOUNT() {
+      showDeprecationWarning('AfricasTalking().ACCOUNT', 'new Client()', 'minor');
+      return APPLICATION(credentials);
+    },
+    get PAYMENT() {
+      showDeprecationWarning('AfricasTalking().PAYMENT', 'new Client()', 'minor');
+      return PAYMENTS(credentials);
+    },
+  };
+};

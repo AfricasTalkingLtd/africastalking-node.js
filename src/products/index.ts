@@ -7,7 +7,10 @@ import * as token from './token';
 import * as voice from './voice';
 import AFRICASTALKING from './index.types';
 
-export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => Object.entries({
+// https://stackoverflow.com/questions/43623461/new-expression-whose-target-lacks-a-construct-signature-in-typescript/43624326#43624326
+
+export const Client = function (credentials: Credentials): AFRICASTALKING {
+  return Object.entries({
   ...airtime,
   ...application,
   ...payments,
@@ -17,4 +20,5 @@ export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => Obje
 }).reduce((acc, [key, value]) => ({
   ...acc,
   [key]: value(credentials),
-}), {} as AFRICASTALKING);
+}), {} as AFRICASTALKING)
+} as any as { new(credentials: Credentials): AFRICASTALKING };

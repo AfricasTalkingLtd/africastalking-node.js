@@ -3,21 +3,21 @@
 import 'mocha';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { AfricasTalking } from '../../dist';
+import { Client } from '../../dist';
 import { validCredentials } from '../fixtures';
 
 chai.use(chaiAsPromised);
 
 describe('Airtime', () => {
-  const at = AfricasTalking(validCredentials);
+  const client = new Client(validCredentials);
 
   context('invalid options', () => {
     it('#send() cannot be empty', () => {
-      expect(at.sendAirtimeRequest({} as any)).to.be.rejected;
+      expect(client.sendAirtimeRequest({} as any)).to.be.rejected;
     });
 
     it('#send() must have phoneNumber/currencyCode/amount', () => {
-      expect(at.sendAirtimeRequest({
+      expect(client.sendAirtimeRequest({
         recipients: [{
           phoneNumber: '+254726166685',
         }],
@@ -25,7 +25,7 @@ describe('Airtime', () => {
     });
 
     it('#send() rejects invalid options', () => {
-      expect(at.sendAirtimeRequest({
+      expect(client.sendAirtimeRequest({
         recipients: [{
           phoneNumber: 'not phone',
           currencyCode: '',
@@ -37,7 +37,7 @@ describe('Airtime', () => {
 
   context('valid options', () => {
     it('sends airtime to one', async () => {
-      const result = await at.sendAirtimeRequest({
+      const result = await client.sendAirtimeRequest({
         recipients: [
           {
             phoneNumber: '+254726166685',
@@ -51,7 +51,7 @@ describe('Airtime', () => {
     });
 
     it('sends airtime to many', async () => {
-      const result = await at.sendAirtimeRequest({
+      const result = await client.sendAirtimeRequest({
         recipients: [
           {
             phoneNumber: '+254726166685',

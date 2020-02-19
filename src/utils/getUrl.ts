@@ -4,13 +4,13 @@ const getBaseUrl = (baseUrlCategory: BaseUrlCategory, isSandbox: boolean): strin
   switch (baseUrlCategory) {
     default:
     case 'API':
-      return `https://api${isSandbox && '.sandbox'}.africastalking.com`;
+      return `https://api${isSandbox ? '.sandbox' : ''}.africastalking.com`;
 
     case 'PAYMENTS':
-      return `https://payments${isSandbox && '.sandbox'}.africastalking.com`;
+      return `https://payments${isSandbox ? '.sandbox' : ''}.africastalking.com`;
 
     case 'VOICE':
-      return `https://voice${isSandbox && '.sandbox'}.africastalking.com`;
+      return `https://voice${isSandbox ? '.sandbox' : ''}.africastalking.com`;
   }
 };
 

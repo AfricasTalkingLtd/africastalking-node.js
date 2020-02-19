@@ -1,4 +1,4 @@
-import { Credentials } from '../dist';
+import { Credentials } from '../../dist';
 
 // test for: required
 export const invalidCredentials1 = {};
@@ -11,7 +11,7 @@ export const invalidCredentials2 = {
 };
 
 export const validCredentials: Credentials = {
-  apiKey: 'YOUR_API_KEY',
-  username: 'YOUR_USERNAME',
+  apiKey: 'c8c30e0e05dd38aed9a156bf53b8f0f091a79d5eac4740a48e561f3b663683c8',
+  username: 'sandbox',
   format: 'json',
 };

@@ -2,7 +2,7 @@ export interface TopupStashOptions {
   productName: string;
   currencyCode: 'KES' | 'UGX' | 'USD';
   amount: number;
-  metadata: {
+  metadata?: {
     [key: string]: any;
   };
 }

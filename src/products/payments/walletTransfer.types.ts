@@ -3,7 +3,7 @@ export interface WalletTransferOptions {
   targetProductCode: number;
   currencyCode: 'KES' | 'UGX' | 'USD';
   amount: number;
-  metadata: {
+  metadata?: {
     [key: string]: any;
   };
 }
