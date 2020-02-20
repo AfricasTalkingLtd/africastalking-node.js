@@ -1,21 +1,8 @@
 # TODO
 
-## [NOTES] Important before every push
-
-- [ ] bump version
-
-## Fix
-
-- [x] Tests error
-  - [x] grpc server
-  - [x] mobile data
-  - [x] [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
-- [x] Remove sendBulkSms
-- [x] deprecate expressHandler
-- [ ] Improve test converage
-
 ## SDK
 
+- [ ] Improve test converage
 - [ ] Add Idempotency Key
 - [ ] Add types:
   - [ ] payments: accepted currencies
