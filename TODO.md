@@ -2,7 +2,6 @@
 
 ## [NOTES] Important before every push
 
-- [ ] remove test credentials
 - [ ] bump version
 
 ## Fix
