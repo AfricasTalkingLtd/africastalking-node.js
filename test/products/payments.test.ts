@@ -26,7 +26,7 @@ describe('Payments', () => {
 
       it('#mobileCheckout() may have string map metadata', () => {
         expect(client.mobileCheckout({
-          metadata: 'Joe',
+          metadata: 'John Doe',
         } as any)).to.be.rejected;
       });
     });
@@ -35,9 +35,12 @@ describe('Payments', () => {
       it('mobileCheckout()', async () => {
         const result = await client.mobileCheckout({
           productName: 'TestProduct',
-          phoneNumber: '+254718769882',
+          phoneNumber: '+254711111111',
           currencyCode: 'KES',
-          metadata: { Joe: 'Biden', id: 'VP' },
+          metadata: {
+            id: '088930432excvmklevdf',
+            name: 'John Doe',
+          },
           amount: 234.5,
         });
 
@@ -60,7 +63,7 @@ describe('Payments', () => {
 
       it('#mobileB2C() recipients must be limited to 10', () => {
         expect(client.mobileB2C({
-          productName: 'Joe',
+          productName: 'TestProduct',
           recipients: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11],
         } as any)).to.be.rejected;
       });
@@ -72,10 +75,13 @@ describe('Payments', () => {
           productName: 'TestProduct',
           recipients: [
             {
-              phoneNumber: '254718769882',
+              phoneNumber: '254711111111',
               currencyCode: 'KES',
-              reason: 'SalaryPayment',
-              metadata: { Joe: 'Biden', id: 'VP' },
+              reason: CONSTANTS.REASON.SALARY,
+              metadata: {
+                id: '088930432excvmklevdf',
+                name: 'John Doe',
+              },
               amount: 234.5,
             },
           ],
@@ -95,7 +101,7 @@ describe('Payments', () => {
 
       it('#mobileB2B() may have string map metadata', () => {
         expect(client.mobileB2B({
-          metadata: 'Joe',
+          metadata: 'John Doe',
         } as any)).to.be.rejected;
       });
     });
@@ -104,8 +110,8 @@ describe('Payments', () => {
       it('mobileB2B()', async () => {
         const result = await client.mobileB2B({
           productName: 'TestProduct',
-          provider: CONSTANTS.PROVIDER.ATHENA as any,
-          transferType: CONSTANTS.TRANSFER_TYPE.B2B_TRANSFER as any,
+          provider: CONSTANTS.PROVIDER.ATHENA,
+          transferType: CONSTANTS.TRANSFER_TYPE.B2B_TRANSFER,
           currencyCode: 'KES',
           amount: 100,
           destinationChannel: '456789',
@@ -141,8 +147,8 @@ describe('Payments', () => {
             unit: 'GB',
             validity: 'Month',
             metadata: {
-              Joe: 'Biden',
-              id: 'VP',
+              id: '088930432excvmklevdf',
+              name: 'John Doe',
             },
           }],
         });
@@ -160,7 +166,7 @@ describe('Payments', () => {
 
       it('#walletTransfer() must have productName/targetProductCode/currencyCode/amount/metadata', () => {
         expect(client.walletTransfer({
-          productName: 'Joe',
+          productName: 'TestProduct',
         } as any)).to.be.rejected;
       });
 
@@ -170,7 +176,7 @@ describe('Payments', () => {
 
       it('#topupStash() must have productName/currencyCode/amount/metadata', () => {
         expect(client.topupStash({
-          productName: 'Joe',
+          productName: 'TestProduct',
         } as any)).to.be.rejected;
       });
     });
@@ -221,7 +227,7 @@ describe('Payments', () => {
 
       it('#bankCheckoutCharge() may have string map metadata', () => {
         expect(client.bankCheckoutCharge({
-          metadata: 'Joe',
+          metadata: 'John Doe',
         } as any)).to.be.rejected;
       });
 
@@ -289,8 +295,8 @@ describe('Payments', () => {
             amount: 50,
             narration: 'Test Payment',
             metadata: {
-              Joe: 'Biden',
-              id: 'VP',
+              id: '088930432excvmklevdf',
+              name: 'John Doe',
             },
           }],
         });
@@ -308,13 +314,13 @@ describe('Payments', () => {
 
       it('#cardCheckoutCharge() must have productName/paymentCard/currencyCode/amount/narration', () => {
         expect(client.cardCheckoutCharge({
-          productName: 'Joe',
+          productName: 'TestProduct',
         } as any)).to.be.rejected;
       });
 
       it('#cardCheckoutCharge() may not have string map metadata', () => {
         expect(client.cardCheckoutCharge({
-          metadata: 'Joe',
+          metadata: 'John Doe',
         } as any)).to.be.rejected;
       });
 
@@ -338,7 +344,7 @@ describe('Payments', () => {
             number: '123456789000',
             cvvNumber: 654,
             expiryMonth: 7,
-            expiryYear: 2019,
+            expiryYear: 2025,
             authToken: '2345',
             countryCode: 'NG',
           },
@@ -373,7 +379,7 @@ describe('Payments', () => {
 
       it('#fetchProductTransactions() must have productName and pageNumber/count filters', () => {
         expect(client.fetchProductTransactions({
-          productName: 'Joe',
+          productName: 'TestProduct',
         } as any)).to.be.rejected;
       });
 
@@ -403,7 +409,7 @@ describe('Payments', () => {
     context('valid options', () => {
       it('fetchProductTransactions()', async () => {
         const result = await client.fetchProductTransactions({
-          productName: 'Joe',
+          productName: 'TestProduct',
           filters: {
             pageNumber: '1',
             count: '10',

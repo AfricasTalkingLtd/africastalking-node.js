@@ -12,7 +12,7 @@ describe('Token', () => {
   const client = new Client(validCredentials);
 
   it('creates checkout token', async () => {
-    const result = await client.createCheckoutToken('+254718769882');
+    const result = await client.createCheckoutToken('+254711111111');
     expect(result).to.have.property('token');
   });
 

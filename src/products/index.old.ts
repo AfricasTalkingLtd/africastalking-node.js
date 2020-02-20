@@ -14,14 +14,14 @@ import {
 } from './payments';
 import {
   createSubscription, deleteSubscription, fetchSubscription, fetchMessages,
-  sendSms, sendBulk, sendPremium,
+  sendSms, sendBulkSms, sendPremiumSms,
 } from './sms';
 import { createCheckoutToken, generateAuthToken } from './token';
 import { makeCall, getNumQueuedCalls, uploadMediaFile } from './voice';
 
 const AIRTIME = (credentials: Credentials): Airtime => ({
   get sendAirtimeRequest() {
-    showDeprecationWarning('AfricasTalking().AIRTIME.send()', 'new Client().sendAirtimeRequest()', 'minor');
+    showDeprecationWarning('AfricasTalking().AIRTIME.sendAirtimeRequest()', 'new Client().sendAirtimeRequest()', 'minor');
     return sendAirtimeRequest(credentials);
   },
 
@@ -33,7 +33,7 @@ const AIRTIME = (credentials: Credentials): Airtime => ({
 
 const APPLICATION = (credentials: Credentials): Application => ({
   get fetchApplicationData() {
-    showDeprecationWarning('AfricasTalking().APPLICATION.fetchAccount()', 'new Client().fetchApplicationData()', 'minor');
+    showDeprecationWarning('AfricasTalking().APPLICATION.fetchApplicationData()', 'new Client().fetchApplicationData()', 'minor');
     return fetchApplicationData(credentials);
   },
 
@@ -44,40 +44,86 @@ const APPLICATION = (credentials: Credentials): Application => ({
 });
 
 const PAYMENTS = (credentials: Credentials): Payments => ({
-  bankCheckoutCharge: bankCheckoutCharge(credentials),
-  bankCheckoutValidate: bankCheckoutValidate(credentials),
-  bankTransfer: bankTransfer(credentials),
+  get bankCheckoutCharge() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.bankCheckoutCharge()', 'new Client().bankCheckoutCharge()', 'minor');
+    return bankCheckoutCharge(credentials);
+  },
+  get bankCheckoutValidate() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.bankCheckoutValidate()', 'new Client().bankCheckoutValidate()', 'minor');
+    return bankCheckoutValidate(credentials);
+  },
+  get bankTransfer() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.bankTransfer()', 'new Client().bankTransfer()', 'minor');
+    return bankTransfer(credentials);
+  },
 
-  cardCheckoutCharge: cardCheckoutCharge(credentials),
-  cardCheckoutValidate: cardCheckoutValidate(credentials),
+  get cardCheckoutCharge() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.cardCheckoutCharge()', 'new Client().cardCheckoutCharge()', 'minor');
+    return cardCheckoutCharge(credentials);
+  },
+  get cardCheckoutValidate() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.cardCheckoutValidate()', 'new Client().cardCheckoutValidate()', 'minor');
+    return cardCheckoutValidate(credentials);
+  },
 
-  mobileB2B: mobileB2B(credentials),
-  mobileB2C: mobileB2C(credentials),
-  mobileCheckout: mobileCheckout(credentials),
-  mobileData: mobileData(credentials),
+  get mobileB2B() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.mobileB2B()', 'new Client().mobileB2B()', 'minor');
+    return mobileB2B(credentials);
+  },
+  get mobileB2C() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.mobileB2C()', 'new Client().mobileB2C()', 'minor');
+    return mobileB2C(credentials);
+  },
+  get mobileCheckout() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.mobileCheckout()', 'new Client().mobileCheckout()', 'minor');
+    return mobileCheckout(credentials);
+  },
+  get mobileData() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.mobileData()', 'new Client().mobileData()', 'minor');
+    return mobileData(credentials);
+  },
 
-  fetchProductTransactions: fetchProductTransactions(credentials),
-  fetchWalletBalance: fetchWalletBalance(credentials),
-  fetchWalletTransactions: fetchWalletTransactions(credentials),
-  findTransaction: findTransaction(credentials),
+  get fetchProductTransactions() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.fetchProductTransactions()', 'new Client().fetchProductTransactions()', 'minor');
+    return fetchProductTransactions(credentials);
+  },
+  get fetchWalletBalance() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.fetchWalletBalance()', 'new Client().fetchWalletBalance()', 'minor');
+    return fetchWalletBalance(credentials);
+  },
+  get fetchWalletTransactions() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.fetchWalletTransactions()', 'new Client().fetchWalletTransactions()', 'minor');
+    return fetchWalletTransactions(credentials);
+  },
+  get findTransaction() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.findTransaction()', 'new Client().findTransaction()', 'minor');
+    return findTransaction(credentials);
+  },
 
-  topupStash: topupStash(credentials),
-  walletTransfer: walletTransfer(credentials),
+  get topupStash() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.topupStash()', 'new Client().topupStash()', 'minor');
+    return topupStash(credentials);
+  },
+  get walletTransfer() {
+    showDeprecationWarning('AfricasTalking().PAYMENTS.walletTransfer()', 'new Client().walletTransfer()', 'minor');
+    return walletTransfer(credentials);
+  },
 
+  // older
   get checkout() {
-    showDeprecationWarning('PAYMENTS.checkout()', 'PAYMENTS.mobileCheckout()', 'minor');
+    showDeprecationWarning('AfricasTalking().PAYMENTS.checkout()', 'new Client().mobileCheckout()', 'minor');
     return mobileCheckout(credentials);
   },
   get checkOut() {
-    showDeprecationWarning('PAYMENTS.checkOut()', 'PAYMENTS.mobileCheckout()', 'minor');
+    showDeprecationWarning('AfricasTalking().PAYMENTS.checkOut()', 'new Client().mobileCheckout()', 'minor');
     return mobileCheckout(credentials);
   },
   get payConsumer() {
-    showDeprecationWarning('PAYMENTS.payConsumer()', 'PAYMENTS.mobileB2C()', 'minor');
+    showDeprecationWarning('AfricasTalking().PAYMENTS.payConsumer()', 'new Client().mobileB2C()', 'minor');
     return mobileB2C(credentials);
   },
   get payBusiness() {
-    showDeprecationWarning('PAYMENTS.payBusiness()', 'PAYMENTS.mobileB2B()', 'minor');
+    showDeprecationWarning('AfricasTalking().PAYMENTS.payBusiness()', 'new Client().mobileB2B()', 'minor');
     return mobileB2B(credentials);
   },
 
@@ -86,38 +132,46 @@ const PAYMENTS = (credentials: Credentials): Payments => ({
 
 const SMS = (credentials: Credentials): Sms => ({
   get createSubscription() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    showDeprecationWarning('AfricasTalking().SMS.createSubscription()', 'new Client().createSubscription()', 'minor');
     return createSubscription(credentials);
   },
   get deleteSubscription() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    showDeprecationWarning('AfricasTalking().SMS.deleteSubscription()', 'new Client().deleteSubscription()', 'minor');
     return deleteSubscription(credentials);
   },
   get fetchSubscription() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    showDeprecationWarning('AfricasTalking().SMS.fetchSubscription()', 'new Client().fetchSubscription()', 'minor');
     return fetchSubscription(credentials);
   },
   get fetchMessages() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
+    showDeprecationWarning('AfricasTalking().SMS.fetchMessages()', 'new Client().fetchMessages()', 'minor');
     return fetchMessages(credentials);
   },
   get sendSms() {
     showDeprecationWarning('AfricasTalking().SMS.sendSms()', 'new Client().sendSms()', 'minor');
     return sendSms(credentials);
   },
-  get sendBulk() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
-    return sendBulk(credentials);
+  get sendBulkSms() {
+    showDeprecationWarning('AfricasTalking().SMS.sendBulkSms()', 'new Client().sendBulkSms()', 'minor');
+    return sendBulkSms(credentials);
   },
-  get sendPremium() {
-    showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
-    return sendPremium(credentials);
+  get sendPremiumSms() {
+    showDeprecationWarning('AfricasTalking().SMS.sendPremiumSms()', 'new Client().sendPremiumSms()', 'minor');
+    return sendPremiumSms(credentials);
   },
 
   // older
   get send() {
     showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
     return sendSms(credentials);
+  },
+  get sendBulk() {
+    showDeprecationWarning('AfricasTalking().SMS.sendBulk()', 'new Client().sendBulkSms()', 'minor');
+    return sendBulkSms(credentials);
+  },
+  get sendPremium() {
+    showDeprecationWarning('AfricasTalking().SMS.sendPremium()', 'new Client().sendPremiumSms()', 'minor');
+    return sendPremiumSms(credentials);
   },
 });
 
@@ -140,7 +194,7 @@ const VOICE = (credentials: Credentials): Voice => ({
     return ActionBuilder;
   },
   get makeCall() {
-    showDeprecationWarning('AfricasTalking().VOICE.call()', 'new Client().makeCall()', 'minor');
+    showDeprecationWarning('AfricasTalking().VOICE.makeCall()', 'new Client().makeCall()', 'minor');
     return makeCall(credentials);
   },
   get getNumQueuedCalls() {

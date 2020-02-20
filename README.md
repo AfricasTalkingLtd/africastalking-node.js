@@ -1,3 +1,7 @@
+###**_IMPORTANT NOTE_**
+
+**The new version of this SDK is a breaking version. [Read here](#notes) for more info.**
+
 # Africa's Talking Node.js SDK
 
 [![NPM](https://nodei.co/npm/africastalking.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.org/package/africastalking)
@@ -46,7 +50,7 @@ const client = new Client({
 
 // Send message and capture the response or error
 client.sendSms({
-    to: ['+254711XXXYYY', '+254733YYYZZZ'],
+    to: ['+254711XXXZZZ', '+254733YYYZZZ'],
     message: "I'm a lumberjack and its ok, I work all night and sleep all day"
 })
     .then((response) => console.log(response))
@@ -57,7 +61,7 @@ See [example](example/) for more usage examples.
 
 ## API Reference
 
-The complete API Reference is [available here](./DOCS.md).
+The complete API Reference is [available here](./API.md).
 
 ## Notes
 
@@ -85,7 +89,7 @@ client.sendSms({
 });
 ```
 
-You can find the complete list of new function names [here](./DOCS.md).
+You can find the complete list of new function names [here](./API.md).
 
 However, we understand that updating the bulk of your code can be tedious, so we have given you a way to incrementally upgrade to the new version.
 

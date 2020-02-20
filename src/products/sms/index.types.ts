@@ -2,4 +2,6 @@ export { CreateSubscriptionOptions, CreateSubscriptionResponse } from './premium
 export { DeleteSubscriptionOptions, DeleteSubscriptionResponse } from './premiumSubscriptions/deleteSubscription.types';
 export { FetchSubscriptionOptions, FetchSubscriptionResponse } from './premiumSubscriptions/fetchSubscription.types';
 export { FetchMessagesOptions, FetchMessagesResponse } from './fetchMessages.types';
-export { SmsOptions, SmsResponse } from './sendSms.types';
+export {
+  SendSmsOptions, SendBulkSmsOptions, SendPremiumSmsOptions, SendMessageResponse,
+} from './sendMessage.types';

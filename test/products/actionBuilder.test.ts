@@ -68,7 +68,7 @@ describe('ActionBuilder', () => {
 
       it('cannot have invalid child', () => {
         expect(() => actionBuilder.getDigits({
-          dial: { phoneNumbers: '+254711XXXYYY' },
+          dial: { phoneNumbers: '+254711111111' },
         } as any)).to.throw();
       });
     });
@@ -119,7 +119,7 @@ describe('ActionBuilder', () => {
     });
 
     context('valid options', () => {
-      const phoneNumbers = '+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com';
+      const phoneNumbers = '+254711111111,+254733YYYZZZ,test@ke.sip.africastalking.com';
 
       it('creates <Dial> with phoneNumbers', () => {
         actionBuilder.dial(phoneNumbers);
@@ -153,7 +153,7 @@ describe('ActionBuilder', () => {
 
       it('cannot have invalid child', () => {
         expect(() => actionBuilder.record({
-          dial: { phoneNumbers: '+254711XXXYYY' },
+          dial: { phoneNumbers: '+254711111111' },
         } as any)).to.throw();
       });
     });

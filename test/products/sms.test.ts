@@ -18,24 +18,24 @@ describe('SMS', () => {
 
     it('#sendSms() must have to/from/message params', () => {
       expect(client.sendSms({
-        to: '+254718769882',
+        to: '+254711111111',
         from: null,
         message: null,
       } as any)).to.be.rejected;
     });
 
-    it('#sendBulk()', () => {
-      expect(client.sendBulk({
-        to: '+254718769882',
+    it('#sendBulkSms()', () => {
+      expect(client.sendBulkSms({
+        to: '+254711111111',
         from: null,
         message: null,
         enqueue: 'Joe',
       } as any)).to.be.rejected;
     });
 
-    it('#sendPremium()', () => {
-      expect(client.sendPremium({
-        to: '+254718769882',
+    it('#sendPremiumSms()', () => {
+      expect(client.sendPremiumSms({
+        to: '+254711111111',
         from: null,
         message: null,
       } as any)).to.be.rejected;
@@ -43,7 +43,7 @@ describe('SMS', () => {
 
     it('#createSubscription()', () => {
       expect(client.createSubscription({
-        to: '+254718769882',
+        to: '+254711111111',
         from: null,
         message: null,
         enqueue: 'Joe',
@@ -52,7 +52,7 @@ describe('SMS', () => {
 
     it('#fetchSubscription()', () => {
       expect(client.fetchSubscription({
-        to: '+254718769882',
+        to: '+254711111111',
         from: null,
         message: null,
         enqueue: 'Joe',
@@ -61,7 +61,7 @@ describe('SMS', () => {
 
     it('#deleteSubscription()', () => {
       expect(client.deleteSubscription({
-        to: '+254718769882',
+        to: '+254711111111',
         from: null,
         message: null,
         enqueue: 'Joe',
@@ -88,7 +88,7 @@ describe('SMS', () => {
       const result = await client.createSubscription({
         shortCode: '1234',
         keyword: 'TESTKWD',
-        phoneNumber: '+254718769882',
+        phoneNumber: '+254711111111',
         checkoutToken: '12abvsfdhh63535',
       });
 
@@ -99,7 +99,7 @@ describe('SMS', () => {
       const result = await client.deleteSubscription({
         shortCode: '1234',
         keyword: 'TESTKWD',
-        phoneNumber: '+254718769882',
+        phoneNumber: '+254711111111',
       });
 
       expect(result).to.have.property('status');
@@ -107,7 +107,7 @@ describe('SMS', () => {
 
     it('sends single simple message', async () => {
       const result = await client.sendSms({
-        to: '+254718769882',
+        to: '+254711111111',
         message: 'This is a test',
         enqueue: true,
       });
@@ -117,7 +117,7 @@ describe('SMS', () => {
 
     it('sends multiple simple message', async () => {
       const result = await client.sendSms({
-        to: ['+254718769882', '+254718769882'],
+        to: ['+254711111111', '+254711111111'],
         message: 'This is mulitple recipients test',
         enqueue: true,
       });
@@ -138,8 +138,22 @@ describe('SMS', () => {
       expect(result).to.have.property('SMSMessageData');
     }).timeout(55000);
 
+    it('sends bulk message', async () => {
+      const count = 1000;
+      const numbers = Array(count).fill(0).map((_num, idx) => `+254718${count + idx}`);
+
+      const result = await client.sendBulkSms({
+        to: numbers,
+        message: 'This is heavy single test',
+        enqueue: true,
+        bulkSMSMode: true,
+      });
+
+      expect(result).to.have.property('SMSMessageData');
+    });
+
     it('sends premium message', async () => {
-      const result = await client.sendPremium({
+      const result = await client.sendPremiumSms({
         to: '+254718760882',
         from: 'testService',
         message: 'This is premium test',

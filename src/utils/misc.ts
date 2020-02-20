@@ -41,7 +41,7 @@ export const showDeprecationWarning = (
   oldFunctionName: string,
   newFunctionName: string,
   releaseType: 'minor' | 'major' = 'major',
-  link: string = 'https://github.com/AfricasTalkingLtd/africastalking-node.js/README.md#Notes',
+  link: string = 'https://github.com/AfricasTalkingLtd/africastalking-node.js/README.md#notes',
 ): void => {
   const header = chalk.bold.bgHex('#D15E00')(`
   Deprecation warning:`);

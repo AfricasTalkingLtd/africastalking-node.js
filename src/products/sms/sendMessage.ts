@@ -2,8 +2,9 @@ import joi from 'joi';
 import queryString from 'query-string';
 import { validateJoiSchema, sendRequest } from '../../utils/misc';
 import {
-  SmsOptions, SmsPostData, SmsResponse, SendMessageComplex, SendMessage,
-} from './sendSms.types';
+  SendMessage, SendMessageOptions, SendMessagePostData, SendMessageResponse, SendSms,
+  SendBulkSms, SendPremiumSms,
+} from './sendMessage.types';
 import { Credentials } from '../../utils/getFullCredentials.types';
 import { getFullCredentials } from '../../utils/getFullCredentials';
 import { customRegex } from '../../utils/constants';
@@ -38,9 +39,9 @@ const getSchema = (isBulk: boolean, isPremium: boolean) => {
 
 const sendMessage = (
   credentials: Credentials,
-): SendMessageComplex => async (options, isBulk = false, isPremium = false) => {
+): SendMessage => async (options, isBulk = false, isPremium = false) => {
   const { apiKey, username, format } = getFullCredentials(credentials);
-  const result = validateJoiSchema<SmsOptions>(getSchema(isBulk, isPremium), options);
+  const result = validateJoiSchema<SendMessageOptions>(getSchema(isBulk, isPremium), options);
 
   const { to } = result;
 
@@ -49,7 +50,7 @@ const sendMessage = (
     ...(isPremium && { bulkSMSMode: false }),
   };
 
-  const data: SmsPostData = {
+  const data: SendMessagePostData = {
     username,
     ...result,
     to: Array.isArray(to) ? to.join(',') : to,
@@ -57,7 +58,7 @@ const sendMessage = (
     bulkSMSMode: bulkSMSMode ? 1 : 0,
   };
 
-  return sendRequest<SmsResponse, string>({
+  return sendRequest<SendMessageResponse, string>({
     endpointCategory: 'SMS',
     username,
     method: 'POST',
@@ -70,14 +71,14 @@ const sendMessage = (
   });
 };
 
-export const sendSms = (credentials: Credentials): SendMessage => (
-  opts: SmsOptions,
-) => sendMessage(credentials)(opts);
+export const sendSms = (
+  credentials: Credentials,
+): SendSms => (opts) => sendMessage(credentials)(opts);
 
-export const sendBulk = (credentials: Credentials): SendMessage => (
-  opts: SmsOptions,
-) => sendMessage(credentials)(opts, true);
+export const sendBulkSms = (
+  credentials: Credentials,
+): SendBulkSms => (opts) => sendMessage(credentials)(opts, true);
 
-export const sendPremium = (credentials: Credentials): SendMessage => (
-  opts: SmsOptions,
-) => sendMessage(credentials)(opts, false, true);
+export const sendPremiumSms = (
+  credentials: Credentials,
+): SendPremiumSms => (opts) => sendMessage(credentials)(opts, false, true);

@@ -4,16 +4,19 @@
 
 - [ ] remove test credentials
 - [ ] bump version
-- [ ] build
 
 ## Fix
 
-- [ ] github actions (tests, run build, push to npm)
-- [ ] readme
+- [x] github actions (tests, run build, push to npm)
+- [x] readme
 - [ ] Tests error
   - [ ] grpc server
   - [ ] [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
 - [ ] Improve test converage
+- [ ] firebase: analytics
+- [ ] Remove:
+  - expressHandler, ActionBuilder, Server, example/
+  - sendBulkSms (+bulkSMSMode)
 
 ## Add
 
@@ -23,6 +26,9 @@
   - [ ] missing types (due to no documentation)
 - [ ] Rewrite:
   - [ ] example/
+- [ ] Add tests for voice
+- [ ] Update Yoda examples
+- [ ] API.md: add documentation for `expressHandler`, `ActionBuilder`, `CONSTANTS`, etc.
 
 ## Yoda
 
