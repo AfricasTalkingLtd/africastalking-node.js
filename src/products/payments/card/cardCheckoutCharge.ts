@@ -11,7 +11,7 @@ import { customRegex } from '../../../utils/constants';
 const getSchema = () => joi.object({
   productName: joi.string().regex(customRegex.noSpace, 'no space').required(),
   paymentCard: joi.object({
-    number: joi.number().required(),
+    number: joi.string().required(),
     cvvNumber: joi.number().required(),
     expiryMonth: joi.number().required(),
     expiryYear: joi.number().required(),

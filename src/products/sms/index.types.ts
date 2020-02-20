@@ -3,5 +3,5 @@ export { DeleteSubscriptionOptions, DeleteSubscriptionResponse } from './premium
 export { FetchSubscriptionOptions, FetchSubscriptionResponse } from './premiumSubscriptions/fetchSubscription.types';
 export { FetchMessagesOptions, FetchMessagesResponse } from './fetchMessages.types';
 export {
-  SendSmsOptions, SendBulkSmsOptions, SendPremiumSmsOptions, SendMessageResponse,
+  SendSmsOptions, SendPremiumSmsOptions, SendMessageResponse,
 } from './sendMessage.types';

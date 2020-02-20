@@ -19,7 +19,7 @@ import { CreateSubscription } from './sms/premiumSubscriptions/createSubscriptio
 import { DeleteSubscription } from './sms/premiumSubscriptions/deleteSubscription.types';
 import { FetchSubscription } from './sms/premiumSubscriptions/fetchSubscription.types';
 import { FetchMessages } from './sms/fetchMessages.types';
-import { SendSms, SendBulkSms, SendPremiumSms } from './sms/sendMessage.types';
+import { SendSms, SendPremiumSms } from './sms/sendMessage.types';
 import { CreateCheckoutToken } from './token/createCheckoutToken.types';
 import { GenerateAuthToken } from './token/generateAuthToken.types';
 import { MakeCall } from './voice/makeCall.types';
@@ -56,7 +56,6 @@ export default interface AFRICASTALKING {
   fetchSubscription: FetchSubscription;
   fetchMessages: FetchMessages;
   sendSms: SendSms;
-  sendBulkSms: SendBulkSms;
   sendPremiumSms: SendPremiumSms;
   createCheckoutToken: CreateCheckoutToken;
   generateAuthToken: GenerateAuthToken;

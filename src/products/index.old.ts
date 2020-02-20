@@ -14,7 +14,7 @@ import {
 } from './payments';
 import {
   createSubscription, deleteSubscription, fetchSubscription, fetchMessages,
-  sendSms, sendBulkSms, sendPremiumSms,
+  sendSms, sendPremiumSms,
 } from './sms';
 import { createCheckoutToken, generateAuthToken } from './token';
 import { makeCall, getNumQueuedCalls, uploadMediaFile } from './voice';
@@ -151,10 +151,6 @@ const SMS = (credentials: Credentials): Sms => ({
     showDeprecationWarning('AfricasTalking().SMS.sendSms()', 'new Client().sendSms()', 'minor');
     return sendSms(credentials);
   },
-  get sendBulkSms() {
-    showDeprecationWarning('AfricasTalking().SMS.sendBulkSms()', 'new Client().sendBulkSms()', 'minor');
-    return sendBulkSms(credentials);
-  },
   get sendPremiumSms() {
     showDeprecationWarning('AfricasTalking().SMS.sendPremiumSms()', 'new Client().sendPremiumSms()', 'minor');
     return sendPremiumSms(credentials);
@@ -164,10 +160,6 @@ const SMS = (credentials: Credentials): Sms => ({
   get send() {
     showDeprecationWarning('AfricasTalking().SMS.send()', 'new Client().sendSms()', 'minor');
     return sendSms(credentials);
-  },
-  get sendBulk() {
-    showDeprecationWarning('AfricasTalking().SMS.sendBulk()', 'new Client().sendBulkSms()', 'minor');
-    return sendBulkSms(credentials);
   },
   get sendPremium() {
     showDeprecationWarning('AfricasTalking().SMS.sendPremium()', 'new Client().sendPremiumSms()', 'minor');
@@ -238,7 +230,7 @@ export const AfricasTalking = (credentials: Credentials): AFRICASTALKING => {
       return TOKEN(credentials);
     },
     get USSD() {
-      showDeprecationWarning('AfricasTalking().USSD', 'expressHandler()', 'minor');
+      showDeprecationWarning('AfricasTalking().USSD', undefined, 'minor');
       return USSD;
     },
     get VOICE() {

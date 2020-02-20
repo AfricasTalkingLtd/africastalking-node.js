@@ -139,6 +139,9 @@ describe('Payments', () => {
 
     context('valid options', () => {
       it('mobileData()', async () => {
+        // TODO: when mobileData finally accepts sandbox env, remove this:
+        if (validCredentials.username === 'sandbox') return;
+
         const result = await client.mobileData({
           productName: 'TestProduct',
           recipients: [{
@@ -336,7 +339,6 @@ describe('Payments', () => {
     });
 
     context('valid options', () => {
-      // TODO: fix API error: The request content was malformed: Expected String as JsString
       it('cardCheckoutCharge()', async () => {
         const result = await client.cardCheckoutCharge({
           productName: 'TestProduct',

@@ -38,6 +38,3 @@ test/fixtures.local.js
 
 # dist
 dist/
-
-# config
-config/test.json

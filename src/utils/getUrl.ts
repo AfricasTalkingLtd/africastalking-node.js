@@ -1,18 +1,8 @@
 import { BaseUrlCategory, Endpoints, EndpointCategory } from './getUrl.types';
 
-const getBaseUrl = (baseUrlCategory: BaseUrlCategory, isSandbox: boolean): string => {
-  switch (baseUrlCategory) {
-    default:
-    case 'API':
-      return `https://api${isSandbox ? '.sandbox' : ''}.africastalking.com`;
-
-    case 'PAYMENTS':
-      return `https://payments${isSandbox ? '.sandbox' : ''}.africastalking.com`;
-
-    case 'VOICE':
-      return `https://voice${isSandbox ? '.sandbox' : ''}.africastalking.com`;
-  }
-};
+const getBaseUrl = (
+  baseUrlCategory: BaseUrlCategory, isSandbox: boolean,
+): string => `https://${baseUrlCategory.toLowerCase()}${isSandbox ? '.sandbox' : ''}.africastalking.com`;
 
 const endpoints: Endpoints = {
   AIRTIME: { baseUrlCategory: 'API', endpoint: '/version1/airtime/send' },

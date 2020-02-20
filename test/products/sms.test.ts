@@ -24,15 +24,6 @@ describe('SMS', () => {
       } as any)).to.be.rejected;
     });
 
-    it('#sendBulkSms()', () => {
-      expect(client.sendBulkSms({
-        to: '+254711111111',
-        from: null,
-        message: null,
-        enqueue: 'Joe',
-      } as any)).to.be.rejected;
-    });
-
     it('#sendPremiumSms()', () => {
       expect(client.sendPremiumSms({
         to: '+254711111111',
@@ -137,20 +128,6 @@ describe('SMS', () => {
 
       expect(result).to.have.property('SMSMessageData');
     }).timeout(55000);
-
-    it('sends bulk message', async () => {
-      const count = 1000;
-      const numbers = Array(count).fill(0).map((_num, idx) => `+254718${count + idx}`);
-
-      const result = await client.sendBulkSms({
-        to: numbers,
-        message: 'This is heavy single test',
-        enqueue: true,
-        bulkSMSMode: true,
-      });
-
-      expect(result).to.have.property('SMSMessageData');
-    });
 
     it('sends premium message', async () => {
       const result = await client.sendPremiumSms({

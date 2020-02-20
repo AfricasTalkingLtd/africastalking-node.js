@@ -1,3 +1,4 @@
+import 'mocha';
 import express, { Application } from 'express';
 import { expect } from 'chai';
 import axios, { AxiosResponse } from 'axios';

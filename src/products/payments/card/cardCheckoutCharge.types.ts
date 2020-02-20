@@ -12,7 +12,7 @@ export interface CardCheckoutChargeOptions {
   currencyCode: 'KES' | 'UGX' | 'USD';
   amount: number;
   narration: string;
-  metadata: {
+  metadata?: {
     [key: string]: any;
   };
 }

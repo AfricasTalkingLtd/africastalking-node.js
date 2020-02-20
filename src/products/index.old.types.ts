@@ -27,7 +27,7 @@ import { GetNumQueuedCalls } from './voice/getNumQueuedCalls.types';
 import { UploadMediaFile } from './voice/uploadMediaFile.types';
 import { UssdHandler, ExpressHandler } from '../utils/expressHandler/expressHandler.types';
 import { ActionBuilder } from '../utils';
-import { SendPremiumSms, SendBulkSms, SendSms } from './sms/sendMessage.types';
+import { SendPremiumSms, SendSms } from './sms/sendMessage.types';
 
 export interface Airtime {
   sendAirtimeRequest: SendAirtimeRequest;
@@ -74,11 +74,9 @@ export interface Sms {
   fetchSubscription: FetchSubscription;
   fetchMessages: FetchMessages;
   sendSms: SendSms;
-  sendBulkSms: SendBulkSms;
   sendPremiumSms: SendPremiumSms;
 
   send: SendSms;
-  sendBulk: SendBulkSms;
   sendPremium: SendPremiumSms;
 }
 

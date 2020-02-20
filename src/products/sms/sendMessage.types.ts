@@ -5,19 +5,14 @@ export interface SendSmsOptions {
   enqueue?: boolean;
 }
 
-export interface SendBulkSmsOptions extends SendSmsOptions {
-  bulkSMSMode: true;
-}
-
 export interface SendPremiumSmsOptions extends SendSmsOptions {
+  bulkSMSMode?: boolean;
   keyword?: string;
   linkId?: string;
   retryDurationInHours?: number;
 }
 
-export interface SendMessageOptions extends Omit<SendBulkSmsOptions & SendPremiumSmsOptions, 'bulkSMSMode'> {
-  bulkSMSMode?: true;
-}
+export type SendMessageOptions = SendPremiumSmsOptions;
 
 export interface SendMessagePostData extends Omit<SendMessageOptions, 'enqueue' | 'bulkSMSMode'> {
   username: string;
@@ -39,10 +34,8 @@ export interface SendMessageResponse {
 }
 
 export type SendMessage = (
-  options: SendMessageOptions, isBulk?: boolean, isPremium?: boolean,
+  options: SendMessageOptions, isPremium?: boolean
 ) => Promise<SendMessageResponse>;
 
-
 export type SendSms = (options: SendSmsOptions) => Promise<SendMessageResponse>;
-export type SendBulkSms = (options: SendBulkSmsOptions) => Promise<SendMessageResponse>;
 export type SendPremiumSms = (options: SendPremiumSmsOptions) => Promise<SendMessageResponse>;

@@ -6,30 +6,43 @@
 
 ## Fix
 
-- [ ] Tests error
-  - [ ] grpc server
-  - [ ] mobile data
-  - [ ] [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
-- [ ] Deprecate:
-  - [ ] expressHandler
-  - [ ] ActionBuilder
-  - [ ] Server
-  - [ ] example/
-  - [ ] sendBulkSms (+bulkSMSMode?)
+- [x] Tests error
+  - [x] grpc server
+  - [x] mobile data
+  - [x] [payments.cardCheckoutCharge] fix API error: The request content was malformed: Expected String as JsString
+- [x] Remove sendBulkSms
+- [x] deprecate expressHandler
 - [ ] Improve test converage
 
-## Add
+## SDK
 
-- [ ] Idempotency Key
-- [ ] types:
+- [ ] Add Idempotency Key
+- [ ] Add types:
   - [ ] payments: accepted currencies
   - [ ] missing types (due to no documentation)
-- [ ] Rewrite:
-  - [ ] example/
+- [ ] example/
+  - [ ] refactor/update packages
+  - [ ] move to independent repo
 - [ ] Add tests for voice
 - [ ] Update Yoda examples
-- [ ] API.md: add documentation for `expressHandler`, `ActionBuilder`, `CONSTANTS`, etc.
-- [ ] analytics
+- [ ] API.md: add documentation for `ActionBuilder`, `CONSTANTS`, etc.
+- [ ] analytics on functions usage
+- [ ] Fix grpc server
+- [ ] Create general account for generating test apiKey credential
+
+### IDEAS
+
+```js
+const client = new Client({});
+
+// in addition to:
+client.sendSms({ to, from, message });
+
+// allow:
+client.sendSms(to, from, message, {
+  // options
+});
+```
 
 ## Yoda
 
@@ -40,21 +53,3 @@
 - [ ] documentation:
   - [ ] accepted currencies: b2b, etc.
   - [ ] full pages for token: generateAuthToken() and createCheckoutToken()
-
-## IDEAS
-
-- [ ] one base url for api
-- [ ] valid('')
-- [ ] functions:
-
-```js
-const client = new Client({});
-
-// instead of:
-client.sendSms({ to, from, message });
-
-// update to:
-client.sendSms(to, from, message, {
-  // options
-});
-```

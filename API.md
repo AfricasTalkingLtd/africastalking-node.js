@@ -59,7 +59,6 @@ const client = new Client({
 - [SMS Operations](#d-sms-operations)
   - fetchMessages
   - sendSms
-  - sendBulkSms
   - sendPremiumSms
   
   [premium subscriptions](#premium-subscriptions)
@@ -684,29 +683,6 @@ const result = client.sendSms({
   to: '+254711111111',
   message: 'This is a test',
   enqueue: true,
-})
-  .then((response) => console.log(response))
-  .catch((error) => console.log(error));
-```
-
-- ### sendBulkSms({ to, message, from, enqueue, bulkSMSMode })
-
-| Param     | Type | Description |
-| :------- | :------------ | :------------ |
-| to | _string, REQUIRED_ | Recipients phone number. |
-| message | _string, REQUIRED_ | SMS content. |
-| from | _string_ |Shortcode or alphanumeric ID that is registered with Africa's Talking account. |
-| enqueue | _string_ | Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos. |
-| bulkSMSMode | _boolean, REQUIRED_ | The value must be set to `true` for bulk messages. |
-
-#### Example
-
-```ts
-const result = client.sendBulkSms({
-  to: ['+254711111111', '+254722222222'],
-  message: 'This is heavy single test',
-  enqueue: true,
-  bulkSMSMode: true,
 })
   .then((response) => console.log(response))
   .catch((error) => console.log(error));

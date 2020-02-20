@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 // Get authentication secrets from a file
-const credentials = require('../../test/fixtures.local');
+const { validCredentials } = require('../../test/fixtures');
 
-const AfricasTalking = require('africastalking')(credentials.TEST_ACCOUNT);
+const AfricasTalking = require('africastalking').default(credentials.TEST_ACCOUNT);
 const payments = AfricasTalking.PAYMENTS;
 
 router.post('/mobile-checkout', (req, res) => {

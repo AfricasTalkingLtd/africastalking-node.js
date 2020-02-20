@@ -39,18 +39,18 @@ export const sendRequest = <Response, PostData = null, Params = any>(
 
 export const showDeprecationWarning = (
   oldFunctionName: string,
-  newFunctionName: string,
+  newFunctionName: string | undefined,
   releaseType: 'minor' | 'major' = 'major',
   link: string = 'https://github.com/AfricasTalkingLtd/africastalking-node.js/README.md#notes',
 ): void => {
-  const header = chalk.bold.bgHex('#D15E00')(`
-  Deprecation warning:`);
+  const header = '\nDeprecation warning:';
 
-  const msg = chalk.keyword('orange')(`
-  ${chalk.bold(oldFunctionName)} is being deprecated and will be removed in upcoming ${chalk.bold(releaseType)} release.
-  Please use ${chalk.bold(newFunctionName)} instead.
-  For more information, please refer to ${chalk.underline(link)}.`);
+  let msg = `\n  ${chalk.bold(oldFunctionName)} is being deprecated and will be removed in upcoming ${chalk.bold(releaseType)} release.`;
+  msg += newFunctionName
+    ? (`\n  Please use ${chalk.bold(newFunctionName)}instead.`)
+    : '';
+  msg += `\n  For more information, please refer to ${chalk.underline(link)}.`;
 
   // eslint-disable-next-line no-console
-  console.warn(`${header}${msg}`);
+  console.warn(`${chalk.bold.bgHex('#D15E00')(header)}${chalk.keyword('orange')(msg)}`);
 };
