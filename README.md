@@ -24,14 +24,14 @@ The package needs to be configured with your app username and API key, which you
 > You can use this SDK for either production or sandbox apps. For sandbox, the app username is **ALWAYS** `sandbox`
 
 ```javascript
-const options = {
+const credentials = {
     apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
     username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
-const AfricasTalking = require('africastalking')(options);
+const AfricasTalking = require('africastalking')(credentials);
 
 // Initialize a service e.g. SMS
-sms = africastalking.SMS
+const sms = africastalking.SMS
 
 // Use the service
 const options = {
