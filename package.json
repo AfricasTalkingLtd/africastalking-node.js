@@ -35,7 +35,7 @@
     "grpc": "^1.24.2",
     "lodash": "^4.17.15",
     "querystring": "^0.2.0",
-    "unirest": "^0.6.0",
+    "unirest": "^0.5.1",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
