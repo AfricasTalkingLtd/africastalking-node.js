@@ -198,7 +198,7 @@ For more information on:
   - `recipients`: A list of consumers that will receive the money. `REQUIRED`
 
 
-- `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, metadata })`:   Send mobile money to busness.
+- `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, requester, metadata })`:   Send mobile money to busness.
 
   - `productName`: Your payment product. `REQUIRED`
   - `provider`: Provider used to process request. Checkout  `payments.PROVIDER.*`. `REQUIRED`
@@ -207,6 +207,7 @@ For more information on:
   - `destinationChannel`: Name or number of channel to receive payment. `REQUIRED`
   - `destinationAccount`: Account name used to receive money. `REQUIRED`
   - `amount`: Amount to transfer. `REQUIRED`
+  - `requester`: PhoneNumber through which KPLC will send tokens when using B2B to buy electricity tokens.
   - `metadata`: Additional info to go with the transfer
 
 - `mobileData(productName, recipients)`: Send mobile data to customers.
