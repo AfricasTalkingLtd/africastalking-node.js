@@ -7,7 +7,7 @@
     "test": "mocha ./test"
   },
   "dependencies": {
-    "africastalking": "^0.3.2",
+    "africastalking": "^0.5.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
