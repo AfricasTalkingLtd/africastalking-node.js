@@ -28,10 +28,10 @@ const credentials = {
     apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
     username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
-const AfricasTalking = require('africastalking')(credentials);
+const Africastalking = require('africastalking')(credentials);
 
 // Initialize a service e.g. SMS
-const sms = africastalking.SMS
+const sms = Africastalking.SMS
 
 // Use the service
 const options = {
