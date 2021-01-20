@@ -7,21 +7,20 @@
     "test": "mocha ./test"
   },
   "dependencies": {
-    "africastalking": "^0.5.1",
-    "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "^4.16.3",
-    "express-validator": "^5.2.0",
+    "africastalking": "^0.5.3",
+    "body-parser": "~1.19.0",
+    "cookie-parser": "~1.4.5",
+    "debug": "~4.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
     "jade": "~1.11.0",
-    "letsencrypt-express": "^2.0.6",
-    "morgan": "~1.9.1",
-    "serve-favicon": "~2.4.5"
+    "morgan": "~1.10.0",
+    "serve-favicon": "~2.5.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
     "request": "^2.87.0"
   }
 }
