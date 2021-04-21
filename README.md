@@ -280,7 +280,8 @@ For more information, please read [http://docs.africastalking.com/payments](http
 - `voice.call({ callFrom, callTo })`: Initiate a phone call
 
     - `callFrom`: Your Africa's Talking issued virtual phone number. `REQUIRED`
-    - `callTo`: Phone number to dial. `REQUIRED`
+    - `callTo`: Comma-separated string of phone numbers to call. `REQUIRED`
+    - `clientRequestId`: Additional information that can be used to tag the call in your callback URL.
 
 
 - `voice.fetchQuedCalls({ phoneNumber })`: Get queued calls
