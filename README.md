@@ -28,10 +28,10 @@ const credentials = {
     apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
     username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
-const AfricasTalking = require('africastalking')(credentials);
+const Africastalking = require('africastalking')(credentials);
 
 // Initialize a service e.g. SMS
-const sms = africastalking.SMS
+const sms = Africastalking.SMS
 
 // Use the service
 const options = {
@@ -198,7 +198,7 @@ For more information on:
   - `recipients`: A list of consumers that will receive the money. `REQUIRED`
 
 
-- `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, metadata })`:   Send mobile money to busness.
+- `mobileB2B({ productName, provider, transferType, currencyCode, destinationChannel, destinationAccount, amount, requester, metadata })`:   Send mobile money to busness.
 
   - `productName`: Your payment product. `REQUIRED`
   - `provider`: Provider used to process request. Checkout  `payments.PROVIDER.*`. `REQUIRED`
@@ -207,6 +207,7 @@ For more information on:
   - `destinationChannel`: Name or number of channel to receive payment. `REQUIRED`
   - `destinationAccount`: Account name used to receive money. `REQUIRED`
   - `amount`: Amount to transfer. `REQUIRED`
+  - `requester`: PhoneNumber through which KPLC will send tokens when using B2B to buy electricity tokens.
   - `metadata`: Additional info to go with the transfer
 
 - `mobileData(productName, recipients)`: Send mobile data to customers.
