@@ -94,8 +94,7 @@ describe('SMS', function () {
         const opts = {
             shortCode: "1234",
             keyword: "TESTKWD",
-            phoneNumber: "+254718769882",
-            checkoutToken: "12abvsfdhh63535"
+            phoneNumber: "+254718769882"
         }
 
         sms.createSubscription(opts)

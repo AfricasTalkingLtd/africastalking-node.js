@@ -126,12 +126,11 @@ For more information, please read [http://docs.africastalking.com/airtime/sendin
   - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`
 
 
-- `createSubscription({ shortCode, keyword, phoneNumber, checkoutToken })`: Create a premium subscription
+- `createSubscription({ shortCode, keyword, phoneNumber })`: Create a premium subscription
 
   - `shortCode`: This is the premium short code mapped to your account. `REQUIRED`
   - `keyword`: A premium keyword under the above short code and mapped to your account. `REQUIRED`
   - `phoneNumber`:  The phone number to be subscribed. `REQUIRED`
-  - `checkoutToken`: This is a token used to validate the subscription request. `REQUIRED`
 
 
 For more information on:
@@ -303,8 +302,6 @@ For more information, please read [http://docs.africastalking.com/voice](http://
 
 
 ### `TokenService`
-
-- `createCheckoutToken(phoneNumber)`: Create a new checkout token.
 
 - `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
 
