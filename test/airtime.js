@@ -24,7 +24,7 @@ describe('Airtime', function(){
 
         it('#send() must have phoneNumber/currencyCode/amount', function () {
             return airtime.send(
-                { recipients: [ { phoneNumber: '+254726166685' } ] }
+                { recipients: [ { phoneNumber: fixtures.phoneNumber } ] }
             )
                 .should.be.rejected();
         })
@@ -41,7 +41,7 @@ describe('Airtime', function(){
         var opts = {
            recipients: [
                {
-                   phoneNumber: '+254726166685',
+                   phoneNumber: fixtures.phoneNumber,
                    currencyCode: 'KES',
                    amount: 10
                }
@@ -65,12 +65,12 @@ describe('Airtime', function(){
        var opts = {
            recipients: [
                {
-                   phoneNumber: '+254726166685',
+                   phoneNumber: fixtures.phoneNumber,
                    currencyCode: 'KES',
                    amount: 90
                },
                {
-                   phoneNumber: '+254726863825',
+                   phoneNumber: fixtures.phoneNumber,
                    currencyCode: 'KES',
                    amount: 897
                }

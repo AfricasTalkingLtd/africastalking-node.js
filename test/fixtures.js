@@ -5,3 +5,4 @@ exports.TEST_ACCOUNT = {
     username: "YOUR_USERNAME",
     format: "json"
 };
+exports.phoneNumber = '+2547xxxxxxxx';

@@ -27,7 +27,7 @@ describe('Payment', function(){
             });
 
             it('#mobileCheckout() must have username/productName/phoneNumber/currencyCode/amount params', function () {
-                options.username = "+254718769882";
+                options.username = fixtures.phoneNumber;
                 options.from = null;
                 options.message = null;
 
@@ -45,7 +45,7 @@ describe('Payment', function(){
         it('mobileCheckout()', function () {
             let opts = {
                 productName: "TestProduct",
-                phoneNumber: "+254718769882",
+                phoneNumber: fixtures.phoneNumber,
                 currencyCode: "KES",
                 metadata: {"Joe": "Biden", "id":"VP"},
                 amount: 234.5
@@ -92,7 +92,7 @@ describe('Payment', function(){
                 productName: "TestProduct",
                 recipients: [
                     {
-                        phoneNumber: "254718769882",
+                        phoneNumber: fixtures.phoneNumber,
                         currencyCode: "KES",
                         reason: payments.REASON.SALARY,
                         providerChannel: '1212',
@@ -159,7 +159,7 @@ describe('Payment', function(){
             let opts = {
                 productName: "TestProduct",
                 recipients: [{
-                    phoneNumber: "+254711223344",
+                    phoneNumber: fixtures.phoneNumber,
                     quantity: 10,
                     unit: "GB",
                     validity: "Month",

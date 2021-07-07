@@ -22,7 +22,7 @@ describe('SMS', function () {
         });
 
         it('#send() must have to/from/message params', function () {
-            options.to = "+254718769882";
+            options.to = fixtures.phoneNumber;
             options.from = null;
             options.message = null;
 
@@ -94,7 +94,7 @@ describe('SMS', function () {
         const opts = {
             shortCode: "1234",
             keyword: "TESTKWD",
-            phoneNumber: "+254718769882"
+            phoneNumber: fixtures.phoneNumber,
         }
 
         sms.createSubscription(opts)
@@ -113,7 +113,7 @@ describe('SMS', function () {
         const opts = {
             shortCode: "1234",
             keyword: "TESTKWD",
-            phoneNumber: "+254718769882"
+            phoneNumber: fixtures.phoneNumber,
         }
 
         sms.deleteSubscription(opts)
@@ -130,7 +130,7 @@ describe('SMS', function () {
     it('sends single simple message', function (done) {
 
         var opts = {
-            to: "+254718769882",
+            to: fixtures.phoneNumber,
             message: "This is a test",
             enqueue: true,
         };
@@ -149,7 +149,7 @@ describe('SMS', function () {
 
     it('sends multiple simple message', function (done) {
         var opts = {
-            to: ["+254718769882", "+254718769882"],
+            to: [fixtures.phoneNumber],
             message: "This is mulitple recipients test",
             enqueue: true,
         };
@@ -167,7 +167,7 @@ describe('SMS', function () {
     it('sends heavy single message', function (done) {
         this.timeout(55000);
         const count = 1000;
-        const numbers = Array(count).fill(0).map((num, idx) => `+254718${count + idx}`);
+        const numbers = Array(count).fill(0).map((num, idx) => `+254000${count + idx}`);
         const opts = {
             to: numbers,
             message: "This is heavy single test",
@@ -186,7 +186,7 @@ describe('SMS', function () {
     it('sends premium message', function (done) {
 
         var opts = {
-            to: "+254718760882",
+            to: fixtures.phoneNumber,
             from: "testService",
             message: "This is premium test",
             keyword: "test",
