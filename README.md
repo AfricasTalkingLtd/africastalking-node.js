@@ -71,7 +71,7 @@ Initialize the SDK as a requirement by doing `require('africastalking')(options)
 
 ## Services
 
-All methoods are asynchronous
+All methods are asynchronous
 
 All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 

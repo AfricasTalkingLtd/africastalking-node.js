@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.5.4",
+  "version": "0.5.5-rc1",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
@@ -30,19 +30,18 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
-    "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "grpc": "^1.24.3",
-    "lodash": "^4.17.15",
+    "axios": "^0.25.0",
+    "body-parser": "^1.19.1",
+    "lodash": "^4.17.21",
     "querystring": "^0.2.0",
     "unirest": "^0.6.0",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "express": "^4.17.1",
-    "mocha": "^6.2.3",
-    "nyc": "^14.1.1",
+    "express": "^4.17.2",
+    "mocha": "^9.2.0",
+    "nyc": "^15.1.0",
     "should": "^13.2.3",
-    "supertest": "^4.0.2"
+    "supertest": "^6.2.2"
   }
 }

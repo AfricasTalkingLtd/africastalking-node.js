@@ -172,7 +172,7 @@ describe('Payment', function(){
 
             return payments.mobileData(opts)
                 .then(function(resp) {
-                    resp.should.have.property('status');
+                    resp.should.have.property('entries');
                 })
                 .catch(function(err) {
                     throw err;
