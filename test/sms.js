@@ -174,13 +174,13 @@ describe('SMS', function () {
         to: fixtures.phoneNumber,
         from: 1458,
         enqueue: true,
-        message: 'test is this message fails and is it is unresolved',
+        message: 'returns object with a message of not sent',
       },
     ];
     sms
       .send(opts)
       .then(function (resp) {
-        resp[0].should.have.property('value');
+        resp[0].should.have.property('SMSMessageData');
         done();
       })
       .catch(function (err) {
