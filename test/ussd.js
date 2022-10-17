@@ -91,7 +91,7 @@ describe('USSD', function () {
             });
     });
 
-    it('shows in valid choice', function (done) {
+    it('shows invalid choice', function (done) {
         request
             .post('/test-service')
             .send({text: '13'})

@@ -141,7 +141,7 @@ describe('SMS', function () {
   it('sends multiple simple message', function (done) {
     var opts = {
       to: [fixtures.phoneNumber],
-      message: 'This is mulitple recipients test',
+      message: 'This is multiple recipients test',
       enqueue: true,
     };
     sms
