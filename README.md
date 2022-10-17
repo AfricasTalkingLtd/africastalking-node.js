@@ -118,7 +118,7 @@ For more information, please read [http://docs.africastalking.com/airtime/sendin
       });
     ```
 
-- Send multiple messages to different recipients.
+- Send different messages to different recipients.
   ```javascript
       send([
         {
