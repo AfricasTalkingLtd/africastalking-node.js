@@ -6,7 +6,7 @@
 
 ## Documentation
 
-Take a look at the [API docs here](http://docs.africastalking.com).
+Take a look at the [API docs here](http://developers.africastalking.com).
 
 
 ## Install
@@ -98,13 +98,48 @@ For more information, please read [http://docs.africastalking.com/airtime/sendin
 
 ### `SmsService`
 
-- `send({ to, from, message, enqueue })`: Send a message
+- Send a message to one recipient.
+  ```javascript
+      send({
+        to: '+xxxxxxxxxxxx',
+        from: 'XYZ LTD',
+        message: 'Hello world',
+        enqueue: true,
+      });
+    ```
 
-  - `to`: Recipients phone number. `REQUIRED`
+- Send a message to multiple recipients.
+  ```javascript
+      send({
+        to: ['+xxxxxxxxxxxx','+yyyyyyyyyyyy','+zzzzzzzzzzzz'],
+        from: 'XYZ LTD',
+        message: 'Hello world',
+        enqueue: true,
+      });
+    ```
+
+- Send different messages to different recipients.
+  ```javascript
+      send([
+        {
+          to: ['+aaaaaaaaaaaa','+bbbbbbbbbbbb','+cccccccccccc'],
+          from: 'XYZ LTD',
+          message: 'Congratulations team! You have won it!',
+          enqueue: true,
+        },
+        {
+          to: '+xxxxxxxxxxxx',
+          from: 'XYZ LTD',
+          message: 'Congratulations coach! Your team has won!',
+          enqueue: true,
+        }
+      ]);
+    ```
+ 
+  - `to`: Recipient(s) phone number. `REQUIRED`
   - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account
   - `message`: SMS content. `REQUIRED`
   - `enqueue`: Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
-
 
 - `sendPremium({ to, from, message, enqueue, keyword, linkId, retryDurationInHours })`: Send premium SMS
 
