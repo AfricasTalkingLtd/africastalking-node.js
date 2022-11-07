@@ -16,7 +16,6 @@ describe('Airtime', function(){
     });
 
     describe('validation', function () {
-
         it('#send() cannot be empty', function () {
             return airtime.send({})
                 .should.be.rejected();
@@ -27,7 +26,32 @@ describe('Airtime', function(){
                 { recipients: [ { phoneNumber: fixtures.phoneNumber } ] }
             )
                 .should.be.rejected();
-        })
+        });
+        
+        it('#send() rejects because there is atleast one invalid phoneNumber', function(){
+            const opts = {
+                recipients: [
+                    {
+                        phoneNumber: '+25571234567890',
+                        currencyCode: 'KES',
+                        amount: 5
+                    },
+                    {
+                        phoneNumber: '',
+                        currencyCode: 'KES',
+                        amount: 5
+                    },
+                    {
+                        phoneNumber: '+25712345678',
+                        currencyCode: 'KES',
+                        amount: 5
+                    },
+                ]
+            };
+            
+            return airtime.send(opts).should.be.rejected();
+    
+        });
 
         it('#send() rejects invalid options', function () {
             return airtime.send(
@@ -39,13 +63,13 @@ describe('Airtime', function(){
 
     it('sends airtime to one', function (done) {
         var opts = {
-           recipients: [
-               {
-                   phoneNumber: fixtures.phoneNumber,
-                   currencyCode: 'KES',
-                   amount: 10
-               }
-           ]
+            recipients: [
+                {
+                    phoneNumber: fixtures.phoneNumber,
+                    currencyCode: 'KES',
+                    amount: 10
+                }
+            ]
         };
 
         airtime.send(opts)
@@ -62,22 +86,22 @@ describe('Airtime', function(){
 
     it('sends airtime to many', function(done){
 
-       var opts = {
-           recipients: [
-               {
-                   phoneNumber: fixtures.phoneNumber,
-                   currencyCode: 'KES',
-                   amount: 90
-               },
-               {
-                   phoneNumber: fixtures.phoneNumber,
-                   currencyCode: 'KES',
-                   amount: 897
-               }
-           ]
-       };
-
-       airtime.send(opts)
+        var opts = {
+            recipients: [
+                {
+                    phoneNumber: fixtures.phoneNumber,
+                    currencyCode: 'KES',
+                    amount: 90
+                },
+                {
+                    phoneNumber: fixtures.phoneNumber,
+                    currencyCode: 'KES',
+                    amount: 897
+                }
+            ]
+        };
+        
+        airtime.send(opts)
             .then(function(resp){
                 resp.should.have.property('responses');
                 done();
@@ -86,7 +110,5 @@ describe('Airtime', function(){
                 console.error(err);
                 done();
             });
-    });
-
-
+        });
 });
