@@ -4,24 +4,32 @@ const should   = require('should');
 const validate = require('validate.js');
 const fixtures = require('./fixtures');
 
-let AfricasTalking, voice, response;
+const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
+const voice = AfricasTalking.VOICE;
 
-let responseTemplate = '<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>';
+describe('Voice', function(){
 
-describe('response', function () {
-
-    this.timeout(15000);
-
-    before(function () {
-        AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
-        voice = AfricasTalking.VOICE;
+    describe('validation', function(){
+        it('#call rejects because of atleast one invalid phone number', ()=>{
+            const options = {
+                callFrom: '+254711xxxxxx',
+                callTo: '+25471234567890,+254705',
+                clientRequestId: 'your-cool-id'
+            };
+            return voice.call(options).should.be.rejected();
+        });
     });
+    
+   describe('Action builders', function () {
 
-    beforeEach(function () {
-        response = new voice.ActionBuilder;
-    })
+        let response;
+        let responseTemplate = '<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>';
 
-    describe('Actions', function () {
+        this.timeout(15000);
+
+        beforeEach(function () {
+            response = new voice.ActionBuilder;
+        })
         describe('say', function () {
             let expected, options;
 
@@ -92,7 +100,7 @@ describe('response', function () {
                         dial: { phoneNumbers: '+254711XXXYYY' }
                     };
 
-                    (function () { response.getDigits(child).buld() })
+                    (function () { response.getDigits(child).build() })
                         .should.throw(Error);
                 });
             });
