@@ -25,7 +25,7 @@ describe('SMS', function () {
         enqueue: true,
       };
 
-      return sms.send(options).should.be.rejected();;
+      return sms.send(options).should.be.rejected();
     })
 
     it('#send() cannot be empty', function () {
