@@ -28,7 +28,7 @@ describe('Airtime', function(){
                 .should.be.rejected();
         });
         
-        it('#send() rejects because there is atleast one invalid phoneNumber', function(){
+        it('#send() rejects because there is at least one invalid phoneNumber', function(){
             const opts = {
                 recipients: [
                     {
