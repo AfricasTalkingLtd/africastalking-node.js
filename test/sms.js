@@ -16,6 +16,18 @@ describe('SMS', function () {
   describe('validation', function () {
     var options = {};
 
+    it('Rejects invalid phone numbers', function(){
+      let phoneNumbers = ['+254713', '+2547XXXXXXXX', '0712345678', '+25571234567890',''];
+      
+      let options = {
+        to:phoneNumbers,
+        message: 'Hi! #WeLoveNerds',
+        enqueue: true,
+      };
+
+      return sms.send(options).should.be.rejected();
+    })
+
     it('#send() cannot be empty', function () {
       return sms.send(options).should.be.rejected();
     });
