@@ -69,7 +69,8 @@ describe('Airtime', function(){
                     currencyCode: 'KES',
                     amount: 10
                 }
-            ]
+            ],
+            maxNumRetry: 10
         };
 
         airtime.send(opts)
@@ -98,7 +99,8 @@ describe('Airtime', function(){
                     currencyCode: 'KES',
                     amount: 897
                 }
-            ]
+            ],
+            maxNumRetry: 1
         };
         
         airtime.send(opts)
