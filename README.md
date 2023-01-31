@@ -87,13 +87,33 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
 
 ### `AirtimeService`
 
-- `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients`: An array of objects containing the following keys:
-  - `phoneNumber`: Recipient of airtime. `REQUIRED`
-  - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`
-  - `amount`: Amount to charge. `REQUIRED`
-  - `maxNumRetry`: This is the number of times a request will be retried. It is equivalent to minutes. If you set a maxNumRetry of 4 that means your transaction will be retried 4 times consecutively in the next 4 minutes because retries are done after every minute. If you don't set maxNumRetry, the request will *NOT* be retried. `OPTIONAL`
+  - `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. `recipients`: An array of objects containing the following keys:
+    - `phoneNumber`: Recipient of airtime. `REQUIRED`.
+    - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`.
+    - `amount`: Amount to charge. `REQUIRED`.
+    - `maxNumRetry`: This is the number of times a request will be retried. It is equivalent to **minutes**. If you set a maxNumRetry of 4 that means your transaction will be retried 4 times consecutively in the next 4 minutes because retries are done after every minute. If you don't set maxNumRetry, the request will **NOT** be retried. `OPTIONAL`.
 
-For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
+  - Example:
+
+  ```javascript
+      airtime.send({
+          recipients: [
+              {
+                  phoneNumber: '+xxxxxxxxxxxx',
+                  currencyCode: 'KES',
+                  amount: 90
+              },
+              {
+                  phoneNumber: '+xxxxxxxxxxxx',
+                  currencyCode: 'KES',
+                  amount: 897
+              }
+          ],
+          maxNumRetry: 1 // will be retried 4 times consecutively in the next 4 minutes
+      });
+  ```
+
+  For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
 
 
 
