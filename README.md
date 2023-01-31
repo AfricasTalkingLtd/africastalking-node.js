@@ -109,7 +109,7 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
                   amount: 897
               }
           ],
-          maxNumRetry: 1 // will be retried 4 times consecutively in the next 4 minutes
+          maxNumRetry: 4 // will be retried 4 times consecutively in the next 4 minutes
       });
   ```
 
