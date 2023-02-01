@@ -3,3 +3,4 @@ coverage/
 example/
 test/
 node_modules/
+.nyc_output/
