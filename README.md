@@ -94,7 +94,7 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
     - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`.
     - `amount`: Amount to charge. `REQUIRED`.
 
-  - `maxNumRetry`: We've added a new **optional** parameter ``maxNumRetry`` to the airtime request body in our API and SDKs. This allows you to specify the maximum number of retries in case of failed airtime deliveries due to various reasons such as telco unavailability. The default retry period is 8 hours and retries occur every 60seconds. For example, setting `maxNumRetry=4` means the transaction will be retried every 60seconds for the next 4 hours.`OPTIONAL`.
+  - `maxNumRetry`: This allows you to specify the maximum number of retries in case of failed airtime deliveries due to various reasons such as telco unavailability. The default retry period is 8 hours and retries occur every 60seconds. For example, setting `maxNumRetry=4` means the transaction will be retried every 60seconds for the next 4 hours.`OPTIONAL`.
 
   - Example:
 
@@ -112,7 +112,7 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
                   amount: 897
               }
           ],
-          maxNumRetry: 4 // will be retried 4 times consecutively in the next 4 minutes
+          maxNumRetry: 3, // Will retry the transaction every 60seconds for the next 3 hours.
       });
   ```
 
