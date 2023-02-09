@@ -70,7 +70,6 @@ describe('Airtime', function(){
                     amount: 10
                 }
             ],
-            maxNumRetry: 10
         };
 
         airtime.send(opts)
