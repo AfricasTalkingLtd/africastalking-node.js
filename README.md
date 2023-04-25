@@ -6,12 +6,12 @@
 
 ## Documentation
 
-Take a look at the [API docs here](http://developers.africastalking.com).
+Take a look at the [API docs here](https://developers.africastalking.com).
 
 
 ## Install
 
-You can install the package from [npm](npmjs.com/package/africastalking) by running: 
+You can install the package from [npm](https://npmjs.com/package/africastalking) by running: 
 
 ```bash
 $ npm install --save africastalking
@@ -81,7 +81,7 @@ All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 
 - `fetchApplicationData()`: Get app information. e.g. balance
 
-For more information, please read [http://docs.africastalking.com/userdata/balance](http://docs.africastalking.com/userdata/balance)
+For more information, please read [https://developers.africastalking.com/docs/application](https://developers.africastalking.com/docs/application)
 
 
 
@@ -116,7 +116,7 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
       });
   ```
 
-  For more information, please read [http://docs.africastalking.com/airtime/sending](http://docs.africastalking.com/airtime/sending)
+  For more information, please read [https://developers.africastalking.com/docs/airtime/sending](https://developers.africastalking.com/docs/airtime/sending)
 
 
 
@@ -193,9 +193,9 @@ For more information, please read [http://docs.africastalking.com/userdata/balan
 
 
 For more information on:
-- SMS service: [http://docs.africastalking.com/sms](http://docs.africastalking.com/sms)
-- How to fetch subscriptions: [http://docs.africastalking.com/subscriptions/fetchsubscriptions](http://docs.africastalking.com/subscriptions/fetchsubscriptions)
-- How to listen for subscription notifications: [http://docs.africastalking.com/subscriptions/callback](http://docs.africastalking.com/subscriptions/callback)
+- SMS service: [https://developers.africastalking.com/docs/sms/overview](https://developers.africastalking.com/docs/sms/overview)
+- How to fetch subscriptions: [https://developers.africastalking.com/docs/sms/premium_subscriptions/fetch](https://developers.africastalking.com/docs/sms/premium_subscriptions/fetch)
+- How to listen for subscription notifications: [https://developers.africastalking.com/docs/sms/notifications](https://developers.africastalking.com/docs/sms/notifications)
 
 
 
@@ -330,8 +330,6 @@ For more information on:
 
 - `fetchWalletBalance()`: Fetch your wallet's balance
 
-For more information, please read [http://docs.africastalking.com/payments](http://docs.africastalking.com/payments)
-
 
 ### `VoiceService`
 
@@ -357,7 +355,7 @@ For more information, please read [http://docs.africastalking.com/payments](http
 - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 > Remember to send back an HTTP 200.
 
-For more information, please read [http://docs.africastalking.com/voice](http://docs.africastalking.com/voice) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
+For more information, please read [https://developers.africastalking.com/docs/voice/overview](https://developers.africastalking.com/docs/voice/overview) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
 
 
@@ -368,7 +366,7 @@ For more information, please read [http://docs.africastalking.com/voice](http://
 
 ### `USSD`
 
-For more information, please read [http://docs.africastalking.com/ussd](http://docs.africastalking.com/ussd)
+For more information, please read [https://developers.africastalking.com/docs/ussd/overview](https://developers.africastalking.com/docs/ussd/overview)
 
 
 
