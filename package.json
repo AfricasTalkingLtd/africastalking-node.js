@@ -39,10 +39,12 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.34.9",
     "express": "^4.17.2",
     "mocha": "^9.2.0",
     "nyc": "^15.1.0",
     "should": "^13.2.3",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "typescript": "^5.0.4"
   }
 }
