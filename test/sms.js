@@ -206,7 +206,8 @@ describe('SMS', function () {
     const count = 1000;
     const numbers = Array(count)
       .fill(0)
-      .map((num, idx) => `+254000${count + idx}`);
+      .map((num, idx) => `+2547000${count + idx}00`.substring(0, 13));
+
     const opts = {
       to: numbers,
       message: 'This is heavy single test',
@@ -219,7 +220,7 @@ describe('SMS', function () {
         done();
       })
       .catch(function (err) {
-        done(error);
+        done(err);
       });
   });
 

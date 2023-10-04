@@ -4,7 +4,7 @@
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha ./test",
+    "test": "nyc mocha ./test --exit --recursive",
     "test-windows": "nyc node_modules/mocha/bin/_mocha ./test"
   },
   "repository": {
