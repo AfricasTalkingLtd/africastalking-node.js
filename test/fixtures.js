@@ -1,8 +1,8 @@
 'use strict';
 
 exports.TEST_ACCOUNT = {
-  apiKey: 'YOUR_API_KEY',
-  username: 'YOUR_USERNAME',
+  apiKey: '',
+  username: 'sandbox',
   format: 'json',
 };
-exports.phoneNumber = '+2547xxxxxxxx';
+exports.phoneNumber = '+2547XXXXXXXX';
