@@ -5,4 +5,4 @@ exports.TEST_ACCOUNT = {
   username: process.env.AT_APP_USERNAME,
   format: 'json',
 };
-exports.phoneNumber = process.env.TEST_PHONENUMBER;g
+exports.phoneNumber = process.env.TEST_PHONENUMBER;
