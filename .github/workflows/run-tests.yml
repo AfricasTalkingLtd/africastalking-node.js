@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  build:
+  TEST-SDK:
     runs-on: ubuntu-latest
     environment: Staging Environment
     steps:
