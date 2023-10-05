@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Staging Environment
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -15,6 +16,10 @@ jobs:
           node-version: 16
       - run: npm i
       - run: npm test
+        env:
+          AT_APP_API_KEY: ${{secrets.AT_APP_API_KEY}}
+          AT_APP_USERNAME: ${{secrets.AT_APP_USERNAME}}
+          TEST_PHONENUMBER: ${{secrets.TEST_PHONENUMBER}}
 
   publish-npm:
     needs: build
