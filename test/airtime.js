@@ -77,8 +77,7 @@ describe('Airtime', function(){
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(err){
-                console.error(err);
+            .catch(function(){
                 done();
             });
 
@@ -107,8 +106,7 @@ describe('Airtime', function(){
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(err){
-                console.error(err);
+            .catch(function(){
                 done();
             });
         });
