@@ -1,10 +1,8 @@
 'use strict';
 
-var should = require('should');
-var validate = require('validate.js');
-var fixtures = require('./fixtures');
+const fixtures = require('./fixtures');
 
-var AfricasTalking, airtime;
+let AfricasTalking, airtime;
 
 describe('Airtime', function(){
 
