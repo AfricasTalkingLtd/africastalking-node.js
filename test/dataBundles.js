@@ -21,7 +21,6 @@ describe('Mobile Data Bundles', function(){
 
         it('#send() must have phoneNumber, quantity, unit and validity', function () {
             const opts =  {
-                username:'test',
                 productName:'Mobile Data',
                 recipients: [ { phoneNumber: fixtures.phoneNumber } ]
             }
@@ -31,7 +30,6 @@ describe('Mobile Data Bundles', function(){
         
         it('#send() rejects because there is at least one invalid phoneNumber', function(){
             const opts = {
-                username:'test',
                 productName:'Mobile Data',
                 recipients: [
                     {
@@ -54,7 +52,6 @@ describe('Mobile Data Bundles', function(){
 
         it('#send() rejects invalid options', function () {
             const opts = {
-                username:'test',
                 productName:'Mobile Data',
                 recipients: [
                     {
@@ -72,7 +69,6 @@ describe('Mobile Data Bundles', function(){
 
     it('sends databundles to one', function (done) {
         const opts = {
-            username:'test',
             productName:'Mobile Data',
             recipients: [
                 {
@@ -97,7 +93,6 @@ describe('Mobile Data Bundles', function(){
 
     it('sends databundles to many', function(done){
         const opts = {
-            username:'test',
             productName:'Mobile Data',
             recipients: [
                 {
