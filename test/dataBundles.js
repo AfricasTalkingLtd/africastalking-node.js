@@ -1,7 +1,5 @@
 'use strict';
 
-const should = require('should');
-const validate = require('validate.js');
 const fixtures = require('./fixtures');
 
 let AfricasTalking, dataBundles;
@@ -91,8 +89,7 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(err){
-                console.error(err);
+            .catch(function(){
                 done();
             });
 
@@ -123,8 +120,7 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(err){
-                console.error(err);
+            .catch(function(){
                 done();
             });
         });
