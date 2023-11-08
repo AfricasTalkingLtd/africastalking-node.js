@@ -82,7 +82,6 @@ describe('Mobile Data Bundles', function(){
 
         mobileData.send(opts)
             .then(function(resp){
-                console.log({respx: resp})
                 resp.should.have.property('responses');
                 done();
             })
@@ -128,12 +127,10 @@ describe('Mobile Data Bundles', function(){
 
         mobileData.findTransaction(opts)
             .then(function(resp){
-                console.log({resp})
                 resp.should.have.property('status');
                 done();
             })
             .catch(function(err){
-                console.log({err})
                 done();
             });
     });
@@ -143,12 +140,10 @@ describe('Mobile Data Bundles', function(){
 
         mobileData.fetchWalletBalance()
             .then(function(resp){
-                console.log({resp1: resp})
                 resp.should.have.property('status');
                 done();
             })
             .catch(function(err){
-                console.log({err})
                 done();
             });
     });
