@@ -159,7 +159,24 @@ For more information, please read [https://developers.africastalking.com/docs/ap
               }
             }
         ]
-    });
+    })
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+
+
+    // Find the details a single mobile data transaction
+    mobileData.findTransaction({
+        transactionId: 'ATPid_SPPxxxxxxxxxxxxxx3800'
+    })
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+
+
+    // Fetch wallet balance  
+    mobileData.fetchWalletBalance()
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+
   ```
 
   For more information, please read [https://developers.africastalking.com/docs/data/sending](https://developers.africastalking.com/docs/data/sending)
