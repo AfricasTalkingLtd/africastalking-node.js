@@ -120,7 +120,7 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
 
 ### `MobileDataService`
-- This service has 3 methods:
+This service has 3 methods:
 
 #### 1. `send({ productName, recipients })`
   - This method allows you to send mobile data to a bunch of phone numbers. 
