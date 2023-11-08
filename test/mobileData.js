@@ -1,6 +1,6 @@
 'use strict';
 
-const fixtures = require('africastalking/test/fixtures');
+const fixtures = require('./fixtures');
 
 let AfricasTalking, mobileData;
 
@@ -9,7 +9,7 @@ describe('Mobile Data Bundles', function(){
     this.timeout(15000);
 
     before(function () {
-        AfricasTalking = require('africastalking/lib')(fixtures.TEST_ACCOUNT);
+        AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
         mobileData = AfricasTalking.MOBILE_DATA;
     });
 
