@@ -128,7 +128,7 @@ describe('Mobile Data Bundles', function(){
         mobileData.findTransaction(opts)
             .then(function(resp){
                 console.log({resp})
-                resp.should.have.property('responses');
+                resp.should.have.property('status');
                 done();
             })
             .catch(function(){
@@ -142,7 +142,7 @@ describe('Mobile Data Bundles', function(){
         mobileData.fetchWalletBalance()
             .then(function(resp){
                 console.log({resp1: resp})
-                resp.should.have.property('responses');
+                resp.should.have.property('balance');
                 done();
             })
             .catch(function(){
