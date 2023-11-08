@@ -121,7 +121,7 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
 ### `MobileDataService`
 
-#### .send({ productName, recipients })
+#### `.send({ productName, recipients })`
   - `mobiledata.send({ productName:'Mobile Data', recipients:[{}] })`: Send mobile data to a bunch of phone numbers. 
   - `productName`: This is the application's product name.
   - `recipients`: An array of objects containing the following keys:
@@ -181,14 +181,35 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
   ```
 
-  For more information, please read [https://developers.africastalking.com/docs/data/sending](https://developers.africastalking.com/docs/data/sending)
+  - For more information, please read [https://developers.africastalking.com/docs/data/sending](https://developers.africastalking.com/docs/data/sending)
+
+#### `findTransaction({ transactionId })`
+  - This method allows you to find the details a single mobile data transaction.
+  - `transactionId`: This is the unique ID (String) that is returned in the response when you send mobile data. `REQUIRED`.
+  - Example:
+
+  ```javascript
+    
+    const credentials = {
+        apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
+        username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
+    };
+
+    const Africastalking = require('africastalking')(credentials);
+
+    const mobileData = Africastalking.MOBILE_DATA;
+
+    // Fetch wallet balance  
+    mobileData.fetchWalletBalance()
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+  ```
+
+  - For more information, please read [https://developers.africastalking.com/docs/data/query/find_transaction](https://developers.africastalking.com/docs/data/query/find_transaction)
 
 
-
-
-#### .findTransaction({ transactionId })
-  - `mobiledata.findTransaction({ transactionId: 'ATPid_SPPxxxxxxxxxxxxxx3800' })`: Find the details a single mobile data transaction 
-  - `transactionId`: This is the unique ID that is returned in the response when you send mobile data. `REQUIRED`.
+#### `fetchWalletBalance()`
+  - This method allows you to fetch your wallet balance.
   - Example:
 
   ```javascript
@@ -210,8 +231,7 @@ For more information, please read [https://developers.africastalking.com/docs/ap
     .catch(err => console.error(err))
   ```
 
-  For more information, please read [https://developers.africastalking.com/docs/data/query/find_transaction](https://developers.africastalking.com/docs/data/query/find_transaction)
-
+    - For more information, please read [https://developers.africastalking.com/docs/data/query/fetch_wallet_balance](https://developers.africastalking.com/docs/data/query/fetch_wallet_balance)
 
 ### `SmsService`
 
