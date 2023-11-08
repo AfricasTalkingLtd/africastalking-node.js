@@ -59,7 +59,7 @@ Initialize the SDK as a requirement by doing `require('africastalking')(options)
 
 - [Airtime Service](#airtimeservice) : `AfricasTalking.AIRTIME`
 
-- [Data Bundles Service](#databundlesservice) : `AfricasTalking.DATABUNDLES`
+- [Mobile Data Service](#mobiledataservice) : `AfricasTalking.MOBILEDATA`
 
 - [SMS Service](#smsservice) : `AfricasTalking.SMS`
 
@@ -119,16 +119,16 @@ For more information, please read [https://developers.africastalking.com/docs/ap
   For more information, please read [https://developers.africastalking.com/docs/airtime/sending](https://developers.africastalking.com/docs/airtime/sending)
 
 
-### `DataBundlesService`
+### `MobileDataService`
 
-  - `databundles.send({ productName:'Mobile Data', recipients:[{}] })`: Send data bundles to a bunch of phone numbers. 
+  - `mobiledata.send({ productName:'Mobile Data', recipients:[{}] })`: Send mobile data to a bunch of phone numbers. 
   - `productName`: This is the application's product name.
   - `recipients`: An array of objects containing the following keys:
-    - `phoneNumber`: Recipient of the data bundles. `REQUIRED`.
-    - `quantity`: a numeric value for the amount of data bundles. It is based on the available data bundles package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `unit`: The units for the specified data quantity, the format is: ``MB`` or ``GB``. It is based on the available data bundles package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `validity`: The period of the data bundle’s validity this can be `Day`, `Week`, `BiWeek`, `Month`, or `Quarterly`. It is based on the available data bundles package [(see "Validity" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `isPromoBundle`: This is an optional field that can be either `true` or `false` depending on whether the data bundles package is [in the promotional bundles table of mobile data pricing](https://africastalking.com/pricing). `OPTIONAL`.
+    - `phoneNumber`: Recipient of the mobile data. `REQUIRED`.
+    - `quantity`: a numeric value for the amount of mobile data. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+    - `unit`: The units for the specified data quantity, the format is: ``MB`` or ``GB``. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+    - `validity`: The period of the data bundle’s validity this can be `Day`, `Week`, `BiWeek`, `Month`, or `Quarterly`. It is based on the available mobile data package [(see "Validity" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+    - `isPromoBundle`: This is an optional field that can be either `true` or `false` depending on whether the mobile data package is [in the promotional bundles table of mobile data pricing](https://africastalking.com/pricing). `OPTIONAL`.
     - `metadata`:  A JSON object of any metadata that you would like us to associate with the request. `OPTIONAL`.
 
   - Example:
@@ -142,9 +142,9 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
     const Africastalking = require('africastalking')(credentials);
 
-    const dataBundles = Africastalking.DATABUNDLES;
+    const mobileData = Africastalking.MOBILE_DATA;
 
-    dataBundles.send({
+    mobileData.send({
         productName: 'Mobile Data',
         recipients: [
             {
