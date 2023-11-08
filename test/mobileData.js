@@ -82,10 +82,11 @@ describe('Mobile Data Bundles', function(){
 
         mobileData.send(opts)
             .then(function(resp){
+                console.log({respx: resp})
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(){
+            .catch(function(err){
                 done();
             });
 
