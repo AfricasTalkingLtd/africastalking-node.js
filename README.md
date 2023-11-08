@@ -217,7 +217,7 @@ For more information, please read [https://developers.africastalking.com/docs/ap
     .catch(err => console.error(err))
   ```
 
-    - For more information, please read [https://developers.africastalking.com/docs/data/query/fetch_wallet_balance](https://developers.africastalking.com/docs/data/query/fetch_wallet_balance)
+  - For more information, please read [https://developers.africastalking.com/docs/data/query/fetch_wallet_balance](https://developers.africastalking.com/docs/data/query/fetch_wallet_balance)
 
 ### `SmsService`
 
