@@ -130,7 +130,7 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('status');
                 done();
             })
-            .catch(function(err){
+            .catch(function(){
                 done();
             });
     });
@@ -143,7 +143,7 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('status');
                 done();
             })
-            .catch(function(err){
+            .catch(function(){
                 done();
             });
     });
