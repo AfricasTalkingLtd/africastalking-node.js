@@ -86,8 +86,7 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('responses');
                 done();
             })
-            .catch(function(err){
-                console.log({err})
+            .catch(function(){
                 done();
             });
 
@@ -133,7 +132,8 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('status');
                 done();
             })
-            .catch(function(){
+            .catch(function(err){
+                console.log({err})
                 done();
             });
     });
@@ -147,7 +147,8 @@ describe('Mobile Data Bundles', function(){
                 resp.should.have.property('balance');
                 done();
             })
-            .catch(function(){
+            .catch(function(err){
+                console.log({err})
                 done();
             });
     });
