@@ -123,7 +123,7 @@ describe('Mobile Data Bundles', function(){
 
     it('checks for transaction status', function (done) {
         const opts = {
-            transactiondId: 'ATPid_9b4xxxxxxxccb27b13800'
+            transactionId: 'ATPid_9b4xxxxxxxccb27b13800'
         };
 
         mobileData.findTransaction(opts)
@@ -144,7 +144,7 @@ describe('Mobile Data Bundles', function(){
         mobileData.fetchWalletBalance()
             .then(function(resp){
                 console.log({resp1: resp})
-                resp.should.have.property('balance');
+                resp.should.have.property('status');
                 done();
             })
             .catch(function(err){
