@@ -120,9 +120,10 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
 
 ### `MobileDataService`
+- This service has 3 methods:
 
-#### `.send({ productName, recipients })`
-  - `mobiledata.send({ productName:'Mobile Data', recipients:[{}] })`: Send mobile data to a bunch of phone numbers. 
+#### 1. `send({ productName, recipients })`
+  - This method allows you to send mobile data to a bunch of phone numbers. 
   - `productName`: This is the application's product name.
   - `recipients`: An array of objects containing the following keys:
     - `phoneNumber`: Recipient of the mobile data. `REQUIRED`.
@@ -164,26 +165,11 @@ For more information, please read [https://developers.africastalking.com/docs/ap
     })
     .then(res => console.log(res))
     .catch(err => console.error(err))
-
-
-    // Find the details a single mobile data transaction
-    mobileData.findTransaction({
-        transactionId: 'ATPid_SPPxxxxxxxxxxxxxx3800'
-    })
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-
-
-    // Fetch wallet balance  
-    mobileData.fetchWalletBalance()
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-
   ```
 
   - For more information, please read [https://developers.africastalking.com/docs/data/sending](https://developers.africastalking.com/docs/data/sending)
 
-#### `findTransaction({ transactionId })`
+#### 2. `findTransaction({ transactionId })`
   - This method allows you to find the details a single mobile data transaction.
   - `transactionId`: This is the unique ID (String) that is returned in the response when you send mobile data. `REQUIRED`.
   - Example:
@@ -208,7 +194,7 @@ For more information, please read [https://developers.africastalking.com/docs/ap
   - For more information, please read [https://developers.africastalking.com/docs/data/query/find_transaction](https://developers.africastalking.com/docs/data/query/find_transaction)
 
 
-#### `fetchWalletBalance()`
+#### 3. `fetchWalletBalance()`
   - This method allows you to fetch your wallet balance.
   - Example:
 
