@@ -87,6 +87,7 @@ describe('Mobile Data Bundles', function(){
                 done();
             })
             .catch(function(err){
+                console.log({err})
                 done();
             });
 
