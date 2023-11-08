@@ -119,4 +119,34 @@ describe('Mobile Data Bundles', function(){
                 done();
             });
         });
+
+    it('checks for transaction status', function (done) {
+        const opts = {
+            transactiondId: 'ATPid_9b4xxxxxxxccb27b13800'
+        };
+
+        mobileData.findTransaction(opts)
+            .then(function(resp){
+                console.log({resp})
+                resp.should.have.property('responses');
+                done();
+            })
+            .catch(function(){
+                done();
+            });
+    });
+
+
+    it('checks for balance left', function (done) {
+
+        mobileData.fetchWalletBalance()
+            .then(function(resp){
+                console.log({resp1: resp})
+                resp.should.have.property('responses');
+                done();
+            })
+            .catch(function(){
+                done();
+            });
+    });
 });
