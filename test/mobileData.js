@@ -37,7 +37,6 @@ describe('Mobile Data Bundles', function(){
                         quantity: 50,
                         unit: 'MB',
                         validity: 'Day',
-                        isPromoBundle: false,
                         metadata: {
                             "first_name": "Daggie",
                             "last_name": "Blanqx"

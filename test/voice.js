@@ -4,10 +4,14 @@ const should   = require('should');
 const validate = require('validate.js');
 const fixtures = require('./fixtures');
 
-const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
-const voice = AfricasTalking.VOICE;
+let AfricasTalking, voice;
 
 describe('Voice', function(){
+
+    before(function () {
+        AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
+        voice = AfricasTalking.VOICE;
+      });
 
     describe('validation', function(){
         it('#call rejects because of atleast one invalid phone number', ()=>{

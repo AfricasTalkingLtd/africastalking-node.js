@@ -55,19 +55,20 @@ See [example](example/) for more usage examples.
 
 Initialize the SDK as a requirement by doing `require('africastalking')(options)`. After initialization, you can get instances of offered services as follows:
 
-- [Application Service](#applicationservice) : `AfricasTalking.APPLICATION`
+- [SMS Service](#sms) : `AfricasTalking.SMS`
 
-- [Airtime Service](#airtimeservice) : `AfricasTalking.AIRTIME`
+- [Airtime Service](#airtime) : `AfricasTalking.AIRTIME`
 
-- [Mobile Data Service](#mobiledataservice) : `AfricasTalking.MOBILEDATA`
+- [Mobile Data Service](#mobiledata) : `AfricasTalking.MOBILEDATA`
 
-- [SMS Service](#smsservice) : `AfricasTalking.SMS`
-
-- [Voice Service](#voiceservice) : `AfricasTalking.VOICE`
-
-- [Token Service](#tokenservice) : `AfricasTalking.TOKEN`
+- [Voice Service](#voice) : `AfricasTalking.VOICE`
 
 - [USSD](#ussd) : USSD API
+
+- [Token Service](#token) : `AfricasTalking.TOKEN`
+
+- [Application Service](#application) : `AfricasTalking.APPLICATION`
+
 
 ## Services
 
@@ -76,206 +77,26 @@ All methods are asynchronous
 All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 
 
+### `SMS`
 
-### `ApplicationService`
+- `send({ to, from, message, enqueue })`: Send an SMS to one or more phone numbers
 
-- `fetchApplicationData()`: Get app information. e.g. balance
-
-For more information, please read [https://developers.africastalking.com/docs/application](https://developers.africastalking.com/docs/application)
-
-
-
-### `AirtimeService`
-
-  - `airtime.send({ recipients })`: Send airtime to a bunch of phone numbers. 
-
-  - `recipients`: An array of objects containing the following keys:
-    - `phoneNumber`: Recipient of airtime. `REQUIRED`.
-    - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`.
-    - `amount`: Amount to charge. `REQUIRED`.
-
-  - `maxNumRetry`: This allows you to specify the maximum number of retries in case of failed airtime deliveries due to various reasons such as telco unavailability. The default retry period is 8 hours and retries occur every 60seconds. For example, setting `maxNumRetry=4` means the transaction will be retried every 60seconds for the next 4 hours.`OPTIONAL`.
-
-  - Example:
-
-  ```javascript
-      airtime.send({
-          recipients: [
-              {
-                  phoneNumber: '+xxxxxxxxxxxx',
-                  currencyCode: 'KES',
-                  amount: 90
-              },
-              {
-                  phoneNumber: '+xxxxxxxxxxxx',
-                  currencyCode: 'KES',
-                  amount: 897
-              }
-          ],
-          maxNumRetry: 3, // Will retry the transaction every 60seconds for the next 3 hours.
-      });
-  ```
-
-  For more information, please read [https://developers.africastalking.com/docs/airtime/sending](https://developers.africastalking.com/docs/airtime/sending)
-
-
-### `MobileDataService`
-This service has 3 methods:
-
-#### 1. `send({ productName, recipients })`
-  - This method allows you to send mobile data to a bunch of phone numbers. 
-  - `productName`: This is the application's product name.
-  - `recipients`: An array of objects containing the following keys:
-    - `phoneNumber`: Recipient of the mobile data. `REQUIRED`.
-    - `quantity`: a numeric value for the amount of mobile data. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `unit`: The units for the specified data quantity, the format is: ``MB`` or ``GB``. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `validity`: The period of the data bundle’s validity this can be `Day`, `Week`, `BiWeek`, `Month`, or `Quarterly`. It is based on the available mobile data package [(see "Validity" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-    - `isPromoBundle`: This is an optional field that can be either `true` or `false` depending on whether the mobile data package is [in the promotional bundles table of mobile data pricing](https://africastalking.com/pricing). `OPTIONAL`.
-    - `metadata`:  A JSON object of any metadata that you would like us to associate with the request. `OPTIONAL`.
-
-  - Example:
-
-  ```javascript
-    
-    const credentials = {
-        apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
-        username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
-    };
-
-    const Africastalking = require('africastalking')(credentials);
-
-    const mobileData = Africastalking.MOBILE_DATA;
-
-    // Send mobile data to a bunch of phone numbers
-    mobileData.send({
-        productName: 'Mobile Data',
-        recipients: [
-            {
-              phoneNumber: '+254705xxxxx8',
-              quantity: 50,
-              unit: 'MB',
-              validity: 'Day',
-              isPromoBundle: false,
-              metadata: {
-                first_name: 'Daggie',
-                last_name: 'Blanqx'
-              }
-            }
-        ]
-    })
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-  ```
-
-  - For more information, please read [https://developers.africastalking.com/docs/data/sending](https://developers.africastalking.com/docs/data/sending)
-
-#### 2. `findTransaction({ transactionId })`
-  - This method allows you to find the details a single mobile data transaction.
-  - `transactionId`: This is the unique ID (String) that is returned in the response when you send mobile data. `REQUIRED`.
-  - Example:
-
-  ```javascript
-    
-    const credentials = {
-        apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
-        username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
-    };
-
-    const Africastalking = require('africastalking')(credentials);
-
-    const mobileData = Africastalking.MOBILE_DATA;
-
-    // Fetch wallet balance  
-    mobileData.fetchWalletBalance()
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-  ```
-
-  - For more information, please read [https://developers.africastalking.com/docs/data/query/find_transaction](https://developers.africastalking.com/docs/data/query/find_transaction)
-
-
-#### 3. `fetchWalletBalance()`
-  - This method allows you to fetch your wallet balance.
-  - Example:
-
-  ```javascript
-    
-    const credentials = {
-        apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
-        username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
-    };
-
-    const Africastalking = require('africastalking')(credentials);
-
-    const mobileData = Africastalking.MOBILE_DATA;
-
-    // Find the details a single mobile data transaction
-    mobileData.findTransaction({
-        transactionId: 'ATPid_SPPxxxxxxxxxxxxxx3800'
-    })
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-  ```
-
-  - For more information, please read [https://developers.africastalking.com/docs/data/query/fetch_wallet_balance](https://developers.africastalking.com/docs/data/query/fetch_wallet_balance)
-
-### `SmsService`
-
-- Send a message to one recipient.
-  ```javascript
-      send({
-        to: '+xxxxxxxxxxxx',
-        from: 'XYZ LTD',
-        message: 'Hello world',
-        enqueue: true,
-      });
-    ```
-
-- Send a message to multiple recipients.
-  ```javascript
-      send({
-        to: ['+xxxxxxxxxxxx','+yyyyyyyyyyyy','+zzzzzzzzzzzz'],
-        from: 'XYZ LTD',
-        message: 'Hello world',
-        enqueue: true,
-      });
-    ```
-
-- Send different messages to different recipients.
-  ```javascript
-      send([
-        {
-          to: ['+aaaaaaaaaaaa','+bbbbbbbbbbbb','+cccccccccccc'],
-          from: 'XYZ LTD',
-          message: 'Congratulations team! You have won it!',
-          enqueue: true,
-        },
-        {
-          to: '+xxxxxxxxxxxx',
-          from: 'XYZ LTD',
-          message: 'Congratulations coach! Your team has won!',
-          enqueue: true,
-        }
-      ]);
-    ```
+- `send([{ to, from, message, enqueue }])`: Send multiple SMSes to one or more phone numbers
  
-  - `to`: Recipient(s) phone number. `REQUIRED`
+  - `to`: Recipient(s) phone number. Can either a single phone number or an array of phone numbers `REQUIRED`
   - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account
   - `message`: SMS content. `REQUIRED`
   - `enqueue`: Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
 
 - `sendPremium({ to, from, message, enqueue, keyword, linkId, retryDurationInHours })`: Send premium SMS
 
-  - `send()` parameters plus:
   - `keyword`: You premium product keyword
   - `linkId`: We forward the `linkId` to your application when the user send a message to your service
   - `retryDurationInHours`: It specifies the number of hours your subscription message should be retried in case it's not delivered to the subscriber
 
-
 - `fetchMessages({ lastReceivedId })`: Manually retrieve your messages
 
   - `lastReceivedId`: "This is the id of the message that you last processed". Defaults to `0`
-
 
 - `fetchSubscription({ shortCode, keyword, lastReceivedId })`: Fetch your premium subscription data
 
@@ -297,21 +118,56 @@ For more information on:
 - How to listen for subscription notifications: [https://developers.africastalking.com/docs/sms/notifications](https://developers.africastalking.com/docs/sms/notifications)
 
 
-### `VoiceService`
+### `Airtime`
 
-- `voice.call({ callFrom, callTo })`: Initiate a phone call
+  - `send({ recipients })`: Send airtime to a bunch of phone numbers. 
+
+    - `recipients`: An array of objects containing the following keys:
+      - `phoneNumber`: Recipient of airtime. `REQUIRED`.
+      - `currencyCode`: 3-digit ISO format currency code. `REQUIRED`.
+      - `amount`: Amount to charge. `REQUIRED`.
+
+    - `maxNumRetry`: This allows you to specify the maximum number of retries in case of failed airtime deliveries due to various reasons such as telco unavailability. The default retry period is 8 hours and retries occur every 60seconds. For example, setting `maxNumRetry=4` means the transaction will be retried every 60seconds for the next 4 hours.`OPTIONAL`.
+
+
+  For more information, please read [https://developers.africastalking.com/docs/airtime/sending](https://developers.africastalking.com/docs/airtime/sending)
+
+
+### `MobileData`
+
+- `send({ productName, recipients })`
+
+    - `productName`: This is the application's product name.
+    - `recipients`: An array of objects containing the following keys:
+      - `phoneNumber`: Recipient of the mobile data. `REQUIRED`.
+      - `quantity`: a numeric value for the amount of mobile data. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+      - `unit`: The units for the specified data quantity, the format is: ``MB`` or ``GB``. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+      - `validity`: The period of the data bundle’s validity this can be `Day`, `Week`, `BiWeek`, `Month`, or `Quarterly`. It is based on the available mobile data package [(see "Validity" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
+      - `metadata`:  A JSON object of any metadata that you would like us to associate with the request. `OPTIONAL`.
+
+
+- `findTransaction({ transactionId })`:  Find a mobile data transaction
+
+- `fetchWalletBalance()`: Fetch a mobile data product balance
+
+For more information, please read the [https://developers.africastalking.com/docs/data/overview](https://developers.africastalking.com/docs/data/overview)
+
+
+### `Voice`
+
+- `call({ callFrom, callTo })`: Initiate a phone call
 
     - `callFrom`: Your Africa's Talking issued virtual phone number. `REQUIRED`
     - `callTo`: Comma-separated string of phone numbers to call. `REQUIRED`
     - `clientRequestId`: Additional information that can be used to tag the call in your callback URL.
 
 
-- `voice.fetchQuedCalls({ phoneNumber })`: Get queued calls
+- `fetchQuedCalls({ phoneNumber })`: Get queued calls
 
     - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
 
 
-- `voice.uploadMediaFile({ phoneNumber, url })`: Upload voice media file
+- `uploadMediaFile({ phoneNumber, url })`: Upload voice media file
 
     - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
     - `url`: URL to your media file. `REQUIRED`
@@ -323,17 +179,21 @@ For more information on:
 
 For more information, please read [https://developers.africastalking.com/docs/voice/overview](https://developers.africastalking.com/docs/voice/overview) and [issue #15](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues/15)
 
-
-
-### `TokenService`
-
-- `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
-
-
 ### `USSD`
 
 For more information, please read [https://developers.africastalking.com/docs/ussd/overview](https://developers.africastalking.com/docs/ussd/overview)
 
+
+### `Token`
+
+- `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
+
+
+### `Application`
+
+- `fetchApplicationData()`: Get app information. e.g. balance
+
+For more information, please read [https://developers.africastalking.com/docs/application](https://developers.africastalking.com/docs/application)
 
 
 ## Development
