@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "@hapi/joi": "^16.1.7",
     "axios": "^1.2.6",
     "body-parser": "^1.19.1",
+    "dotenv": "^16.3.1",
     "google-libphonenumber": "^3.2.33",
     "lodash": "^4.17.21",
     "querystring": "^0.2.0",
