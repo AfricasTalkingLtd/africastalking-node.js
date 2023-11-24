@@ -1,5 +1,4 @@
 'use strict';
-
 const fixtures = require('./fixtures');
 
 let AfricasTalking, airtime;
@@ -73,6 +72,22 @@ describe('Airtime', function(){
         airtime.send(opts)
             .then(function(resp){
                 resp.should.have.property('responses');
+                done();
+            })
+            .catch(function(){
+                done();
+            });
+
+    });
+
+    it('should find airtime transaction status', function (done) {
+        const opts = {
+            transactionId: 'ATPid_9b4xxxxxxxccb27b13225',
+        };
+
+        airtime.findTransactionStatus(opts)
+            .then(function(resp){
+                resp.should.have.property('status');
                 done();
             })
             .catch(function(){
