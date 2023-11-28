@@ -81,11 +81,8 @@ describe('Airtime', function(){
     });
 
     it('should find airtime transaction status', function (done) {
-        const opts = {
-            transactionId: 'ATPid_9b4xxxxxxxccb27b13225',
-        };
-
-        airtime.findTransactionStatus(opts)
+        const transactionId = 'ATPid_9b4xxxxxxxccb27b13225';
+        airtime.findTransactionStatus(transactionId)
             .then(function(resp){
                 resp.should.have.property('status');
                 done();
@@ -93,7 +90,6 @@ describe('Airtime', function(){
             .catch(function(){
                 done();
             });
-
     });
 
     it('sends airtime to many', function(done){
