@@ -129,6 +129,10 @@ For more information on:
 
     - `maxNumRetry`: This allows you to specify the maximum number of retries in case of failed airtime deliveries due to various reasons such as telco unavailability. The default retry period is 8 hours and retries occur every 60seconds. For example, setting `maxNumRetry=4` means the transaction will be retried every 60seconds for the next 4 hours.`OPTIONAL`.
 
+  - `findTransactionStatus(transactionId)`: Find the status of a given airtime transaction.
+
+    - `transactionId`: ID of the transaction you would like to find.
+
 
   For more information, please read [https://developers.africastalking.com/docs/airtime/sending](https://developers.africastalking.com/docs/airtime/sending)
 
