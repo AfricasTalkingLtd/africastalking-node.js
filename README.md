@@ -28,10 +28,10 @@ const credentials = {
     apiKey: 'YOUR_API_KEY',         // use your sandbox app API key for development in the test environment
     username: 'YOUR_USERNAME',      // use 'sandbox' for development in the test environment
 };
-const Africastalking = require('africastalking')(credentials);
+const AfricasTalking = require('africastalking')(credentials);
 
 // Initialize a service e.g. SMS
-const sms = Africastalking.SMS
+const sms = AfricasTalking.SMS
 
 // Use the service
 const options = {
@@ -59,7 +59,7 @@ Initialize the SDK as a requirement by doing `require('africastalking')(options)
 
 - [Airtime Service](#airtime) : `AfricasTalking.AIRTIME`
 
-- [Mobile Data Service](#mobiledata) : `AfricasTalking.MOBILEDATA`
+- [Mobile Data Service](#mobiledata) : `AfricasTalking.MOBILE_DATA`
 
 - [Voice Service](#voice) : `AfricasTalking.VOICE`
 
