@@ -67,6 +67,8 @@ Initialize the SDK as a requirement by doing `require('africastalking')(options)
 
 - [Token Service](#token) : `AfricasTalking.TOKEN`
 
+- [Insights](#insights) : `AfricasTalking.INSIGHTS`
+
 - [Application Service](#application) : `AfricasTalking.APPLICATION`
 
 
@@ -191,6 +193,10 @@ For more information, please read [https://developers.africastalking.com/docs/us
 ### `Token`
 
 - `generateAuthToken()`: Generate an auth token to use for authentication instead of an API key.
+
+### `Insights`
+
+- `checkSimSwapState()`: Check the sim swap state of a given (set of ) phone number(s).
 
 
 ### `Application`
