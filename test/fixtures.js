@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 
 exports.TEST_ACCOUNT = {
   apiKey: process.env.AT_APP_API_KEY,

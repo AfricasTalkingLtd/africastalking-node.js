@@ -196,7 +196,7 @@ For more information, please read [https://developers.africastalking.com/docs/us
 
 ### `Insights`
 
-- `checkSimSwapState()`: Check the sim swap state of a given (set of ) phone number(s).
+- `checkSimSwapState([phoneNumbers])`: Check the sim swap state of a given [set of ] phone number(s).
 
 
 ### `Application`
@@ -212,6 +212,7 @@ Run all tests:
 
 ```bash
 $ npm install
+$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
 $ npm test
 ```
 
@@ -219,6 +220,7 @@ or on Windows...
 
 ```bash
 $ npm install
+$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
 $ npm run test-windows
 ```
 
