@@ -1,4 +1,4 @@
-name: Publish to NPM
+name: Publish
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
           AT_APP_USERNAME: ${{secrets.AT_APP_USERNAME}}
           TEST_PHONENUMBER: ${{secrets.TEST_PHONENUMBER}}
 
-  publish-npm:
+  publish:
     needs: build
     runs-on: ubuntu-latest
     steps:

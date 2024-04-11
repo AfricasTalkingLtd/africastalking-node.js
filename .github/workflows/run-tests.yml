@@ -1,10 +1,10 @@
-name: Test SDK
+name: Test
 
 on:
   push:
 
 jobs:
-  TEST-SDK:
+  test:
     runs-on: ubuntu-latest
     environment: Staging Environment
     steps:
