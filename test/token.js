@@ -1,27 +1,23 @@
-'use strict';
+'use strict'
 
-var should = require('should');
-var validate = require('validate.js');
-var fixtures = require('./fixtures');
+const validate = require('validate.js')
+const fixtures = require('./fixtures')
 
 describe('Token', function () {
-    this.timeout(15000);
+  this.timeout(15000)
 
-    it('generates auth token', function (done) {
+  it('generates auth token', function (done) {
+    const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
-        var AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
+    const p = AfricasTalking.TOKEN.generateAuthToken()
+    validate.isPromise(p).should.be.exactly(true)
 
-        var p = AfricasTalking.TOKEN.generateAuthToken();
-        validate.isPromise(p).should.be.exactly(true);
-
-        p.then(function (resp) {
-            resp.should.have.property('token');
-            resp.should.have.property('lifetimeInSeconds');
-            done();
-
-        }).catch(function (error) {
-            done(new Error(error));
-        });
-
-    });
-});
+    p.then(function (resp) {
+      resp.should.have.property('token')
+      resp.should.have.property('lifetimeInSeconds')
+      done()
+    }).catch(function (error) {
+      done(new Error(error))
+    })
+  })
+})
