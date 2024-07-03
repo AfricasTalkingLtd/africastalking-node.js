@@ -37,3 +37,4 @@ test/fixtures.local.js
 package-lock.json
 
 .env
+tmp/

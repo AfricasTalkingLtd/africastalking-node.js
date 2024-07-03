@@ -1,45 +1,38 @@
-'use strict';
+'use strict'
 
-var should = require('should');
-var validate = require('validate.js');
-var fixtures = require('./fixtures');
+const validate = require('validate.js')
+const fixtures = require('./fixtures')
 
 describe('Application', function () {
-    this.timeout(15000);
+  this.timeout(15000)
 
-    it('fetched application data', function (done) {
+  it('fetched application data', function (done) {
+    const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
-        var AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
+    const p = AfricasTalking.APPLICATION.fetchApplicationData()
+    validate.isPromise(p).should.be.exactly(true)
 
-        var p = AfricasTalking.APPLICATION.fetchApplicationData();
-        validate.isPromise(p).should.be.exactly(true);
+    p.then(function (resp) {
+      resp.should.have.property('UserData')
+      done()
+    }).catch(function (error) {
+      console.log(error)
+      done()
+    })
+  })
 
-        p.then(function (resp) {
-            resp.should.have.property('UserData');
-            done();
+  it('fetched account info', function (done) {
+    const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
-        }).catch(function (error) {
-            console.log(error);
-            done();
-        });
+    const p = AfricasTalking.ACCOUNT.fetchAccount()
+    validate.isPromise(p).should.be.exactly(true)
 
-    });
-
-    it('fetched account info', function (done) {
-
-        var AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT);
-
-        var p = AfricasTalking.ACCOUNT.fetchAccount();
-        validate.isPromise(p).should.be.exactly(true);
-
-        p.then(function (resp) {
-            resp.should.have.property('UserData');
-            done();
-
-        }).catch(function (error) {
-            console.log(error);
-            done();
-        });
-
-    });
-});
+    p.then(function (resp) {
+      resp.should.have.property('UserData')
+      done()
+    }).catch(function (error) {
+      console.log(error)
+      done()
+    })
+  })
+})

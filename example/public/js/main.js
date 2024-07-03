@@ -1,149 +1,143 @@
 $(function () {
+  function log (message) {
+    $('#response').text(message)
+    $('pre span').each(function (i, block) {
+      hljs.highlightBlock(block)
+    })
+  }
 
-    function log(message) {
-        $("#response").text(message);
-        $('pre span').each(function (i, block) {
-            hljs.highlightBlock(block);
-        });
+  $('#sendSms').click(() => {
+    const to = $('#phone').val()
+    if (!to) {
+      log(JSON.stringify({ error: 'Enter a phone number' }, null, 2))
+      return
     }
 
-    $("#sendSms").click(() => {
-        let to = $("#phone").val();
-        if ( !to) {
-            log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
-            return;
-        }
+    log('Sending SMS...')
 
-        log("Sending SMS...");
+    $.ajax({
+      method: 'POST',
+      url: '/sms/send',
+      data: {
+        to,
+        message: 'Im a lumberjack, I sleep all day and I code all night'
+      }
+    })
+      .done(function (msg) {
+        console.log('message : ', msg)
+        log(JSON.stringify(msg, null, 2))
+      })
+      .fail(function (jqXHR, textStatus) {
+        console.log('jqXHR', jqXHR)
+        log(textStatus)
+      })
+  })
 
-        $.ajax({
-            method: "POST",
-            url: "/sms/send",
-            data: {
-                to,
-                message: "Im a lumberjack, I sleep all day and I code all night"
-            },
-        })
-        .done(function (msg) {
-            console.log("message : ", msg);
-            log(JSON.stringify(msg, null, 2));
-        })
-        .fail(function (jqXHR, textStatus) {
-            console.log("jqXHR", jqXHR);
-            log(textStatus);
-        });
+  $('#airtime').click(function () {
+    const to = $('#phone').val()
+    const inputAmount = $('#amount').val()
+    if (!to) {
+      log(JSON.stringify({ error: 'Enter a phone number' }, null, 2))
+      return
+    }
 
-    });
+    if (!inputAmount) {
+      log(JSON.stringify({ error: 'Enter an amount (with currency) e,g, KES 334' }, null, 2))
+      return
+    }
 
-    $("#airtime").click(function () {
-        const to = $("#phone").val();
-        const inputAmount = $("#amount").val();
-        if (!to) {
-            log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
-            return;
-        }
+    let currencyCode, amount;
+    [currencyCode, amount] = inputAmount.split(' ')
 
-        if (!inputAmount) {
-            log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
-            return;
-        }
+    log('Sending airtime.....')
 
-        let currencyCode, amount;
-        [currencyCode, amount] = inputAmount.split(" ");
+    $.ajax({
+      method: 'POST',
+      url: '/airtime/send',
+      data: {
+        to,
+        currencyCode,
+        amount
+      }
+    })
+      .done(function (msg) {
+        log(JSON.stringify(msg, null, 2))
+      })
+      .fail(function (jqXHR, textStatus) {
+        log(textStatus)
+      })
+  })
 
-        log("Sending airtime.....");
+  $('#mobileCheckout').click(function () {
+    const phoneNumber = $('#phone').val()
+    const inputAmount = $('#mobileCheckoutAmount').val()
+    const productName = 'TestProduct'
 
-        $.ajax({
-            method: "POST",
-            url: "/airtime/send",
-            data: {
-                to,
-                currencyCode,
-                amount
-            }
-        })
-        .done(function (msg) {
-            log(JSON.stringify(msg, null, 2));
-        })
-        .fail(function (jqXHR, textStatus) {
-            log(textStatus);
-        });
+    if (!phoneNumber) {
+      log(JSON.stringify({ error: 'Enter a phone number' }, null, 2))
+      return
+    }
 
-    });
+    if (!inputAmount) {
+      log(JSON.stringify({ error: 'Enter an amount (with currency) e,g, KES 334' }, null, 2))
+      return
+    }
 
-    $("#mobileCheckout").click(function () {
-        const phoneNumber = $("#phone").val();
-        const inputAmount = $("#mobileCheckoutAmount").val();
-        const productName = "TestProduct";
+    let currencyCode, amount;
+    [currencyCode, amount] = inputAmount.split(' ')
 
-        if (!phoneNumber) {
-            log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
-            return;
-        }
+    log('Sending...')
 
-        if (!inputAmount) {
-            log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
-            return;
-        }
+    $.ajax({
+      method: 'POST',
+      url: '/payments/mobile-checkout',
+      data: {
+        phoneNumber,
+        currencyCode,
+        amount,
+        productName
+      }
+    })
+      .done(function (msg) {
+        log(JSON.stringify(msg, null, 2))
+      })
+      .fail(function (jqXHR, textStatus) {
+        log(textStatus)
+      })
+  })
 
-        let currencyCode, amount;
-        [currencyCode, amount] = inputAmount.split(" ");
+  $('#mobileB2C').click(function () {
+    const phoneNumber = $('#phone').val()
+    const inputAmount = $('#mobileB2CAmount').val()
+    if (!phoneNumber) {
+      log(JSON.stringify({ error: 'Enter a phone number' }, null, 2))
+      return
+    }
 
-        log("Sending...");
+    if (!inputAmount) {
+      log(JSON.stringify({ error: 'Enter an amount (with currency) e,g, KES 334' }, null, 2))
+      return
+    }
 
-        $.ajax({
-            method: "POST",
-            url: "/payments/mobile-checkout",
-            data: {
-                phoneNumber,
-                currencyCode,
-                amount,
-                productName
-            }
-        })
-        .done(function (msg) {
-            log(JSON.stringify(msg, null, 2));
-        })
-        .fail(function (jqXHR, textStatus) {
-            log(textStatus);
-        });
+    let currencyCode, amount;
+    [currencyCode, amount] = inputAmount.split(' ')
 
-    });
+    log('Sending money...')
 
-    $("#mobileB2C").click(function () {
-        const phoneNumber = $("#phone").val();
-        const inputAmount = $("#mobileB2CAmount").val();
-        if (!phoneNumber) {
-            log(JSON.stringify({ error: "Enter a phone number" }, null, 2));
-            return;
-        }
-
-        if (!inputAmount) {
-            log(JSON.stringify({ error: "Enter an amount (with currency) e,g, KES 334" }, null, 2));
-            return;
-        }
-
-        let currencyCode, amount;
-        [currencyCode, amount] = inputAmount.split(" ");
-
-        log("Sending money...");
-
-        $.ajax({
-            method: "POST",
-            url: "/payments/mobile-b2c",
-            data: {
-                phoneNumber,
-                currencyCode,
-                amount
-            }
-        })
-        .done(function (msg) {
-            log(JSON.stringify(msg, null, 2));
-        })
-        .fail(function (jqXHR, textStatus) {
-            log(textStatus);
-        });
-
-    });
-
-});
+    $.ajax({
+      method: 'POST',
+      url: '/payments/mobile-b2c',
+      data: {
+        phoneNumber,
+        currencyCode,
+        amount
+      }
+    })
+      .done(function (msg) {
+        log(JSON.stringify(msg, null, 2))
+      })
+      .fail(function (jqXHR, textStatus) {
+        log(textStatus)
+      })
+  })
+})

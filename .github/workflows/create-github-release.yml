@@ -1,11 +1,11 @@
-name: Create Github Release
+name: Release
 
 on:
   push:
     tags:
       - '*'
 jobs:
-  create_release:
+  release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
