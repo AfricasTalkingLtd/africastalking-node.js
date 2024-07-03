@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha ./test --exit --recursive",
-    "test-windows": "nyc node_modules/mocha/bin/_mocha ./test"
+    "test-windows": "nyc node_modules/mocha/bin/_mocha ./test",
+    "lint": "standard --fix",
+    "pretest": "standard"
   },
+  "pre-commit": [
+    "test"
+],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AfricasTalkingLtd/africastalking-node.js"
