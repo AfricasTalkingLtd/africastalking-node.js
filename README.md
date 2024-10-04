@@ -92,9 +92,15 @@ All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 
 - `sendPremium({ to, from, message, enqueue, keyword, linkId, retryDurationInHours })`: Send premium SMS
 
-  - `keyword`: You premium product keyword
+  - `keyword`: Your premium product keyword
   - `linkId`: We forward the `linkId` to your application when the user send a message to your service
   - `retryDurationInHours`: It specifies the number of hours your subscription message should be retried in case it's not delivered to the subscriber
+
+- `sendToMaskedNumber({ message, telco, senderId, maskedNumber })`: Send SMS to hashed number
+
+  - `telco`: The telco provider
+  - `senderId`: Your sender id
+  - `maskedNumber`: The hashed number provided by the telco
 
 - `fetchMessages({ lastReceivedId })`: Manually retrieve your messages
 
