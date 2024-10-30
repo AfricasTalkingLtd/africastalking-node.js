@@ -227,23 +227,22 @@ TEST_PHONENUMBER=your_test_phone_number
 ```
 
 ### Running Tests
+> Install dependencies using your preferred package manager
 
 ```bash
-# Install dependencies using your preferred package manager
 $ npm install
 # or
 $ yarn install
 # or
 $ bun install
-
+```
+```bash
 # Run tests
-$ npm test        # For Unix-based systems (Linux/MacOS)
-$ npm run test-windows  # For Windows
+$ npm test        
 # or
-$ yarn test       # For Unix-based systems (Linux/MacOS)
-$ yarn test:windows    # For Windows
+$ yarn test       
 # or
-$ bun test        # Works on all platforms
+$ bun test        
 ```
 
 ### Troubleshooting
