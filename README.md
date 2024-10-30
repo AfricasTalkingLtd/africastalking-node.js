@@ -11,19 +11,29 @@ Take a look at the [API docs here](https://developers.africastalking.com).
 
 ## Install
 
-You can install the package from [npm](https://npmjs.com/package/africastalking) by running: 
+Choose your preferred package manager:
 
+### NPM
 ```bash
-# Using npm
 $ npm install --save africastalking
-$ npm install --save @types/africastalking
+```
+```bash
+$ npm install --save-dev @types/africastalking
+```
 
-# Using yarn
+### Yarn
+```bash
 $ yarn add africastalking
-$ yarn add @types/africastalking
+```
+```bash
+$ yarn add --dev @types/africastalking
+```
 
-# Using bun
+### Bun
+```bash
 $ bun add africastalking
+```
+```bash
 $ bun add @types/africastalking
 ```
 ## Usage
