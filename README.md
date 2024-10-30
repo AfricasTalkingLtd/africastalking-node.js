@@ -14,9 +14,18 @@ Take a look at the [API docs here](https://developers.africastalking.com).
 You can install the package from [npm](https://npmjs.com/package/africastalking) by running: 
 
 ```bash
+# Using npm
 $ npm install --save africastalking
-```
+$ npm install --save @types/africastalking
 
+# Using yarn
+$ yarn add africastalking
+$ yarn add @types/africastalking
+
+# Using bun
+$ bun add africastalking
+$ bun add @types/africastalking
+```
 ## Usage
 
 The package needs to be configured with your app username and API key, which you can get from the [dashboard](https://account.africastalking.com).
@@ -208,21 +217,39 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 
 ## Development
 
-Run all tests:
-
-```bash
-$ npm install
-$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
-$ npm test
+### Prerequisites
+1. Create a `.env` file in the root directory
+2. Add the following credentials to your `.env` file:
+```env
+AT_APP_API_KEY=your_api_key_here
+AT_APP_USERNAME=your_username_here
+TEST_PHONENUMBER=your_test_phone_number
 ```
 
-or on Windows...
+### Running Tests
 
 ```bash
+# Install dependencies using your preferred package manager
 $ npm install
-$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
-$ npm run test-windows
+# or
+$ yarn install
+# or
+$ bun install
+
+# Run tests
+$ npm test        # For Unix-based systems (Linux/MacOS)
+$ npm run test-windows  # For Windows
+# or
+$ yarn test       # For Unix-based systems (Linux/MacOS)
+$ yarn test:windows    # For Windows
+# or
+$ bun test        # Works on all platforms
 ```
+
+### Troubleshooting
+- Make sure all environment variables are properly set in your `.env` file
+- Ensure you have a valid Africa's Talking account and API credentials
+- Check that your test phone number is in the international format (e.g., +254XXXXXXXXX)
 
 
 ## Issues
