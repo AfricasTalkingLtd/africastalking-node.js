@@ -31,9 +31,9 @@ describe('SMS', function () {
       return sms.send(options).should.be.rejected()
     })
 
-    it('#send() must have to/from/message params', function () {
+    it('#send() must have to/senderId/message params', function () {
       options.to = fixtures.phoneNumber
-      options.from = null
+      options.senderId = null
       options.message = null
 
       return sms.send(options).should.be.rejected()
@@ -172,18 +172,18 @@ describe('SMS', function () {
       {
         to: fixtures.phoneNumber,
         enqueue: true,
-        from: '34587',
+        senderId: '34587',
         message: 'This is mulitple recipients test'
       },
       {
         to: [fixtures.phoneNumber],
         enqueue: true,
-        from: '34587',
+        senderId: '34587',
         message: 'Send message to multiple recipients'
       },
       {
         to: fixtures.phoneNumber,
-        from: 1458,
+        senderId: 1458,
         enqueue: true,
         message: 'returns object with a message of not sent'
       }
