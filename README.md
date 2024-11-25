@@ -81,12 +81,12 @@ All phone numbers use the international format. e.g. `+234xxxxxxxx`.
 
 ### `SMS`
 
-- `send({ to, from, message, enqueue })`: Send an SMS to one or more phone numbers
+- `send({ to, senderId, message, enqueue })`: Send an SMS to one or more phone numbers
 
-- `send([{ to, from, message, enqueue }])`: Send multiple SMSes to one or more phone numbers
+- `send([{ to, senderId, message, enqueue }])`: Send multiple SMSes to one or more phone numbers
  
   - `to`: Recipient(s) phone number. Can either a single phone number or an array of phone numbers `REQUIRED`
-  - `from`: Shortcode or alphanumeric ID that is registered with Africa's Talking account
+  - `senderId`: Shortcode or alphanumeric ID that is registered with Africa's Talking account
   - `message`: SMS content. `REQUIRED`
   - `enqueue`: Set to true if you would like to deliver as many messages to the API without waiting for an acknowledgement from telcos.
 
