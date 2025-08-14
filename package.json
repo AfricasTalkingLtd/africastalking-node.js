@@ -50,6 +50,7 @@
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
     "google-libphonenumber": "^3.2.40",
+    "joi": "^18.0.0",
     "lodash": "^4.17.21",
     "querystring": "^0.2.1",
     "validate.js": "^0.13.1"
