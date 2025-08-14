@@ -1,6 +1,6 @@
 'use strict'
 
-const validate = require('validate.js')
+const joi = require('@hapi/joi')
 const fixtures = require('./fixtures')
 
 describe('Application', function () {
@@ -25,7 +25,7 @@ describe('Application', function () {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.ACCOUNT.fetchAccount()
-    validate.isPromise(p).should.be.exactly(true)
+    joi.assert(p, joi.object().instance(Promise));
 
     p.then(function (resp) {
       resp.should.have.property('UserData')
