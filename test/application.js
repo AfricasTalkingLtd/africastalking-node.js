@@ -10,7 +10,7 @@ describe('Application', function () {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.APPLICATION.fetchApplicationData()
-    validate.isPromise(p).should.be.exactly(true)
+    joi.assert(p, joi.object().instance(Promise))
 
     p.then(function (resp) {
       resp.should.have.property('UserData')
@@ -25,7 +25,7 @@ describe('Application', function () {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.ACCOUNT.fetchAccount()
-    joi.assert(p, joi.object().instance(Promise));
+    joi.assert(p, joi.object().instance(Promise))
 
     p.then(function (resp) {
       resp.should.have.property('UserData')

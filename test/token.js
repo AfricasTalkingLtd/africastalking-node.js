@@ -10,7 +10,7 @@ describe('Token', function () {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.TOKEN.generateAuthToken()
-    joi.assert(p, joi.object().instance(Promise));
+    joi.assert(p, joi.object().instance(Promise))
 
     p.then(function (resp) {
       resp.should.have.property('token')

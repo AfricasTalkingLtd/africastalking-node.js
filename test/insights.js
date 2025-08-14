@@ -10,7 +10,7 @@ describe('Insights', function () {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.INSIGHTS.checkSimSwapState(['+254710000000'])
-    joi.assert(p, joi.object().instance(Promise));
+    joi.assert(p, joi.object().instance(Promise))
 
     p.then(function (resp) {
       resp.should.have.property('status')
