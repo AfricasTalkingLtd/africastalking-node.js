@@ -47,43 +47,39 @@ describe('USSD', function () {
     }))
   })
 
-  it('returns expected response', function (done) {
+  it('returns response starting with CON or END', function (done) {
     request
       .post('/test-service')
-      .send('hello')
-      .expect('content-type', /text\/plain/i)
-      .expect(200, function (err, resp) {
-        if (err) throw err
-        const match = resp.text.match(/^(CON)|(END)/)
-        should(match).be.ok()
+      .send({ text: 'hello', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .expect('Content-Type', /text\/plain/i)
+      .expect(200)
+      .end((err, resp) => {
+        if (err) return done(err)
+        resp.text.should.match(/^(CON|END) /)
         done()
       })
   })
 
-  it('shows menu', function (done) {
+  it('shows main menu when text is empty', function (done) {
     request
       .post('/test-service')
       .send({ text: '', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
       .expect(200)
-      .end(function (err, resp) {
-        if (err) throw err
-        console.log(resp.text + '\n')
-        const match = resp.text.match('CON ' + menu)
-        should(match).be.ok()
+      .end((err, resp) => {
+        if (err) return done(err)
+        resp.text.should.equal('CON ' + menu)
         done()
       })
   })
 
-  it('shows account info', function (done) {
+  it('shows account info when user selects option 1', function (done) {
     request
       .post('/test-service')
       .send({ text: '1', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
       .expect(200)
-      .end(function (err, resp) {
-        if (err) throw err
-        console.log(resp.text + '\n')
-        const match = resp.text.match('END ' + accountInfo)
-        should(match).be.ok()
+      .end((err, resp) => {
+        if (err) return done(err)
+        resp.text.should.equal('END ' + accountInfo)
         done()
       })
   })
