@@ -63,7 +63,7 @@ describe('USSD', function () {
   it('shows menu', function (done) {
     request
       .post('/test-service')
-      .send({ text: '' })
+      .send({ text: '', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
       .expect(200)
       .end(function (err, resp) {
         if (err) throw err
@@ -77,7 +77,7 @@ describe('USSD', function () {
   it('shows account info', function (done) {
     request
       .post('/test-service')
-      .send({ text: '1' })
+      .send({ text: '1', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
       .expect(200)
       .end(function (err, resp) {
         if (err) throw err
@@ -91,13 +91,37 @@ describe('USSD', function () {
   it('shows invalid choice', function (done) {
     request
       .post('/test-service')
-      .send({ text: '13' })
+      .send({ text: '13', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
       .expect(200)
       .end(function (err, resp) {
         if (err) throw err
         console.log(resp.text + '\n')
         const match = resp.text.match('END ' + invalidOption)
         should(match).be.ok()
+        done()
+      })
+  })
+
+  it('shows submenu for lost gas cylinder option (2)', function (done) {
+    request
+      .post('/test-service')
+      .send({ text: '2', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .expect(200)
+      .end((err, resp) => {
+        if (err) return done(err)
+        resp.text.should.equal('CON Enter 1 for recovery \nEnter 2 for lost and found')
+        done()
+      })
+  })
+
+  it('handles missing fields gracefully', function (done) {
+    request
+      .post('/test-service')
+      .send({})
+      .expect(200)
+      .end((err, resp) => {
+        if (err) return done(err)
+        resp.text.should.startWith('CON')
         done()
       })
   })
