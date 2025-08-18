@@ -149,7 +149,7 @@ For more information on:
       - `quantity`: a numeric value for the amount of mobile data. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
       - `unit`: The units for the specified data quantity, the format is: ``MB`` or ``GB``. It is based on the available mobile data package[(see "Bundle Package" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
       - `validity`: The period of the data bundle’s validity this can be `Day`, `Week`, `BiWeek`, `Month`, or `Quarterly`. It is based on the available mobile data package [(see "Validity" column of mobile data pricing)](https://africastalking.com/pricing). `REQUIRED`.
-      - `metadata`:  A JSON object of any metadata that you would like us to associate with the request. `OPTIONAL`.
+      - `metadata`:  A JSON object of any metadata that you would like us to associate with the request. `REQUIRED`.
 
 
 - `findTransaction({ transactionId })`:  Find a mobile data transaction
@@ -225,6 +225,8 @@ $ npm run test-windows
 ```
 
 
-## Issues
+## Issues & Contribution
 
 If you find a bug, please file an issue on [our issue tracker on GitHub](https://github.com/AfricasTalkingLtd/africastalking-node.js/issues).
+
+If you want to help improve this library, just send send us a PR!

@@ -68,15 +68,12 @@ describe('SMS', function () {
         messages.should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (error) {
-        console.error(error)
-        done()
-      })
+      .catch(done)
   })
 
   it('fetches subscription', function (done) {
     const opts = {
-      shortCode: '1234',
+      shortCode: '46585',
       keyword: 'TESTKWD'
     }
 
@@ -86,15 +83,12 @@ describe('SMS', function () {
         subscriptions.should.have.property('responses')
         done()
       })
-      .catch(function (error) {
-        console.error(error)
-        done()
-      })
+      .catch(done)
   })
 
   it('creates subscription', function (done) {
     const opts = {
-      shortCode: '1234',
+      shortCode: '46585',
       keyword: 'TESTKWD',
       phoneNumber: fixtures.phoneNumber
     }
@@ -105,15 +99,12 @@ describe('SMS', function () {
         resp.should.have.property('status')
         done()
       })
-      .catch(function (error) {
-        console.error(error)
-        done()
-      })
+      .catch(done)
   })
 
   it('deletes subscription', function (done) {
     const opts = {
-      shortCode: '1234',
+      shortCode: '46585',
       keyword: 'TESTKWD',
       phoneNumber: fixtures.phoneNumber
     }
@@ -124,10 +115,7 @@ describe('SMS', function () {
         resp.should.have.property('status')
         done()
       })
-      .catch(function (error) {
-        console.error(error)
-        done()
-      })
+      .catch(done)
   })
 
   it('sends single simple message', function (done) {
@@ -143,10 +131,7 @@ describe('SMS', function () {
         resp.should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (err) {
-        console.error(err)
-        done()
-      })
+      .catch(done)
   })
 
   it('sends multiple simple message', function (done) {
@@ -161,10 +146,7 @@ describe('SMS', function () {
         resp.should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (err) {
-        console.error(err)
-        done()
-      })
+      .catch(done)
   })
 
   it('sends multiple messages to different receipients', function (done) {
@@ -194,10 +176,7 @@ describe('SMS', function () {
         resp[0].should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (err) {
-        console.error(err)
-        done()
-      })
+      .catch(done)
   })
 
   it('sends heavy single message', function (done) {
@@ -218,9 +197,7 @@ describe('SMS', function () {
         resp.should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (err) {
-        done(err)
-      })
+      .catch(done)
   })
 
   it('sends premium message', function (done) {
@@ -238,9 +215,6 @@ describe('SMS', function () {
         resp.should.have.property('SMSMessageData')
         done()
       })
-      .catch(function (err) {
-        console.error(err)
-        done()
-      })
+      .catch(done)
   })
 })

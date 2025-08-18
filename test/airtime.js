@@ -72,9 +72,7 @@ describe('Airtime', function () {
         resp.should.have.property('responses')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 
   it('should find airtime transaction status', function (done) {
@@ -84,9 +82,7 @@ describe('Airtime', function () {
         resp.should.have.property('status')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 
   it('sends airtime to many', function (done) {
@@ -111,8 +107,6 @@ describe('Airtime', function () {
         resp.should.have.property('responses')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 })

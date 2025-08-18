@@ -15,10 +15,7 @@ describe('Application', function () {
     p.then(function (resp) {
       resp.should.have.property('UserData')
       done()
-    }).catch(function (error) {
-      console.log(error)
-      done()
-    })
+    }).catch(done)
   })
 
   it('fetched account info', function (done) {
@@ -30,9 +27,6 @@ describe('Application', function () {
     p.then(function (resp) {
       resp.should.have.property('UserData')
       done()
-    }).catch(function (error) {
-      console.log(error)
-      done()
-    })
+    }).catch(done)
   })
 })

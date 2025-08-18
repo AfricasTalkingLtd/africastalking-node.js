@@ -16,8 +16,7 @@ describe('Insights', function () {
       resp.should.have.property('status')
       resp.should.have.property('transactionId')
       done()
-    }).catch(function (error) {
-      done(new Error(error))
     })
+      .catch(done)
   })
 })

@@ -66,54 +66,62 @@ describe('Mobile Data Bundles', function () {
 
   it('sends mobiledata to one', function (done) {
     const opts = {
-      productName: 'Mobile Data',
+      productName: 'TestProduct',
       recipients: [
         {
           phoneNumber: fixtures.phoneNumber,
           quantity: 50,
           unit: 'MB',
-          validity: 'Day'
+          validity: 'Day',
+          metadata: {
+            happy: 'yes',
+            name: 'John Doe'
+          }
         }
       ]
     }
 
     mobileData.send(opts)
       .then(function (resp) {
-        resp.should.have.property('responses')
+        resp.should.have.property('entries')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 
   it('sends mobiledata to many', function (done) {
     const opts = {
-      productName: 'Mobile Data',
+      productName: 'TestProduct',
       recipients: [
         {
           phoneNumber: fixtures.phoneNumber,
           quantity: 50,
           unit: 'MB',
-          validity: 'Day'
+          validity: 'Day',
+          metadata: {
+            happy: 'yes',
+            name: 'John Doe'
+          }
         },
         {
           phoneNumber: fixtures.phoneNumber,
           quantity: 50,
           unit: 'MB',
-          validity: 'Day'
+          validity: 'Day',
+          metadata: {
+            happy: 'yes',
+            name: 'John Doe'
+          }
         }
       ]
     }
 
     mobileData.send(opts)
       .then(function (resp) {
-        resp.should.have.property('responses')
+        resp.should.have.property('entries')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 
   it('checks for transaction status', function (done) {
@@ -126,9 +134,7 @@ describe('Mobile Data Bundles', function () {
         resp.should.have.property('status')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 
   it('checks for balance left', function (done) {
@@ -137,8 +143,6 @@ describe('Mobile Data Bundles', function () {
         resp.should.have.property('status')
         done()
       })
-      .catch(function () {
-        done()
-      })
+      .catch(done)
   })
 })

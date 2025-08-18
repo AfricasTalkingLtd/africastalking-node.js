@@ -24,7 +24,7 @@ const handler = function (params, next) {
   } else if (params.text === '2') {
     message = 'Enter 1 for recovery \n'
     message += 'Enter 2 for lost and found'
-    endSession = true
+    endSession = false
   } else {
     message = invalidOption
     endSession = true
@@ -117,7 +117,7 @@ describe('USSD', function () {
       .expect(200)
       .end((err, resp) => {
         if (err) return done(err)
-        resp.text.should.startWith('CON')
+        resp.text.should.startWith('END Invalid option')
         done()
       })
   })
