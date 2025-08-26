@@ -16,8 +16,7 @@ describe('Token', function () {
       resp.should.have.property('token')
       resp.should.have.property('lifetimeInSeconds')
       done()
-    }).catch(function (error) {
-      done(new Error(error))
     })
+      .catch(done)
   })
 })
