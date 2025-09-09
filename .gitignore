@@ -34,7 +34,6 @@ test/fixtures.local.js
 
 # OSX junk
 .DS_Store
-package-lock.json
 
 .env
 tmp/

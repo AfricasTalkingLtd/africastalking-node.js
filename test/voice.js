@@ -52,11 +52,11 @@ describe('Voice', function () {
 
       it('creates <Say> with text, optional parameters', function () {
         options = {
-          response: 'woman',
+          voice: 'woman',
           playBeep: true
         }
         expected = responseTemplate +
-                    '<Say response="woman" playBeep="true">Hello there</Say>' +
+                    '<Say voice="woman" playBeep="true">Hello there</Say>' +
                     '</Response>'
 
         response.say('Hello there', options)
@@ -77,10 +77,10 @@ describe('Voice', function () {
 
       it('creates valid <Play>', function () {
         expected = responseTemplate +
-                '<Play url="http://www.myresponsemailserver.com/audio/vmail.wav"/>' +
+                '<Play url="https://www.myresponsemailserver.com/audio/vmail.wav"/>' +
                 '</Response>'
 
-        response.play('http://www.myresponsemailserver.com/audio/vmail.wav')
+        response.play('https://www.myresponsemailserver.com/audio/vmail.wav')
           .build()
           .should.equal(expected)
       })
@@ -92,7 +92,7 @@ describe('Voice', function () {
       describe('validation', function () {
         it('<GetDigits> must have <Say> or <Play> child', function () {
           (function () { response.getDigits() })
-            .should.throw(Error)
+            .should.throw()
         })
 
         it('cannot have invalid child', function () {
@@ -101,16 +101,16 @@ describe('Voice', function () {
           };
 
           (function () { response.getDigits(child).build() })
-            .should.throw(Error)
+            .should.throw()
         })
       })
 
       it('creates <GetDigits> with <Play> child', function () {
         child = {
-          play: { url: 'http://www.myresponsemailserver.com/audio/vmail.wav' }
+          play: { url: 'https://www.myresponsemailserver.com/audio/vmail.wav' }
         }
         expected = responseTemplate +
-                '<GetDigits><Play url="http://www.myresponsemailserver.com/audio/vmail.wav"/></GetDigits>' +
+                '<GetDigits><Play url="https://www.myresponsemailserver.com/audio/vmail.wav"/></GetDigits>' +
                 '</Response>'
 
         response.getDigits(child)
@@ -139,11 +139,11 @@ describe('Voice', function () {
           numDigits: 1,
           timeout: 30,
           finishOnKey: '#',
-          callbackUrl: 'http://myapp.com/callback'
+          callbackUrl: 'https://myapp.com/callback'
         }
         expected = responseTemplate +
                 '<GetDigits numDigits="1" timeout="30" finishOnKey="#" ' +
-                'callbackUrl="http://myapp.com/callback"><Say>Hello there</Say></GetDigits>' +
+                'callbackUrl="https://myapp.com/callback"><Say>Hello there</Say></GetDigits>' +
                 '</Response>'
 
         response.getDigits(child, options)
@@ -177,12 +177,12 @@ describe('Voice', function () {
           record: true,
           sequential: true,
           callerId: '+254711222333',
-          ringBackTone: 'http://mymediafile.com/playme.mp3',
+          ringBackTone: 'https://mymediafile.com/playme.mp3',
           maxDuration: 120
         }
         expected = responseTemplate +
                 '<Dial record="true" sequential="true" callerId="+254711222333" ' +
-                'ringBackTone="http://mymediafile.com/playme.mp3" maxDuration="120" ' +
+                'ringBackTone="https://mymediafile.com/playme.mp3" maxDuration="120" ' +
                 'phoneNumbers="+254711XXXYYY,+254733YYYZZZ,test@ke.sip.africastalking.com"/>' +
                 '</Response>'
 
@@ -213,10 +213,10 @@ describe('Voice', function () {
 
       it('creates <Record> with <Play> child', function () {
         child = {
-          play: { url: 'http://www.myresponsemailserver.com/audio/vmail.wav' }
+          play: { url: 'https://www.myresponsemailserver.com/audio/vmail.wav' }
         }
         expected = responseTemplate +
-                '<Record><Play url="http://www.myresponsemailserver.com/audio/vmail.wav"/></Record>' +
+                '<Record><Play url="https://www.myresponsemailserver.com/audio/vmail.wav"/></Record>' +
                 '</Response>'
 
         response.record(child)
@@ -247,11 +247,11 @@ describe('Voice', function () {
           timeout: 3600,
           trimSilence: true,
           playBeep: true,
-          callbackUrl: 'http://myapp.com/callback'
+          callbackUrl: 'https://myapp.com/callback'
         }
         expected = responseTemplate +
                 '<Record finishOnKey="#" maxLength="120" timeout="3600" ' +
-                'trimSilence="true" playBeep="true" callbackUrl="http://myapp.com/callback">' +
+                'trimSilence="true" playBeep="true" callbackUrl="https://myapp.com/callback">' +
                 '<Say>Hello there</Say></Record></Response>'
 
         response.record(child, options)
@@ -275,11 +275,11 @@ describe('Voice', function () {
 
       it('creates <Enqueue> with optional parameters', function () {
         options = {
-          holdMusic: 'http://www.mymediaserver.com/audio/callWaiting.wav',
+          holdMusic: 'https://www.mymediaserver.com/audio/callWaiting.wav',
           name: 'support'
         }
         expected = responseTemplate +
-                '<Enqueue holdMusic="http://www.mymediaserver.com/audio/callWaiting.wav" name="support"/>' +
+                '<Enqueue holdMusic="https://www.mymediaserver.com/audio/callWaiting.wav" name="support"/>' +
                 '</Response>'
 
         response.enqueue(options)
@@ -337,10 +337,10 @@ describe('Voice', function () {
 
       it('creates valid <Redirect> given url', function () {
         expected = responseTemplate +
-                '<Redirect>http://myredirecturl.com/rdrct</Redirect>' +
+                '<Redirect>https://myredirecturl.com/rdrct</Redirect>' +
                 '</Response>'
 
-        response.redirect('http://myredirecturl.com/rdrct')
+        response.redirect('https://myredirecturl.com/rdrct')
           .build()
           .should.equal(expected)
       })
