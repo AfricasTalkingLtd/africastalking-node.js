@@ -17,6 +17,12 @@ describe('Insights', function () {
       resp.should.have.property('transactionId')
       done()
     })
-      .catch(done)
+      .catch((ex) => {
+        if (ex.transactionId) {
+          done()
+        } else {
+          done(new Error(ex))
+        }
+      })
   })
 })
