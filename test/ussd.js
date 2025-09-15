@@ -50,7 +50,7 @@ describe('USSD', function () {
   it('returns response starting with CON or END', function (done) {
     request
       .post('/test-service')
-      .send({ text: 'hello', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .send('text=hello&sessionId=123&serviceCode=*123#&phoneNumber=+1234567890')
       .expect('Content-Type', /text\/plain/i)
       .expect(200)
       .end((err, resp) => {
@@ -63,7 +63,7 @@ describe('USSD', function () {
   it('shows main menu when text is empty', function (done) {
     request
       .post('/test-service')
-      .send({ text: '', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .send('text=&sessionId=123&serviceCode=*123#&phoneNumber=+1234567890')
       .expect(200)
       .end((err, resp) => {
         if (err) return done(err)
@@ -75,7 +75,7 @@ describe('USSD', function () {
   it('shows account info when user selects option 1', function (done) {
     request
       .post('/test-service')
-      .send({ text: '1', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .send('text=1&sessionId=123&serviceCode=*123#&phoneNumber=+1234567890')
       .expect(200)
       .end((err, resp) => {
         if (err) return done(err)
@@ -87,7 +87,7 @@ describe('USSD', function () {
   it('shows invalid choice', function (done) {
     request
       .post('/test-service')
-      .send({ text: '13', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .send('text=13&sessionId=123&serviceCode=*123#&phoneNumber=+1234567890')
       .expect(200)
       .end(function (err, resp) {
         if (err) throw err
@@ -101,7 +101,7 @@ describe('USSD', function () {
   it('shows submenu for lost gas cylinder option (2)', function (done) {
     request
       .post('/test-service')
-      .send({ text: '2', sessionId: '123', serviceCode: '*123#', phoneNumber: '+1234567890' })
+      .send('text=2&sessionId=123&serviceCode=*123#&phoneNumber=+1234567890')
       .expect(200)
       .end((err, resp) => {
         if (err) return done(err)
@@ -113,7 +113,7 @@ describe('USSD', function () {
   it('handles missing fields gracefully', function (done) {
     request
       .post('/test-service')
-      .send({})
+      .send('')
       .expect(200)
       .end((err, resp) => {
         if (err) return done(err)
