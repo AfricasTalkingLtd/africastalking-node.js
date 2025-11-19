@@ -45,15 +45,15 @@
     ]
   },
   "dependencies": {
-    "axios": "1.12.2",
-    "dotenv": "17.2.2",
-    "google-libphonenumber": "3.2.42",
+    "axios": "1.13.2",
+    "dotenv": "17.2.3",
+    "google-libphonenumber": "3.2.43",
     "joi": "18.0.1",
     "lodash": "4.17.21"
   },
   "devDependencies": {
     "express": "5.1.0",
-    "mocha": "11.7.2",
+    "mocha": "11.7.5",
     "nyc": "17.1.0",
     "should": "13.2.3",
     "standard": "17.1.2",
