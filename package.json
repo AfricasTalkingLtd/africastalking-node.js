@@ -44,11 +44,11 @@
     ]
   },
   "dependencies": {
-    "axios": "1.13.2",
+    "axios": "1.13.3",
     "dotenv": "17.2.3",
-    "google-libphonenumber": "3.2.43",
+    "google-libphonenumber": "3.2.44",
     "joi": "18.0.2",
-    "lodash": "4.17.21"
+    "lodash": "4.17.23"
   },
   "devDependencies": {
     "express": "5.2.1",
@@ -56,6 +56,6 @@
     "nyc": "17.1.0",
     "should": "13.2.3",
     "standard": "17.1.2",
-    "supertest": "7.1.4"
+    "supertest": "7.2.2"
   }
 }
