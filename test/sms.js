@@ -16,7 +16,13 @@ describe('SMS', function () {
     const options = {}
 
     it('Rejects invalid phone numbers', function () {
-      const phoneNumbers = ['+254713', '+2547XXXXXXXX', '0712345678', '+25571234567890', '']
+      const phoneNumbers = [
+        '+254713',
+        '+2547XXXXXXXX',
+        '0712345678',
+        '+25571234567890',
+        ''
+      ]
 
       const options = {
         to: phoneNumbers,
@@ -216,5 +222,15 @@ describe('SMS', function () {
         done()
       })
       .catch(done)
+  })
+
+  it('rejects premium SMS without keyword', function () {
+    const opts = {
+      to: fixtures.phoneNumber,
+      from: 'service',
+      message: 'missing keyword'
+    }
+
+    return sms.sendPremium(opts).should.be.rejected()
   })
 })
