@@ -8,8 +8,11 @@ describe('SMS', function () {
   this.timeout(5000)
 
   before(function () {
+    console.log(fixtures.TEST_ACCOUNT)
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     sms = AfricasTalking.SMS
+
+    console.log('sms object', sms)
   })
 
   describe('validation', function () {
@@ -232,5 +235,30 @@ describe('SMS', function () {
     }
 
     return sms.sendPremium(opts).should.be.rejected()
+  })
+
+  it('rejects deleteSubscription without phoneNumber', function () {
+    const opts = {
+      shortCode: '46585',
+      keyword: 'TEST'
+    }
+
+    return sms.deleteSubscription(opts).should.be.rejected()
+  })
+
+  it('uses senderId when from is not provided', function (done) {
+    const opts = {
+      to: fixtures.phoneNumber,
+      senderId: 'ATTEST',
+      message: 'senderId test'
+    }
+
+    sms
+      .send(opts)
+      .then(function (resp) {
+        resp.should.have.property('SMSMessageData')
+        done()
+      })
+      .catch(done)
   })
 })

@@ -56,7 +56,9 @@ describe('Initialization', function () {
     lib = require('../lib')(options) // eslint-disable-line no-unused-vars
     common = require('../lib/common')
 
-    common.BASE_URL.should.equal('https://api.sandbox.africastalking.com/version1')
+    common.BASE_URL.should.equal(
+      'https://api.sandbox.africastalking.com/version1'
+    )
     common.VOICE_URL.should.equal('https://voice.sandbox.africastalking.com')
   })
 })
