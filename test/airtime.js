@@ -13,14 +13,12 @@ describe('Airtime', function () {
 
   describe('validation', function () {
     it('#send() cannot be empty', function () {
-      return airtime.send({})
-        .should.be.rejected()
+      return airtime.send({}).should.be.rejected()
     })
 
     it('#send() must have phoneNumber/currencyCode/amount', function () {
-      return airtime.send(
-        { recipients: [{ phoneNumber: fixtures.phoneNumber }] }
-      )
+      return airtime
+        .send({ recipients: [{ phoneNumber: fixtures.phoneNumber }] })
         .should.be.rejected()
     })
 
@@ -49,9 +47,12 @@ describe('Airtime', function () {
     })
 
     it('#send() rejects invalid options', function () {
-      return airtime.send(
-        { recipients: [{ phoneNumber: 'not phone', currencyCode: '', amount: 'NaN' }] }
-      )
+      return airtime
+        .send({
+          recipients: [
+            { phoneNumber: 'not phone', currencyCode: '', amount: 'NaN' }
+          ]
+        })
         .should.be.rejected()
     })
   })
@@ -67,7 +68,8 @@ describe('Airtime', function () {
       ]
     }
 
-    airtime.send(opts)
+    airtime
+      .send(opts)
       .then(function (resp) {
         resp.should.have.property('responses')
         done()
@@ -77,7 +79,8 @@ describe('Airtime', function () {
 
   it('should find airtime transaction status', function (done) {
     const transactionId = 'ATPid_9b4xxxxxxxccb27b13225'
-    airtime.findTransactionStatus(transactionId)
+    airtime
+      .findTransactionStatus(transactionId)
       .then(function (resp) {
         resp.should.have.property('status')
         done()
@@ -102,11 +105,33 @@ describe('Airtime', function () {
       maxNumRetry: 1
     }
 
-    airtime.send(opts)
+    airtime
+      .send(opts)
       .then(function (resp) {
         resp.should.have.property('responses')
         done()
       })
       .catch(done)
+  })
+
+  it('sends airtime with idempotencyKey', function () {
+    const opts = {
+      idempotencyKey: 'unique-key-12345',
+      recipients: [
+        {
+          phoneNumber: fixtures.phoneNumber,
+          currencyCode: 'KES',
+          amount: 10
+        }
+      ]
+    }
+
+    return airtime.send(opts).then(function (resp) {
+      resp.should.have.property('responses')
+    })
+  })
+
+  it('rejects findTransactionStatus when transactionId is not provided', function () {
+    return airtime.findTransactionStatus(null).should.be.rejected()
   })
 })
