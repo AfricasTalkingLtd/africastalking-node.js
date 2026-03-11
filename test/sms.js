@@ -108,6 +108,22 @@ describe('SMS', function () {
       .catch(done)
   })
 
+  it('rejects creates subscription when shortCode is missing', function () {
+    const opts = {
+      keyword: 'TESTKWD',
+      phoneNumber: fixtures.phoneNumber
+    }
+    return sms.createSubscription(opts).should.be.rejected()
+  })
+
+  it('rejects create subscription when phoneNumber is missing', function () {
+    const opts = {
+      shortCode: '46585',
+      keyword: 'TESTKWD'
+    }
+    return sms.createSubscription(opts).should.be.rejected()
+  })
+
   it('deletes subscription', function (done) {
     const opts = {
       shortCode: '46585',
