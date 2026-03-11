@@ -16,7 +16,13 @@ describe('SMS', function () {
     const options = {}
 
     it('Rejects invalid phone numbers', function () {
-      const phoneNumbers = ['+254713', '+2547XXXXXXXX', '0712345678', '+25571234567890', '']
+      const phoneNumbers = [
+        '+254713',
+        '+2547XXXXXXXX',
+        '0712345678',
+        '+25571234567890',
+        ''
+      ]
 
       const options = {
         to: phoneNumbers,
@@ -216,5 +222,54 @@ describe('SMS', function () {
         done()
       })
       .catch(done)
+  })
+
+  it('rejects premium SMS without keyword', function () {
+    const opts = {
+      to: fixtures.phoneNumber,
+      from: 'service',
+      message: 'missing keyword'
+    }
+
+    return sms.sendPremium(opts).should.be.rejected()
+  })
+
+  it('uses senderId as sender when from is not provided', function () {
+    const opts = {
+      to: fixtures.phoneNumber,
+      senderId: 'ATTEST',
+      message: 'senderId test'
+    }
+
+    return sms.send(opts).then(function (resp) {
+      resp.should.have.property('SMSMessageData')
+      resp.SMSMessageData.should.have.property('Recipients').with.lengthOf(1)
+      resp.SMSMessageData.Recipients[0].should.have.property('statusCode', 101)
+    })
+  })
+
+  it('handles partial failure in array send — valid and invalid objects mixed', function () {
+    const opts = [
+      {
+        to: fixtures.phoneNumber,
+        enqueue: true,
+        message: 'Valid message'
+      },
+      {
+        to: 'NOT_A_PHONE_NUMBER',
+        enqueue: true,
+        message: 'Invalid recipient'
+      }
+    ]
+
+    return sms.send(opts).then(function (results) {
+      results.should.be.instanceof(Array)
+      results.should.have.lengthOf(2)
+      // First should succeed
+      results[0].should.have.property('SMSMessageData')
+      // Second should return the failure shape from Promise.allSettled handler
+      results[1].should.have.property('SMSMessageData')
+      results[1].SMSMessageData.should.have.property('status', 'failed')
+    })
   })
 })
