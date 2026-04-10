@@ -48,7 +48,7 @@
     "dotenv": "17.2.4",
     "google-libphonenumber": "3.2.44",
     "joi": "18.0.2",
-    "lodash": "4.17.23"
+    "lodash": "4.18.1"
   },
   "devDependencies": {
     "express": "5.2.1",
