@@ -44,7 +44,7 @@
     ]
   },
   "dependencies": {
-    "axios": "1.13.5",
+    "axios": "1.15.0",
     "dotenv": "17.2.4",
     "google-libphonenumber": "3.2.44",
     "joi": "18.0.2",
