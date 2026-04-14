@@ -206,20 +206,41 @@ For more information, please read [https://developers.africastalking.com/docs/us
 
     - `waNumber`: The number being used to send the message that is associated with the account. `REQUIRED`
     - `phoneNumber`: The number that is to receive the message. `REQUIRED`
-    - `body`:  The message to be sent. The message has a combination of the following:
+    - `body`: The message to be sent. The message has a combination of the following:
+
       - For simple text message:
-        - `message`: The message to be sent to the client. `OPTIONAL`
+        - `message`: The message to be sent to the client.
       
       - For media messages:
-        - `mediaType`: The type of message being sent Can be one of `Image`, `Video`, `Audio` or `Voice`. `OPTIONAL`
-        - `url`: The hosted URL of what is being sent. `OPTIONAL`
-        - `caption`: The caption associated with an image or video that is being sent. `OPTIONAL`
+        - `mediaType`: The type of message being sent Can be one of `Image`, `Video`, `Audio` or `Voice`.
+        - `url`: The hosted URL of what is being sent.
+        - `caption`: The caption associated with an image or video that is being sent.
 
-      - For interactive messages:
-        - `action`: A with a list of actions. `OPTIONAL`
-        - `body`: An object containing what is being sent with the interactive button or list. `OPTIONAL`
-        - `header`: An object containing what header is being sent with the interactive button or list.`OPTIONAL`
-        - `footer`: An object containing what footer is being sent with the interactive button or list.`OPTIONAL`
+      - For interactive list:
+        - `action`: An object with a list of actions.
+          - `button`: Action button title
+          - `section`: A list of sections
+            - `title`: A section title
+            - `rows`: `[{ id, title, description }]`,
+        - `body`:
+          - `text`: Body text
+        - `header`:
+          - `text`: Header text
+        - `footer`:
+          - `text`: Footer text
+
+      - For interactive buttons:
+        - `action`: An object with a list of actions.
+          - `buttons`: `[{ id, title }]`
+        - `body`:
+          - `text`: Body text
+        - `header`:
+          - `text`: Header text
+
+      - For template messages:
+        - `templateId`: Id of template to use
+        - `headerValue`: Value of the header text
+        - `bodyValues`: List of values to fill in the template
 
 - `sendTemplate({ component, waNumber, name, language, category })`: Send a Whatsapp template for your future messages.
 
@@ -228,10 +249,25 @@ For more information, please read [https://developers.africastalking.com/docs/us
     - `language`: The language code associated with the template. `REQUIRED`
     - `category`: The category associated with the template. `REQUIRED`
     - `component`:  A complex type containing the values that will be in the template. It can contain the following types:
-      - `header`: The header of the template to be sent. `OPTIONAL`
-      - `body`: The type of message being sent in the body of the template. `OPTIONAL`
-      - `footer`: The footer of the template to be sent. `OPTIONAL`
-      - `buttons`: A list of buttons to be sent in the template. `OPTIONAL`
+      - `header`: The header of the template to be sent.
+        - `type`: always `HEADER`
+        - `format`: One of `TEXT`, `MEDIA` or `LOCAATION`
+        - `text`:
+        - `example`
+      - `body`: The type of message being sent in the body of the template.
+        - `type`: always `BODY`
+        - `text`: 
+        - `example`:
+          - `body_text`: `[String]`
+      - `footer`: The footer of the template to be sent.
+        - `type`: always `FOOTER`
+        - `text`:
+      - `buttons`: A list of buttons to be sent in the template. Each can have the following, depending on the type
+        - `type`: One of `PHONE_NUMBER`, `URL`, and `QUICK_REPLY`
+        - `phoneNumber`: Only needed for phone number type
+        - `url`: Only needed for url type
+        - `text`:
+        - `example`:
 
 ### `Application`
 
