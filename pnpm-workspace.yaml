@@ -1,0 +1,20 @@
+
+blockExoticSubdeps: true
+
+childConcurrency: 1
+
+dangerouslyAllowAllBuilds: false
+
+ignoreDepScripts: true
+
+ignoreScripts: true
+
+minimumReleaseAge: 2880
+
+preferFrozenLockfile: true
+strictDepBuilds: true
+
+strictPeerDependencies: true
+
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 5760

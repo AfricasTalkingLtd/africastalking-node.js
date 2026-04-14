@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.7.9",
+  "version": "0.8.0",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "sms",
     "ussd",
     "voice",
-    "m-pesa",
+    "whatsapp",
     "payments",
     "airtime",
     "mobile_data"
@@ -29,7 +29,15 @@
   },
   "homepage": "https://github.com/AfricasTalkingLtd/africastalking-node.js#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "pnpm": ">=10.33.0",
+    "npm": ">=11.12.1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "onFail": "warn"
+    }
   },
   "standard": {
     "ignore": [
@@ -40,20 +48,23 @@
       "describe",
       "before",
       "after",
-      "context"
+      "context",
+      "beforeEach",
+      "afterEach"
     ]
   },
   "dependencies": {
-    "axios": "1.13.5",
-    "dotenv": "17.2.4",
+    "axios": "1.15.0",
     "google-libphonenumber": "3.2.44",
-    "joi": "18.0.2",
-    "lodash": "4.17.23"
+    "joi": "18.1.2",
+    "lodash": "4.18.1"
   },
   "devDependencies": {
+    "dotenv": "17.4.1",
     "express": "5.2.1",
     "mocha": "11.7.5",
-    "nyc": "17.1.0",
+    "nock": "14.0.12",
+    "nyc": "18.0.0",
     "should": "13.2.3",
     "standard": "17.1.2",
     "supertest": "7.2.2"

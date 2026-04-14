@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: Staging Environment
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 16
-      - run: npm i
-      - run: npm test
+          node-version: 18
+      - run: pnpm i
+      - run: pnpm test
         env:
           AT_APP_API_KEY: ${{secrets.AT_APP_API_KEY}}
           AT_APP_USERNAME: ${{secrets.AT_APP_USERNAME}}
