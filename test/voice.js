@@ -25,8 +25,6 @@ describe('Voice', function () {
     let response
     const responseTemplate = '<?xml version="1.0" encoding="UTF-8"?><Response>'
 
-    this.timeout(15000)
-
     beforeEach(function () { // eslint-disable-line no-undef
       response = new voice.ActionBuilder()
     })

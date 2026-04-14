@@ -4,11 +4,11 @@ const fixtures = require('./fixtures')
 let AfricasTalking, airtime
 
 describe('Airtime', function () {
-  this.timeout(15000)
-
   before(function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     airtime = AfricasTalking.AIRTIME
+
+    fixtures.mockAirtime()
   })
 
   describe('validation', function () {

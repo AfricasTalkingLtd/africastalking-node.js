@@ -4,7 +4,9 @@ const joi = require('joi')
 const fixtures = require('./fixtures')
 
 describe('Token', function () {
-  this.timeout(15000)
+  before(() => {
+    fixtures.mockToken()
+  })
 
   it('generates auth token', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)

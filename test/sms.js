@@ -5,11 +5,10 @@ const fixtures = require('./fixtures')
 let AfricasTalking, sms
 
 describe('SMS', function () {
-  this.timeout(5000)
-
   before(function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     sms = AfricasTalking.SMS
+    fixtures.mockSms()
   })
 
   describe('validation', function () {

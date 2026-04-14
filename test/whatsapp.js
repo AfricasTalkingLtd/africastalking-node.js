@@ -1,30 +1,17 @@
 'use strict'
 
 const joi = require('joi')
-// const nock = require('nock')
 const fixtures = require('./fixtures')
 
 describe('WhatsApp', function () {
   const phoneNumber = '+25471111111'
 
-  // before(() => {
-  //   nock.disableNetConnect()
-  // })
-
-  // after(() => {
-  //   nock.enableNetConnect()
-  // })
+  before(() => {
+    fixtures.mockWhatsApp(phoneNumber)
+  })
 
   it('sends a message', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
-
-    // const scope = nock('https://chat.sandbox.africastalking.com')
-    //   .post('/whatsapp/message/send')
-    //   .reply(200, {
-    //     phoneNumber,
-    //     status: 'SENT',
-    //     messageId: 'AT_some_id'
-    //   })
 
     const p = AfricasTalking.WHATSAPP.send({
       phoneNumber,
@@ -37,11 +24,9 @@ describe('WhatsApp', function () {
       resp.should.have.property('status')
       resp.should.have.property('messageId')
       resp.should.have.property('phoneNumber')
-      // scope.cleanAll()
       done()
     })
       .catch((ex) => {
-        // scope.cleanAll()
         if (ex.messageId) {
           done()
         } else {
@@ -52,14 +37,6 @@ describe('WhatsApp', function () {
 
   it('sends a template', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
-
-    // const scope = nock('https://chat.sandbox.africastalking.com')
-    //   .get('/whatsapp/template/send')
-    //   .reply(200, {
-    //     status: 'Success',
-    //     templateId: 'AT_some_id',
-    //     templateStatus: 'Pending'
-    //   })
 
     const p = AfricasTalking.WHATSAPP.sendTemplate({
       waNumber: '+1234567890',
@@ -112,11 +89,9 @@ describe('WhatsApp', function () {
       resp.should.have.property('status')
       resp.should.have.property('templateId')
       resp.should.have.property('templateStatus')
-      // scope.cleanAll()
       done()
     })
       .catch((ex) => {
-        // scope.cleanAll()
         if (ex.templateId) {
           done()
         } else {

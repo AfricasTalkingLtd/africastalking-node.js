@@ -5,11 +5,11 @@ const fixtures = require('./fixtures')
 let AfricasTalking, mobileData
 
 describe('Mobile Data Bundles', function () {
-  this.timeout(15000)
-
   before(function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     mobileData = AfricasTalking.MOBILE_DATA
+
+    fixtures.mockMobileData()
   })
 
   describe('validation', function () {
