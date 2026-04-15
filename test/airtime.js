@@ -8,7 +8,7 @@ describe('Airtime', function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     airtime = AfricasTalking.AIRTIME
 
-    fixtures.mockAirtime()
+    fixtures.mockServices()
   })
 
   describe('validation', function () {

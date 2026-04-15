@@ -4,9 +4,9 @@ const should = require('should')
 const fixtures = require('./fixtures')
 const express = require('express')
 
-let AfricasTalking
 let USSD
 let request
+let AfricasTalking
 const app = express()
 const menu = 'Welcom to Nat Oil \n1: For account info \n2: For lost gas cylinder'
 const accountInfo = 'You are Jacky, registered on 4th-2016-March'

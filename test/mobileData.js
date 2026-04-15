@@ -8,8 +8,6 @@ describe('Mobile Data Bundles', function () {
   before(function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     mobileData = AfricasTalking.MOBILE_DATA
-
-    fixtures.mockMobileData()
   })
 
   describe('validation', function () {

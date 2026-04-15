@@ -4,10 +4,6 @@ const joi = require('joi')
 const fixtures = require('./fixtures')
 
 describe('Insights', function () {
-  before(() => {
-    fixtures.mockInsights()
-  })
-
   it('check sim swap state', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 

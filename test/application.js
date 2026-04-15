@@ -4,10 +4,6 @@ const joi = require('joi')
 const fixtures = require('./fixtures')
 
 describe('Application', function () {
-  before(() => {
-    fixtures.mockApplication()
-  })
-
   it('fetched application data', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 

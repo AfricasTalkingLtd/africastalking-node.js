@@ -4,17 +4,11 @@ const joi = require('joi')
 const fixtures = require('./fixtures')
 
 describe('WhatsApp', function () {
-  const phoneNumber = '+25471111111'
-
-  before(() => {
-    fixtures.mockWhatsApp(phoneNumber)
-  })
-
   it('sends a message', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
     const p = AfricasTalking.WHATSAPP.send({
-      phoneNumber,
+      phoneNumber: '+25471111111',
       waNumber: '+1234567890',
       body: { message: 'test' }
     })

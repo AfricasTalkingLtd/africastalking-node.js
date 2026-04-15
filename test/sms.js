@@ -8,7 +8,6 @@ describe('SMS', function () {
   before(function () {
     AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     sms = AfricasTalking.SMS
-    fixtures.mockSms()
   })
 
   describe('validation', function () {
