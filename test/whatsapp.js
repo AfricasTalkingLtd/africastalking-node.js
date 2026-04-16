@@ -7,7 +7,7 @@ describe('WhatsApp', function () {
   it('sends a message', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
-    const p = AfricasTalking.WHATSAPP.send({
+    const p = AfricasTalking.WHATSAPP.sendMessage({
       phoneNumber: '+25471111111',
       waNumber: '+1234567890',
       body: { message: 'test' }
@@ -29,10 +29,10 @@ describe('WhatsApp', function () {
       })
   })
 
-  it('sends a template', function (done) {
+  it('creates a template', function (done) {
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
 
-    const p = AfricasTalking.WHATSAPP.sendTemplate({
+    const p = AfricasTalking.WHATSAPP.createTemplate({
       waNumber: '+1234567890',
       name: 'amazing_offer',
       language: 'en',
@@ -43,7 +43,7 @@ describe('WhatsApp', function () {
           format: 'TEXT',
           text: 'Offer {{1}}',
           example: {
-            header_text: ['12345678']
+            header_text: '12345678'
           }
         },
         body: {
@@ -60,21 +60,28 @@ describe('WhatsApp', function () {
           type: 'FOOTER',
           text: 'Thank you for using our service.'
         },
-        buttons: [
-          {
-            type: 'PHONE_NUMBER',
-            text: 'Contact Us',
-            phoneNumber: '+9876543210'
-          },
-          {
-            type: 'URL',
-            text: 'Talk to A Representative',
-            url: 'https://coolurl.fake/contact',
-            example: [
-              'https://coolurl.fake/contact'
-            ]
-          }
-        ]
+        buttons: {
+          type: 'BUTTONS',
+          buttons: [
+            {
+              type: 'PHONE_NUMBER',
+              text: 'Contact Us',
+              phone_number: '+9876543210'
+            },
+            {
+              type: 'URL',
+              text: 'Talk to A Representative',
+              url: 'https://coolurl.fake/contact',
+              example: [
+                'https://coolurl.fake/contact'
+              ]
+            },
+            {
+              type: 'QUICK_REPLY',
+              text: 'Say What?'
+            }
+          ]
+        }
       }
     })
     joi.assert(p, joi.object().instance(Promise))

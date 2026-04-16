@@ -202,26 +202,26 @@ For more information, please read [https://developers.africastalking.com/docs/us
 
 ### `WhatsApp`
 
-- `send({ body, waNumber, phoneNumber })`: Send a WhatsApp message to a given number.
+- `sendMessage({ body, waNumber, phoneNumber })`: Send a WhatsApp message to a given number.
 
     - `waNumber`: The number being used to send the message that is associated with the account. `REQUIRED`
     - `phoneNumber`: The number that is to receive the message. `REQUIRED`
-    - `body`: The message to be sent. The message has a combination of the following:
+    - `body`: The body of message to be sent. It is an object with one of the following fields:
 
       - For simple text message:
-        - `message`: The message to be sent to the client.
+        - `message`: The text message to be sent to the client.
       
       - For media messages:
-        - `mediaType`: The type of message being sent Can be one of `Image`, `Video`, `Audio` or `Voice`.
-        - `url`: The hosted URL of what is being sent.
-        - `caption`: The caption associated with an image or video that is being sent.
+        - `mediaType`: The type of media being sent. Can be one of `Image`, `Video`, `Audio` or `Voice`.
+        - `url`: The hosted URL of the media being sent. 
+        - `caption`: The caption associated with the media being sent.
 
       - For interactive list:
         - `action`: An object with a list of actions.
           - `button`: Action button title
           - `section`: A list of sections
             - `title`: A section title
-            - `rows`: `[{ id, title, description }]`,
+            - `rows`: An array of section rows. Each row is an object `{ id, title, description }`
         - `body`:
           - `text`: Body text
         - `header`:
@@ -231,7 +231,7 @@ For more information, please read [https://developers.africastalking.com/docs/us
 
       - For interactive buttons:
         - `action`: An object with a list of actions.
-          - `buttons`: `[{ id, title }]`
+          - `buttons`: An array of buttons. Each is an object `{ id, title }`
         - `body`:
           - `text`: Body text
         - `header`:
@@ -242,32 +242,40 @@ For more information, please read [https://developers.africastalking.com/docs/us
         - `headerValue`: Value of the header text
         - `bodyValues`: List of values to fill in the template
 
-- `sendTemplate({ component, waNumber, name, language, category })`: Send a Whatsapp template for your future messages.
+- `createTemplate({ component, waNumber, name, language, category })`: Create a template for your future messages.
 
-    - `waNumber`: The Whatsapp phone number that will be used to send the messages associated with the template. `REQUIRED`
+    - `waNumber`: The WhatsApp phone number that will be used to send the messages associated with the template. `REQUIRED`
     - `name`: The name of the template. This must be unique. `REQUIRED`
-    - `language`: The language code associated with the template. `REQUIRED`
-    - `category`: The category associated with the template. `REQUIRED`
-    - `component`:  A complex type containing the values that will be in the template. It can contain the following types:
+    - `language`: The language code([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)) associated with the template. `REQUIRED`
+    - `category`: The category associated with the template. Must be one of `MARKETING`, `UTILITY` and `AUTHENTICATION`.
+    - `components`:  An object containing the template values. It can contain the following:
       - `header`: The header of the template to be sent.
         - `type`: always `HEADER`
-        - `format`: One of `TEXT`, `MEDIA` or `LOCAATION`
-        - `text`:
-        - `example`
+        - `format`: One of `LOCATION`, `TEXT`, `DOCUMENT`, `IMAGE` and `VIDEO`
+        - `text`: The text to be contained in the header. Can be used with variables, e.g 'Hello {{1}}' where `{{1}}` will be replaced by a value sent.
+        - `example`:
+          - `header_handle`: Text used for replacement when header is of type media(i.e. anything but `TEXT`)
+          - `header_text`: Text used for replacement when header type is `TEXT`
+
       - `body`: The type of message being sent in the body of the template.
         - `type`: always `BODY`
-        - `text`: 
+        - `text`: The text to be contained in the body. Can be used with variables, e.g 'Hello {{1}} there {{2}}' where `{{1}}` and `{{2}}` will be replaced by values sent.
         - `example`:
-          - `body_text`: `[String]`
+          - `body_text`: A list of texts to use for replacement. e.g. `['Juma', 'Champ']`
+
       - `footer`: The footer of the template to be sent.
         - `type`: always `FOOTER`
-        - `text`:
-      - `buttons`: A list of buttons to be sent in the template. Each can have the following, depending on the type
-        - `type`: One of `PHONE_NUMBER`, `URL`, and `QUICK_REPLY`
-        - `phoneNumber`: Only needed for phone number type
-        - `url`: Only needed for url type
-        - `text`:
-        - `example`:
+        - `text`: The footer text.
+
+      - `buttons`:
+        - `type`: always `BUTTONS`
+        - `buttons`: A list of buttons to be sent in the template. Each can have the following, depending on the type
+          - `type`: One of `PHONE_NUMBER`, `URL`, `FLOW`, `COPY_CODE` and `QUICK_REPLY`
+          - `phone_number`: Only needed for phone number type
+          - `url`: Only needed for url type
+          - `text`: Button text
+          - `example`: An example string(Or list of string for type `URL`)
+          - `flow_id`, `flow_action`(navigate or data_exchange) and `navigate_screen` are only needed for type `FLOW`
 
 ### `Application`
 
@@ -281,17 +289,8 @@ For more information, please read [https://developers.africastalking.com/docs/ap
 Run all tests:
 
 ```bash
-$ npm install
-$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
-$ npm test
-```
-
-or on Windows...
-
-```bash
-$ npm install
-$ # add credentials AT_APP_API_KEY, AT_APP_USERNAME and TEST_PHONENUMBER to .env
-$ npm run test-windows
+$ pnpm install
+$ pnpm test
 ```
 
 
