@@ -222,6 +222,7 @@ For more information, please read [https://developers.africastalking.com/docs/us
           - `section`: A list of sections
             - `title`: A section title
             - `rows`: An array of section rows. Each row is an object `{ id, title, description }`
+            - `product_items`: A list of product items. Each item is an object `{ key: value(String) }`
         - `body`:
           - `text`: Body text
         - `header`:
