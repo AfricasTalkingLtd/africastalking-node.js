@@ -71,9 +71,9 @@ describe('WhatsApp', function () {
             {
               type: 'URL',
               text: 'Talk to A Representative',
-              url: 'https://coolurl.fake/contact',
+              url: 'https://coolurl.fake/contact/{{1}}',
               example: [
-                'https://coolurl.fake/contact'
+                'abc'
               ]
             },
             {
