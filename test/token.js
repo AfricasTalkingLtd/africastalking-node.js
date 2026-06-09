@@ -2,13 +2,13 @@
 
 require('should')
 const joi = require('joi')
-const nock = require('nock')
 const fixtures = require('./fixtures')
 
 let token
 
 describe('Token', function () {
   before(function () {
+    fixtures.mockServices()
     const AfricasTalking = require('../lib')(fixtures.TEST_ACCOUNT)
     token = AfricasTalking.TOKEN
   })
@@ -26,18 +26,10 @@ describe('Token', function () {
   })
 
   it('rejects when API returns token: None', function () {
-    nock('https://api.sandbox.africastalking.com')
-      .post('/auth-token/generate')
-      .reply(200, { token: 'None', description: 'Invalid credentials' })
-
     return token.generateAuthToken().should.be.rejected()
   })
 
   it('rejects on network error', function () {
-    nock('https://api.sandbox.africastalking.com')
-      .post('/auth-token/generate')
-      .replyWithError('Network failure')
-
     return token.generateAuthToken().should.be.rejected()
   })
 })

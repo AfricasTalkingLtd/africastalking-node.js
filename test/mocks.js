@@ -56,6 +56,14 @@ const mockToken = (nock) => {
       token: 'AT_some_token',
       lifetimeInSeconds: 3600
     })
+
+  nock('https://api.sandbox.africastalking.com')
+    .post('/auth-token/generate')
+    .reply(200, { token: 'None', description: 'Invalid credentials' })
+
+  nock('https://api.sandbox.africastalking.com')
+    .post('/auth-token/generate')
+    .replyWithError('Network failure')
 }
 
 const mockAirtime = (nock) => {
