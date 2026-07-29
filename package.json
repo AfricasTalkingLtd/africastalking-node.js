@@ -1,6 +1,6 @@
 {
   "name": "africastalking",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
@@ -54,14 +54,14 @@
     ]
   },
   "dependencies": {
-    "axios": "1.15.0",
+    "axios": "1.18.1",
     "google-libphonenumber": "3.2.44",
-    "joi": "18.1.2",
+    "joi": "18.2.3",
     "lodash": "4.18.1"
   },
   "devDependencies": {
     "express": "5.2.1",
-    "mocha": "11.7.5",
+    "mocha": "11.7.6",
     "nock": "14.0.12",
     "nyc": "18.0.0",
     "should": "13.2.3",
