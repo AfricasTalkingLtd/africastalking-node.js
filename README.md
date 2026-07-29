@@ -212,7 +212,7 @@ For more information, please read [https://developers.africastalking.com/docs/us
         - `message`: The text message to be sent to the client.
       
       - For media messages:
-        - `mediaType`: The type of media being sent. Can be one of `Image`, `Video`, `Audio` or `Voice`.
+        - `mediaType`: The type of media being sent. Can be one of `Image`, `Video`, `Audio`, `Document` or `Voice`.
         - `url`: The hosted URL of the media being sent. 
         - `caption`: The caption associated with the media being sent.
 
