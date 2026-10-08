@@ -170,7 +170,7 @@ For more information, please read the [https://developers.africastalking.com/doc
     - `clientRequestId`: Additional information that can be used to tag the call in your callback URL.
 
 
-- `fetchQuedCalls({ phoneNumber })`: Get queued calls
+- `getNumQueuedCalls({ phoneNumber })`: Get queued calls
 
     - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
 
