@@ -21,6 +21,93 @@ describe('Voice', function () {
     })
   })
 
+  describe('requestCapabilityToken', function () {
+    describe('validation', function () {
+      it('rejects a clientName containing spaces', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'call center agent',
+          phoneNumber: fixtures.phoneNumber
+        }).should.be.rejectedWith(/must not contain spaces/)
+      })
+
+      it('rejects an invalid phoneNumber', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: 'not-a-phone-number'
+        }).should.be.rejectedWith(/E\.164/)
+      })
+
+      it('rejects a phoneNumber that is not a valid number', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: '+2541234'
+        }).should.be.rejectedWith(/E\.164/)
+      })
+
+      it('rejects a non-positive expire', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: fixtures.phoneNumber,
+          expire: 0
+        }).should.be.rejectedWith(/positive number of seconds/)
+      })
+
+      it('rejects an expire that is not a number of seconds', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: fixtures.phoneNumber,
+          expire: 'soon'
+        }).should.be.rejectedWith(/positive number of seconds/)
+      })
+
+      it('rejects a non-positive expire string', function () {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: fixtures.phoneNumber,
+          expire: '0s'
+        }).should.be.rejectedWith(/positive number of seconds/)
+      })
+
+      it('rejects missing parameters', function () {
+        return voice.requestCapabilityToken({})
+          .should.be.rejectedWith(/clientName is required.*phoneNumber is required/)
+      })
+    })
+
+    it('requests a capability token with the documented defaults', function (done) {
+      voice.requestCapabilityToken({
+        clientName: 'browser',
+        phoneNumber: fixtures.phoneNumber
+      })
+        .then(function (resp) {
+          resp.should.have.property('token', 'ATCAPtkn_c985f9ezzzzzzzzzzzzzzzzzz0b21')
+          resp.should.have.property('clientName', 'browser')
+          resp.should.have.property('lifeTimeSec', '86400')
+          resp.should.have.property('incoming', true)
+          resp.should.have.property('outgoing', true)
+          done()
+        })
+        .catch(done)
+    })
+
+    it('accepts expire as 3600, "3600" or "3600s"', function (done) {
+      Promise.all([3600, '3600', '3600s'].map(function (expire) {
+        return voice.requestCapabilityToken({
+          clientName: 'browser',
+          phoneNumber: fixtures.phoneNumber,
+          expire
+        })
+      }))
+        .then(function (responses) {
+          responses.forEach(function (resp) {
+            resp.should.have.property('lifeTimeSec', '3600')
+          })
+          done()
+        })
+        .catch(done)
+    })
+  })
+
   describe('Action builders', function () {
     let response
     const responseTemplate = '<?xml version="1.0" encoding="UTF-8"?><Response>'

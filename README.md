@@ -181,6 +181,15 @@ For more information, please read the [https://developers.africastalking.com/doc
     - `url`: URL to your media file. `REQUIRED`
 
 
+- `requestCapabilityToken({ clientName, phoneNumber, incoming, outgoing, expire })`: Request a capability token to be used by the WebRTC client
+
+    - `clientName`: Your unique name used to identify and call your browser client, without space characters. `REQUIRED`
+    - `phoneNumber`: Your Africa's Talking issued virtual phone number. `REQUIRED`
+    - `incoming`: Enable the client to receive incoming calls. Defaults to `true`.
+    - `outgoing`: Enable the client to make outgoing calls. Defaults to `true`.
+    - `expire`: Period of time it takes the token to expire, in seconds. Defaults to `86400s`.
+
+
 > Helpers that will construct proper `xml` to send back to Africa's Taking API when it comes `POST`ing.
 - `Say`, `Play`, `GetDigits`, `Dial`, `Record`, `Enqueue`, `Dequeue`, `Conference`, `Redirect`, `Reject`
 > Remember to send back an HTTP 200.
