@@ -1,5 +1,10 @@
+const { version } = require('../package.json')
+
+const USER_AGENT = `nodejs-sdk/v${version}`
+
 const mockSms = (nock) => {
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/version1/messaging')
     .times(6)
     .reply(201, {
@@ -16,6 +21,7 @@ const mockSms = (nock) => {
     })
 
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get(/\/version1\/messaging\?.+/)
     .reply(200, {
       SMSMessageData: {
@@ -31,18 +37,21 @@ const mockSms = (nock) => {
     })
 
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get(/\/version1\/subscription\?.+/)
     .reply(200, {
       responses: []
     })
 
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/version1/subscription/create')
     .reply(201, {
       status: 'Success'
     })
 
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/version1/subscription/delete')
     .reply(200, {
       status: 'Success'
@@ -51,6 +60,7 @@ const mockSms = (nock) => {
 
 const mockToken = (nock) => {
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/auth-token/generate')
     .reply(200, {
       token: 'AT_some_token',
@@ -60,6 +70,7 @@ const mockToken = (nock) => {
 
 const mockAirtime = (nock) => {
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/version1/airtime/send')
     .times(2)
     .reply(201, {
@@ -78,6 +89,7 @@ const mockAirtime = (nock) => {
     })
 
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get(/\/query\/transaction\/find\?.+/)
     .reply(200, {
       status: 'Success'
@@ -86,6 +98,7 @@ const mockAirtime = (nock) => {
 
 const mockApplication = (nock) => {
   nock('https://api.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get('/version1/user?username=sandbox')
     .times(2)
     .reply(200, {
@@ -97,6 +110,7 @@ const mockApplication = (nock) => {
 
 const mockInsights = (nock) => {
   nock('https://insights.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/v1/sim-swap')
     .reply(200, {
       status: 'Processed',
@@ -106,6 +120,7 @@ const mockInsights = (nock) => {
 
 const mockWhatsApp = (nock) => {
   nock('https://chat.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/whatsapp/message/send')
     .reply(200, {
       phoneNumber: '+25471111111',
@@ -114,6 +129,7 @@ const mockWhatsApp = (nock) => {
     })
 
   nock('https://chat.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/whatsapp/template/send')
     .reply(200, {
       status: 'Success',
@@ -124,6 +140,7 @@ const mockWhatsApp = (nock) => {
 
 const mockMobileData = (nock) => {
   nock('https://bundles.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .post('/mobile/data/request')
     .times(2)
     .reply(200, {
@@ -137,6 +154,7 @@ const mockMobileData = (nock) => {
     })
 
   nock('https://bundles.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get(/\/query\/transaction\/find\?.+/)
     .reply(200, {
       status: 'Success',
@@ -167,6 +185,7 @@ const mockMobileData = (nock) => {
     })
 
   nock('https://bundles.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
     .get(/\/query\/wallet\/balance\?.+/)
     .reply(200, {
       status: 'Success',
