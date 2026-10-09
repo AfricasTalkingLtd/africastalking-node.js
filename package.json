@@ -4,8 +4,8 @@
   "description": "Official AfricasTalking node.js API wrapper",
   "main": "index.js",
   "scripts": {
-    "test": "standard && nyc mocha ./test --exit --recursive",
-    "test-windows": "standard && nyc node_modules/mocha/bin/_mocha ./test",
+    "test": "standard && nyc mocha ./test --exit --recursive --require ./test/setup.js",
+    "test-windows": "standard && nyc node_modules/mocha/bin/_mocha ./test --require ./test/setup.js",
     "lint": "standard --fix"
   },
   "repository": {

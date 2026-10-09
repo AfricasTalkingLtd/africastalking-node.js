@@ -175,6 +175,31 @@ const mockMobileData = (nock) => {
     })
 }
 
+const mockVoice = (nock) => {
+  nock('https://voice.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
+    .post('/call')
+    .reply(201, {
+      status: 'Success',
+      phoneNumbers: ['+254711XXXYYY']
+    })
+
+  nock('https://voice.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
+    .post('/queueStatus')
+    .reply(200, {
+      status: 'Success',
+      queuedCalls: ['+254711XXXYYY']
+    })
+
+  nock('https://voice.sandbox.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
+    .post('/mediaUpload')
+    .reply(201, {
+      status: 'Success'
+    })
+}
+
 module.exports = () => {
   if (process.env.NO_NOCK) {
     return
@@ -191,4 +216,5 @@ module.exports = () => {
   mockInsights(nock)
   mockMobileData(nock)
   mockApplication(nock)
+  mockVoice(nock)
 }

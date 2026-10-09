@@ -21,6 +21,42 @@ describe('Voice', function () {
     })
   })
 
+  describe('API calls', function () {
+    it('#call initiates a call', function (done) {
+      voice.call({
+        callFrom: fixtures.phoneNumber,
+        callTo: [fixtures.phoneNumber],
+        clientRequestId: 'test-client-request-id'
+      })
+        .then(function (resp) {
+          resp.should.have.property('status')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('#getNumQueuedCalls fetches queued calls', function (done) {
+      voice.getNumQueuedCalls({ phoneNumbers: [fixtures.phoneNumber] })
+        .then(function (resp) {
+          resp.should.have.property('queuedCalls')
+          done()
+        })
+        .catch(done)
+    })
+
+    it('#uploadMediaFile uploads a media file', function (done) {
+      voice.uploadMediaFile({
+        url: 'https://myapp.com/audio/welcome.mp3',
+        phoneNumber: fixtures.phoneNumber
+      })
+        .then(function (resp) {
+          resp.should.have.property('status')
+          done()
+        })
+        .catch(done)
+    })
+  })
+
   describe('Action builders', function () {
     let response
     const responseTemplate = '<?xml version="1.0" encoding="UTF-8"?><Response>'
