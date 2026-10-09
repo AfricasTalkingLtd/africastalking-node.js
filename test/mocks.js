@@ -1,4 +1,5 @@
 const { version } = require('../package.json')
+const fixtures = require('./fixtures')
 
 const USER_AGENT = `nodejs-sdk/v${version}`
 
@@ -194,6 +195,45 @@ const mockMobileData = (nock) => {
     })
 }
 
+const mockWebrtc = (nock) => {
+  nock('https://webrtc.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
+    .post('/capability-token/request', {
+      username: fixtures.TEST_ACCOUNT.username,
+      phoneNumber: fixtures.phoneNumber,
+      clientName: 'browser',
+      incoming: true,
+      outgoing: true,
+      expire: '86400s'
+    })
+    .reply(201, {
+      clientName: 'browser',
+      incoming: true,
+      lifeTimeSec: '86400',
+      outgoing: true,
+      token: 'ATCAPtkn_c985f9ezzzzzzzzzzzzzzzzzz0b21'
+    })
+
+  nock('https://webrtc.africastalking.com')
+    .matchHeader('User-Agent', USER_AGENT)
+    .post('/capability-token/request', {
+      username: fixtures.TEST_ACCOUNT.username,
+      phoneNumber: fixtures.phoneNumber,
+      clientName: 'browser',
+      incoming: true,
+      outgoing: true,
+      expire: '3600s'
+    })
+    .times(3)
+    .reply(201, {
+      clientName: 'browser',
+      incoming: true,
+      lifeTimeSec: '3600',
+      outgoing: true,
+      token: 'ATCAPtkn_c985f9ezzzzzzzzzzzzzzzzzz0b21'
+    })
+}
+
 module.exports = () => {
   if (process.env.NO_NOCK) {
     return
@@ -210,4 +250,5 @@ module.exports = () => {
   mockInsights(nock)
   mockMobileData(nock)
   mockApplication(nock)
+  mockWebrtc(nock)
 }

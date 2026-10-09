@@ -51,6 +51,7 @@ describe('Initialization', function () {
 
     common.BASE_URL.should.equal('https://api.africastalking.com/version1')
     common.VOICE_URL.should.equal('https://voice.africastalking.com')
+    common.WEBRTC_URL.should.equal('https://webrtc.africastalking.com')
 
     options.username = 'sandbox'
     lib = require('../lib')(options) // eslint-disable-line no-unused-vars
@@ -58,5 +59,6 @@ describe('Initialization', function () {
 
     common.BASE_URL.should.equal('https://api.sandbox.africastalking.com/version1')
     common.VOICE_URL.should.equal('https://voice.sandbox.africastalking.com')
+    common.WEBRTC_URL.should.equal('https://webrtc.africastalking.com')
   })
 })
